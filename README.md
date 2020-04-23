@@ -1,2 +1,24 @@
-# charter-yacht-app-vue-wsb
-The application for chartering sea yachts - project for wsb diploma defend
+# yacht-charter-app-wsb
+
+## Project setup
+```
+npm install
+```
+
+### Compiles and hot-reloads for development
+```
+npm run serve
+```
+
+### Compiles and minifies for production
+```
+npm run build
+```
+
+### Lints and fixes files
+```
+npm run lint
+```
+
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).
