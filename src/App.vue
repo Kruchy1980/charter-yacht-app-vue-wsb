@@ -1,10 +1,10 @@
 <template>
-  <div id="yacht-charter-app" />
+  <div id="yacht-charter-app">
+    <div>Jakiś tekst tylko na próbę</div>
+  </div>
 </template>
 
 <script>
-// import HelloWorld from './components/HelloWorld.vue'
-
 export default {
   name: "App",
   components: {}
