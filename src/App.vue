@@ -1,6 +1,6 @@
 <template>
   <div id="yacht-charter-app">
-    <div>Jakiś tekst tylko na próbę</div>
+    <div :any="any" class="smth">Jakiś tekst tylko na próbę</div>
   </div>
 </template>
 
