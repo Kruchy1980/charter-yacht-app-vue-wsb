@@ -1,15 +1,34 @@
 <template>
-  <div class="slide__box">
+  <!-- <div class="slide__box"> -->
+  <!-- We can add the transition of our images to appeare using vue tag  where name is a style of transition and mode shows us the mode of fading-->
+  <transition-group class="slide__box" name="slide-fade" mode="out-in" tag="div">
     <!-- And add here displaying of slide -->
     <!-- The slide id is: {{ slide.id }} with source of: {{ slide.src }} -->
-    <div class="slide__box__image"></div>
-  </div>
+    <div :key="slide.id" class="slide__box__image" :style="setTheSlide">
+      <!-- Add the title as well -->
+      <div class="slide__box__title">{{ slide.title }}</div>
+    </div>
+  </transition-group>
+  <!-- </div> -->
 </template>
 
 <script>
 export default {
   // Here we are adding props - oassed from TheSlider.vue component where we have binded the slide as :slide="slides[0]" with all of the properties of a slide
-  props: ["slide"]
+  props: {
+    slide: {
+      type: Object,
+      required: true
+    }
+  },
+  // Here we can add the
+  computed: {
+    setTheSlide() {
+      return {
+        backgroundImage: `url(${this.slide.src})`
+      };
+    }
+  }
 };
 </script>
 
@@ -21,21 +40,56 @@ export default {
 
   &__image {
     // just for check
-    background-image: url("../assets/images/slider-image/sailing/4.yacht-s.jpeg");
+    // background-image: url("../assets/images/slider-image/sailing/4.yacht-s.jpeg");
     height: 100%;
     width: 100%;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
   }
+  &__title {
+    margin-top: 60px;
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: #1e56ce;
+  }
 }
-// .slide__box__image {
-//   // just for check
-//   // background-image: url("../assets/images/slider-image/sailing/4.yacht-s.jpeg");
-//   height: 100%;
-//   width: 100%;
-//   background-position: center;
-//   background-repeat: no-repeat;
-//   background-size: cover;
-// }
+
+// Animation
+.slide-fade-enter-active {
+  animation-name: fadeEnter;
+  animation-iteration-count: 1;
+  position: absolute;
+  transition: all 0.3s ease;
+}
+.slide-fade-leave-active {
+  animation-name: fadeLeave;
+  animation-iteration-count: 1;
+  position: absolute;
+  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.slide-fade-enter,
+.slide-fade-leave-to {
+  transform: translateX(100px);
+  opacity: 0;
+}
+
+@keyframes fadeEnter {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes fadeLeave {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
 </style>
