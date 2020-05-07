@@ -2,9 +2,9 @@
   <!-- First bind the images to the slide component -->
   <div class="slider__box">
     <!-- Here we will add the arrows -->
-    <div class="slider__box__arrow--left"></div>
+    <div class="slider__box__arrow--left">&lt;</div>
     <Slide :slide="slides[choosenSlide]" />
-    <div class="slider__box__arrow--right"></div>
+    <div class="slider__box__arrow--right">&gt;</div>
   </div>
 </template>
 
@@ -68,9 +68,27 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-// .slider__box {
-//   h1 {
-//     text-align: center;
-//   }
-// }
+.slider__box {
+  &__arrow--left,
+  &__arrow--right {
+    position: absolute;
+    font-size: 60px;
+    font-weight: bold;
+    color: #77777780;
+    top: 24vh;
+    opacity: 0.3;
+    transition: 1s;
+  }
+  &__arrow--left {
+    left: 5px;
+  }
+  &__arrow--right {
+    right: 5px;
+  }
+  &__arrow--left:hover,
+  &__arrow--right:hover {
+    cursor: pointer;
+    opacity: 1;
+  }
+}
 </style>
