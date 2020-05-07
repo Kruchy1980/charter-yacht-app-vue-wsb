@@ -1,15 +1,14 @@
 <template>
   <div id="yacht-charter-app">
-    <!-- <div :any="any" class="smth">Jakiś tekst tylko na próbę</div> -->
-    <TheNavbar />
+    <TheSlider />
   </div>
 </template>
 
 <script>
-import TheNavbar from "@/components/TheNavbar";
+import TheSlider from "@/components/TheSlider";
 export default {
   name: "App",
-  components: { TheNavbar }
+  components: { TheSlider }
 };
 </script>
 
@@ -26,5 +25,5 @@ export default {
   padding: 0;
   box-sizing: border-box;
 }
-/* Navbar styles - później przeniesione zostaną do TheNavbar.vue component */
+/* Slider styles - później przeniesione zostaną do TheSlider.vue component */
 </style>
