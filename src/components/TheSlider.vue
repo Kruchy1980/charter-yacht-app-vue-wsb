@@ -2,9 +2,9 @@
   <!-- First bind the images to the slide component -->
   <div class="slider__box">
     <!-- Here we will add the arrows -->
-    <div class="slider__box__arrow--left">&lt;</div>
+    <div class="slider__box__arrow--left" @click="arrowLeft">&lt;</div>
     <Slide :slide="slides[choosenSlide]" />
-    <div class="slider__box__arrow--right">&gt;</div>
+    <div class="slider__box__arrow--right" @click="arrowRight">&gt;</div>
   </div>
 </template>
 
@@ -41,18 +41,48 @@ export default {
         }
       ],
       // Add a variable to dynamically choose the image
-      choosenSlide: 0 //just now defined for first image
+      choosenSlide: 0, //just now defined for first image
+      // To make the arrows work we should to declare the variale with defined value = null
+      intervalObject: null
     };
   },
   // Now we can add the change after 3s each image
   created() {
-    setInterval(() => {
-      this.moveTheSlide();
+    this.intervalObject = setInterval(() => {
+      this.moveTheSlideRight();
     }, 5000);
   },
   // Add the logic to our slider
   methods: {
-    moveTheSlide() {
+    // We can add the arrow methods in here:
+    arrowLeft() {
+      // First we need to clear interval when using the arrows
+      clearInterval(this.intervalObject);
+      // Now we can decrease the choosenSlide using our move slide method
+      this.moveTheSlideLeft();
+      // And now we should even start the automqt again
+      this.intervalObject = setInterval(() => {
+        this.moveTheSlideRight();
+      }, 5000);
+    },
+    arrowRight() {
+      clearInterval(this.intervalObject);
+      this.moveTheSlideRight();
+      this.intervalObject = setInterval(() => {
+        this.moveTheSlideRight();
+      }, 5000);
+    },
+    moveTheSlideLeft() {
+      // we can use the variable in here to implement condition
+      let slideIndex = this.choosenSlide;
+      slideIndex--;
+      // Implement condition whqt should be done if the slide will go to the end
+      if (slideIndex < 0) {
+        slideIndex = this.slides.length - 1;
+      }
+      this.choosenSlide = slideIndex;
+    },
+    moveTheSlideRight() {
       // we can use the variable in here to implement condition
       let slideIndex = this.choosenSlide;
       slideIndex++;
@@ -60,7 +90,6 @@ export default {
       if (slideIndex >= this.slides.length) {
         slideIndex = 0;
       }
-      console.log(slideIndex);
       this.choosenSlide = slideIndex;
     }
   }
