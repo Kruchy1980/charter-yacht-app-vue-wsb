@@ -32,14 +32,12 @@ export default {
         },
         {
           id: 2,
-          src:
-            "images/slider-image/catamaran-sailing/1.catamaran-s.jpeg",
+          src: "images/slider-image/catamaran-sailing/1.catamaran-s.jpeg",
           title: "Charter"
         },
         {
           id: 3,
-          src:
-            "images/slider-image/catamaran-motor/2.catamaran-m.jpeg",
+          src: "images/slider-image/catamaran-motor/2.catamaran-m.jpeg",
           title: "Something"
         }
       ],
