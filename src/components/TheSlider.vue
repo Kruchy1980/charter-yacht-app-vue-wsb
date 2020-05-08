@@ -6,7 +6,7 @@
     <Slide :slide="slides[choosenSlide]" />
     <div class="slider__box__arrow--right" @click="arrowRight">&gt;</div>
     <div class="slider__box__indicator-dots">
-      <div v-for="slide in slides" :key="slide.id" @click="indicatorDots(slide.id-1)"></div>
+      <div v-for="slide in slides" :key="slide.id" @click="indicatorDots(slide.id-1)" />
     </div>
   </div>
 </template>
@@ -115,6 +115,8 @@ export default {
 
 <style lang="scss" scoped>
 .slider__box {
+  border: 1px solid #000;
+  margin-top: 20px;
   &__arrow--left,
   &__arrow--right {
     position: absolute;
@@ -144,11 +146,14 @@ export default {
     align-content: flex-end;
     div {
       cursor: pointer;
-      margin: 0 10px;
+      margin: 5px 10px;
       height: 15px;
       width: 15px;
-      background-color: #77777780;
+      background-color: #77777750;
       border-radius: 50%;
+      &:hover {
+        background-color: #77777799;
+      }
     }
   }
 }
