@@ -34,6 +34,7 @@ export default {
 
 <style lang="scss" scoped>
 .slide__box {
+  width: 100vw;
   margin: 30px 0;
   height: 50vh;
   overflow: hidden;

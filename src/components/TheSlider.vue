@@ -122,8 +122,10 @@ export default {
 
 <style lang="scss" scoped>
 .slider__box {
-  border: 1px solid #000;
+  border-bottom: 1px solid #000;
   margin-top: 20px;
+  width: 100%;
+
   &__arrow--left,
   &__arrow--right {
     position: absolute;
