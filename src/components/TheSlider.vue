@@ -124,17 +124,19 @@ export default {
     top: 24vh;
     opacity: 0.3;
     transition: 1s;
+    cursor: pointer;
   }
   &__arrow--left {
     left: 5px;
+    &:hover {
+      opacity: 1;
+    }
   }
   &__arrow--right {
     right: 5px;
-  }
-  &__arrow--left:hover,
-  &__arrow--right:hover {
-    cursor: pointer;
-    opacity: 1;
+    &:hover {
+      opacity: 1;
+    }
   }
   &__indicator-dots {
     display: flex;
