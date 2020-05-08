@@ -1,14 +1,16 @@
 <template>
   <div id="yacht-charter-app">
-    <div :any="any" class="smth">Jakiś tekst tylko na próbę</div>
-    <nav></nav>
+    <MainMenu/>
   </div>
 </template>
 
 <script>
+import MainMenu from './components/MainMenu.vue';
 export default {
   name: "App",
-  components: {}
+  components: {
+    MainMenu
+  }
 };
 </script>
 
@@ -19,6 +21,5 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 </style>
