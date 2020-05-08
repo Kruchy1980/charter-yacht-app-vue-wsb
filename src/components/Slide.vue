@@ -36,7 +36,8 @@ export default {
 .slide__box {
   margin: 30px 0;
   height: 50vh;
-  border: 1px solid #000;
+  overflow: hidden;
+  // border: 1px solid #000;
 
   &__image {
     // just for check

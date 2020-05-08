@@ -5,6 +5,9 @@
     <div class="slider__box__arrow--left" @click="arrowLeft">&lt;</div>
     <Slide :slide="slides[choosenSlide]" />
     <div class="slider__box__arrow--right" @click="arrowRight">&gt;</div>
+    <div class="slider__box__indicator-dots">
+      <div v-for="slide in slides" :key="slide.id" @click="indicatorDots(slide.id-1)"></div>
+    </div>
   </div>
 </template>
 
@@ -54,6 +57,19 @@ export default {
   },
   // Add the logic to our slider
   methods: {
+    // Here we will add the method which will change the photos for indicator click
+    indicatorDots(id) {
+      //  Assign the choosenSlide to the id of photo
+
+      this.choosenSlide = id;
+
+      // Clear the interval while chosing by indicators
+      clearInterval(this.intervalObject);
+      this.moveTheSlideRight();
+      this.intervalObject = setInterval(() => {
+        this.moveTheSlideRight();
+      }, 5000);
+    },
     // We can add the arrow methods in here:
     arrowLeft() {
       // First we need to clear interval when using the arrows
@@ -86,6 +102,7 @@ export default {
       // we can use the variable in here to implement condition
       let slideIndex = this.choosenSlide;
       slideIndex++;
+      // console.log(slideIndex);
       // Implement condition whqt should be done if the slide will go to the end
       if (slideIndex >= this.slides.length) {
         slideIndex = 0;
@@ -118,6 +135,19 @@ export default {
   &__arrow--right:hover {
     cursor: pointer;
     opacity: 1;
+  }
+  &__indicator-dots {
+    display: flex;
+    justify-content: center;
+    align-content: flex-end;
+    div {
+      cursor: pointer;
+      margin: 0 10px;
+      height: 15px;
+      width: 15px;
+      background-color: #77777780;
+      border-radius: 50%;
+    }
   }
 }
 </style>
