@@ -22,24 +22,24 @@ export default {
       slides: [
         {
           id: 0,
-          src: "../assets/images/slider-image/sailing/1.yacht-s.jpeg",
+          src: "images/slider-image/sailing/1.yacht-s.jpeg",
           title: "Home"
         },
         {
           id: 1,
-          src: "../assets/images/slider-image/motor/1.motorboat.jpg",
+          src: "images/slider-image/motor/1.motorboat.jpg",
           title: "About"
         },
         {
           id: 2,
           src:
-            "../assets/images/slider-image/catamaran-sailing/1.catamaran-s.jpeg",
+            "images/slider-image/catamaran-sailing/1.catamaran-s.jpeg",
           title: "Charter"
         },
         {
           id: 3,
           src:
-            "../assets/images/slider-image/catamaran-motor/2.catamaran-m.jpeg",
+            "images/slider-image/catamaran-motor/2.catamaran-m.jpeg",
           title: "Something"
         }
       ],
