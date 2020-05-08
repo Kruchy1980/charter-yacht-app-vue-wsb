@@ -6,7 +6,7 @@
     <Slide :slide="slides[choosenSlide]" />
     <div class="slider__box__arrow--right" @click="arrowRight">&gt;</div>
     <div class="slider__box__indicator-dots">
-      <div v-for="slide in slides" :key="slide.id" @click="indicatorDots(slide.id-1)"></div>
+      <div v-for="slide in slides" :key="slide.id" class="dots" @click="indicatorDots(slide.id-1)" />
     </div>
   </div>
 </template>
@@ -59,9 +59,16 @@ export default {
   methods: {
     // Here we will add the method which will change the photos for indicator click
     indicatorDots(id) {
+      // // Test
+      // // Create an array with dots
+      // const dots = [...document.querySelectorAll(".dots")];
+      // // console.log(dots[id]);
+
       //  Assign the choosenSlide to the id of photo
 
       this.choosenSlide = id;
+      // this.dots[this.choosenSlide].classList.toggle("active");
+      // console.log(dots[this.choosenSlide]);
 
       // Clear the interval while chosing by indicators
       clearInterval(this.intervalObject);
@@ -115,6 +122,10 @@ export default {
 
 <style lang="scss" scoped>
 .slider__box {
+  border-bottom: 1px solid #000;
+  margin-top: 20px;
+  width: 100%;
+
   &__arrow--left,
   &__arrow--right {
     position: absolute;
@@ -144,12 +155,18 @@ export default {
     align-content: flex-end;
     div {
       cursor: pointer;
-      margin: 0 10px;
+      margin: 10px;
       height: 15px;
       width: 15px;
-      background-color: #77777780;
+      background-color: #77777750;
       border-radius: 50%;
+      &:hover {
+        background-color: #77777799;
+      }
     }
   }
+}
+.active {
+  background-color: #998511;
 }
 </style>

@@ -34,6 +34,7 @@ export default {
 
 <style lang="scss" scoped>
 .slide__box {
+  width: 100vw;
   margin: 30px 0;
   height: 50vh;
   overflow: hidden;
@@ -62,7 +63,7 @@ export default {
   animation-name: fadeEnter;
   animation-iteration-count: 1;
   position: absolute;
-  transition: all 0.3s ease;
+  transition: all 0.3s ease-in;
 }
 .slide-fade-leave-active {
   animation-name: fadeLeave;
