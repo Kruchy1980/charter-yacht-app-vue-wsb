@@ -34,11 +34,10 @@ export default {
 
 <style lang="scss" scoped>
 .slide__box {
-  width: 100vw;
+  width: 100%;
   margin: 30px 0;
   height: 50vh;
   overflow: hidden;
-  // border: 1px solid #000;
 
   &__image {
     // just for check
