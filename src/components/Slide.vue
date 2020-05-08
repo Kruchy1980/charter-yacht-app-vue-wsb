@@ -62,7 +62,7 @@ export default {
   animation-name: fadeEnter;
   animation-iteration-count: 1;
   position: absolute;
-  transition: all 0.3s ease;
+  transition: all 0.3s ease-in;
 }
 .slide-fade-leave-active {
   animation-name: fadeLeave;
