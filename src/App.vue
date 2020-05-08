@@ -1,6 +1,23 @@
 <template>
   <div id="yacht-charter-app">
+    <!-- Tu miejsce na navbar -->
+
+    <!-- Tutaj już walnięty slider  -->
     <TheSlider />
+    <!-- Kafelki -->
+    <div class="main__box">
+      <div class="main__box__tile main__box__tile__yachts" data-title="Yachts for charters">
+        <p>1234567</p>
+      </div>
+      <div
+        class="main__box__tile main__box__tile__skippers"
+        data-title="Skippers in our database"
+      >1234567</div>
+      <div
+        class="main__box__tile main__box__tile__chartetrers"
+        data-title="Registered charterers"
+      >1234567</div>
+    </div>
   </div>
 </template>
 
@@ -12,7 +29,7 @@ export default {
 };
 </script>
 
-<style>
+<style  lang="scss" scoped>
 #yacht-charter-app {
   /* Czcionkę możemy sobie zmienić jak co także mus to nie jest może znajdziemy jakąś fajną pod tą stronę */
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -25,5 +42,72 @@ export default {
   padding: 0;
   box-sizing: border-box;
 }
-/* Slider styles - później przeniesione zostaną do TheSlider.vue component */
+/* Tiles styles */
+.main__box {
+  min-width: 300px;
+  max-width: 800px;
+  margin: 30px auto;
+  // border: 1px solid #000;
+  display: flex;
+  justify-content: space-evenly;
+  align-content: center;
+  flex-grow: 1;
+  &__tile {
+    display: flex;
+    min-width: 75px;
+    height: 70px;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
+    border: 5px groove;
+    padding: 20px;
+    font-weight: bold;
+    &__yachts {
+      border-color: #00ff80;
+      color: #00ff00;
+      &[data-title]:hover:after {
+        background-color: #00ff00;
+        color: #222;
+      }
+    }
+    &__skippers {
+      border-color: #0000ff80;
+      color: #0000ff;
+      &[data-title]:hover:after {
+        background-color: #0000ff;
+        color: #ddd;
+      }
+    }
+    &__chartetrers {
+      border-color: #cfab0780;
+      color: #cfab07;
+      &[data-title]:hover:after {
+        background-color: #cfab07;
+        color: #222;
+      }
+    }
+    &[data-title] {
+      position: relative;
+    }
+    &[data-title]:hover:after {
+      content: attr(data-title);
+      position: absolute;
+      top: -35px;
+      padding: 4px;
+      // color: #222;
+      white-space: nowrap;
+      // background-color: #0000ff;
+      // color: #ddd;
+      border: 1px solid #777;
+      border-radius: 5px;
+      opacity: 0;
+      display: none;
+    }
+    &[data-title]:hover:after {
+      opacity: 1;
+      transition: all 0.1s ease 0.5s;
+      display: block;
+    }
+  }
+}
 </style>
