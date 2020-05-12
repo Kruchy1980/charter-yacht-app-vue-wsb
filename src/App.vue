@@ -64,26 +64,26 @@ export default {
     font-weight: bold;
     &__yachts {
       border-color: #00ff80;
-      color: #00ff00;
+      color: #068a06;
       &[data-title]:hover:after {
-        background-color: #00ff00;
-        color: #222;
+        background-color: #ddd;
+        color: #068a06;
       }
     }
     &__skippers {
       border-color: #0000ff80;
       color: #0000ff;
       &[data-title]:hover:after {
-        background-color: #0000ff;
-        color: #ddd;
+        background-color: #ddd;
+        color: #0000ff;
       }
     }
     &__chartetrers {
       border-color: #cfab0780;
       color: #cfab07;
       &[data-title]:hover:after {
-        background-color: #cfab07;
-        color: #222;
+        background-color: #ddd;
+        color: #cfab07;
       }
     }
     &[data-title] {

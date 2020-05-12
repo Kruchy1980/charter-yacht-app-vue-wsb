@@ -34,23 +34,25 @@ export default {
 
 <style lang="scss" scoped>
 .slide__box {
-  width: 100vw;
+  width: 100%;
+  height: 500px;
   margin: 30px 0;
   height: 50vh;
   overflow: hidden;
-  // border: 1px solid #000;
 
   &__image {
     // just for check
     // background-image: url("../assets/images/slider-image/sailing/4.yacht-s.jpeg");
-    height: 100%;
+    // height: 100%;
+    height: 474.5px;
     width: 100%;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
   }
   &__title {
-    margin-top: 60px;
+    // margin-top: 90px;
+    padding-top: 60px;
     text-align: center;
     font-size: 24px;
     font-weight: bold;
@@ -69,7 +71,8 @@ export default {
   animation-name: fadeLeave;
   animation-iteration-count: 1;
   position: absolute;
-  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
+  // transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
+  transition: all 0.3s ease-out;
 }
 
 .slide-fade-enter,
