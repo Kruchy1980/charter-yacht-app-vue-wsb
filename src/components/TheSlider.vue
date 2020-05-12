@@ -155,11 +155,11 @@ export default {
     div {
       cursor: pointer;
       position: relative;
-      bottom: 80px;
+      bottom: 60px;
       margin: 0 10px;
       height: 15px;
       width: 15px;
-      background-color: #22222250;
+      background-color: #0000ff;
       border-radius: 50%;
       &:hover {
         background-color: #666;
