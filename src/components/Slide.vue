@@ -38,13 +38,13 @@ export default {
   height: 500px;
   margin: 30px 0;
   height: 50vh;
-  overflow: hidden;
+  // overflow: hidden;
 
   &__image {
     // just for check
     // background-image: url("../assets/images/slider-image/sailing/4.yacht-s.jpeg");
     // height: 100%;
-    height: 474.5px;
+    height: 450px;
     width: 100%;
     background-position: center;
     background-repeat: no-repeat;
@@ -91,7 +91,7 @@ export default {
 }
 @keyframes fadeLeave {
   from {
-    opacity: 1;
+    opacity: 0;
   }
   to {
     opacity: 0;
