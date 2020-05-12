@@ -123,7 +123,8 @@ export default {
   // border-bottom: 1px solid #000;
   margin-top: 20px;
   width: 100%;
-  // height: 100%;
+  background-color: #0000ff;
+  height: 50vh;
 
   &__arrow--left,
   &__arrow--right {
