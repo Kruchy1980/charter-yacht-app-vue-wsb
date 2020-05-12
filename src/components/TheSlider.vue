@@ -159,7 +159,7 @@ export default {
       margin: 0 10px;
       height: 15px;
       width: 15px;
-      background-color: #66666650;
+      background-color: #22222250;
       border-radius: 50%;
       &:hover {
         background-color: #666;
