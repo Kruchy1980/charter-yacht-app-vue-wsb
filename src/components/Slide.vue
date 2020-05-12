@@ -65,19 +65,19 @@ export default {
   animation-name: fadeEnter;
   animation-iteration-count: 1;
   position: absolute;
-  transition: all 0.3s ease-in;
+  transition: all 0.5s ease-in;
 }
 .slide-fade-leave-active {
   animation-name: fadeLeave;
   animation-iteration-count: 1;
   position: absolute;
   // transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
-  transition: all 0.3s ease-out;
+  transition: all 0.5s ease-out;
 }
 
 .slide-fade-enter,
 .slide-fade-leave-to {
-  transform: translateX(100px);
+  transform: translateX(10px);
   opacity: 0;
 }
 
