@@ -120,7 +120,7 @@ export default {
 
 <style lang="scss" scoped>
 .slider__box {
-  border-bottom: 1px solid #000;
+  // border-bottom: 1px solid #000;
   margin-top: 20px;
   width: 100%;
   // height: 100%;
@@ -151,16 +151,18 @@ export default {
   &__indicator-dots {
     display: flex;
     justify-content: center;
-    align-content: flex-end;
+    // align-content: flex-end;
     div {
       cursor: pointer;
-      margin: 10px;
+      position: relative;
+      bottom: 80px;
+      margin: 0 10px;
       height: 15px;
       width: 15px;
-      background-color: #77777750;
+      background-color: #22222250;
       border-radius: 50%;
       &:hover {
-        background-color: #77777799;
+        background-color: #666;
       }
     }
   }

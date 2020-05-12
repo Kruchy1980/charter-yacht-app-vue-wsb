@@ -35,17 +35,21 @@ export default {
 <style lang="scss" scoped>
 .slide__box {
   width: 100%;
-  height: 500px;
+  // height: 500px;
   margin: 30px 0;
   height: 50vh;
-  overflow: hidden;
+  // overflow: hidden;
 
   &__image {
     // just for check
     // background-image: url("../assets/images/slider-image/sailing/4.yacht-s.jpeg");
     // height: 100%;
-    height: 474.5px;
+    display: flex;
+    justify-content: center;
+    flex-flow: nowrap;
+    height: 50vh;
     width: 100%;
+    // margin: 0;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -72,12 +76,14 @@ export default {
   animation-iteration-count: 1;
   position: absolute;
   // transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
-  transition: all 0.5s ease-out;
+  transition: all 0.8s;
 }
 
-.slide-fade-enter,
+.slide-fade-enter {
+  transform: translateX(100%);
+}
 .slide-fade-leave-to {
-  transform: translateX(10px);
+  transform: translateX(-100%);
   opacity: 0;
 }
 
