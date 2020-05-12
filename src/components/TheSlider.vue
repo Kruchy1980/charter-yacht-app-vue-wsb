@@ -123,7 +123,8 @@ export default {
   // border-bottom: 1px solid #000;
   margin-top: 20px;
   width: 100%;
-  // height: 100%;
+  background-color: #0000ff;
+  height: 50vh;
 
   &__arrow--left,
   &__arrow--right {
@@ -155,11 +156,11 @@ export default {
     div {
       cursor: pointer;
       position: relative;
-      bottom: 80px;
+      bottom: 60px;
       margin: 0 10px;
       height: 15px;
       width: 15px;
-      background-color: #22222250;
+      background-color: #0000ff;
       border-radius: 50%;
       &:hover {
         background-color: #666;

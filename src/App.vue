@@ -98,14 +98,14 @@ export default {
       white-space: nowrap;
       // background-color: #0000ff;
       // color: #ddd;
-      border: 1px solid #777;
+      border: 1px groove #777;
       border-radius: 5px;
       opacity: 0;
       display: none;
     }
     &[data-title]:hover:after {
       opacity: 1;
-      transition: all 0.1s ease 0.5s;
+      transition: all 0.5s ease;
       display: block;
     }
   }
