@@ -70,7 +70,7 @@ ul a{
 }
 nav{
     flex-basis: 100%;
-}
+} 
 li{
     padding-left: .5rem;
     margin-top: .5rem;
@@ -111,7 +111,7 @@ li{
     padding: 3px;
     border-radius: 7px;
     border-bottom: 1px solid rgb(102,102,102, .2);
-    background-color: #fff;
+    background-color: rgb(254, 254, 254);
 }
 .main_header{
     margin: 0px;
@@ -119,8 +119,7 @@ li{
     position: relative;
     top: 0px;
     width: 100%;
-    background-color: #fff;
-    z-index: 1000;
+    background-color: rgb(254, 254, 254);
     display: flex;
     border-bottom: 1px solid rgb(102,102,102, .2);
 }
