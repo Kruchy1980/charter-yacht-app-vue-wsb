@@ -1,7 +1,7 @@
 <template>
   <div id="yacht-charter-app">
     <!-- Tu miejsce na navbar -->
-
+    <MainMenu/>
     <!-- Tutaj już walnięty slider  -->
     <TheSlider />
     <!-- Kafelki -->
@@ -18,14 +18,17 @@
         data-title="Registered charterers"
       >1234567</div>
     </div>
+    <MainFooter/>
   </div>
 </template>
 
 <script>
 import TheSlider from "@/components/TheSlider";
+import MainMenu from "@/components/MainMenu"
+import MainFooter from "@/components/MainFooter"
 export default {
   name: "App",
-  components: { TheSlider }
+  components: { TheSlider,MainMenu,MainFooter }
 };
 </script>
 
