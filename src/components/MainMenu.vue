@@ -8,7 +8,7 @@
         </button>  
         <nav class="hide">
             <ul class="nav_menu">
-                <li><a href="" class="nav_link primary_color">Strona główna</a></li>
+                <li><router-link to="/" class="nav_link primary_color">Strona główna</router-link></li>
                 <li>
                     <a type="button" class="nav_link primary_color" v-on:click="expandMenuCharter($event)">Czartery jachtów 
                         <i class="fas fa-caret-down" v-show="!isExpanded"></i>
@@ -21,8 +21,8 @@
                         <li><a href="" class="nav_link primary_color">Katamarany motorowe</a></li>
                     </ul>
                 </li>
-                <li><a href="" class="nav_link primary_color">Kontakt</a></li>
-                <li><a href="" class="nav_link primary_color">O Nas</a></li>
+                <li><router-link to="/contact" class="nav_link primary_color">Kontakt</router-link></li>
+                <li><router-link to="/about" class="nav_link primary_color">O Nas</router-link></li>
                 <li><a href="" class="nav_link primary_color">
                     <i class="fas fa-user-circle fa-lg"></i>
                     </a>
