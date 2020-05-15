@@ -36,7 +36,7 @@ export default {
 .slide__box {
   width: 100%;
   // height: 500px;
-  margin: 30px 0;
+  // margin: 30px 0;
   height: 50vh;
   // overflow: hidden;
 

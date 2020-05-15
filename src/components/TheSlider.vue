@@ -121,7 +121,7 @@ export default {
 <style lang="scss" scoped>
 .slider__box {
   // border-bottom: 1px solid #000;
-  margin-top: 20px;
+  // margin-top: 20px;
   width: 100%;
   background-color: #0000ff;
   height: 50vh;
@@ -132,7 +132,7 @@ export default {
     font-size: 60px;
     font-weight: bold;
     color: #77777780;
-    top: 24vh;
+    top: 25vh;
     opacity: 0.3;
     transition: 1s;
     cursor: pointer;
