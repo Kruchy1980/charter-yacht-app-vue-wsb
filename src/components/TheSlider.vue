@@ -168,7 +168,8 @@ export default {
     }
   }
 }
-.active {
-  background-color: #998511;
-}
+// The class added to make the indicators show the slide is active
+// .active {
+//   background-color: #998511;
+// }
 </style>
