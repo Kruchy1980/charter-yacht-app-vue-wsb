@@ -23,22 +23,22 @@ export default {
         {
           id: 0,
           src: "images/slider-image/sailing/1.yacht-s.jpeg",
-          title: "Home"
+          title: "Strona Główna"
         },
         {
           id: 1,
           src: "images/slider-image/motor/1.motorboat.jpg",
-          title: "About"
+          title: "Czartery Jachtów"
         },
         {
           id: 2,
           src: "images/slider-image/catamaran-sailing/1.catamaran-s.jpeg",
-          title: "Charter"
+          title: "O Nas"
         },
         {
           id: 3,
           src: "images/slider-image/catamaran-motor/2.catamaran-m.jpeg",
-          title: "Something"
+          title: "Kontakt"
         }
       ],
       // Add a variable to dynamically choose the image

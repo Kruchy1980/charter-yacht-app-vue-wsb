@@ -56,7 +56,15 @@ export default {
   }
   &__title {
     // margin-top: 90px;
-    padding-top: 60px;
+    display: inline-block;
+
+    background-color: #eeeeee80;
+    margin-top: 60px;
+    padding: 10px;
+    height: 2em;
+    width: 250px;
+    border: 2px solid #0000ff;
+    border-radius: 10px;
     text-align: center;
     font-size: 24px;
     font-weight: bold;
