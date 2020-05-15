@@ -22,10 +22,13 @@ const routes = [
     path: "/about",
     name: "about",
     component: About
-  }
+  },
+  { path: '*', redirect: '/' }, //przekierowanie dla błędnej nazwy strony
 ];
 
 const router = new VueRouter({
+  mode: 'history',
+  hash: false,
   routes
 });
 
