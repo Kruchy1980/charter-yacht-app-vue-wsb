@@ -35,8 +35,6 @@ export default {
 <style lang="scss" scoped>
 .slide__box {
   width: 100%;
-  // height: 500px;
-  // margin: 30px 0;
   height: 50vh;
   // overflow: hidden;
 
@@ -91,7 +89,7 @@ export default {
   transform: translateX(100%);
 }
 .slide-fade-leave-to {
-  transform: translateX(-100%);
+  transform: translateX(-99%);
   opacity: 0;
 }
 
