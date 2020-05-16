@@ -91,7 +91,6 @@ export default {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-
     background-color: #eeeeee80;
     margin-top: 20px;
     padding: 10px;
