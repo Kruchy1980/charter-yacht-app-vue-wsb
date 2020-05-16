@@ -23,22 +23,22 @@ export default {
         {
           id: 0,
           src: "images/slider-image/sailing/1.yacht-s.jpeg",
-          title: "Home"
+          title: "Strona Główna"
         },
         {
           id: 1,
           src: "images/slider-image/motor/1.motorboat.jpg",
-          title: "About"
+          title: "Czartery Jachtów"
         },
         {
           id: 2,
           src: "images/slider-image/catamaran-sailing/1.catamaran-s.jpeg",
-          title: "Charter"
+          title: "O Nas"
         },
         {
           id: 3,
           src: "images/slider-image/catamaran-motor/2.catamaran-m.jpeg",
-          title: "Something"
+          title: "Kontakt"
         }
       ],
       // Add a variable to dynamically choose the image
@@ -121,7 +121,7 @@ export default {
 <style lang="scss" scoped>
 .slider__box {
   // border-bottom: 1px solid #000;
-  margin-top: 20px;
+  // margin-top: 20px;
   width: 100%;
   background-color: #0000ff;
   height: 50vh;
@@ -132,7 +132,7 @@ export default {
     font-size: 60px;
     font-weight: bold;
     color: #77777780;
-    top: 24vh;
+    top: 25vh;
     opacity: 0.3;
     transition: 1s;
     cursor: pointer;
@@ -168,7 +168,8 @@ export default {
     }
   }
 }
-.active {
-  background-color: #998511;
-}
+// The class added to make the indicators show the slide is active
+// .active {
+//   background-color: #998511;
+// }
 </style>
