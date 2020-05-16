@@ -5,8 +5,12 @@
     <!-- And add here displaying of slide -->
     <!-- The slide id is: {{ slide.id }} with source of: {{ slide.src }} -->
     <div :key="slide.id" class="slide__box__image" :style="setTheSlide">
-      <!-- Add the title as well -->
-      <div class="slide__box__title">{{ slide.title }}</div>
+      <div class="slide__box__text">
+        <!-- Add the title as well -->
+        <div class="slide__box__title">{{ slide.title }}</div>
+        <!-- Add The desdription -->
+        <div class="slide__box__description">{{ slide.description }}</div>
+      </div>
     </div>
   </transition-group>
   <!-- </div> -->
@@ -37,7 +41,18 @@ export default {
   width: 100%;
   height: 50vh;
   // overflow: hidden;
-
+  &__text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    text-align: center;
+    // flex-wrap: wrap;
+    // height: 300px;
+    // width: 300px;
+    // border: 1px solid #fff;
+    // background-color: #eeeeee80;
+  }
   &__image {
     // just for check
     // background-image: url("../assets/images/slider-image/sailing/4.yacht-s.jpeg");
@@ -53,15 +68,36 @@ export default {
     background-size: cover;
   }
   &__title {
-    // margin-top: 90px;
+    margin: 0 auto;
     display: inline-block;
-
     background-color: #eeeeee80;
     margin-top: 60px;
     padding: 10px;
     height: 2em;
-    width: 250px;
-    border: 2px solid #0000ff;
+    width: 300px;
+    // border: 2px solid #0000ff;
+    box-shadow: 0 0 8px 0px #0000ff;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: #1e56ce;
+    &:hover {
+      background-color: #eeeeee;
+      cursor: pointer;
+    }
+  }
+  &__description {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    background-color: #eeeeee80;
+    margin-top: 20px;
+    padding: 10px;
+    // height: 2em;
+    // width: 300px;
+    // border: 2px solid #0000ff;
     border-radius: 10px;
     text-align: center;
     font-size: 24px;
