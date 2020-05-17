@@ -42,7 +42,8 @@ export default {
           id: 3,
           src: "images/slider-image/catamaran-motor/2.catamaran-m.jpeg",
           title: "Katamarany motorowe",
-          description: "Jeśli chcesz się czuć jak w domu"
+          description:
+            "Jeśli chcesz się czuć jak w domu, a jednocześnie zwiedzać świat"
         }
       ],
       // Add a variable to dynamically choose the image
