@@ -8,29 +8,48 @@
         <i class="fas fa-bars fa-lg" v-show="isMobileMenuClicked"></i>
         <i class="fas fa-times fa-lg" v-show="!isMobileMenuClicked"></i>
       </button>
-      <nav class="hide">
+      <nav class="header_nav">
         <ul class="nav_menu">
           <li>
             <router-link to="/" class="nav_link primary_color">Strona główna</router-link>
           </li>
           <li>
-            <a type="button" class="nav_link primary_color" v-on:click="expandMenuCharter($event)">
+            <a class="nav_link primary_color" v-on:click="expandMenuCharter($event)">
               Czartery jachtów
               <i class="fas fa-caret-down" v-show="!isExpanded"></i>
               <i class="fas fa-caret-up" v-show="isExpanded"></i>
             </a>
-            <ul class="nav_dropdown hide">
+            <ul class="nav_dropdown ">
               <li>
-                <a href class="nav_link primary_color">Jachty żaglowe</a>
+                <a  class="nav_link primary_color" v-on:click="isExpanded1=!isExpanded1">
+                  Jachty żaglowe 
+                  <i class="fas fa-caret-down" v-show="!isExpanded1"></i>
+                  <i class="fas fa-caret-up" v-show="isExpanded1"></i>
+                </a>
+                <ul v-show="isExpanded1">
+                  <li class="dropdown_item">
+                    <a class="primary_color nav_link"><i class="fas fa-caret-right"></i> Jednokadłubowe</a>
+                  </li>
+                  <li class="dropdown_item">
+                    <a class="primary_color nav_link"><i class="fas fa-caret-right"></i> Wielokadłubowe</a>
+                  </li>
+                </ul>
               </li>
+
               <li>
-                <a href class="nav_link primary_color">Jachty motorowe</a>
-              </li>
-              <li>
-                <a href class="nav_link primary_color">Katamarany żaglowe</a>
-              </li>
-              <li>
-                <a href class="nav_link primary_color">Katamarany motorowe</a>
+                <a  class="nav_link primary_color" v-on:click="isExpanded2=!isExpanded2">
+                  Jachty motorowe 
+                  <i class="fas fa-caret-down" v-show="!isExpanded2"></i>
+                  <i class="fas fa-caret-up" v-show="isExpanded2"></i>
+                </a>
+                <ul v-show="isExpanded2">
+                  <li class="dropdown_item ">
+                    <a class="primary_color nav_link "><i class="fas fa-caret-right"></i> Jednokadłubowe</a>
+                  </li>
+                  <li class="dropdown_item">
+                    <a class="primary_color nav_link"><i class="fas fa-caret-right"></i> Wielokadłubowe</a>
+                  </li>
+                </ul>
               </li>
             </ul>
           </li>
@@ -59,19 +78,27 @@ export default {
       mainUrl: "/",
       logoUrl: "/bookmark-icon/1.blue.svg",
       isMobileMenuClicked: true,
-      isExpanded: false
+      isExpanded: false,
+      isExpanded1: false,
+      isExpanded2: false,
     };
   },
   methods: {
     showMobileMenu() {
+      let nav = document.querySelector('.header_nav');
+      if(this.isMobileMenuClicked){
+        nav.style='max-height: 50vh;'
+      }
+      else{
+        nav.style='max-height: 0;';
+      }
       this.isMobileMenuClicked = !this.isMobileMenuClicked;
-      let nav = document.getElementsByTagName("nav")[0];
-      nav.classList.toggle("show");
+      
     },
     expandMenuCharter(e) {
-      this.isExpanded = !this.isExpanded;
       let ul = e.target.nextSibling;
-      ul.classList.toggle("show");
+      this.isExpanded = !this.isExpanded;
+      ul.classList.toggle("nav_dropdown--grow");
     }
   }
 };
@@ -83,27 +110,54 @@ ul {
   padding: 0;
   list-style: none;
 }
-ul a {
+li a {
   text-decoration: none;
 }
-nav {
+.header_nav {
   flex-basis: 100%;
+  -moz-transition: max-height .5s;
+  -ms-transition: max-height .5s;
+  -o-transition: max-height .5s;
+  -webkit-transition: max-height .5s;
+  transition: max-height .5s;
+  max-height: 0;
+  overflow: hidden;
 }
 li {
   padding-left: 0.5rem;
   margin-top: 0.5rem;
+  margin-bottom: .2rem;
 }
 .nav_link {
   padding: 0.25rem;
   border: solid 1px transparent;
-  transition: all 0.5s;
+  -moz-transition:  all 0.5s;
+  -ms-transition:  all 0.5s;
+  -o-transition:  all 0.5s;
+  -webkit-transition:  all 0.5s;
+  transition:  all 0.5s;
 }
-.nav_link:hover {
+.nav_link:hover{
   cursor: pointer;
   border-radius: 7px;
   border-left: solid 1px rgba(60, 84, 180, 0.6);
   border-right: solid 1px rgba(60, 84, 180, 0.6);
   color: rgba(60, 84, 180, 0.6);
+}
+.nav_dropdown > li{
+  margin-top: .5rem;
+}
+.dropdown_item{
+  margin-top: .5rem;
+  padding-bottom: .2rem;
+  -moz-transition:  all 0.5s;
+  -ms-transition:  all 0.5s;
+  -o-transition:  all 0.5s;
+  -webkit-transition:  all 0.5s;
+  transition:  all 0.5s;
+}
+.dropdown_item:hover{
+  margin-left: .25rem;
 }
 .nav_toggler {
   height: 2rem;
@@ -115,7 +169,11 @@ li {
   cursor: pointer;
   display: inline-block;
   text-align: center;
-  transition: all 0.5s;
+  -moz-transition:  all 0.5s;
+  -ms-transition:  all 0.5s;
+  -o-transition:  all 0.5s;
+  -webkit-transition:  all 0.5s;
+  transition:  all 0.5s;
 }
 .nav_menu {
   display: flex;
@@ -123,23 +181,16 @@ li {
   text-align: left;
   margin-bottom: 0.5rem;
 }
-.nav_dropdown {
-  position: static;
-  width: fit-content;
-  padding: 3px;
-  border-radius: 7px;
-  border-bottom: 1px solid rgb(102, 102, 102, 0.2);
-  background-color: rgb(254, 254, 254);
-}
 .main_header {
   margin: 0px;
   padding: 0px;
-  position: relative;
+  position: absolute;
   top: 0px;
   width: 100%;
   background-color: rgb(254, 254, 254);
   display: flex;
   border-bottom: 1px solid rgb(102, 102, 102, 0.2);
+  z-index: 100;
 }
 .main_header_nav {
   margin: 0 auto;
@@ -161,16 +212,37 @@ li {
 .hide:not(.show) {
   display: none;
 }
-
-/* szkielet dla różnych wyświetlaczy */
-@media (min-width: 640px) {
+.nav_dropdown {
+  width: fit-content;
+  border-bottom-right-radius: 7px;
+  border-bottom-left-radius: 7px;
+  background-color: rgb(254, 254, 254);
+  
+  /* ukrycie + animacja */
+  max-height: 0px;
+  overflow: hidden;
+  -moz-transition:  all 0.5s;
+  -ms-transition:  all 0.5s;
+  -o-transition:  all 0.5s;
+  -webkit-transition:  all 0.5s;
+  transition:  all 0.5s;
+}
+.nav_dropdown--grow{
+  max-height: 50vh;
+  padding: 3px; 
+  /* border-bottom: 1px solid rgb(102, 102, 102, 0.2); */
 }
 
+/* szkielet dla różnych wyświetlaczy */
+/* @media (min-width: 640px) {
+} */
+
 @media (min-width: 768px) {
-  nav {
+  .header_nav {
     margin: auto 5% auto auto;
     display: inherit !important;
     flex-basis: auto;
+    max-height: 50vh;
   }
   li {
     margin-top: 0.25rem;
@@ -191,12 +263,13 @@ li {
   .nav_dropdown {
     position: absolute;
     width: auto;
+    padding: 3px;
   }
 }
 
-@media (min-width: 1024px) {
+/* @media (min-width: 1024px) {
 }
 
 @media (min-width: 1200px) {
-}
+} */
 </style>

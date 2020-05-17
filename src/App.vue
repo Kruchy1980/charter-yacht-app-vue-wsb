@@ -15,4 +15,19 @@ body {
 .primary_color {
   color: rgb(60, 84, 180);
 }
+.text-yellow{
+    color: #ffc107;
+}
+.text-red{
+    color: #ff0000;
+}
+.text-blue{
+    color: #0000ff;
+}
+.text-dark{
+  color: #212529;
+}
+.bg-dark{
+  background-color: #212529;
+}
 </style>
