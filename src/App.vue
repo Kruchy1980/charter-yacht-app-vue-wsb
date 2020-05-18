@@ -6,6 +6,13 @@
 
 
 <style  lang="scss">
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 body {
   margin: 0;
   padding: 0;
@@ -15,19 +22,19 @@ body {
 .primary_color {
   color: rgb(60, 84, 180);
 }
-.text-yellow{
-    color: #ffc107;
+.text-yellow {
+  color: #ffc107;
 }
-.text-red{
-    color: #ff0000;
+.text-red {
+  color: #ff0000;
 }
-.text-blue{
-    color: #0000ff;
+.text-blue {
+  color: #0000ff;
 }
-.text-dark{
+.text-dark {
   color: #212529;
 }
-.bg-dark{
+.bg-dark {
   background-color: #212529;
 }
 </style>
