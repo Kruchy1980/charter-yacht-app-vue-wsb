@@ -166,7 +166,7 @@ $mobile: "only screen and (max-width : 425px)";
 .main-card__box {
   max-width: 1100px;
   min-width: 300px;
-  margin: 0 auto;
+  margin: 50px auto;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -212,6 +212,7 @@ $mobile: "only screen and (max-width : 425px)";
       padding: 15px;
       cursor: pointer;
       &__show {
+        cursor: pointer;
         padding: 5px;
         background-color: #b9820a;
         font-weight: bold;

@@ -21,33 +21,41 @@
             </a>
             <ul class="nav_dropdown bg-light">
               <li>
-                <a  class="nav_link primary_color" v-on:click="isExpanded1=!isExpanded1">
-                  Jachty żaglowe 
+                <a class="nav_link primary_color" v-on:click="isExpanded1=!isExpanded1">
+                  Jachty żaglowe
                   <i class="fas fa-caret-down" v-show="!isExpanded1"></i>
                   <i class="fas fa-caret-up" v-show="isExpanded1"></i>
                 </a>
                 <ul v-show="isExpanded1">
                   <li class="dropdown_item">
-                    <a class="primary_color nav_link"><i class="fas fa-caret-right"></i> Jednokadłubowe</a>
+                    <a class="primary_color nav_link">
+                      <i class="fas fa-caret-right"></i> Jednokadłubowe
+                    </a>
                   </li>
                   <li class="dropdown_item">
-                    <a class="primary_color nav_link"><i class="fas fa-caret-right"></i> Wielokadłubowe</a>
+                    <a class="primary_color nav_link">
+                      <i class="fas fa-caret-right"></i> Wielokadłubowe
+                    </a>
                   </li>
                 </ul>
               </li>
 
               <li>
-                <a  class="nav_link primary_color" v-on:click="isExpanded2=!isExpanded2">
-                  Jachty motorowe 
+                <a class="nav_link primary_color" v-on:click="isExpanded2=!isExpanded2">
+                  Jachty motorowe
                   <i class="fas fa-caret-down" v-show="!isExpanded2"></i>
                   <i class="fas fa-caret-up" v-show="isExpanded2"></i>
                 </a>
                 <ul v-show="isExpanded2">
-                  <li class="dropdown_item ">
-                    <a class="primary_color nav_link "><i class="fas fa-caret-right"></i> Jednokadłubowe</a>
+                  <li class="dropdown_item">
+                    <a class="primary_color nav_link">
+                      <i class="fas fa-caret-right"></i> Jednokadłubowe
+                    </a>
                   </li>
                   <li class="dropdown_item">
-                    <a class="primary_color nav_link"><i class="fas fa-caret-right"></i> Wielokadłubowe</a>
+                    <a class="primary_color nav_link">
+                      <i class="fas fa-caret-right"></i> Wielokadłubowe
+                    </a>
                   </li>
                 </ul>
               </li>
@@ -80,20 +88,18 @@ export default {
       isMobileMenuClicked: true,
       isExpanded: false,
       isExpanded1: false,
-      isExpanded2: false,
+      isExpanded2: false
     };
   },
   methods: {
     showMobileMenu() {
-      let nav = document.querySelector('.header_nav');
-      if(this.isMobileMenuClicked){
-        nav.style='max-height: 50vh;'
-      }
-      else{
-        nav.style='max-height: 0;';
+      let nav = document.querySelector(".header_nav");
+      if (this.isMobileMenuClicked) {
+        nav.style = "max-height: 50vh;";
+      } else {
+        nav.style = "max-height: 0;";
       }
       this.isMobileMenuClicked = !this.isMobileMenuClicked;
-      
     },
     expandMenuCharter(e) {
       let ul = e.target.nextSibling;
@@ -115,49 +121,49 @@ li a {
 }
 .header_nav {
   flex-basis: 100%;
-  -moz-transition: max-height .5s;
-  -ms-transition: max-height .5s;
-  -o-transition: max-height .5s;
-  -webkit-transition: max-height .5s;
-  transition: max-height .5s;
+  -moz-transition: max-height 0.5s;
+  -ms-transition: max-height 0.5s;
+  -o-transition: max-height 0.5s;
+  -webkit-transition: max-height 0.5s;
+  transition: max-height 0.5s;
   max-height: 0;
   overflow: hidden;
 }
 li {
   padding-left: 0.5rem;
   margin-top: 0.5rem;
-  margin-bottom: .2rem;
+  margin-bottom: 0.2rem;
 }
 .nav_link {
   padding: 0.25rem;
   border: solid 1px transparent;
-  -moz-transition:  all 0.5s;
-  -ms-transition:  all 0.5s;
-  -o-transition:  all 0.5s;
-  -webkit-transition:  all 0.5s;
-  transition:  all 0.5s;
+  -moz-transition: all 0.5s;
+  -ms-transition: all 0.5s;
+  -o-transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
 }
-.nav_link:hover{
+.nav_link:hover {
   cursor: pointer;
   border-radius: 7px;
   border-left: solid 1px rgba(60, 84, 180, 0.6);
   border-right: solid 1px rgba(60, 84, 180, 0.6);
   color: rgba(60, 84, 180, 0.6);
 }
-.nav_dropdown > li{
-  margin-top: .5rem;
+.nav_dropdown > li {
+  margin-top: 0.5rem;
 }
-.dropdown_item{
-  margin-top: .5rem;
-  padding-bottom: .2rem;
-  -moz-transition:  all 0.5s;
-  -ms-transition:  all 0.5s;
-  -o-transition:  all 0.5s;
-  -webkit-transition:  all 0.5s;
-  transition:  all 0.5s;
+.dropdown_item {
+  margin-top: 0.5rem;
+  padding-bottom: 0.2rem;
+  -moz-transition: all 0.5s;
+  -ms-transition: all 0.5s;
+  -o-transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
 }
-.dropdown_item:hover{
-  margin-left: .25rem;
+.dropdown_item:hover {
+  margin-left: 0.25rem;
 }
 .nav_toggler {
   height: 2rem;
@@ -169,11 +175,11 @@ li {
   cursor: pointer;
   display: inline-block;
   text-align: center;
-  -moz-transition:  all 0.5s;
-  -ms-transition:  all 0.5s;
-  -o-transition:  all 0.5s;
-  -webkit-transition:  all 0.5s;
-  transition:  all 0.5s;
+  -moz-transition: all 0.5s;
+  -ms-transition: all 0.5s;
+  -o-transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
 }
 .nav_menu {
   display: flex;
@@ -184,7 +190,7 @@ li {
 .main_header {
   margin: 0px;
   padding: 0px;
-  position: absolute;
+  position: fixed;
   top: 0px;
   width: 100%;
   /* background-color: rgb(254, 254, 254); */
@@ -216,19 +222,19 @@ li {
   width: fit-content;
   border-bottom-right-radius: 7px;
   border-bottom-left-radius: 7px;
-  
+
   /* ukrycie + animacja */
   max-height: 0px;
   overflow: hidden;
-  -moz-transition:  all 0.5s;
-  -ms-transition:  all 0.5s;
-  -o-transition:  all 0.5s;
-  -webkit-transition:  all 0.5s;
-  transition:  all 0.5s;
+  -moz-transition: all 0.5s;
+  -ms-transition: all 0.5s;
+  -o-transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
 }
-.nav_dropdown--grow{
+.nav_dropdown--grow {
   max-height: 50vh;
-  padding: 3px; 
+  padding: 3px;
   border-bottom: 1px solid rgb(102, 102, 102, 0.2);
 }
 
