@@ -2,7 +2,7 @@
 <footer class="main_fotter">
     <div class="footer_container">
         <p class="footer_p"> &copy; 2020 International Yachts Charters - Pomysł i realizacja</p>
-        <p class="footer_p"> Jakub Kruszyński <a href="https://github.com/Kruchy1980" target="_blank" class="primary_color"><i class="fab fa-github"></i></a> & Paweł Jarosiewicz <a href="https://github.com/PawelJarosiewicz" target="_blank" class="primary_color"><i class="fab fa-github"></i></a></p>
+        <p class="footer_p"> Jakub Kruszyński <a href="https://github.com/Kruchy1980" target="_blank" class="primary_color"><i class="fab fa-github"></i></a>  &  Paweł Jarosiewicz <a href="https://github.com/PawelJarosiewicz" target="_blank" class="primary_color"><i class="fab fa-github"></i></a></p>
     </div>
 </footer>
 </template>

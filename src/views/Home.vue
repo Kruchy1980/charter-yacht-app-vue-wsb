@@ -1,34 +1,34 @@
 <template>
   <div id="yacht-charter-app">
     <!-- Tu miejsce na navbar -->
-    <MainMenu/>
+    <MainMenu />
     <!-- Tutaj już walnięty slider  -->
     <TheSlider />
     <!-- Kafelki -->
     <div class="main__box">
-      <div class="main__box__tile main__box__tile__yachts" data-title="Yachts for charters">
+      <div class="main__box__tile main__box__tile__yachts" data-title="Jachty do wyczarterowania">
         <p>1234567</p>
       </div>
       <div
         class="main__box__tile main__box__tile__skippers"
-        data-title="Skippers in our database"
+        data-title="Skiperzy do wynajęcia"
       >1234567</div>
       <div
         class="main__box__tile main__box__tile__chartetrers"
-        data-title="Registered charterers"
+        data-title="Zarejestrowani czarterujący"
       >1234567</div>
     </div>
-    <MainFooter/>
+    <MainFooter />
   </div>
 </template>
 
 <script>
 import TheSlider from "@/components/TheSlider";
-import MainMenu from "@/components/MainMenu"
-import MainFooter from "@/components/MainFooter"
+import MainMenu from "@/components/MainMenu";
+import MainFooter from "@/components/MainFooter";
 export default {
   name: "App",
-  components: { TheSlider,MainMenu,MainFooter }
+  components: { TheSlider, MainMenu, MainFooter }
 };
 </script>
 
