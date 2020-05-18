@@ -1,7 +1,7 @@
 <template>
   <div id="about">
     <MainMenu />
-    <div class="about_wrapper">
+    <div class="about_wrapper bg-light">
       <div>
         <h2>Kim jesteśmy</h2>
         <p>
@@ -69,18 +69,18 @@ p {
   margin-bottom: 0.2rem;
   line-height: 1.5;
 }
-a {
+.about_wrapper a {
   text-decoration: none;
   color: #212529;
 }
 .about_wrapper {
-  background-color: rgb(254, 254, 254);
   display: block;
   margin-top: 15%;
-  margin-left: 10%;
-  margin-right: 10%;
+  margin-left: 5%;
+  margin-right: 5%;
   box-shadow: 4px 6px 20px #999;
   border-radius: 5px;
+  color: #212529;
 }
 .about_wrapper > div {
   padding: 5%;
@@ -118,6 +118,8 @@ a {
   }
   .about_wrapper {
     margin-top: 10%;
+    margin-left: 10%;
+    margin-right: 10%;
   }
 }
 </style>

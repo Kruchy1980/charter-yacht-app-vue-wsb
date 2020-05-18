@@ -13,21 +13,27 @@ body {
   font-family: Avenir, Helvetica, Arial, sans-serif;
 }
 .primary_color {
-  color: rgb(60, 84, 180);
+  color: rgb(60, 84, 180)!important;
 }
 .text-yellow{
-    color: #ffc107;
+    color: rgb(255, 193, 7)!important;
 }
 .text-red{
-    color: #ff0000;
+    color: rgb(255, 0, 0)!important;
 }
 .text-blue{
-    color: #0000ff;
+    color: rgb(0, 0, 255)!important;
 }
 .text-dark{
-  color: #212529;
+  color: rgb(33, 37, 41)!important;
 }
 .bg-dark{
-  background-color: #212529;
+  background-color: rgb(33, 37, 41)!important;
+}
+.text-light{
+  color: rgb(251, 252, 253)!important;
+}
+.bg-light{
+  background-color: rgb(251, 252, 253)!important;
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <header class="main_header primary_color">
+  <header class="main_header primary_color bg-light">
     <div class="main_header_nav">
       <a :href="mainUrl">
         <img :src="logoUrl" alt="logo" class="nav_logo" />
@@ -19,7 +19,7 @@
               <i class="fas fa-caret-down" v-show="!isExpanded"></i>
               <i class="fas fa-caret-up" v-show="isExpanded"></i>
             </a>
-            <ul class="nav_dropdown ">
+            <ul class="nav_dropdown bg-light">
               <li>
                 <a  class="nav_link primary_color" v-on:click="isExpanded1=!isExpanded1">
                   Jachty żaglowe 
@@ -187,7 +187,7 @@ li {
   position: absolute;
   top: 0px;
   width: 100%;
-  background-color: rgb(254, 254, 254);
+  /* background-color: rgb(254, 254, 254); */
   display: flex;
   border-bottom: 1px solid rgb(102, 102, 102, 0.2);
   z-index: 100;
@@ -216,7 +216,6 @@ li {
   width: fit-content;
   border-bottom-right-radius: 7px;
   border-bottom-left-radius: 7px;
-  background-color: rgb(254, 254, 254);
   
   /* ukrycie + animacja */
   max-height: 0px;
@@ -230,7 +229,7 @@ li {
 .nav_dropdown--grow{
   max-height: 50vh;
   padding: 3px; 
-  /* border-bottom: 1px solid rgb(102, 102, 102, 0.2); */
+  border-bottom: 1px solid rgb(102, 102, 102, 0.2);
 }
 
 /* szkielet dla różnych wyświetlaczy */
