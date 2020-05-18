@@ -72,7 +72,7 @@ export default {
         },
         {
           id: 3,
-          src: "../../public/card-images/catamarans/motor/1.catamaran-m.jpeg",
+          src: "card-images/catamarans/motor/1.catamaran-m.jpeg",
           title: "Jachty motorowe - wielokadłubowe",
           text:
             "Jeśli intresuje Ciebie dobre samopoczucie i komfort sprzyjające żeglowaniu, a jednocześnie nie lubisz siedzieć w miejscu, to ten rodzaj czarteru zapewni Tobie wspaniale spędzony czas."
