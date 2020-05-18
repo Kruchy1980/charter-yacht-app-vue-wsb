@@ -1,5 +1,5 @@
 <template>
-  <header class="main_header primary_color bg-light">
+  <header class="main_header text__color--primary background__color--light">
     <div class="main_header_nav">
       <a :href="mainUrl">
         <img :src="logoUrl" alt="logo" class="nav_logo" />
@@ -11,56 +11,56 @@
       <nav class="header_nav">
         <ul class="nav_menu">
           <li>
-            <router-link to="/" class="nav_link primary_color">Strona główna</router-link>
+            <router-link to="/" class="nav_link text__color--primary">Strona główna</router-link>
           </li>
           <li>
-            <a class="nav_link primary_color" v-on:click="expandMenuCharter($event)">
+            <a class="nav_link text__color--primary" v-on:click="expandMenuCharter($event)">
               Czartery jachtów
               <i class="fas fa-caret-down" v-show="!isExpanded"></i>
               <i class="fas fa-caret-up" v-show="isExpanded"></i>
             </a>
-            <ul class="nav_dropdown bg-light">
+            <ul class="nav_dropdown background__color--light">
               <li>
-                <a  class="nav_link primary_color" v-on:click="isExpanded1=!isExpanded1">
+                <a  class="nav_link text__color--primary" v-on:click="isExpanded1=!isExpanded1">
                   Jachty żaglowe 
                   <i class="fas fa-caret-down" v-show="!isExpanded1"></i>
                   <i class="fas fa-caret-up" v-show="isExpanded1"></i>
                 </a>
                 <ul v-show="isExpanded1">
                   <li class="dropdown_item">
-                    <a class="primary_color nav_link"><i class="fas fa-caret-right"></i> Jednokadłubowe</a>
+                    <a class="text__color--primary nav_link"><i class="fas fa-caret-right"></i> Jednokadłubowe</a>
                   </li>
                   <li class="dropdown_item">
-                    <a class="primary_color nav_link"><i class="fas fa-caret-right"></i> Wielokadłubowe</a>
+                    <a class="text__color--primary nav_link"><i class="fas fa-caret-right"></i> Wielokadłubowe</a>
                   </li>
                 </ul>
               </li>
 
               <li>
-                <a  class="nav_link primary_color" v-on:click="isExpanded2=!isExpanded2">
+                <a  class="nav_link text__color--primary" v-on:click="isExpanded2=!isExpanded2">
                   Jachty motorowe 
                   <i class="fas fa-caret-down" v-show="!isExpanded2"></i>
                   <i class="fas fa-caret-up" v-show="isExpanded2"></i>
                 </a>
                 <ul v-show="isExpanded2">
                   <li class="dropdown_item ">
-                    <a class="primary_color nav_link "><i class="fas fa-caret-right"></i> Jednokadłubowe</a>
+                    <a class="text__color--primary nav_link "><i class="fas fa-caret-right"></i> Jednokadłubowe</a>
                   </li>
                   <li class="dropdown_item">
-                    <a class="primary_color nav_link"><i class="fas fa-caret-right"></i> Wielokadłubowe</a>
+                    <a class="text__color--primary nav_link"><i class="fas fa-caret-right"></i> Wielokadłubowe</a>
                   </li>
                 </ul>
               </li>
             </ul>
           </li>
           <li>
-            <router-link to="/contact" class="nav_link primary_color">Kontakt</router-link>
+            <router-link to="/contact" class="nav_link text__color--primary">Kontakt</router-link>
           </li>
           <li>
-            <router-link to="/about" class="nav_link primary_color">O Nas</router-link>
+            <router-link to="/about" class="nav_link text__color--primary">O Nas</router-link>
           </li>
           <li>
-            <a href class="nav_link primary_color">
+            <a href class="nav_link text__color--primary">
               <i class="fas fa-user-circle fa-lg"></i>
             </a>
           </li>
@@ -122,6 +122,7 @@ li a {
   transition: max-height .5s;
   max-height: 0;
   overflow: hidden;
+  
 }
 li {
   padding-left: 0.5rem;
@@ -180,6 +181,7 @@ li {
   flex-direction: column;
   text-align: left;
   margin-bottom: 0.5rem;
+
 }
 .main_header {
   margin: 0px;
@@ -191,6 +193,7 @@ li {
   display: flex;
   border-bottom: 1px solid rgb(102, 102, 102, 0.2);
   z-index: 100;
+  box-shadow: 1px 1px 5px #999;
 }
 .main_header_nav {
   margin: 0 auto;
@@ -216,7 +219,7 @@ li {
   width: fit-content;
   border-bottom-right-radius: 7px;
   border-bottom-left-radius: 7px;
-  
+
   /* ukrycie + animacja */
   max-height: 0px;
   overflow: hidden;
@@ -229,7 +232,8 @@ li {
 .nav_dropdown--grow{
   max-height: 50vh;
   padding: 3px; 
-  border-bottom: 1px solid rgb(102, 102, 102, 0.2);
+  border-bottom: 1px solid rgb(102, 102, 102, 0.5);
+  box-shadow: 0 4px 2px -2px #999;  
 }
 
 /* szkielet dla różnych wyświetlaczy */
