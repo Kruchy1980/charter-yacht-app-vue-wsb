@@ -122,6 +122,7 @@ li a {
   transition: max-height .5s;
   max-height: 0;
   overflow: hidden;
+  
 }
 li {
   padding-left: 0.5rem;
@@ -180,6 +181,7 @@ li {
   flex-direction: column;
   text-align: left;
   margin-bottom: 0.5rem;
+
 }
 .main_header {
   margin: 0px;
@@ -191,6 +193,7 @@ li {
   display: flex;
   border-bottom: 1px solid rgb(102, 102, 102, 0.2);
   z-index: 100;
+  box-shadow: 1px 1px 5px #999;
 }
 .main_header_nav {
   margin: 0 auto;
@@ -216,7 +219,7 @@ li {
   width: fit-content;
   border-bottom-right-radius: 7px;
   border-bottom-left-radius: 7px;
-  
+
   /* ukrycie + animacja */
   max-height: 0px;
   overflow: hidden;
@@ -229,7 +232,8 @@ li {
 .nav_dropdown--grow{
   max-height: 50vh;
   padding: 3px; 
-  border-bottom: 1px solid rgb(102, 102, 102, 0.2);
+  border-bottom: 1px solid rgb(102, 102, 102, 0.5);
+  box-shadow: 0 4px 2px -2px #999;  
 }
 
 /* szkielet dla różnych wyświetlaczy */

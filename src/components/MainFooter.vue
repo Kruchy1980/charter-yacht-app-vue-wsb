@@ -32,7 +32,7 @@ export default {
 }
 .fotter{
     bottom: 0;
-    position: absolute;
+    /* position: absolute; */
     background-color: #6c757d;
     margin: 0 auto;
     padding: 0px;

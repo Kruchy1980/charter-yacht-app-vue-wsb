@@ -1,49 +1,51 @@
 <template>
   <div id="about">
     <MainMenu />
-    <section class="container background__color--light">
-      <article class="article">
-        <h2 class="article__title">Kim jesteśmy</h2>
-        <p class="article__p">
-          Jesteśmy początkującymi programistami front-endu i strona, którą właśnie odwiedzasz jest naszym pierwszym projektem aplikacji typu
-          <a class="article__a"
-            href="https://en.wikipedia.org/wiki/Single-page_application"
-            target="_blank"
-          >
-            <i>
-              <strong>SPA (single-page application).</strong>
-            </i>
-          </a>
-        </p>
-        <p class="article__p">Naszym zamiarem było stworzenie portalu pozwalającego na wynajem jachtów wraz ze podstawowymi funkcjonalnościami tego typu portali.</p>
-        <p class="article__p">Projekt powstał w ramach obrony na studiach podyplomowych. Przy realizacji zostały wykorzystane technologie:</p>
-        <ul class="article__ul">
-          <li class="article__li">
-            <i class="fab fa-html5 text__color--red"></i> HTML i
-            <i class="fab fa-css3-alt text__color--blue"></i> CSS,
-          </li>
-          <li class="article__li">
-            <i class="fab fa-js text__color--yellow background__color--dark"></i> JavaScript,
-          </li>
-          <li class="article__li">
-            <img src="images/icons/vuejs.png" alt="Vue.js" height="17px" /> Vue.js
-          </li>
-          <li class="article__li">
-            oraz
-            <img src="images/icons/firebase.png" alt="Firebase" height="20px" />.
-          </li>
-        </ul>
-        <p class="article__p">
-          Dlaczego najem jachtów? Ponieważ Jakub zawodowo pływał na jachtach, a Paweł lubi podziwiać jachty z lądu...
-          <i
-            class="far fa-smile fa-lg text__color--yellow"
-            style="padding: 5px;"
-          ></i>
-        </p>
-      </article>
-    </section>
-    <!--Opis mie się podoba spoko:), Menu świetnie super o to kaman spoko chodzi o ten podział :) 
-    Paweł w komentarzu tylko ale dopiszę jeszcze tutaj ponieważ co do tehnologii można by dodać jeszcze metodykę  BEM - ja do swojej częsci takiej uzywam - ale już pewnie po obronie możan będzie użyć wspólnej bo na razie to jest taki trochę mieszany kod ale na obronę spoko tym bardziej, że nie będzie patrzył na kod raczej nawet nie dchdiał - jeśli chodzi o CSS'a, frame Bootstap, SCSS, i pewnie jeszcze coś dodamy po drodze ale to dopiszemy potem spokojna. Jeszcze dodatkowo można by dopisać biblioteki jak eslint, Saas i inne, które tutaj używamy i będziemy używali - do rozwoju i tylko zastanów się nad tym mamy na takie pierdoły jeszcze sporo czasu także można to zrobić przed oddaniem, jak już wszystko będzie z czego korzystamy i będziemy korzystali.-->
+    <main class="container">
+      <section class="section background__color--light">
+        <article class="article">
+          <h2 class="article__title">Kim jesteśmy</h2>
+          <p class="article__p">
+            Jesteśmy początkującymi programistami front-endu i strona, którą właśnie odwiedzasz jest naszym pierwszym projektem aplikacji typu
+            <a class="article__a"
+              href="https://en.wikipedia.org/wiki/Single-page_application"
+              target="_blank"
+            >
+              <i>
+                <strong>SPA (single-page application).</strong>
+              </i>
+            </a>
+          </p>
+          <p class="article__p">Naszym zamiarem było stworzenie portalu pozwalającego na wynajem jachtów wraz ze podstawowymi funkcjonalnościami tego typu portali.</p>
+          <p class="article__p">Projekt powstał w ramach obrony na studiach podyplomowych. Przy realizacji zostały wykorzystane technologie:</p>
+          <ul class="article__ul">
+            <li class="article__li">
+              <i class="fab fa-html5 text__color--red"></i> HTML i
+              <i class="fab fa-css3-alt text__color--blue"></i> CSS,
+            </li>
+            <li class="article__li">
+              <i class="fab fa-js text__color--yellow background__color--dark"></i> JavaScript,
+            </li>
+            <li class="article__li">
+              <img src="images/icons/vuejs.png" alt="Vue.js" height="17px" /> Vue.js
+            </li>
+            <li class="article__li">
+              oraz
+              <img src="images/icons/firebase.png" alt="Firebase" height="20px" />.
+            </li>
+          </ul>
+          <p class="article__p">
+            Dlaczego najem jachtów? Ponieważ Jakub zawodowo pływał na jachtach, a Paweł lubi podziwiać jachty z lądu...
+            <i
+              class="far fa-smile fa-lg text__color--yellow"
+              style="padding: 5px;"
+            ></i>
+          </p>
+        </article>
+      </section>
+      <!--Opis mie się podoba spoko:), Menu świetnie super o to kaman spoko chodzi o ten podział :) 
+      Paweł w komentarzu tylko ale dopiszę jeszcze tutaj ponieważ co do tehnologii można by dodać jeszcze metodykę  BEM - ja do swojej częsci takiej uzywam - ale już pewnie po obronie możan będzie użyć wspólnej bo na razie to jest taki trochę mieszany kod ale na obronę spoko tym bardziej, że nie będzie patrzył na kod raczej nawet nie dchdiał - jeśli chodzi o CSS'a, frame Bootstap, SCSS, i pewnie jeszcze coś dodamy po drodze ale to dopiszemy potem spokojna. Jeszcze dodatkowo można by dopisać biblioteki jak eslint, Saas i inne, które tutaj używamy i będziemy używali - do rozwoju i tylko zastanów się nad tym mamy na takie pierdoły jeszcze sporo czasu także można to zrobić przed oddaniem, jak już wszystko będzie z czego korzystamy i będziemy korzystali.-->
+    </main>
     <MainFooter />
   </div>
 </template>
@@ -74,11 +76,11 @@ export default {
   text-decoration: none;
   color: #212529;
 }
-.container {
-  display: block;
+.section {
   margin-top: 15%;
   margin-left: 5%;
   margin-right: 5%;
+  margin-bottom: 3%;
   box-shadow: 4px 6px 20px #999;
   border-radius: 5px;
   color: #212529;
@@ -93,7 +95,14 @@ export default {
   margin-right: 1rem;
   margin-bottom: 1rem;
 }
-
+#about{
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.container{
+  flex: 1;
+}
 #about::after {
   content: "";
   background: url("/images/background/about-small.jpg") no-repeat center center
@@ -117,11 +126,15 @@ export default {
     background: url("/images/background/about-big.jpg") no-repeat center center
       fixed;
   }
-  .container {
+  .section {
     margin-top: 10%;
     margin-left: 10%;
     margin-right: 10%;
   }
+  .article {
+  padding: 3%;
+  text-align: justify;
+}
 }
 </style>
 
