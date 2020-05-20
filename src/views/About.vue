@@ -59,7 +59,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .article__ul {
   margin-left: 1rem;
   margin-bottom: 0.5rem;
@@ -77,7 +77,7 @@ export default {
   color: #212529;
 }
 .section {
-  margin-top: 15%;
+  margin-top: 19%;
   margin-left: 5%;
   margin-right: 5%;
   margin-bottom: 3%;
@@ -120,8 +120,12 @@ export default {
   z-index: -1;
   height: 100vh;
 }
-
-@media (min-width: 768px) {
+@media only screen and (min-width: 640px){
+  .section{
+    margin-top: 15%;
+  }
+}
+@media only screen and (min-width: 768px) {
   #about::after {
     background: url("/images/background/about-big.jpg") no-repeat center center
       fixed;
@@ -135,6 +139,13 @@ export default {
   padding: 3%;
   text-align: justify;
 }
+}
+@media only screen and (min-width: 1200px) {
+  .section{
+    margin-top: 8%;
+    margin-left: 15%;
+    margin-right: 15%;
+  }
 }
 </style>
 
