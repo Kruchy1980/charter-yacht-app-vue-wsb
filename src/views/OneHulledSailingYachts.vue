@@ -84,32 +84,56 @@
                       alt="Sailing Yacht"
                     />
                   </div>
-                  <div class="container__box__item__description">
-                    <ul class="container__box__item__description__list">
-                      <li class="container__box__item__description__list__item--type">
+                  <div class="container__box__item__display">
+                    <ul class="container__box__item__display__list">
+                      <li class="container__box__item__display__list__item--type">
                         <h3>Typ Jachtu</h3>
                       </li>
-                      <li class="container__box__item__description__list__item--place">
+                      <li class="container__box__item__display__list__item--place">
                         <p>Ilość kabin/gości: 4/8</p>
                       </li>
-                      <li class="container__box__item__description__list__item--crew">
+                      <li class="container__box__item__display__list__item--crew">
                         <p>Ilość załogi: 2</p>
                       </li>
-                      <li class="container__box__item__description__list__item--price">
+                      <li class="container__box__item__display__list__item--price">
                         <p>Koszta</p>
                       </li>
                     </ul>
                   </div>
                 </div>
                 <!-- Second item -->
+                <div class="container__box__item">
+                  <div class="container__box__item__image">
+                    <img
+                      src="../../public/card-images/one-hulled/sailing/3.sailing-yacht-s.jpeg"
+                      alt="Sailing Yacht"
+                    />
+                  </div>
+                  <div class="container__box__item__display">
+                    <ul class="container__box__item__display__list">
+                      <li class="container__box__item__display__list__item--type">
+                        <h3>Typ Jachtu</h3>
+                      </li>
+                      <li class="container__box__item__display__list__item--place">
+                        <p>Ilość kabin/gości: 4/8</p>
+                      </li>
+                      <li class="container__box__item__display__list__item--crew">
+                        <p>Ilość załogi: 2</p>
+                      </li>
+                      <li class="container__box__item__display__list__item--price">
+                        <p>Koszta</p>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
               </div>
             </section>
           </div>
         </div>
         <!-- Right side -->
         <div class="main-content__box__inner__right">
-          <div class="main-content__box__inner__right__content__link">
-            <a href class="main-content__box__inner__right__content__link--display"></a>
+          <div class="main-content__box__inner__right__content">
+            <a href class="main-content__box__inner__right__content__link">Zapytaj o czarter</a>
           </div>
           <!-- Charters -->
           <div class="main-content__box__inner__right__content__charter">
@@ -308,16 +332,81 @@ $media-content: "only screen and (min-width : 960px)";
     .container {
       &__box {
         border: 1px solid #ccc;
+        &__item {
+          padding: 10px;
+          display: flex;
+          justify-content: flex-start;
+          height: 400px;
+          &__image {
+            width: 40%;
+            img {
+              // margin-left: -40px;
+              width: 150px;
+              height: 150px;
+            }
+          }
+          &__display {
+            width: 60%;
+            display: flex;
+            justify-content: flex-start;
+            &__list {
+              display: flex;
+              list-style: none;
+              flex-direction: column;
+              justify-content: space-evenly;
+              &__item--type {
+                margin-top: -25px;
+                font-size: 24px;
+              }
+              &__item--place {
+                margin-top: -45px;
+                padding-bottom: 10px;
+                font-size: 1em;
+                border-bottom: 1px solid #ccc;
+              }
+              &__item--crew {
+                margin-top: -45px;
+                padding-bottom: 10px;
+                font-size: 1em;
+                border-bottom: 1px solid #ccc;
+              }
+              &__item--price {
+                margin-top: -45px;
+                padding-bottom: 10px;
+                font-size: 1em;
+                border-bottom: 1px solid #ccc;
+              }
+            }
+          }
+        }
       }
     }
     // right side --> fixed part of page
     &__right {
+      // background-color: orange;
+      margin-top: 30px;
       width: 80%;
       margin: 0 auto;
       @media #{$media-content} {
         border-left: 1px solid #eee;
         padding-left: 4%;
         width: 35%;
+        &__content {
+          padding: 15px 0;
+          &__link {
+            margin: 30px 0;
+            display: flex;
+            justify-content: center;
+            a {
+              text-decoration: none;
+              background-color: #a89003;
+              color: #ddd;
+              padding: 15px;
+              border-radius: 20px;
+              cursor: pointer;
+            }
+          }
+        }
       }
     }
   }
