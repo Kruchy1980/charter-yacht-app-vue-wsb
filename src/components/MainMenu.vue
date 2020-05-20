@@ -29,12 +29,20 @@
                 <ul v-show="isExpanded1">
                   <li class="dropdown_item">
                     <a class="primary_color nav_link">
-                      <i class="fas fa-caret-right"></i> Jednokadłubowe
+                      <i class="fas fa-caret-right"></i>
+                      <router-link
+                        to="/one-hulled-sailing-yachts"
+                        class="primary_color"
+                      >Jednokadłubowe</router-link>
                     </a>
                   </li>
                   <li class="dropdown_item">
                     <a class="primary_color nav_link">
-                      <i class="fas fa-caret-right"></i> Wielokadłubowe
+                      <i class="fas fa-caret-right"></i>
+                      <router-link
+                        to="/one-hulled-sailing-yachts"
+                        class="primary_color"
+                      >Wielokadłubowe</router-link>
                     </a>
                   </li>
                 </ul>
@@ -49,12 +57,20 @@
                 <ul v-show="isExpanded2">
                   <li class="dropdown_item">
                     <a class="primary_color nav_link">
-                      <i class="fas fa-caret-right"></i> Jednokadłubowe
+                      <i class="fas fa-caret-right"></i>
+                      <router-link
+                        to="/one-hulled-sailing-yachts"
+                        class="primary_color"
+                      >Jednokadłubowe</router-link>
                     </a>
                   </li>
                   <li class="dropdown_item">
                     <a class="primary_color nav_link">
-                      <i class="fas fa-caret-right"></i> Wielokadłubowe
+                      <i class="fas fa-caret-right"></i>
+                      <router-link
+                        to="/one-hulled-sailing-yachts"
+                        class="primary_color"
+                      >Wielokadłubowe</router-link>
                     </a>
                   </li>
                 </ul>
