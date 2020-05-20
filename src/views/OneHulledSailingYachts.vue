@@ -28,7 +28,10 @@
               class="main-content__box__inner__left__content__paragraph"
             >Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quia quasi, suscipit molestiae, a incidunt aliquam nihil, asperiores veritatis accusantium culpa nostrum odit cum quam impedit! Laboriosam tenetur laborum praesentium numquam tempora quidem consequuntur blanditiis illo dolor ratione esse labore veniam sit asperiores maxime dolores, quas porro incidunt id totam impedit.</p>
             <div class="main-content__box__inner__left__content__link">
-              <a href class="main-content__box__inner__left__content__link--display"></a>
+              <a
+                href
+                class="main-content__box__inner__left__content__link--display"
+              >Zapytaj o czarter jachtu</a>
             </div>
             <p
               class="main-content__box__inner__left__content__paragraph"
@@ -41,48 +44,67 @@
             >Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quia quasi, suscipit molestiae, a incidunt aliquam nihil, asperiores veritatis accusantium culpa nostrum odit cum quam impedit! Laboriosam tenetur laborum praesentium numquam tempora quidem consequuntur blanditiis illo dolor ratione esse labore veniam sit asperiores maxime dolores, quas porro incidunt id totam impedit.</p>
           </div>
           <div class="main-content__box__inner__left__content__description">
-            <nav class="navbar is-white">
-              <div class="container">
-                <div class="navbar-menu">
-                  <div class="navbar-start">
-                    <a class="navbar-item is-active" href="#">Polska</a>
-                    <a class="navbar-item" href="#">Europa</a>
-                    <a class="navbar-item" href="#">Świat</a>
+            <div class="main-content__box__inner__left__content__description__inner">
+              <nav class="main-content__box__inner__left__content__description__inner__nav">
+                <div
+                  class="main-content__box__inner__left__content__description__inner__nav__container"
+                >
+                  <!-- <div
+                    class="main-content__box__inner__left__content__description__inner__nav__container__menu"
+                  >-->
+                  <!-- <div
+                    class="main-content__box__inner__left__content__description__inner__nav__container__menu"
+                  >-->
+                  <a
+                    class="main-content__box__inner__left__content__description__inner__nav__container__link"
+                    href="#"
+                  >Polska</a>
+                  <a
+                    class="main-content__box__inner__left__content__description__inner__nav__container__link"
+                    href="#"
+                  >Europa</a>
+                  <a
+                    class="main-content__box__inner__left__content__description__inner__nav__container__link"
+                    href="#"
+                  >Świat</a>
+                  <!-- </div> -->
+                  <!-- </div> -->
+                </div>
+              </nav>
+              <!-- </div> -->
+            </div>
+            <!-- Details about yachts -->
+            <section class="container">
+              <div class="container__box">
+                <!-- First item -->
+                <div class="container__box__item">
+                  <div class="container__box__item__image">
+                    <img
+                      src="../../public/card-images/one-hulled/sailing/3.sailing-yacht-s.jpeg"
+                      alt="Sailing Yacht"
+                    />
+                  </div>
+                  <div class="container__box__item__description">
+                    <ul class="container__box__item__description__list">
+                      <li class="container__box__item__description__list__item--type">
+                        <h3>Typ Jachtu</h3>
+                      </li>
+                      <li class="container__box__item__description__list__item--place">
+                        <p>Ilość kabin/gości: 4/8</p>
+                      </li>
+                      <li class="container__box__item__description__list__item--crew">
+                        <p>Ilość załogi: 2</p>
+                      </li>
+                      <li class="container__box__item__description__list__item--price">
+                        <p>Koszta</p>
+                      </li>
+                    </ul>
                   </div>
                 </div>
+                <!-- Second item -->
               </div>
-            </nav>
+            </section>
           </div>
-          <section class="container">
-            <div class="container__box">
-              <!-- First item -->
-              <div class="container__box__item">
-                <div class="container__box__item__image">
-                  <img
-                    src="../../public/card-images/one-hulled/sailing/3.sailing-yacht-s.jpeg"
-                    alt="Sailing Yacht"
-                  />
-                </div>
-                <div class="container__box__item__description">
-                  <ul class="container__box__item__description__list">
-                    <li class="container__box__item__description__list__item--type">
-                      <h3>Typ Jachtu</h3>
-                    </li>
-                    <li class="container__box__item__description__list__item--place">
-                      <p>Ilość kabin/gości: 4/8</p>
-                    </li>
-                    <li class="container__box__item__description__list__item--crew">
-                      <p>Ilość załogi: 2</p>
-                    </li>
-                    <li class="container__box__item__description__list__item--price">
-                      <p>Koszta</p>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              <!-- Second item -->
-            </div>
-          </section>
         </div>
         <!-- Right side -->
         <div class="main-content__box__inner__right">
@@ -128,25 +150,19 @@
               <a
                 href
                 class="main-content__box__inner__right__content__destination__list__item__link"
-              >Jachty żaglowe - jednokadłubowy</a>
+              >Polska</a>
             </li>
             <li class="main-content__box__inner__right__content__destination__list__item">
               <a
                 href
                 class="main-content__box__inner__right__content__destination__list__item__link"
-              >Jachty motorowe - jednokadłubowy</a>
+              >Europa</a>
             </li>
             <li class="main-content__box__inner__right__content__destination__list__item">
               <a
                 href
                 class="main-content__box__inner__right__content__destination__list__item__link"
-              >Jachty żaglowe - wielookadłubowy</a>
-            </li>
-            <li class="main-content__box__inner__right__content__destination__list__item">
-              <a
-                href
-                class="main-content__box__inner__right__content__destination__list__item__link"
-              >Jachty motorowe - wielokadłubowy</a>
+              >Świat</a>
             </li>
           </ul>
         </div>
@@ -222,7 +238,88 @@ $media-content: "only screen and (min-width : 960px)";
   max-width: 950px;
   margin: 0 auto;
   padding: 5px;
-  display: flex;
-  flex-direction: column;
+  &__inner {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    @media #{$media-content} {
+      flex-direction: row;
+    }
+    // left side
+    &__left {
+      margin: 30px auto;
+      width: 90%;
+      @media #{$media-content} {
+        width: 60%;
+      }
+      &__title {
+        margin: 30px 0;
+        border-bottom: 2px solid #333;
+        padding-bottom: 30px;
+        &__text {
+          font-weight: bold;
+          font-size: 24px;
+        }
+      }
+      &__content {
+        padding: 15px 0;
+        &__paragraph {
+          margin: 10px 0;
+        }
+        &__link {
+          margin: 30px 0;
+          display: flex;
+          justify-content: center;
+          &--display {
+            text-decoration: none;
+            background-color: #a89003;
+            color: #ddd;
+            padding: 15px;
+            border-radius: 20px;
+            cursor: pointer;
+          }
+        }
+        &__description {
+          margin: 20px 0;
+          border: 1px solid #ddd;
+          &__inner {
+            background-color: #fff;
+            &__nav {
+              // border: 1px solid #ddd;
+              padding: 20px 0;
+              &__container {
+                // background: yellow;
+                &__link {
+                  text-decoration: none;
+                  padding: 20px;
+                  border: 1px solid #ccc;
+                  border-bottom: #fff;
+                  border-right: #fff;
+                  border-collapse: collapse;
+                  color: #333;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    // Contqainer for description - detqails about yachts
+    .container {
+      &__box {
+        border: 1px solid #ccc;
+      }
+    }
+    // right side --> fixed part of page
+    &__right {
+      width: 80%;
+      margin: 0 auto;
+      @media #{$media-content} {
+        border-left: 1px solid #eee;
+        padding-left: 4%;
+        width: 35%;
+      }
+    }
+  }
 }
 </style>
