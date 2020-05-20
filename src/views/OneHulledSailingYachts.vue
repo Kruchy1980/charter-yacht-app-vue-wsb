@@ -391,62 +391,62 @@ $media-content: "only screen and (min-width : 960px)";
         border-left: 1px solid #eee;
         padding-left: 4%;
         width: 35%;
-        &__content {
-          padding: 15px 0;
-          &__link {
-            margin: 45px 0;
-            width: 200px;
-            display: flex;
-            justify-content: center;
-            text-decoration: none;
-            background-color: #a89003;
-            color: #ddd;
-            padding: 15px;
-            border-radius: 20px;
-            cursor: pointer;
+      }
+      &__content {
+        padding: 15px 0;
+        &__link {
+          margin: 45px 0;
+          width: 200px;
+          display: flex;
+          justify-content: center;
+          text-decoration: none;
+          background-color: #a89003;
+          color: #ddd;
+          padding: 15px;
+          border-radius: 20px;
+          cursor: pointer;
+        }
+        &__charter {
+          margin: 30px 0;
+          border-bottom: 2px solid #333;
+          padding-bottom: 30px;
+          &__title {
+            font-weight: bold;
+            font-size: 24px;
           }
-          &__charter {
-            margin: 30px 0;
-            border-bottom: 2px solid #333;
-            padding-bottom: 30px;
-            &__title {
-              font-weight: bold;
-              font-size: 24px;
-            }
-            &__list {
-              list-style: none;
-              padding-top: 10px;
-              &__item {
-                margin: 10px 0;
-                padding-bottom: 10px;
-                border-bottom: 2px solid #777;
-                &__link {
-                  text-decoration: none;
-                  color: #333;
-                }
+          &__list {
+            list-style: none;
+            padding-top: 10px;
+            &__item {
+              margin: 10px 0;
+              padding-bottom: 10px;
+              border-bottom: 2px solid #777;
+              &__link {
+                text-decoration: none;
+                color: #333;
               }
             }
           }
-          &__destination {
-            margin: 20px 0;
-            &__title {
-              margin: 30px 0;
-              border-bottom: 2px solid #333;
-              padding-bottom: 30px;
-              font-weight: bold;
-              font-size: 24px;
-            }
-            &__list {
-              list-style: none;
-              padding-top: 10px;
-              &__item {
-                margin: 10px 0;
-                padding-bottom: 10px;
-                border-bottom: 2px solid #777;
-                &__link {
-                  text-decoration: none;
-                  color: #333;
-                }
+        }
+        &__destination {
+          margin-top: 40px;
+          &__title {
+            margin: 30px 0;
+            border-bottom: 2px solid #333;
+            padding-bottom: 30px;
+            font-weight: bold;
+            font-size: 24px;
+          }
+          &__list {
+            list-style: none;
+            padding-top: 10px;
+            &__item {
+              margin: 10px 0;
+              padding-bottom: 10px;
+              border-bottom: 2px solid #777;
+              &__link {
+                text-decoration: none;
+                color: #333;
               }
             }
           }
