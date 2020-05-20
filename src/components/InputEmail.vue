@@ -1,6 +1,6 @@
 <template>
 <div>
-  <input type="text" ref='inputTxt'
+  <input type="email" ref="inputEmail"
   @focusout="leave" @focus="enter" @input="textChange"
   :class="{'input--valid' : validState==1, 'input--invalid' : validState==0}" >
   <small ref='errorTxt' :class="{'input__error--hide' : validState!=0, 'input__error--show' : validState==0}" >{{errorText}}</small>
@@ -11,9 +11,8 @@
 <script>
 export default {
   props: {
-    minLength: { type: Number, default: 0 },  //wymagana liczba znaków w polu
-    errorText: { type: String, default: ''},  //komunikat z błędem wyświetlany gdy min liczba znaków nie została osiągnięta
-    valid: { type: Boolean},  //wskaznie początkowego stanu pola: poprawne/niepoprawne
+    errorText: { type: String, default: ''},  //komunikat z wyświetlanym błędem
+    valid: { type: Boolean},  //wskaznie początkowego stanu komponentu: poprawne/niepoprawne
   },
   data(){
     return{
@@ -23,55 +22,49 @@ export default {
   },
   mounted(){
     let s = this.$refs.errorTxt;
-    if(this.minLength<=0){  //nie jest wymagana min długość tekstu
-      this.isValid=true;  //stan komponentu poprawny
-      s.style.display='none'; //ukrywamy element z komunikatem błędu
-    }
     if(s.innerHTML==null || s.innerHTML==''){
       s.style.display='none';
     }
   },
   methods: {
-    //weryfikacja długości wprowadzonego ciągu znaków przy wyjściu z pola
+    //weryfikacja poprawności adresu email
+    validEmail: function (email) {
+      var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return re.test(email);
+    },
     leave(){
-      if(this.minLength>0){
-        let t = this.$refs.inputTxt;
-        if(t.value.length<this.minLength){
-          this.isValid=false;
-          this.validState=0;
+        let email = this.$refs.inputEmail;
+        if (!this.validEmail(email.value)){
+            this.isValid=false;
+            this.validState=0;
         }
         else{
-          this.isValid=true;
-          this.validState=1;
+            this.isValid=true;
+            this.validState=1;
         }
-      }
     },
     //czyścimy stan pola przy wejściu w edycją
     enter(){
-      if(this.minLength>0){
-        let t = this.$refs.inputTxt;
         this.validState=-1;
-        if(t.value.length<this.minLength){
-          this.isValid=false;
+        let email = this.$refs.inputEmail;
+        if (!this.validEmail(email.value)){
+            this.isValid=false;
         }
         else{
-          this.isValid=true;
+            this.isValid=true;
         }
-      }
     },
     //weryfikacja podczas wprowadzania
     textChange(){
-      if(this.minLength>0){
-        let t = this.$refs.inputTxt;
-        if(t.value.length>=this.minLength){
-          this.isValid=true;
-          this.validState=1;
+      let email = this.$refs.inputEmail;
+        if (!this.validEmail(email.value)){
+            this.isValid=false;
+            this.validState=0;
         }
         else{
-          this.isValid=false;
-          this.validState=0;
+            this.isValid=true;
+            this.validState=1;
         }
-      }
     },
   }
 }

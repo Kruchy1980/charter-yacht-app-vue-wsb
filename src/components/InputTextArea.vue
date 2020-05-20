@@ -1,9 +1,9 @@
 <template>
 <div>
-  <input type="text" ref='inputTxt'
+  <textarea rows=5 ref='areaTxt'
   @focusout="leave" @focus="enter" @input="textChange"
-  :class="{'input--valid' : validState==1, 'input--invalid' : validState==0}" >
-  <small ref='errorTxt' :class="{'input__error--hide' : validState!=0, 'input__error--show' : validState==0}" >{{errorText}}</small>
+  :class="{'textarea--valid' : validState==1, 'textarea--invalid' : validState==0}"> </textarea>
+  <small ref='errorTxt' :class="{'textarea__error--hide' : validState!=0, 'textarea__error--show' : validState==0}" >{{errorText}}</small>
 </div>
   
 </template>
@@ -35,7 +35,7 @@ export default {
     //weryfikacja długości wprowadzonego ciągu znaków przy wyjściu z pola
     leave(){
       if(this.minLength>0){
-        let t = this.$refs.inputTxt;
+        let t = this.$refs.areaTxt;
         if(t.value.length<this.minLength){
           this.isValid=false;
           this.validState=0;
@@ -49,7 +49,7 @@ export default {
     //czyścimy stan pola przy wejściu w edycją
     enter(){
       if(this.minLength>0){
-        let t = this.$refs.inputTxt;
+        let t = this.$refs.areaTxt;
         this.validState=-1;
         if(t.value.length<this.minLength){
           this.isValid=false;
@@ -62,7 +62,7 @@ export default {
     //weryfikacja podczas wprowadzania
     textChange(){
       if(this.minLength>0){
-        let t = this.$refs.inputTxt;
+        let t = this.$refs.areaTxt;
         if(t.value.length>=this.minLength){
           this.isValid=true;
           this.validState=1;
@@ -78,9 +78,10 @@ export default {
 </script>
 
 <style scoped>
-input{
+textarea{
+    overflow: auto;
+    resize: vertical;
     width: 100%;
-    height: 2em;
     padding: .375rem .75rem;
     font-size: 1rem;
     font-weight: normal;
@@ -94,25 +95,25 @@ input{
     -o-transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
     -webkit-transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
     transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-    margin-bottom: 0.2rem;
+    margin-bottom: 0.1rem;
 }
-input:focus{
+textarea:focus{
   box-shadow: 2px 2px 6px #999;
   outline: none;
 }
-.input--invalid{
+.textarea--invalid{
   border: 1px solid rgb(255, 0, 0)!important;
   box-shadow: 0px 0px 6px rgb(255, 0, 0)!important;
 }
-.input--valid{
+.textarea--valid{
   border: 1px solid rgb(0, 128, 0)!important;
   box-shadow: 0px 0px 3px rgb(0, 128, 0)!important;
 }
-.input__error--show{
+.textarea__error--show{
   color: rgb(255, 0, 0);
   visibility: visible;
 }
-.input__error--hide{
+.textarea__error--hide{
   visibility: hidden;
 }
 </style>
