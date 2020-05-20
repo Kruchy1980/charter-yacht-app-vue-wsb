@@ -40,9 +40,116 @@
               class="main-content__box__inner__left__content__paragraph"
             >Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quia quasi, suscipit molestiae, a incidunt aliquam nihil, asperiores veritatis accusantium culpa nostrum odit cum quam impedit! Laboriosam tenetur laborum praesentium numquam tempora quidem consequuntur blanditiis illo dolor ratione esse labore veniam sit asperiores maxime dolores, quas porro incidunt id totam impedit.</p>
           </div>
+          <div class="main-content__box__inner__left__content__description">
+            <nav class="navbar is-white">
+              <div class="container">
+                <div class="navbar-menu">
+                  <div class="navbar-start">
+                    <a class="navbar-item is-active" href="#">Polska</a>
+                    <a class="navbar-item" href="#">Europa</a>
+                    <a class="navbar-item" href="#">Świat</a>
+                  </div>
+                </div>
+              </div>
+            </nav>
+          </div>
+          <section class="container">
+            <div class="container__box">
+              <!-- First item -->
+              <div class="container__box__item">
+                <div class="container__box__item__image">
+                  <img
+                    src="../../public/card-images/one-hulled/sailing/3.sailing-yacht-s.jpeg"
+                    alt="Sailing Yacht"
+                  />
+                </div>
+                <div class="container__box__item__description">
+                  <ul class="container__box__item__description__list">
+                    <li class="container__box__item__description__list__item--type">
+                      <h3>Typ Jachtu</h3>
+                    </li>
+                    <li class="container__box__item__description__list__item--place">
+                      <p>Ilość kabin/gości: 4/8</p>
+                    </li>
+                    <li class="container__box__item__description__list__item--crew">
+                      <p>Ilość załogi: 2</p>
+                    </li>
+                    <li class="container__box__item__description__list__item--price">
+                      <p>Koszta</p>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <!-- Second item -->
+            </div>
+          </section>
         </div>
         <!-- Right side -->
-        <div class="main-content__box__inner__right"></div>
+        <div class="main-content__box__inner__right">
+          <div class="main-content__box__inner__right__content__link">
+            <a href class="main-content__box__inner__right__content__link--display"></a>
+          </div>
+          <!-- Charters -->
+          <div class="main-content__box__inner__right__content__charter">
+            <h4 class="main-content__box__inner__right__content__charter__title">Czartery</h4>
+          </div>
+          <ul class="main-content__box__inner__right__content__charter__list">
+            <li class="main-content__box__inner__right__content__charter__list__item">
+              <a
+                href
+                class="main-content__box__inner__right__content__charter__list__item__link"
+              >Jachty żaglowe - jednokadłubowy</a>
+            </li>
+            <li class="main-content__box__inner__right__content__charter__list__item">
+              <a
+                href
+                class="main-content__box__inner__right__content__charter__list__item__link"
+              >Jachty motorowe - jednokadłubowy</a>
+            </li>
+            <li class="main-content__box__inner__right__content__charter__list__item">
+              <a
+                href
+                class="main-content__box__inner__right__content__charter__list__item__link"
+              >Jachty żaglowe - wielookadłubowy</a>
+            </li>
+            <li class="main-content__box__inner__right__content__charter__list__item">
+              <a
+                href
+                class="main-content__box__inner__right__content__charter__list__item__link"
+              >Jachty motorowe - wielokadłubowy</a>
+            </li>
+          </ul>
+          <!-- Destinations -->
+          <div class="main-content__box__inner__right__content__destination">
+            <h4 class="main-content__box__inner__right__content__destination__title">Destynacje</h4>
+          </div>
+          <ul class="main-content__box__inner__right__content__destination__list">
+            <li class="main-content__box__inner__right__content__destination__list__item">
+              <a
+                href
+                class="main-content__box__inner__right__content__destination__list__item__link"
+              >Jachty żaglowe - jednokadłubowy</a>
+            </li>
+            <li class="main-content__box__inner__right__content__destination__list__item">
+              <a
+                href
+                class="main-content__box__inner__right__content__destination__list__item__link"
+              >Jachty motorowe - jednokadłubowy</a>
+            </li>
+            <li class="main-content__box__inner__right__content__destination__list__item">
+              <a
+                href
+                class="main-content__box__inner__right__content__destination__list__item__link"
+              >Jachty żaglowe - wielookadłubowy</a>
+            </li>
+            <li class="main-content__box__inner__right__content__destination__list__item">
+              <a
+                href
+                class="main-content__box__inner__right__content__destination__list__item__link"
+              >Jachty motorowe - wielokadłubowy</a>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
     <MainFooter />
@@ -67,6 +174,8 @@ export default {
 $mobile-plus: "only screen and (min-width : 425px)";
 // Media Query for 768px plus
 $tablet-plus: "only screen and (min-width : 768px)";
+// Media Query - main-content larger
+$media-content: "only screen and (min-width : 960px)";
 
 .banner__box {
   margin: 50px 0;
@@ -107,5 +216,13 @@ $tablet-plus: "only screen and (min-width : 768px)";
       }
     }
   }
+}
+// Main content box
+.main-content__box {
+  max-width: 950px;
+  margin: 0 auto;
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
 }
 </style>
