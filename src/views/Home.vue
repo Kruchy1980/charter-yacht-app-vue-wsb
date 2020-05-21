@@ -23,7 +23,7 @@
       <div v-for="(card, index) in cards" :key="index" class="card__box">
         <div class="card__box__description">
           <div class="card__box__description__image">
-            <img :src="`${card.src}`" :alt="`${card.title}`" />
+            <img :src="`${card.src}`" :alt="`${card.title}`">
           </div>
           <div class="card__box__description__inner">
             <h3 class="card__box__description__inner__title">{{ card.title }}</h3>
@@ -201,8 +201,8 @@ $mobile: "only screen and (max-width : 425px)";
           margin: 8px 0;
           font-size: 1.3em;
         }
-        &__text {
-        }
+        // &__text {
+        // }
       }
     }
     &__button {

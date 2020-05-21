@@ -82,7 +82,7 @@
                     <img
                       src="../../public/card-images/one-hulled/sailing/3.sailing-yacht-s.jpeg"
                       alt="Sailing Yacht"
-                    />
+                    >
                   </div>
                   <div class="container__box__item__display">
                     <ul class="container__box__item__display__list">
@@ -107,7 +107,7 @@
                     <img
                       src="../../public/card-images/one-hulled/sailing/3.sailing-yacht-s.jpeg"
                       alt="Sailing Yacht"
-                    />
+                    >
                   </div>
                   <div class="container__box__item__display">
                     <ul class="container__box__item__display__list">
@@ -201,7 +201,7 @@ import MainMenu from "@/components/MainMenu";
 import MainFooter from "@/components/MainFooter";
 
 export default {
-  name: "one-hulled-sailing-yachts",
+  name: "OneHulledSailingYachts",
   components: {
     MainMenu,
     MainFooter
