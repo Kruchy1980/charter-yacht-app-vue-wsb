@@ -2,11 +2,11 @@
   <header class="main_header text__color--primary background__color--light">
     <div class="main_header_nav">
       <a :href="mainUrl">
-        <img :src="logoUrl" alt="logo" class="nav_logo" />
+        <img :src="logoUrl" alt="logo" class="nav_logo">
       </a>
-      <button type="button" class="nav_toggler" v-on:click="showMobileMenu()">
-        <i class="fas fa-bars fa-lg" v-show="isMobileMenuClicked"></i>
-        <i class="fas fa-times fa-lg" v-show="!isMobileMenuClicked"></i>
+      <button type="button" class="nav_toggler" @click="showMobileMenu()">
+        <i v-show="isMobileMenuClicked" class="fas fa-bars fa-lg" />
+        <i v-show="!isMobileMenuClicked" class="fas fa-times fa-lg" />
       </button>
       <nav class="header_nav">
         <ul class="nav_menu">
@@ -14,22 +14,22 @@
             <router-link to="/" class="nav_link text__color--primary">Strona główna</router-link>
           </li>
           <li>
-            <a class="nav_link text__color--primary" v-on:click="expandMenuCharter($event)">
+            <a class="nav_link text__color--primary" @click="expandMenuCharter($event)">
               Czartery jachtów
-              <i class="fas fa-caret-down" v-show="!isExpanded"></i>
-              <i class="fas fa-caret-up" v-show="isExpanded"></i>
+              <i v-show="!isExpanded" class="fas fa-caret-down" />
+              <i v-show="isExpanded" class="fas fa-caret-up" />
             </a>
             <ul class="nav_dropdown background__color--light">
               <li>
-                <a class="nav_link text__color--primary" v-on:click="isExpanded1=!isExpanded1">
+                <a class="nav_link text__color--primary" @click="isExpanded1=!isExpanded1">
                   Jachty żaglowe
-                  <i class="fas fa-caret-down" v-show="!isExpanded1"></i>
-                  <i class="fas fa-caret-up" v-show="isExpanded1"></i>
+                  <i v-show="!isExpanded1" class="fas fa-caret-down" />
+                  <i v-show="isExpanded1" class="fas fa-caret-up" />
                 </a>
                 <ul v-show="isExpanded1">
                   <li class="dropdown_item">
                     <a class="text__color--primary nav_link">
-                      <i class="fas fa-caret-right"></i>
+                      <i class="fas fa-caret-right" />
                       <router-link
                         to="/one-hulled-sailing-yachts"
                         class="text__color--primary"
@@ -38,7 +38,7 @@
                   </li>
                   <li class="dropdown_item">
                     <a class="text__color--primary nav_link">
-                      <i class="fas fa-caret-right"></i>
+                      <i class="fas fa-caret-right" />
                       <router-link
                         to="/one-hulled-sailing-yachts"
                         class="text__color--primary"
@@ -49,15 +49,15 @@
               </li>
 
               <li>
-                <a class="nav_link text__color--primary" v-on:click="isExpanded2=!isExpanded2">
+                <a class="nav_link text__color--primary" @click="isExpanded2=!isExpanded2">
                   Jachty motorowe
-                  <i class="fas fa-caret-down" v-show="!isExpanded2"></i>
-                  <i class="fas fa-caret-up" v-show="isExpanded2"></i>
+                  <i v-show="!isExpanded2" class="fas fa-caret-down" />
+                  <i v-show="isExpanded2" class="fas fa-caret-up" />
                 </a>
                 <ul v-show="isExpanded2">
                   <li class="dropdown_item">
                     <a class="text__color--primary nav_link">
-                      <i class="fas fa-caret-right"></i>
+                      <i class="fas fa-caret-right" />
                       <router-link
                         to="/one-hulled-sailing-yachts"
                         class="text__color--primary"
@@ -66,7 +66,7 @@
                   </li>
                   <li class="dropdown_item">
                     <a class="text__color--primary nav_link">
-                      <i class="fas fa-caret-right"></i>
+                      <i class="fas fa-caret-right" />
                       <router-link
                         to="/one-hulled-sailing-yachts"
                         class="text__color--primary"
@@ -85,7 +85,7 @@
           </li>
           <li>
             <a href class="nav_link text__color--primary">
-              <i class="fas fa-user-circle fa-lg"></i>
+              <i class="fas fa-user-circle fa-lg" />
             </a>
           </li>
         </ul>

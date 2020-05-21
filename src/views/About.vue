@@ -20,18 +20,18 @@
           <p class="about__article__p">Projekt powstał w ramach obrony na studiach podyplomowych. Przy realizacji zostały wykorzystane technologie:</p>
           <ul class="about__article__ul">
             <li class="about__article__li">
-              <i class="fab fa-html5 text__color--red"></i> HTML i
-              <i class="fab fa-css3-alt text__color--blue"></i> CSS,
+              <i class="fab fa-html5 text__color--red" /> HTML i
+              <i class="fab fa-css3-alt text__color--blue" /> CSS,
             </li>
             <li class="about__article__li">
-              <i class="fab fa-js text__color--yellow background__color--dark"></i> JavaScript,
+              <i class="fab fa-js text__color--yellow background__color--dark" /> JavaScript,
             </li>
             <li class="about__article__li">
-              <img src="images/icons/vuejs.png" alt="Vue.js" height="17px" /> Vue.js
+              <img src="images/icons/vuejs.png" alt="Vue.js" height="17px"> Vue.js
             </li>
             <li class="about__article__li">
               oraz
-              <img src="images/icons/firebase.png" alt="Firebase" height="20px" />.
+              <img src="images/icons/firebase.png" alt="Firebase" height="20px">.
             </li>
           </ul>
           <p class="about__article__p">
@@ -39,7 +39,7 @@
             <i
               class="far fa-smile fa-lg text__color--yellow"
               style="padding: 5px;"
-            ></i>
+            />
           </p>
         </article>
       </section>
@@ -54,7 +54,7 @@
 import MainMenu from "@/components/MainMenu";
 import MainFooter from "@/components/MainFooter";
 export default {
-  name: "about",
+  name: "About",
   components: { MainMenu, MainFooter }
 };
 </script>

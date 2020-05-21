@@ -6,22 +6,22 @@
         <article class="contact__article text__color--dark">
           <h2 class="contact__article__title">Kontakt</h2>
           <p class="contact__article__p">Napisz do nas! Z góry dziękujemy za wszystkie sugestie i opinie.</p>
-          <form action="" class="contactform" >
+          <form action="" class="contactform">
               <div class="contactform__group">
                   <label class="contactform__label" for="name">Imię <span class="text__color--gray">(wymagane)</span></label>
-                  <InputText id="name" :minLength=3 :errorText="'Podaj swoje imię, minimum 3 znaki.'" ref="name"/>
+                  <InputText id="name" ref="name" :min-length="3" :error-text="'Podaj swoje imię, minimum 3 znaki.'" />
               </div>
               <div class="contactform__group">
                   <label class="contactform__label" for="email">E-mail <span class="text__color--gray">(wymagane)</span></label>
-                  <InputEmail id="mail" :errorText="'Proszę podać poprawny adres e-mail.'" ref="email"/>
+                  <InputEmail id="mail" ref="email" :error-text="'Proszę podać poprawny adres e-mail.'" />
               </div>
               <div class="contactform__group">
                   <label class="contactform__label" for="subject">Temat <span class="text__color--gray">(wymagane)</span></label>
-                  <InputText id="subject" :minLength=1 :errorText="'Określ temat wiadomości.'" ref="subject"/>
+                  <InputText id="subject" ref="subject" :min-length="1" :error-text="'Określ temat wiadomości.'" />
               </div>
               <div class="contactform__group">
                   <label class="contactform__label" for="msg">Treść wiadomości <span class="text__color--gray">(wymagane)</span></label>
-                  <InputTextArea id="msg" :minLength=1 :noRows=5 :errorText="'Określ treść wiadomości.'" ref="msg"/>
+                  <InputTextArea id="msg" ref="msg" :min-length="1" :no-rows="5" :error-text="'Określ treść wiadomości.'" />
               </div>
               <button class="contactform__button background__color--light">Wyślij wiadomość</button>
           </form>
@@ -40,7 +40,7 @@ import InputEmail from "@/components/InputEmail";
 import InputTextArea from "@/components/InputTextArea";
 
 export default {
-  name: "contact",
+  name: "Contact",
   components: { MainMenu, MainFooter, InputText,InputEmail, InputTextArea },
   data(){
     return{

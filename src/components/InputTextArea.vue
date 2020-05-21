@@ -1,9 +1,10 @@
 <template>
 <div>
-  <textarea :rows='noRows' ref='areaTxt'
-  @focusout="leave" @focus="enter" @input="textChange"
-  :class="{'textarea--valid' : validState==1, 'textarea--invalid' : validState==0}"> </textarea>
-  <small ref='errorTxt' :class="{'textarea__error--hide' : validState!=0, 'textarea__error--show' : validState==0}" >{{errorText}}</small>
+  <textarea ref="areaTxt" :rows="noRows"
+  :class="{'textarea--valid' : validState==1, 'textarea--invalid' : validState==0}" @focusout="leave" @focus="enter"
+  @input="textChange"
+/>
+  <small ref="errorTxt" :class="{'textarea__error--hide' : validState!=0, 'textarea__error--show' : validState==0}">{{ errorText }}</small>
 </div>
   
 </template>

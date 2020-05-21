@@ -1,9 +1,10 @@
 <template>
 <div>
-  <input type="text" ref='inputTxt'
-  @focusout="leave" @focus="enter" @input="textChange"
-  :class="{'input--valid' : validState==1, 'input--invalid' : validState==0}" >
-  <small ref='errorTxt' :class="{'input__error--hide' : validState!=0, 'input__error--show' : validState==0}" >{{errorText}}</small>
+  <input ref="inputTxt" type="text"
+  :class="{'input--valid' : validState==1, 'input--invalid' : validState==0}" @focusout="leave" @focus="enter"
+  @input="textChange"
+>
+  <small ref="errorTxt" :class="{'input__error--hide' : validState!=0, 'input__error--show' : validState==0}">{{ errorText }}</small>
 </div>
   
 </template>
