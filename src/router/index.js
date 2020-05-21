@@ -3,6 +3,7 @@ import VueRouter from "vue-router";
 import Home from "@/views/Home.vue";
 import Contact from "@/views/Contact.vue"
 import About from "@/views/About.vue"
+import User from "@/views/User.vue"
 
 Vue.use(VueRouter);
 
@@ -21,6 +22,11 @@ const routes = [{
         path: "/about",
         name: "about",
         component: About
+    },
+    {
+        path: "/user",
+        name: "user",
+        component: User
     },
     { path: '*', redirect: '/' }, //przekierowanie dla błędnej nazwy strony
 ];

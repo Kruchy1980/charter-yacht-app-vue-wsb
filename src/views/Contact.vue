@@ -6,7 +6,7 @@
         <article class="contact__article text__color--dark">
           <h2 class="contact__article__title">Kontakt</h2>
           <p class="contact__article__p">Napisz do nas! Z góry dziękujemy za wszystkie sugestie i opinie.</p>
-          <form action="submit" class="contactform">
+          <form action="" class="contactform" >
               <div class="contactform__group">
                   <label class="contactform__label" for="name">Imię <span class="text__color--gray">(wymagane)</span></label>
                   <InputText id="name" :minLength=3 :errorText="'Podaj swoje imię, minimum 3 znaki.'" ref="name"/>
