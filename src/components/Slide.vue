@@ -7,7 +7,7 @@
     <div :key="slide.id" class="slide__box__image" :style="setTheSlide">
       <div class="slide__box__text">
         <!-- Add the title as well -->
-        <div class="slide__box__title">{{ slide.title }}</div>
+        <a :href="`${slide.source}`" class="slide__box__title">{{ slide.title }}</a>
         <!-- Add The desdription -->
         <div class="slide__box__description">{{ slide.description }}</div>
       </div>
@@ -79,6 +79,7 @@ $media-content: "only screen and (min-width : 960px)";
     box-shadow: 0 0 8px 0px #000;
     border-radius: 10px;
     text-align: center;
+    text-decoration: none;
     font-size: 24px;
     color: #eee;
     @media #{$mobile-plus} {

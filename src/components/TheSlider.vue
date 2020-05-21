@@ -24,7 +24,8 @@ export default {
           id: 0,
           src: "images/slider-image/sailing/1.yacht-s.jpeg",
           title: "Jachty  żaglowe",
-          description: "Jeśli potrzebujesz spokoju podczas żeglowania"
+          description: "Jeśli potrzebujesz spokoju podczas żeglowania",
+          source: "http://localhost:8080/one-hulled-sailing-yachts"
         },
         {
           id: 1,
