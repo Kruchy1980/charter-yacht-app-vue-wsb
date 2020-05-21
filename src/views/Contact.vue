@@ -21,7 +21,7 @@
               </div>
               <div class="contactform__group">
                   <label class="contactform__label" for="msg">Treść wiadomości <span class="text__color--gray">(wymagane)</span></label>
-                  <InputTextArea id="msg" :minLength=1 :errorText="'Określ treść wiadomości.'" ref="msg"/>
+                  <InputTextArea id="msg" :minLength=1 :noRows=5 :errorText="'Określ treść wiadomości.'" ref="msg"/>
               </div>
               <button class="contactform__button background__color--light">Wyślij wiadomość</button>
           </form>

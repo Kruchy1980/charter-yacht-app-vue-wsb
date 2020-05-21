@@ -101,12 +101,12 @@ input:focus{
   outline: none;
 }
 .input--invalid{
-  border: 1px solid rgb(255, 0, 0)!important;
-  box-shadow: 0px 0px 6px rgb(255, 0, 0)!important;
+  border: 1px solid rgb(255, 0, 0);
+  box-shadow: 0px 0px 6px rgb(255, 0, 0);
 }
 .input--valid{
-  border: 1px solid rgb(0, 128, 0)!important;
-  box-shadow: 0px 0px 3px rgb(0, 128, 0)!important;
+  border: 1px solid rgb(0, 128, 0);
+  box-shadow: 0px 0px 3px rgb(0, 128, 0);
 }
 .input__error--show{
   color: rgb(255, 0, 0);

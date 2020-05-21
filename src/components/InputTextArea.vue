@@ -1,6 +1,6 @@
 <template>
 <div>
-  <textarea rows=5 ref='areaTxt'
+  <textarea :rows='noRows' ref='areaTxt'
   @focusout="leave" @focus="enter" @input="textChange"
   :class="{'textarea--valid' : validState==1, 'textarea--invalid' : validState==0}"> </textarea>
   <small ref='errorTxt' :class="{'textarea__error--hide' : validState!=0, 'textarea__error--show' : validState==0}" >{{errorText}}</small>
@@ -14,6 +14,7 @@ export default {
     minLength: { type: Number, default: 0 },  //wymagana liczba znaków w polu
     errorText: { type: String, default: ''},  //komunikat z błędem wyświetlany gdy min liczba znaków nie została osiągnięta
     valid: { type: Boolean},  //wskaznie początkowego stanu pola: poprawne/niepoprawne
+    noRows: { type: Number, default: 5}
   },
   data(){
     return{
@@ -102,12 +103,12 @@ textarea:focus{
   outline: none;
 }
 .textarea--invalid{
-  border: 1px solid rgb(255, 0, 0)!important;
-  box-shadow: 0px 0px 6px rgb(255, 0, 0)!important;
+  border: 1px solid rgb(255, 0, 0);
+  box-shadow: 0px 0px 6px rgb(255, 0, 0);
 }
 .textarea--valid{
-  border: 1px solid rgb(0, 128, 0)!important;
-  box-shadow: 0px 0px 3px rgb(0, 128, 0)!important;
+  border: 1px solid rgb(0, 128, 0);
+  box-shadow: 0px 0px 3px rgb(0, 128, 0);
 }
 .textarea__error--show{
   color: rgb(255, 0, 0);
