@@ -1,11 +1,14 @@
 <template>
-  <div id="one-hulled-sailing-yachts">
+  <div id="multi-hulled-sailing-yachts">
     <MainMenu />
     <div class="banner__box">
       <div class="banner__box__image">
-        <img src="../../public/images/slider-image/sailing/4.yacht-s.jpeg" alt="Sailing Yacht" />
+        <img
+          src="../../public/images/slider-image/catamaran-sailing/1.catamaran-s.jpeg"
+          alt="Multihulled sailing Yacht"
+        />
         <div class="banner__box__image__text">
-          <p class="banner__box__image__text__title">Luksusowe jachty żaglowe</p>
+          <p class="banner__box__image__text__title">Luksusowe jachty żaglowe wielokadłubowe</p>
         </div>
       </div>
     </div>
@@ -16,7 +19,7 @@
           <div class="main-content__box__inner__left__title">
             <p
               class="main-content__box__inner__left__title__text"
-            >Czarter jachtu żaglowego jednokadłubowego</p>
+            >Czarter jachtu żaglowego wielokadłubowego</p>
           </div>
           <div class="main-content__box__inner__left__content">
             <p
@@ -81,7 +84,7 @@
                 <div class="container__box__item">
                   <div class="container__box__item__image">
                     <img
-                      src="../../public/card-images/one-hulled/sailing/3.sailing-yacht-s.jpeg"
+                      src="../../public/card-images/catamarans/sailing/1.catamaran-s.jpeg"
                       alt="Sailing Yacht"
                     />
                   </div>
@@ -106,7 +109,7 @@
                 <div class="container__box__item">
                   <div class="container__box__item__image">
                     <img
-                      src="../../public/card-images/one-hulled/sailing/3.sailing-yacht-s.jpeg"
+                      src="../../public/card-images/catamarans/sailing/3.catamaran-s.jpeg"
                       alt="Sailing Yacht"
                     />
                   </div>
@@ -202,7 +205,7 @@ import MainMenu from "@/components/MainMenu";
 import MainFooter from "@/components/MainFooter";
 
 export default {
-  name: "OneHulledSailingYachts",
+  name: "MultiHulledSailingYachts",
   components: {
     MainMenu,
     MainFooter
@@ -228,18 +231,12 @@ $media-content: "only screen and (min-width : 960px)";
       width: 100%;
       height: 40vh;
       display: flex;
-      // background-image: url("/slider-image/sailing/5.yacht-s.jpeg");
+      // background-image: url("../../public/images/slider-image/catamaran-sailing/2.catamaran-s.jpeg");
       height: 50vh;
       background-size: cover;
       background-position: center center;
     }
     &__text {
-      // position: absolute;
-      // // margin: 0 auto;
-      // // display: flex;
-      // // align-self: center;
-      // left: 50%;
-      // transform: translateX(-50%);    margin: 0 auto;
       left: 50%;
       top: 25vh;
       transform: translateX(-50%);
