@@ -40,7 +40,7 @@
                     <a class="text__color--primary nav_link">
                       <i class="fas fa-caret-right" />
                       <router-link
-                        to="/one-hulled-sailing-yachts"
+                        to="/multi-hulled-sailing-yachts"
                         class="text__color--primary"
                       >Wielokadłubowe</router-link>
                     </a>
@@ -59,7 +59,7 @@
                     <a class="text__color--primary nav_link">
                       <i class="fas fa-caret-right" />
                       <router-link
-                        to="/one-hulled-sailing-yachts"
+                        to="/one-hulled-motor-yachts"
                         class="text__color--primary"
                       >Jednokadłubowe</router-link>
                     </a>
@@ -68,7 +68,7 @@
                     <a class="text__color--primary nav_link">
                       <i class="fas fa-caret-right" />
                       <router-link
-                        to="/one-hulled-sailing-yachts"
+                        to="/multi-hulled-motor-yachts"
                         class="text__color--primary"
                       >Wielokadłubowe</router-link>
                     </a>

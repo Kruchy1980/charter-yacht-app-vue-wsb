@@ -3,9 +3,9 @@
     <MainMenu />
     <div class="banner__box">
       <div class="banner__box__image">
-        <img src="../../public/images/slider-image/sailing/4.yacht-s.jpeg" alt="Sailing Yacht" />
+        <img src="../../public/images/slider-image/catamaran-motor/2.catamaran-m.jpeg" alt />
         <div class="banner__box__image__text">
-          <p class="banner__box__image__text__title">Luksusowe jachty żaglowe</p>
+          <p class="banner__box__image__text__title">Luksusowe jachty motorowe wielokadłubowe</p>
         </div>
       </div>
     </div>
@@ -16,7 +16,7 @@
           <div class="main-content__box__inner__left__title">
             <p
               class="main-content__box__inner__left__title__text"
-            >Czarter jachtu żaglowego jednokadłubowego</p>
+            >Czarter jachtu motorowego wielokadłubowego</p>
           </div>
           <div class="main-content__box__inner__left__content">
             <p
@@ -202,7 +202,7 @@ import MainMenu from "@/components/MainMenu";
 import MainFooter from "@/components/MainFooter";
 
 export default {
-  name: "OneHulledSailingYachts",
+  name: "MultiHulledMotorYachts",
   components: {
     MainMenu,
     MainFooter
@@ -228,18 +228,12 @@ $media-content: "only screen and (min-width : 960px)";
       width: 100%;
       height: 40vh;
       display: flex;
-      // background-image: url("/slider-image/sailing/5.yacht-s.jpeg");
+      // background-image: url("../../public/images/slider-image/catamaran-sailing/2.catamaran-s.jpeg");
       height: 50vh;
       background-size: cover;
       background-position: center center;
     }
     &__text {
-      // position: absolute;
-      // // margin: 0 auto;
-      // // display: flex;
-      // // align-self: center;
-      // left: 50%;
-      // transform: translateX(-50%);    margin: 0 auto;
       left: 50%;
       top: 25vh;
       transform: translateX(-50%);
@@ -261,7 +255,7 @@ $media-content: "only screen and (min-width : 960px)";
           font-size: 4vw;
         }
         @media #{$tablet-plus} {
-          // width: 500px;
+          // width: auto;
           font-size: 32px;
           padding: 8px;
         }
@@ -386,8 +380,13 @@ $media-content: "only screen and (min-width : 960px)";
               list-style: none;
               flex-direction: column;
               justify-content: space-evenly;
+              margin: 20px 0;
+              // @media #{$tablet-plus} {
+              //   flex-direction: row;
+              //   justify-content: flex-start;
+              // }
               &__item--type {
-                // margin-top: -25px;
+                margin-top: 10px;
                 font-size: 24px;
               }
               &__item--place,
