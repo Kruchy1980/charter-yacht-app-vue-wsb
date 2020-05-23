@@ -44,6 +44,7 @@ import InputTextArea from "@/components/InputTextArea";
 import ModalLoading from "@/components/LoadingLineDots";
 import ModalInfo from "@/components/ModalInfo";
 
+
 export default {
   name: "contact",
   components: { MainMenu, MainFooter, InputText,InputEmail, InputTextArea, ModalLoading, ModalInfo },
