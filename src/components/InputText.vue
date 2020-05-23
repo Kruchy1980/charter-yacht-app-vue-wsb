@@ -1,7 +1,7 @@
 <template>
 <div>
   <input type="text" ref='inputTxt'
-  @focusout="leave" @focus="enter" @input="textChange"
+  @focusout="setState" @focus="enter" @input="setState"
   :class="{'input--valid' : validState==1, 'input--invalid' : validState==0}" >
   <small ref='errorTxt' :class="{'input__error--hide' : validState!=0, 'input__error--show' : validState==0}" >{{errorText}}</small>
 </div>
@@ -33,7 +33,7 @@ export default {
   },
   methods: {
     //weryfikacja długości wprowadzonego ciągu znaków przy wyjściu z pola
-    leave(){
+    setState(){
       if(this.minLength>0){
         let t = this.$refs.inputTxt;
         if(t.value.length<this.minLength){
@@ -56,20 +56,6 @@ export default {
         }
         else{
           this.isValid=true;
-        }
-      }
-    },
-    //weryfikacja podczas wprowadzania
-    textChange(){
-      if(this.minLength>0){
-        let t = this.$refs.inputTxt;
-        if(t.value.length>=this.minLength){
-          this.isValid=true;
-          this.validState=1;
-        }
-        else{
-          this.isValid=false;
-          this.validState=0;
         }
       }
     },

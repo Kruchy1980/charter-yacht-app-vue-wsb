@@ -6,14 +6,14 @@
         <article class="contact__article text__color--dark">
           <h2 class="contact__article__title">Kontakt</h2>
           <p class="contact__article__p">Napisz do nas! Z góry dziękujemy za wszystkie sugestie i opinie.</p>
-          <form action="" class="contactform" >
+          <form action="" class="contactform" @submit.prevent="validateSendContact($event)" novalidate>
               <div class="contactform__group">
                   <label class="contactform__label" for="name">Imię <span class="text__color--gray">(wymagane)</span></label>
                   <InputText id="name" :minLength=3 :errorText="'Podaj swoje imię, minimum 3 znaki.'" ref="name"/>
               </div>
               <div class="contactform__group">
                   <label class="contactform__label" for="email">E-mail <span class="text__color--gray">(wymagane)</span></label>
-                  <InputEmail id="mail" :errorText="'Proszę podać poprawny adres e-mail.'" ref="email"/>
+                  <InputEmail id="email" :errorText="'Proszę podać poprawny adres e-mail.'" ref="email"/>
               </div>
               <div class="contactform__group">
                   <label class="contactform__label" for="subject">Temat <span class="text__color--gray">(wymagane)</span></label>
@@ -23,11 +23,14 @@
                   <label class="contactform__label" for="msg">Treść wiadomości <span class="text__color--gray">(wymagane)</span></label>
                   <InputTextArea id="msg" :minLength=1 :noRows=5 :errorText="'Określ treść wiadomości.'" ref="msg"/>
               </div>
-              <button class="contactform__button background__color--light">Wyślij wiadomość</button>
+              <button type="submit" class="contactform__button background__color--light">Wyślij wiadomość</button>
           </form>
         </article>
       </section>
     </main>
+    <!-- okna modalne -->
+    <ModalLoading v-show="isLoadingVisible" />
+    <ModalInfo v-show="isModalInfoVisible" @close="closeModal" :isError="true" />
     <MainFooter />
   </div>
 </template>
@@ -38,26 +41,44 @@ import MainFooter from "@/components/MainFooter";
 import InputText from "@/components/InputText";
 import InputEmail from "@/components/InputEmail";
 import InputTextArea from "@/components/InputTextArea";
+import ModalLoading from "@/components/LoadingLineDots";
+import ModalInfo from "@/components/ModalInfo";
 
 export default {
   name: "contact",
-  components: { MainMenu, MainFooter, InputText,InputEmail, InputTextArea },
+  components: { MainMenu, MainFooter, InputText,InputEmail, InputTextArea, ModalLoading, ModalInfo },
   data(){
-    return{
-      inputValid: false,
-    }
+    return{ isLoadingVisible: false, isModalInfoVisible: false, }
   },
   methods: {
-
+    showModal() {
+        this.isModalInfoVisible = true;
+    },
+    closeModal() {
+      this.isModalInfoVisible = false;
+    },
+    validateSendContact(e){
+      //weryfikacja poprawności formularza
+      let valid = true; //zmienna pomocnicza
+      let controls = ['name','email','subject','msg']
+      controls.forEach(element => {
+        let el = this.$refs[element]
+        if(!el.isValid){
+          valid=false;
+          this.$refs[element].setState();  //uruchamiamy alert na kontrolce
+        }
+      });
+      this.isModalInfoVisible = true;
+    }
   }
-};
+}
 </script>
 
 <style scoped>
 .contactform__button{
   width: 100%;
   cursor: pointer;
-  height: 2.2em;
+  height: 2.3em;
   padding: .35rem .75rem;
   text-align: center;
   vertical-align: middle;
