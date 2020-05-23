@@ -3,7 +3,7 @@
     <div class="modal--backdrop">
       <div class="modal" role="dialog" aria-labelledby="modalTitle" aria-describedby="modalDescription" >
         
-        <header id="modalTitle" :class="error ? 'modal__header--red' : 'modal__header--green'">
+        <header id="modalTitle" :class="isError ? 'modal__header--red' : 'modal__header--green'">
           <slot name="header">
               <h4>Komunikat</h4> 
               <button type="button" class="button--close" @click="close" aria-label="Close modal" >&times;</button>
@@ -17,7 +17,7 @@
 
         <footer class="modal__footer">
           <slot name="footer">
-            <button type="button" :class="error ? 'button--red' : 'button--green'" @click="close" aria-label="Close modal" >OK</button>
+            <button type="button" :class="isError ? 'button--red' : 'button--green'" @click="close" aria-label="Close modal" >OK</button>
           </slot>
         </footer>
 
