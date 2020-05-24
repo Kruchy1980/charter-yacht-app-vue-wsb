@@ -59,6 +59,7 @@ export default {
     display: flex;
     flex-direction: column;
     border-radius: 5px;
+    min-width: 250px;
   }
   .modal__body {
     position: relative;

@@ -1,6 +1,6 @@
 <template>
 <div>
-  <textarea :rows='noRows' ref='areaTxt' class="input_area"
+  <textarea :rows='noRows' ref='areaTxt' v-model="value" class="input_area"
   @focusout="setState" @focus="enter" @input="setState"
   :class="{'textarea--valid' : validState==1, 'textarea--invalid' : validState==0}"> </textarea>
   <small ref='errorTxt' :class="{'textarea__error--hide' : validState!=0, 'textarea__error--show' : validState==0}" >{{errorText}}</small>
@@ -20,6 +20,7 @@ export default {
     return{
       isValid: false, //aktualny stan komponentu
       validState: -1, //zmienna pomocnicza do zarządaniem wyglądem komponentu
+      value: '',
     }
   },
   mounted(){

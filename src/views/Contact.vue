@@ -9,19 +9,19 @@
           <form action="" class="contactform" @submit.prevent="validateSendContact($event)">
               <div class="contactform__group">
                   <label class="contactform__label" for="name">Imię <span class="text__color--gray">(wymagane)</span></label>
-                  <InputText id="name" ref="name" v-model="contactName" :min-length="3" :error-text="'Podaj swoje imię, minimum 3 znaki.'" />
+                  <InputText id="name" ref="name" :min-length="3" :error-text="'Podaj swoje imię, minimum 3 znaki.'" />
               </div>
               <div class="contactform__group">
                   <label class="contactform__label" for="email">E-mail <span class="text__color--gray">(wymagane)</span></label>
-                  <InputEmail id="email" ref="email" v-model="conatacMail" :error-text="'Proszę podać poprawny adres e-mail.'" />
+                  <InputEmail id="email" ref="email" :error-text="'Proszę podać poprawny adres e-mail.'" />
               </div>
               <div class="contactform__group">
                   <label class="contactform__label" for="subject">Temat <span class="text__color--gray">(wymagane)</span></label>
-                  <InputText id="subject" ref="subject" v-model="contactSubject" :min-length="1" :error-text="'Określ temat wiadomości.'" />
+                  <InputText id="subject" ref="subject" :min-length="1" :error-text="'Określ temat wiadomości.'" />
               </div>
               <div class="contactform__group">
                   <label class="contactform__label" for="msg">Treść wiadomości <span class="text__color--gray">(wymagane)</span></label>
-                  <InputTextArea id="msg" ref="msg" v-model="contactMsg" :min-length="1" :no-rows="5" :error-text="'Określ treść wiadomości.'" />
+                  <InputTextArea id="msg" ref="msg" :min-length="1" :no-rows="5" :error-text="'Określ treść wiadomości.'" />
               </div>
               <button type="submit" class="contactform__button background__color--light">Wyślij wiadomość</button>
           </form>
@@ -30,9 +30,9 @@
     </main>
     <!-- okna modalne -->
     <ModalLoading v-show="isLoadingVisible" />
-    <ModalInfo v-show="isModalInfoVisible" :is-error="true" @close="closeModal">
-      <template v-slot:header>{{errorTitle}}</template>
-      <template v-slot:body>{{errorMsg}}</template>
+    <ModalInfo v-show="isModalInfoVisible" :is-error="modalIsError" @close="closeModal">
+      <template v-slot:header>{{modalTitle}}</template>
+      <template v-slot:body><div>{{modalMsg}}</div></template>
     </ModalInfo>
     <MainFooter />
   </div>
@@ -54,13 +54,17 @@ export default {
   components: { MainMenu, MainFooter, InputText,InputEmail, InputTextArea, ModalLoading, ModalInfo },
   data(){
     return{ isLoadingVisible: false, isModalInfoVisible: false, 
-      errorTitle: '', errorMsg: '',
-      contactName:'', contactMail:'', contactSubject:'', contactMsg:''
+      modalTitle: '', modalMsg: '', 
+      modalIsError: true,  //flaga określająca czy pokazywane okno modalne jest błędem
+      formSubmit: false, //flaga określająca czy odświeżyć formę
     }
   },
   methods: {
     closeModal() {
       this.isModalInfoVisible = false;
+      if(this.formSubmit){
+        document.getElementsByTagName('form')[0].submit();
+      }
     },
     validateSendContact(e){
       //weryfikacja poprawności formularza
@@ -82,13 +86,14 @@ export default {
               //brak aktywnego usera -> logowanie anonimowe
               firebase.auth().signInAnonymously()
               .then(function() {
-                saveContactMsg(that);
+                saveContactMsg(that); //zapis do bazy
               })
               .catch(function(error){
+                that.modalIsError = true;
                 that.isLoadingVisible=false;
-                that.errorTitle='Login anonymous: '+error.code;
-                that.errorMsg=error.message;
-                console.error(errorTitle, errorMsg);
+                that.modalTitle='Login anonymous: '+error.code;
+                that.modalMsg=error.message;
+                console.error(that.modalTitle, that.modalMsg);
                 that.isModalInfoVisible = true;
               });
             }
@@ -99,10 +104,11 @@ export default {
         }
       }
       catch(err){
+        this.modalIsError = true;
         this.isLoadingVisible=false;
         console.error("Error contact form: ", err);
-        errorTitle='Błąd podczas wysyłania wiadomości!'
-        errorMsg= err;
+        this.modalTitle ='Błąd podczas wysyłania wiadomości!'
+        this.modalMsg = err;
         this.isModalInfoVisible = true;
       }
     }
@@ -111,6 +117,28 @@ export default {
 
 function saveContactMsg(that) {
   let db = firebase.firestore();
+  db.collection("ContactMsg").add({ //dodanie do bazy wiadomości
+    Name: that.$refs['name'].value,
+    Email: that.$refs['email'].value,
+    Subject: that.$refs['subject'].value,
+    MessageContent: that.$refs['msg'].value
+    })
+    .then(function(docRef) { 
+      that.formSubmit = true; //należy odświeżyć formularz
+      that.isLoadingVisible=false;  //ukrywamy animację
+      that.modalIsError=false;  //zmieniamy status okna modalnego
+      that.modalTitle = "Wiadomość wysłana."
+      that.modalMsg  = "Dziękujemy za przesłanie wiadomości. Twoja wiadomość została zapisana z identyfikatorem: "+docRef.id;
+      that.isModalInfoVisible = true; //pokazujemy okno z komunikatem
+    })
+    .catch(function(error) {
+      that.modalIsError = true;
+      that.isLoadingVisible=false;
+      that.modalTitle='Adding message: '+error.code;
+      that.modalMsg=error.message;
+      console.error(that.modalTitle, that.modalMsg);
+      that.isModalInfoVisible = true;
+    });
 }
 </script>
 

@@ -1,6 +1,6 @@
 <template>
 <div>
-  <input type="text" ref='inputTxt'
+  <input type="text" ref='inputTxt' v-model="value"
   @focusout="setState" @focus="enter" @input="setState"
   :class="{'input--valid' : validState==1, 'input--invalid' : validState==0}" >
   <small ref='errorTxt' :class="{'input__error--hide' : validState!=0, 'input__error--show' : validState==0}" >{{errorText}}</small>
@@ -19,6 +19,7 @@ export default {
     return{
       isValid: false, //aktualny stan komponentu
       validState: -1, //zmienna pomocnicza do zarządaniem wyglądem komponentu
+      value: '',
     }
   },
   mounted(){
