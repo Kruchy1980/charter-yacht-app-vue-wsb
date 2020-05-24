@@ -1,10 +1,9 @@
 <template>
 <div>
-  <textarea ref="areaTxt" :rows="noRows"
-  :class="{'textarea--valid' : validState==1, 'textarea--invalid' : validState==0}" @focusout="leave" @focus="enter"
-  @input="textChange"
-/>
-  <small ref="errorTxt" :class="{'textarea__error--hide' : validState!=0, 'textarea__error--show' : validState==0}">{{ errorText }}</small>
+  <textarea :rows='noRows' ref='areaTxt' v-model="value" class="input_area"
+  @focusout="setState" @focus="enter" @input="setState"
+  :class="{'textarea--valid' : validState==1, 'textarea--invalid' : validState==0}"> </textarea>
+  <small ref='errorTxt' :class="{'textarea__error--hide' : validState!=0, 'textarea__error--show' : validState==0}" >{{errorText}}</small>
 </div>
   
 </template>
@@ -21,6 +20,7 @@ export default {
     return{
       isValid: false, //aktualny stan komponentu
       validState: -1, //zmienna pomocnicza do zarządaniem wyglądem komponentu
+      value: '',
     }
   },
   mounted(){
@@ -35,7 +35,7 @@ export default {
   },
   methods: {
     //weryfikacja długości wprowadzonego ciągu znaków przy wyjściu z pola
-    leave(){
+    setState(){
       if(this.minLength>0){
         let t = this.$refs.areaTxt;
         if(t.value.length<this.minLength){
@@ -61,50 +61,37 @@ export default {
         }
       }
     },
-    //weryfikacja podczas wprowadzania
-    textChange(){
-      if(this.minLength>0){
-        let t = this.$refs.areaTxt;
-        if(t.value.length>=this.minLength){
-          this.isValid=true;
-          this.validState=1;
-        }
-        else{
-          this.isValid=false;
-          this.validState=0;
-        }
-      }
-    },
   }
 }
 </script>
 
 <style scoped>
-textarea{
+.input_area{
     overflow: auto;
     resize: vertical;
     width: 100%;
+    height: auto;
     padding: .375rem .75rem;
-    font-size: 1rem;
+    font-size: 1.23rem;
     font-weight: normal;
     line-height: 1.5;
     color: rgb(73, 80, 87);
     background-color: #fff;
     border: 1px solid rgb(90, 90, 90);
     border-radius: .25rem;
-    -moz-transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    margin-bottom: 0.1rem;
+    /* -moz-transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
     -ms-transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
     -o-transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
     -webkit-transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-    margin-bottom: 0.1rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out; */
 }
-textarea:focus{
+.input_area:focus{
   box-shadow: 2px 2px 6px #999;
   outline: none;
 }
 .textarea--invalid{
-  border: 1px solid rgb(255, 0, 0);
+  border-color: rgb(255, 0, 0);
   box-shadow: 0px 0px 6px rgb(255, 0, 0);
 }
 .textarea--valid{

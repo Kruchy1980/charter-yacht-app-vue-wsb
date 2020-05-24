@@ -1,10 +1,9 @@
 <template>
 <div>
-  <input ref="inputEmail" type="email"
-  :class="{'input--valid' : validState==1, 'input--invalid' : validState==0}" @focusout="leave" @focus="enter"
-  @input="textChange"
->
-  <small ref="errorTxt" :class="{'input__error--hide' : validState!=0, 'input__error--show' : validState==0}">{{ errorText }}</small>
+  <input type="email" ref="inputEmail" v-model="value"
+  @focusout="setState" @focus="enter" @input="setState"
+  :class="{'input--valid' : validState==1, 'input--invalid' : validState==0}" >
+  <small ref='errorTxt' :class="{'input__error--hide' : validState!=0, 'input__error--show' : validState==0}" >{{errorText}}</small>
 </div>
   
 </template>
@@ -19,6 +18,7 @@ export default {
     return{
       isValid: false, //aktualny stan komponentu
       validState: -1, //zmienna pomocnicza do zarządaniem wyglądem komponentu
+      value: '',
     }
   },
   mounted(){
@@ -33,7 +33,7 @@ export default {
       var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       return re.test(email);
     },
-    leave(){
+    setState(){
         let email = this.$refs.inputEmail;
         if (!this.validEmail(email.value)){
             this.isValid=false;
@@ -53,18 +53,6 @@ export default {
         }
         else{
             this.isValid=true;
-        }
-    },
-    //weryfikacja podczas wprowadzania
-    textChange(){
-      let email = this.$refs.inputEmail;
-        if (!this.validEmail(email.value)){
-            this.isValid=false;
-            this.validState=0;
-        }
-        else{
-            this.isValid=true;
-            this.validState=1;
         }
     },
   }
