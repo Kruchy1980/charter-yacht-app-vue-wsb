@@ -1,13 +1,13 @@
 <template>
   <div id="about">
     <MainMenu />
-    <main class="container">
-      <section class="section background__color--light">
-        <article class="article">
-          <h2 class="article__title">Kim jesteśmy</h2>
-          <p class="article__p">
+    <main class="about__container">
+      <section class="about__section background__color--light">
+        <article class="about__article">
+          <h2 class="about__article__title">Kim jesteśmy</h2>
+          <p class="about__article__p">
             Jesteśmy początkującymi programistami front-endu i strona, którą właśnie odwiedzasz jest naszym pierwszym projektem aplikacji typu
-            <a class="article__a"
+            <a class="about__article__a"
               href="https://en.wikipedia.org/wiki/Single-page_application"
               target="_blank"
             >
@@ -16,30 +16,30 @@
               </i>
             </a>
           </p>
-          <p class="article__p">Naszym zamiarem było stworzenie portalu pozwalającego na wynajem jachtów wraz ze podstawowymi funkcjonalnościami tego typu portali.</p>
-          <p class="article__p">Projekt powstał w ramach obrony na studiach podyplomowych. Przy realizacji zostały wykorzystane technologie:</p>
-          <ul class="article__ul">
-            <li class="article__li">
-              <i class="fab fa-html5 text__color--red"></i> HTML i
-              <i class="fab fa-css3-alt text__color--blue"></i> CSS,
+          <p class="about__article__p">Naszym zamiarem było stworzenie portalu pozwalającego na wynajem jachtów wraz ze podstawowymi funkcjonalnościami tego typu portali.</p>
+          <p class="about__article__p">Projekt powstał w ramach obrony na studiach podyplomowych. Przy realizacji zostały wykorzystane technologie:</p>
+          <ul class="about__article__ul">
+            <li class="about__article__li">
+              <i class="fab fa-html5 text__color--red" /> HTML i
+              <i class="fab fa-css3-alt text__color--blue" /> CSS,
             </li>
-            <li class="article__li">
-              <i class="fab fa-js text__color--yellow background__color--dark"></i> JavaScript,
+            <li class="about__article__li">
+              <i class="fab fa-js text__color--yellow background__color--dark" /> JavaScript,
             </li>
-            <li class="article__li">
-              <img src="images/icons/vuejs.png" alt="Vue.js" height="17px" /> Vue.js
+            <li class="about__article__li">
+              <img src="images/icons/vuejs.png" alt="Vue.js" height="17px"> Vue.js
             </li>
-            <li class="article__li">
+            <li class="about__article__li">
               oraz
-              <img src="images/icons/firebase.png" alt="Firebase" height="20px" />.
+              <img src="images/icons/firebase.png" alt="Firebase" height="20px">.
             </li>
           </ul>
-          <p class="article__p">
+          <p class="about__article__p">
             Dlaczego najem jachtów? Ponieważ Jakub zawodowo pływał na jachtach, a Paweł lubi podziwiać jachty z lądu...
             <i
               class="far fa-smile fa-lg text__color--yellow"
               style="padding: 5px;"
-            ></i>
+            />
           </p>
         </article>
       </section>
@@ -54,29 +54,29 @@
 import MainMenu from "@/components/MainMenu";
 import MainFooter from "@/components/MainFooter";
 export default {
-  name: "about",
+  name: "About",
   components: { MainMenu, MainFooter }
 };
 </script>
 
 <style scoped>
-.article__ul {
+.about__article__ul {
   margin-left: 1rem;
   margin-bottom: 0.5rem;
 }
-.article__li {
+.about__article__li {
   margin-top: 0.5rem;
   margin-left: 0.5rem;
 }
-.article__p {
+.about__article__p {
   margin-bottom: 0.2rem;
   line-height: 1.5;
 }
-.article__a {
+.about__article__a {
   text-decoration: none;
   color: #212529;
 }
-.section {
+.about__section {
   margin-top: 19%;
   margin-left: 5%;
   margin-right: 5%;
@@ -85,11 +85,11 @@ export default {
   border-radius: 5px;
   color: #212529;
 }
-.article {
+.about__article {
   padding: 5%;
   text-align: justify;
 }
-.article__title {
+.about__article__title {
   margin-top: 0.3rem;
   margin-left: 1rem;
   margin-right: 1rem;
@@ -100,7 +100,7 @@ export default {
   flex-direction: column;
   min-height: 100vh;
 }
-.container{
+.about__container{
   flex: 1;
 }
 #about::after {
@@ -121,7 +121,7 @@ export default {
   height: 100vh;
 }
 @media only screen and (min-width: 640px){
-  .section{
+  .about__section{
     margin-top: 15%;
   }
 }
@@ -130,18 +130,18 @@ export default {
     background: url("/images/background/about-big.jpg") no-repeat center center
       fixed;
   }
-  .section {
+  .about__section {
     margin-top: 10%;
     margin-left: 10%;
     margin-right: 10%;
   }
-  .article {
+  .about__article {
   padding: 3%;
   text-align: justify;
 }
 }
 @media only screen and (min-width: 1200px) {
-  .section{
+  .about__section{
     margin-top: 8%;
     margin-left: 15%;
     margin-right: 15%;

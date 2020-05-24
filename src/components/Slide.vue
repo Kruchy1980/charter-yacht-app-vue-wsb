@@ -7,7 +7,7 @@
     <div :key="slide.id" class="slide__box__image" :style="setTheSlide">
       <div class="slide__box__text">
         <!-- Add the title as well -->
-        <div class="slide__box__title">{{ slide.title }}</div>
+        <a :href="`${slide.source}`" class="slide__box__title">{{ slide.title }}</a>
         <!-- Add The desdription -->
         <div class="slide__box__description">{{ slide.description }}</div>
       </div>
@@ -36,54 +36,61 @@ export default {
 };
 </script>
 
+
 <style lang="scss" scoped>
+// Media Query prepared for larger than 425
+$mobile-plus: "only screen and (min-width : 425px)";
+// Media Query for 768px plus
+$tablet-plus: "only screen and (min-width : 768px)";
+// Media Query - main-content larger
+$media-content: "only screen and (min-width : 960px)";
+
 .slide__box {
   width: 100%;
   height: 50vh;
-  // overflow: hidden;
   &__text {
+    font-family: monospace;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-content: center;
     text-align: center;
-    // flex-wrap: wrap;
-    // height: 300px;
-    // width: 300px;
-    // border: 1px solid #fff;
-    // background-color: #eeeeee80;
   }
   &__image {
-    // just for check
-    // background-image: url("../assets/images/slider-image/sailing/4.yacht-s.jpeg");
-    // height: 100%;
     display: flex;
     justify-content: center;
     flex-flow: nowrap;
     height: 50vh;
     width: 100%;
-    // margin: 0;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
   }
   &__title {
     margin: 0 auto;
-    display: inline-block;
-    background-color: #eeeeee80;
+    display: flex;
+    background-color: #00000080;
     margin-top: 60px;
     padding: 10px;
-    height: 2em;
-    width: 300px;
-    // border: 2px solid #0000ff;
-    box-shadow: 0 0 8px 0px #0000ff;
+    height: auto;
+    width: auto;
+    justify-content: center;
+    align-content: center;
+    box-shadow: 0 0 8px 0px #000;
     border-radius: 10px;
     text-align: center;
+    text-decoration: none;
     font-size: 24px;
-    font-weight: bold;
-    color: #1e56ce;
+    color: #eee;
+    @media #{$mobile-plus} {
+      font-size: 4.5vw;
+    }
+    @media #{$tablet-plus} {
+      font-size: 32px;
+      padding: 8px;
+    }
     &:hover {
-      background-color: #eeeeee;
+      background-color: #000000cc;
       cursor: pointer;
     }
   }
@@ -91,17 +98,21 @@ export default {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    background-color: #eeeeee80;
+    background-color: #00000080;
     margin-top: 20px;
     padding: 10px;
-    // height: 2em;
-    // width: 300px;
-    // border: 2px solid #0000ff;
+    width: auto;
     border-radius: 10px;
     text-align: center;
-    font-size: 24px;
-    font-weight: bold;
-    color: #1e56ce;
+    font-size: 14px;
+    color: #eee;
+    @media #{$mobile-plus} {
+      font-size: 3.5vw;
+    }
+    @media #{$tablet-plus} {
+      font-size: 24px;
+      padding: 8px;
+    }
   }
 }
 

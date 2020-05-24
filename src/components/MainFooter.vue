@@ -1,8 +1,8 @@
 <template>
 <footer class="fotter">
     <div class="footer__container">
-        <p class="footer__p text__color--light"> &copy; 2020 International Yachts Charters - Pomysł i realizacja</p>
-        <p class="footer__p text__color--light"> Jakub Kruszyński <a href="https://github.com/Kruchy1980" target="_blank" class="text__color--primary"><i class="fab fa-github"></i></a>  &  Paweł Jarosiewicz <a href="https://github.com/PawelJarosiewicz" target="_blank" class="text__color--primary"><i class="fab fa-github"></i></a></p>
+        <p class="footer__container__p text__color--light"> &copy; 2020 International Yachts Charters - Pomysł i realizacja</p>
+        <p class="footer__container__p text__color--light"> Jakub Kruszyński <a href="https://github.com/Kruchy1980" target="_blank" class="text__color--primary"><i class="fab fa-github" /></a>  &  Paweł Jarosiewicz <a href="https://github.com/PawelJarosiewicz" target="_blank" class="text__color--primary"><i class="fab fa-github" /></a></p>
     </div>
 </footer>
 </template>
@@ -17,7 +17,7 @@ export default {
 </script>
 
 <style scoped>
-.footer__p{
+.footer__container__p{
     margin: 0 auto;
     padding-left: 0.8rem;
     padding-right: 0.8rem;
@@ -47,7 +47,7 @@ export default {
         width: fit-content;
         padding-bottom: .5rem;
     }
-    .footer__p{
+    .footer__container__p{
         margin: 0;
         padding-left: 0;
         padding-right: .25rem;

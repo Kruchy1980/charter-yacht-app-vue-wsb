@@ -15,7 +15,6 @@ var firebaseConfig = {
 try{
     // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
-    console.log('init firebase')
 }
 catch(err){
     console.error("Error initialize Firebase: ", err);
