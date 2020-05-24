@@ -136,63 +136,7 @@
         </div>
         <!-- Right side -->
         <div class="main-content__box__inner__right">
-          <div class="main-content__box__inner__right__content">
-            <a href class="main-content__box__inner__right__content__link">Zapytaj o czarter</a>
-          </div>
-          <!-- Charters -->
-          <div class="main-content__box__inner__right__content__charter">
-            <h4 class="main-content__box__inner__right__content__charter__title">Czartery</h4>
-          </div>
-          <ul class="main-content__box__inner__right__content__charter__list">
-            <li class="main-content__box__inner__right__content__charter__list__item">
-              <a
-                href
-                class="main-content__box__inner__right__content__charter__list__item__link"
-              >Jachty żaglowe - jednokadłubowy</a>
-            </li>
-            <li class="main-content__box__inner__right__content__charter__list__item">
-              <a
-                href
-                class="main-content__box__inner__right__content__charter__list__item__link"
-              >Jachty motorowe - jednokadłubowy</a>
-            </li>
-            <li class="main-content__box__inner__right__content__charter__list__item">
-              <a
-                href
-                class="main-content__box__inner__right__content__charter__list__item__link"
-              >Jachty żaglowe - wielookadłubowy</a>
-            </li>
-            <li class="main-content__box__inner__right__content__charter__list__item">
-              <a
-                href
-                class="main-content__box__inner__right__content__charter__list__item__link"
-              >Jachty motorowe - wielokadłubowy</a>
-            </li>
-          </ul>
-          <!-- Destinations -->
-          <div class="main-content__box__inner__right__content__destination">
-            <h4 class="main-content__box__inner__right__content__destination__title">Destynacje</h4>
-          </div>
-          <ul class="main-content__box__inner__right__content__destination__list">
-            <li class="main-content__box__inner__right__content__destination__list__item">
-              <a
-                href
-                class="main-content__box__inner__right__content__destination__list__item__link"
-              >Polska</a>
-            </li>
-            <li class="main-content__box__inner__right__content__destination__list__item">
-              <a
-                href
-                class="main-content__box__inner__right__content__destination__list__item__link"
-              >Europa</a>
-            </li>
-            <li class="main-content__box__inner__right__content__destination__list__item">
-              <a
-                href
-                class="main-content__box__inner__right__content__destination__list__item__link"
-              >Świat</a>
-            </li>
-          </ul>
+          <CharterAsk />
         </div>
       </div>
     </div>
@@ -203,12 +147,14 @@
 <script>
 import MainMenu from "@/components/MainMenu";
 import MainFooter from "@/components/MainFooter";
+import CharterAsk from "@/components/CharterAsk";
 
 export default {
-  name: "MultiHulledSailingYachts",
+  name: "OneHulledSailingYachts",
   components: {
     MainMenu,
-    MainFooter
+    MainFooter,
+    CharterAsk
   }
 };
 </script>
@@ -231,18 +177,15 @@ $media-content: "only screen and (min-width : 960px)";
       width: 100%;
       height: 40vh;
       display: flex;
-      // background-image: url("../../public/images/slider-image/catamaran-sailing/2.catamaran-s.jpeg");
       height: 50vh;
       background-size: cover;
       background-position: center center;
     }
     &__text {
+      position: absolute;
       left: 50%;
       top: 25vh;
       transform: translateX(-50%);
-      // margin: 0 auto;
-      // display: flex;
-      // align-self: center;
       &__title {
         background-color: #00000080;
         text-align: center;
@@ -337,23 +280,35 @@ $media-content: "only screen and (min-width : 960px)";
         }
       }
     }
+    &__right {
+      width: 90%;
+      margin: 0 auto;
+      @media #{$media-content} {
+        width: 30%;
+      }
+    }
     // Contqainer for description - detqails about yachts
     .container {
       &__box {
-        border: 1px solid #ccc;
+        max-width: 100%;
+        margin: 0 auto;
+        padding: 10px;
         &__item {
           border: 1px solid #ddd;
-          margin: 5px;
+          margin: 20px auto;
           padding: 10px;
           display: flex;
           flex-direction: column;
           justify-content: flex-start;
-          height: 400px;
+          height: auto;
+          max-width: 500px;
+          border-radius: 20px;
+          box-shadow: 0 0 10px 2px #ccc;
+          transition: all 1s;
           @media #{$tablet-plus} {
             padding: 10px;
             flex-direction: row;
             justify-content: flex-start;
-            height: 400px;
           }
           &__image {
             display: flex;
@@ -364,7 +319,7 @@ $media-content: "only screen and (min-width : 960px)";
               justify-content: flex-start;
             }
             img {
-              // margin-left: -40px;
+              border-radius: 20px;
               width: 150px;
               height: 150px;
             }
@@ -384,88 +339,20 @@ $media-content: "only screen and (min-width : 960px)";
               flex-direction: column;
               justify-content: space-evenly;
               &__item--type {
-                // margin-top: -25px;
+                margin-top: 10px;
                 font-size: 24px;
               }
               &__item--place,
-              &__item--crew,
-              &__item--price {
+              &__item--crew {
                 margin-top: 15px;
                 padding-bottom: 10px;
                 font-size: 1em;
                 border-bottom: 1px solid #ccc;
               }
-            }
-          }
-        }
-      }
-    }
-    // right side --> fixed part of page
-    &__right {
-      // background-color: orange;
-      margin-top: 30px;
-      width: 80%;
-      margin: 0 auto;
-      @media #{$media-content} {
-        border-left: 1px solid #eee;
-        padding-left: 4%;
-        width: 35%;
-      }
-      &__content {
-        padding: 15px 0;
-        &__link {
-          margin: 45px 0;
-          width: 200px;
-          display: flex;
-          justify-content: center;
-          text-decoration: none;
-          background-color: #a89003;
-          color: #ddd;
-          padding: 15px;
-          border-radius: 20px;
-          cursor: pointer;
-        }
-        &__charter {
-          margin: 30px 0;
-          border-bottom: 2px solid #333;
-          padding-bottom: 30px;
-          &__title {
-            font-weight: bold;
-            font-size: 24px;
-          }
-          &__list {
-            list-style: none;
-            padding-top: 10px;
-            &__item {
-              margin: 10px 0;
-              padding-bottom: 10px;
-              border-bottom: 2px solid #777;
-              &__link {
-                text-decoration: none;
-                color: #333;
-              }
-            }
-          }
-        }
-        &__destination {
-          margin-top: 40px;
-          &__title {
-            margin: 30px 0;
-            border-bottom: 2px solid #333;
-            padding-bottom: 30px;
-            font-weight: bold;
-            font-size: 24px;
-          }
-          &__list {
-            list-style: none;
-            padding-top: 10px;
-            &__item {
-              margin: 10px 0;
-              padding-bottom: 10px;
-              border-bottom: 2px solid #777;
-              &__link {
-                text-decoration: none;
-                color: #333;
+              &__item--price {
+                margin-top: 15px;
+                padding-bottom: 10px;
+                font-size: 1em;
               }
             }
           }

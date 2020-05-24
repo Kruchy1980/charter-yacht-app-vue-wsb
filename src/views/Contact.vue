@@ -6,14 +6,14 @@
         <article class="contact__article text__color--dark">
           <h2 class="contact__article__title">Kontakt</h2>
           <p class="contact__article__p">Napisz do nas! Z góry dziękujemy za wszystkie sugestie i opinie.</p>
-          <form action="" class="contactform">
+          <form action="" class="contactform" @submit.prevent="validateSendContact($event)">
               <div class="contactform__group">
                   <label class="contactform__label" for="name">Imię <span class="text__color--gray">(wymagane)</span></label>
                   <InputText id="name" ref="name" :min-length="3" :error-text="'Podaj swoje imię, minimum 3 znaki.'" />
               </div>
               <div class="contactform__group">
                   <label class="contactform__label" for="email">E-mail <span class="text__color--gray">(wymagane)</span></label>
-                  <InputEmail id="mail" ref="email" :error-text="'Proszę podać poprawny adres e-mail.'" />
+                  <InputEmail id="email" ref="email" :error-text="'Proszę podać poprawny adres e-mail.'" />
               </div>
               <div class="contactform__group">
                   <label class="contactform__label" for="subject">Temat <span class="text__color--gray">(wymagane)</span></label>
@@ -23,11 +23,17 @@
                   <label class="contactform__label" for="msg">Treść wiadomości <span class="text__color--gray">(wymagane)</span></label>
                   <InputTextArea id="msg" ref="msg" :min-length="1" :no-rows="5" :error-text="'Określ treść wiadomości.'" />
               </div>
-              <button class="contactform__button background__color--light">Wyślij wiadomość</button>
+              <button type="submit" class="contactform__button background__color--light">Wyślij wiadomość</button>
           </form>
         </article>
       </section>
     </main>
+    <!-- okna modalne -->
+    <ModalLoading v-show="isLoadingVisible" />
+    <ModalInfo v-show="isModalInfoVisible" :is-error="modalIsError" @close="closeModal">
+      <template v-slot:header>{{modalTitle}}</template>
+      <template v-slot:body><div>{{modalMsg}}</div></template>
+    </ModalInfo>
     <MainFooter />
   </div>
 </template>
@@ -38,26 +44,109 @@ import MainFooter from "@/components/MainFooter";
 import InputText from "@/components/InputText";
 import InputEmail from "@/components/InputEmail";
 import InputTextArea from "@/components/InputTextArea";
+import ModalLoading from "@/components/LoadingLineDots";
+import ModalInfo from "@/components/ModalInfo";
+import firebase from "@/firebase.js";
+
 
 export default {
-  name: "Contact",
-  components: { MainMenu, MainFooter, InputText,InputEmail, InputTextArea },
+  name: "contact",
+  components: { MainMenu, MainFooter, InputText,InputEmail, InputTextArea, ModalLoading, ModalInfo },
   data(){
-    return{
-      inputValid: false,
+    return{ isLoadingVisible: false, isModalInfoVisible: false, 
+      modalTitle: '', modalMsg: '', 
+      modalIsError: true,  //flaga określająca czy pokazywane okno modalne jest błędem
+      formSubmit: false, //flaga określająca czy odświeżyć formę
     }
   },
   methods: {
-
+    closeModal() {
+      this.isModalInfoVisible = false;
+      if(this.formSubmit){
+        document.getElementsByTagName('form')[0].submit();
+      }
+    },
+    validateSendContact(e){
+      //weryfikacja poprawności formularza
+      try{
+        let valid = true; //zmienna pomocnicza
+        let controls = ['name','email','subject','msg']
+        controls.forEach(element => {
+          let el = this.$refs[element]
+          if(!el.isValid){
+            valid=false;
+            this.$refs[element].setState();  //uruchamiamy alert na kontrolce
+          }
+        });
+        if(valid){  //wszystkie kontrolki wypełnione -> zapisujemy wiadomość do bazy
+          this.isLoadingVisible=true;
+          const that = this;  //zapamiętujemy kontekst aby użyć w innej funkcji
+          firebase.auth().onAuthStateChanged(function(user){
+            if(!user){
+              //brak aktywnego usera -> logowanie anonimowe
+              firebase.auth().signInAnonymously()
+              .then(function() {
+                saveContactMsg(that); //zapis do bazy
+              })
+              .catch(function(error){
+                that.modalIsError = true;
+                that.isLoadingVisible=false;
+                that.modalTitle='Login anonymous: '+error.code;
+                that.modalMsg=error.message;
+                console.error(that.modalTitle, that.modalMsg);
+                that.isModalInfoVisible = true;
+              });
+            }
+            else{
+              saveContactMsg(that);
+            }
+          });
+        }
+      }
+      catch(err){
+        this.modalIsError = true;
+        this.isLoadingVisible=false;
+        console.error("Error contact form: ", err);
+        this.modalTitle ='Błąd podczas wysyłania wiadomości!'
+        this.modalMsg = err;
+        this.isModalInfoVisible = true;
+      }
+    }
   }
-};
+}
+
+function saveContactMsg(that) {
+  let db = firebase.firestore();
+  db.collection("ContactMsg").add({ //dodanie do bazy wiadomości
+    Name: that.$refs['name'].value,
+    Email: that.$refs['email'].value,
+    Subject: that.$refs['subject'].value,
+    MessageContent: that.$refs['msg'].value
+    })
+    .then(function(docRef) { 
+      that.formSubmit = true; //należy odświeżyć formularz
+      that.isLoadingVisible=false;  //ukrywamy animację
+      that.modalIsError=false;  //zmieniamy status okna modalnego
+      that.modalTitle = "Wiadomość wysłana."
+      that.modalMsg  = "Dziękujemy za przesłanie wiadomości. Twoja wiadomość została zapisana z identyfikatorem: "+docRef.id;
+      that.isModalInfoVisible = true; //pokazujemy okno z komunikatem
+    })
+    .catch(function(error) {
+      that.modalIsError = true;
+      that.isLoadingVisible=false;
+      that.modalTitle='Adding message: '+error.code;
+      that.modalMsg=error.message;
+      console.error(that.modalTitle, that.modalMsg);
+      that.isModalInfoVisible = true;
+    });
+}
 </script>
 
 <style scoped>
 .contactform__button{
   width: 100%;
   cursor: pointer;
-  height: 2.2em;
+  height: 2.3em;
   padding: .35rem .75rem;
   text-align: center;
   vertical-align: middle;
