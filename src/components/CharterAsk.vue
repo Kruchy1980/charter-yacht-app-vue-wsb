@@ -10,25 +10,25 @@
     <ul class="main-content__box__inner__right__content__charter__list">
       <li class="main-content__box__inner__right__content__charter__list__item">
         <a
-          href="http://localhost:8080/one-hulled-sailing-yachts"
+          :href="oneHulledSailing"
           class="main-content__box__inner__right__content__charter__list__item__link"
         >Jachty żaglowe - jednokadłubowe</a>
       </li>
       <li class="main-content__box__inner__right__content__charter__list__item">
         <a
-          href="http://localhost:8080/one-hulled-motor-yachts"
+          :href="oneHulledMotor"
           class="main-content__box__inner__right__content__charter__list__item__link"
         >Jachty motorowe - jednokadłubowe</a>
       </li>
       <li class="main-content__box__inner__right__content__charter__list__item">
         <a
-          href="http://localhost:8080/multi-hulled-sailing-yachts"
+          :href="multiHulledSailing"
           class="main-content__box__inner__right__content__charter__list__item__link"
         >Jachty żaglowe - wielookadłubowe</a>
       </li>
       <li class="main-content__box__inner__right__content__charter__list__item">
         <a
-          href="http://localhost:8080/multi-hulled-motor-yachts"
+          :href="multiHulledMotor"
           class="main-content__box__inner__right__content__charter__list__item__link"
         >Jachty motorowe - wielokadłubowe</a>
       </li>
@@ -61,7 +61,16 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      oneHulledSailing: "/one-hulled-sailing-yachts",
+      multiHulledSailing: "/multi-hulled-sailing-yachts",
+      oneHulledMotor: "/one-hulled-motor-yachts",
+      multiHulledMotor: "/multi-hulled-motor-yachts"
+    };
+  }
+};
 </script>
 
 <style lang="scss" scoped>

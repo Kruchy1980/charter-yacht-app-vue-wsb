@@ -23,7 +23,7 @@
       <div v-for="(card, index) in cards" :key="index" class="card__box">
         <div class="card__box__description">
           <div class="card__box__description__image">
-            <img :src="`${card.src}`" :alt="`${card.title}`">
+            <img :src="`${card.src}`" :alt="`${card.title}`" />
           </div>
           <div class="card__box__description__inner">
             <h3 class="card__box__description__inner__title">{{ card.title }}</h3>
@@ -86,14 +86,6 @@ export default {
 <style  lang="scss">
 // Media Q
 $mobile: "only screen and (max-width : 425px)";
-/* All elements */
-// *,
-// *::after,
-// *::before {
-//   margin: 0;
-//   padding: 0;
-//   box-sizing: border-box;
-// }
 /* Tiles styles */
 .main__box {
   min-width: 300px;
