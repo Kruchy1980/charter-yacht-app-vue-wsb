@@ -1,6 +1,6 @@
 <template>
 <div>
-  <textarea :rows='noRows' ref='areaTxt'
+  <textarea :rows='noRows' ref='areaTxt' class="input_area"
   @focusout="setState" @focus="enter" @input="setState"
   :class="{'textarea--valid' : validState==1, 'textarea--invalid' : validState==0}"> </textarea>
   <small ref='errorTxt' :class="{'textarea__error--hide' : validState!=0, 'textarea__error--show' : validState==0}" >{{errorText}}</small>
@@ -65,12 +65,13 @@ export default {
 </script>
 
 <style scoped>
-textarea{
+.input_area{
     overflow: auto;
     resize: vertical;
     width: 100%;
+    height: auto;
     padding: .375rem .75rem;
-    font-size: 1rem;
+    font-size: 1.23rem;
     font-weight: normal;
     line-height: 1.5;
     color: rgb(73, 80, 87);
@@ -84,7 +85,7 @@ textarea{
     -webkit-transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
     transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out; */
 }
-textarea:focus{
+.input_area:focus{
   box-shadow: 2px 2px 6px #999;
   outline: none;
 }

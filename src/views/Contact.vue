@@ -6,22 +6,22 @@
         <article class="contact__article text__color--dark">
           <h2 class="contact__article__title">Kontakt</h2>
           <p class="contact__article__p">Napisz do nas! Z góry dziękujemy za wszystkie sugestie i opinie.</p>
-          <form action="" class="contactform" @submit.prevent="validateSendContact($event)" novalidate>
+          <form action="" class="contactform" @submit.prevent="validateSendContact($event)">
               <div class="contactform__group">
                   <label class="contactform__label" for="name">Imię <span class="text__color--gray">(wymagane)</span></label>
-                  <InputText id="name" :minLength=3 :errorText="'Podaj swoje imię, minimum 3 znaki.'" ref="name"/>
+                  <InputText id="name" ref="name" v-model="contactName" :min-length="3" :error-text="'Podaj swoje imię, minimum 3 znaki.'" />
               </div>
               <div class="contactform__group">
                   <label class="contactform__label" for="email">E-mail <span class="text__color--gray">(wymagane)</span></label>
-                  <InputEmail id="email" :errorText="'Proszę podać poprawny adres e-mail.'" ref="email"/>
+                  <InputEmail id="email" ref="email" v-model="conatacMail" :error-text="'Proszę podać poprawny adres e-mail.'" />
               </div>
               <div class="contactform__group">
                   <label class="contactform__label" for="subject">Temat <span class="text__color--gray">(wymagane)</span></label>
-                  <InputText id="subject" :minLength=1 :errorText="'Określ temat wiadomości.'" ref="subject"/>
+                  <InputText id="subject" ref="subject" v-model="contactSubject" :min-length="1" :error-text="'Określ temat wiadomości.'" />
               </div>
               <div class="contactform__group">
                   <label class="contactform__label" for="msg">Treść wiadomości <span class="text__color--gray">(wymagane)</span></label>
-                  <InputTextArea id="msg" :minLength=1 :noRows=5 :errorText="'Określ treść wiadomości.'" ref="msg"/>
+                  <InputTextArea id="msg" ref="msg" v-model="contactMsg" :min-length="1" :no-rows="5" :error-text="'Określ treść wiadomości.'" />
               </div>
               <button type="submit" class="contactform__button background__color--light">Wyślij wiadomość</button>
           </form>
@@ -30,7 +30,10 @@
     </main>
     <!-- okna modalne -->
     <ModalLoading v-show="isLoadingVisible" />
-    <ModalInfo v-show="isModalInfoVisible" @close="closeModal" :isError="true" />
+    <ModalInfo v-show="isModalInfoVisible" :is-error="true" @close="closeModal">
+      <template v-slot:header>{{errorTitle}}</template>
+      <template v-slot:body>{{errorMsg}}</template>
+    </ModalInfo>
     <MainFooter />
   </div>
 </template>
@@ -43,35 +46,71 @@ import InputEmail from "@/components/InputEmail";
 import InputTextArea from "@/components/InputTextArea";
 import ModalLoading from "@/components/LoadingLineDots";
 import ModalInfo from "@/components/ModalInfo";
+import firebase from "@/firebase.js";
 
 
 export default {
   name: "contact",
   components: { MainMenu, MainFooter, InputText,InputEmail, InputTextArea, ModalLoading, ModalInfo },
   data(){
-    return{ isLoadingVisible: false, isModalInfoVisible: false, }
+    return{ isLoadingVisible: false, isModalInfoVisible: false, 
+      errorTitle: '', errorMsg: '',
+      contactName:'', contactMail:'', contactSubject:'', contactMsg:''
+    }
   },
   methods: {
-    showModal() {
-        this.isModalInfoVisible = true;
-    },
     closeModal() {
       this.isModalInfoVisible = false;
     },
     validateSendContact(e){
       //weryfikacja poprawności formularza
-      let valid = true; //zmienna pomocnicza
-      let controls = ['name','email','subject','msg']
-      controls.forEach(element => {
-        let el = this.$refs[element]
-        if(!el.isValid){
-          valid=false;
-          this.$refs[element].setState();  //uruchamiamy alert na kontrolce
+      try{
+        let valid = true; //zmienna pomocnicza
+        let controls = ['name','email','subject','msg']
+        controls.forEach(element => {
+          let el = this.$refs[element]
+          if(!el.isValid){
+            valid=false;
+            this.$refs[element].setState();  //uruchamiamy alert na kontrolce
+          }
+        });
+        if(valid){  //wszystkie kontrolki wypełnione -> zapisujemy wiadomość do bazy
+          this.isLoadingVisible=true;
+          const that = this;  //zapamiętujemy kontekst aby użyć w innej funkcji
+          firebase.auth().onAuthStateChanged(function(user){
+            if(!user){
+              //brak aktywnego usera -> logowanie anonimowe
+              firebase.auth().signInAnonymously()
+              .then(function() {
+                saveContactMsg(that);
+              })
+              .catch(function(error){
+                that.isLoadingVisible=false;
+                that.errorTitle='Login anonymous: '+error.code;
+                that.errorMsg=error.message;
+                console.error(errorTitle, errorMsg);
+                that.isModalInfoVisible = true;
+              });
+            }
+            else{
+              saveContactMsg(that);
+            }
+          });
         }
-      });
-      this.isModalInfoVisible = true;
+      }
+      catch(err){
+        this.isLoadingVisible=false;
+        console.error("Error contact form: ", err);
+        errorTitle='Błąd podczas wysyłania wiadomości!'
+        errorMsg= err;
+        this.isModalInfoVisible = true;
+      }
     }
   }
+}
+
+function saveContactMsg(that) {
+  let db = firebase.firestore();
 }
 </script>
 
