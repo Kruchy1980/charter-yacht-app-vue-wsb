@@ -295,12 +295,13 @@ $media-content: "only screen and (min-width : 960px)";
         padding: 10px;
         &__item {
           border: 1px solid #ddd;
-          margin: 20px;
+          margin: 20px auto;
           padding: 10px;
           display: flex;
           flex-direction: column;
           justify-content: flex-start;
           height: auto;
+          max-width: 500px;
           border-radius: 20px;
           box-shadow: 0 0 10px 2px #ccc;
           transition: all 1s;
@@ -308,7 +309,6 @@ $media-content: "only screen and (min-width : 960px)";
             padding: 10px;
             flex-direction: row;
             justify-content: flex-start;
-            height: 400px;
           }
           &__image {
             display: flex;

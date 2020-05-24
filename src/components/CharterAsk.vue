@@ -16,19 +16,19 @@
       </li>
       <li class="main-content__box__inner__right__content__charter__list__item">
         <a
-          href
+          href="http://localhost:8080/one-hulled-motor-yachts"
           class="main-content__box__inner__right__content__charter__list__item__link"
         >Jachty motorowe - jednokadłubowe</a>
       </li>
       <li class="main-content__box__inner__right__content__charter__list__item">
         <a
-          href
+          href="http://localhost:8080/multi-hulled-sailing-yachts"
           class="main-content__box__inner__right__content__charter__list__item__link"
         >Jachty żaglowe - wielookadłubowe</a>
       </li>
       <li class="main-content__box__inner__right__content__charter__list__item">
         <a
-          href
+          href="http://localhost:8080/multi-hulled-motor-yachts"
           class="main-content__box__inner__right__content__charter__list__item__link"
         >Jachty motorowe - wielokadłubowe</a>
       </li>
