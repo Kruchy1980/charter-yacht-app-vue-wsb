@@ -25,21 +25,21 @@ export default {
           src: "images/slider-image/sailing/1.yacht-s.jpeg",
           title: "Jachty  żaglowe",
           description: "Jeśli potrzebujesz spokoju podczas żeglowania",
-          source: "http://localhost:8080/one-hulled-sailing-yachts"
+          source: "/one-hulled-sailing-yachts"
         },
         {
           id: 1,
           src: "images/slider-image/motor/1.motorboat.jpg",
           title: "Jachty motorowe",
           description: "Jeśli bardziej zależy Tobie na szybkości",
-          source: "http://localhost:8080/one-hulled-sailing-yachts"
+          source: "/one-hulled-motor-yachts"
         },
         {
           id: 2,
           src: "images/slider-image/catamaran-sailing/1.catamaran-s.jpeg",
           title: "Katamarany żaglowe",
           description: "Jeśli lubisz spokój i komfort",
-          source: "http://localhost:8080/one-hulled-sailing-yachts"
+          source: "/multi-hulled-sailing-yachts"
         },
         {
           id: 3,
@@ -47,7 +47,7 @@ export default {
           title: "Katamarany motorowe",
           description:
             "Jeśli chcesz się czuć jak w domu, a jednocześnie zwiedzać świat",
-          source: "http://localhost:8080/one-hulled-sailing-yachts"
+          source: "/multi-hulled-motor-yachts"
         }
       ],
       // Add a variable to dynamically choose the image
