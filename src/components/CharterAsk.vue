@@ -1,7 +1,10 @@
 <template>
   <div class="main-content__box__inner__right">
     <div class="main-content__box__inner__right__content">
-      <a href class="main-content__box__inner__right__content__link">Zapytaj o czarter</a>
+      <a
+        :href="askForChahrterForm"
+        class="main-content__box__inner__right__content__link"
+      >Zapytaj o czarter</a>
     </div>
     <!-- Charters -->
     <div class="main-content__box__inner__right__content__charter">
@@ -67,7 +70,8 @@ export default {
       oneHulledSailing: "/one-hulled-sailing-yachts",
       multiHulledSailing: "/multi-hulled-sailing-yachts",
       oneHulledMotor: "/one-hulled-motor-yachts",
-      multiHulledMotor: "/multi-hulled-motor-yachts"
+      multiHulledMotor: "/multi-hulled-motor-yachts",
+      askForChahrterForm: "/ask-for-charter-form"
     };
   }
 };
