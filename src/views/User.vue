@@ -9,6 +9,9 @@
         </article>
       </section>
     </main>
+    <!-- okna modalne -->
+    <UserModal v-show="isUserModalVisible" />
+    <ModalLoading v-show="isLoadingVisible" />
     <MainFooter />
   </div>
 </template>
@@ -16,9 +19,22 @@
 <script>
 import MainMenu from "@/components/MainMenu";
 import MainFooter from "@/components/MainFooter";
+import InputText from "@/components/InputText";
+import InputEmail from "@/components/InputEmail";
+import ModalLoading from "@/components/LoadingLineDots";
+import ModalInfo from "@/components/ModalInfo";
+import firebase from "@/firebase.js";
+import UserModal from "@/components/UserModal";
 export default {
   name: "userAccount",
-  components: { MainMenu, MainFooter }
+  components: { MainMenu, MainFooter, UserModal, ModalLoading },
+  data() {
+    return{
+      isLoadingVisible: false,isModalInfoVisible: false, isUserModalVisible: true,
+      modalTitle: '', modalMsg: '', 
+      modalIsError: true,  //flaga określająca czy pokazywane okno modalne jest błędem
+    }
+  }
 };
 </script>
 

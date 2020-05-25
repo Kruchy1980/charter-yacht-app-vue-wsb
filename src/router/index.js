@@ -7,6 +7,7 @@ import OneHulledSailingYachts from '@/views/OneHulledSailingYachts';
 import OneHulledMotorYachts from '@/views/OneHulledMotorYachts';
 import MultiHulledSailingYachts from '@/views/MultiHulledSailingYachts';
 import MultiHulledMotorYachts from '@/views/MultiHulledMotorYachts';
+import User from "@/views/User.vue"
 
 Vue.use(VueRouter);
 
@@ -45,6 +46,11 @@ const routes = [{
         path: "/multi-hulled-motor-yachts",
         name: "multi-hulled-motor-yachts",
         component: MultiHulledMotorYachts
+    },
+    {
+        path: "/user",
+        name: "user",
+        component: User
     },
     { path: '*', redirect: '/' }, //przekierowanie dla błędnej nazwy strony
 ];

@@ -84,9 +84,9 @@
             <router-link to="/about" class="nav_link text__color--primary">O Nas</router-link>
           </li>
           <li>
-            <a href class="nav_link text__color--primary">
+            <router-link to="/user" class="nav_link text__color--primary">
               <i class="fas fa-user-circle fa-lg" />
-            </a>
+            </router-link>
           </li>
         </ul>
       </nav>
