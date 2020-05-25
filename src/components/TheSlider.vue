@@ -6,7 +6,7 @@
     <Slide :slide="slides[choosenSlide]" />
     <div class="slider__box__arrow--right" @click="arrowRight">&gt;</div>
     <div class="slider__box__indicator-dots">
-      <div v-for="slide in slides" :key="slide.id" class="dots" @click="indicatorDots(slide.id-1)" />
+      <div v-for="slide in slides" :key="slide.id" class="dots" @click="indicatorDots(slide.id)" />
     </div>
   </div>
 </template>
@@ -50,6 +50,7 @@ export default {
           source: "/multi-hulled-motor-yachts"
         }
       ],
+      // active: "background-color = grey;",
       // Add a variable to dynamically choose the image
       choosenSlide: 0, //just now defined for first image
       // To make the arrows work we should to declare the variale with defined value = null
@@ -68,9 +69,9 @@ export default {
     indicatorDots(id) {
       // // Test
       // // Create an array with dots
-      // const dots = [...document.querySelectorAll(".dots")];
-      // // console.log(dots[id]);
-
+      // let dots = [...document.querySelectorAll(".dots")];
+      // console.log(dots[id]);
+      // console.log(id);
       //  Assign the choosenSlide to the id of photo
 
       this.choosenSlide = id;
