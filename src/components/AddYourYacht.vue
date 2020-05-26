@@ -2,146 +2,128 @@
   <div id="add-your-yacht">
     <div class="modal__display">
       <div class="modal__display__link">
-        <a class="modal__display__link--display" title="Dodaj swój jacht do bazy">+</a>
+        <a
+          v-if="!isModalDisplayed"
+          class="modal__display__link--display"
+          title="Dodaj swój jacht do bazy"
+          @click="toggleModalDisplay"
+        >+</a>
       </div>
-    </div>
-    <div class="modal__box">
-      <div class="modal__box__window">
-        <p class="modal__box__window__text--upper">Wprowadź podstawowe dane swojego jachtu oraz opis</p>
-        <div class="modal__box__window__form">
-          <form action class="modal__box__window__form">
-            <div class="modal__box__window__form__items">
-              <div class="modal__box__window__form__items__item">
-                <label for class="modal__box__window__form__items__item__label">
-                  Typ Jachtu:
-                  <span class="modal__box__window__form__items__item__label--must">*</span>
-                  <input type="text" class="modal__box__window__form__items__item__label__content" />
-                </label>
-              </div>
+      <!-- </div> -->
+      <div v-if="isModalDisplayed" class="modal__box">
+        <div class="modal__box__window">
+          <p
+            class="modal__box__window__text--upper"
+          >Wprowadź podstawowe dane swojego jachtu oraz opis</p>
+          <div class="modal__box__window__form">
+            <form action class="modal__box__window__form">
+              <div class="modal__box__window__form__items">
+                <div class="modal__box__window__form__items__item">
+                  <label for class="modal__box__window__form__items__item__label">
+                    Typ Jachtu:
+                    <span class="modal__box__window__form__items__item__label--must">*</span>
+                    <input
+                      type="text"
+                      class="modal__box__window__form__items__item__label__content"
+                    />
+                  </label>
+                </div>
 
-              <div class="modal__box__window__form__items__item">
-                <label for class="modal__box__window__form__items__item__label">
-                  Ilość kabin:
-                  <span class="modal__box__window__form__items__item__label--must">*</span>
-                  <input
-                    type="number"
-                    class="modal__box__window__form__items__item__label__content"
-                  />
-                </label>
-              </div>
-              <div class="modal__box__window__form__items__item">
-                <label for class="modal__box__window__form__items__item__label">
-                  Maksymalna ilość gości:
-                  <span
-                    class="modal__box__window__form__items__item__label--must"
-                  >*</span>
-                  <input
-                    type="number"
-                    class="modal__box__window__form__items__item__label__content"
-                  />
-                </label>
-              </div>
-              <div class="modal__box__window__form__items__item">
-                <label for class="modal__box__window__form__items__item__label">
-                  Dodatkowe informacje (np. rejon pływania):
-                  <span
-                    class="modal__box__window__form__items__item__label--must"
-                  >*</span>
-                  <textarea class="modal__box__window__form__items__item__label__content" rows="10"></textarea>
-                </label>
-              </div>
+                <div class="modal__box__window__form__items__item">
+                  <label for class="modal__box__window__form__items__item__label">
+                    Ilość kabin:
+                    <span class="modal__box__window__form__items__item__label--must">*</span>
+                    <input
+                      type="number"
+                      class="modal__box__window__form__items__item__label__content"
+                    />
+                  </label>
+                </div>
+                <div class="modal__box__window__form__items__item">
+                  <label for class="modal__box__window__form__items__item__label">
+                    Maksymalna ilość gości:
+                    <span
+                      class="modal__box__window__form__items__item__label--must"
+                    >*</span>
+                    <input
+                      type="number"
+                      class="modal__box__window__form__items__item__label__content"
+                    />
+                  </label>
+                </div>
+                <div class="modal__box__window__form__items__item">
+                  <label for class="modal__box__window__form__items__item__label">
+                    Dodatkowe informacje (np. rejon pływania):
+                    <span
+                      class="modal__box__window__form__items__item__label--must"
+                    >*</span>
+                    <textarea
+                      class="modal__box__window__form__items__item__label__content"
+                      rows="10"
+                    ></textarea>
+                  </label>
+                </div>
 
-              <div class="modal__box__window__form__items__item">
-                <label for class="modal__box__window__form__items__item__label">
-                  Koszta czarteru / tydzień:
-                  <span
-                    class="modal__box__window__form__items__item__label--must"
-                  >*</span>
-                  <input
-                    type="number"
-                    class="modal__box__window__form__items__item__label__content"
-                    required
-                  />
-                </label>
-              </div>
+                <div class="modal__box__window__form__items__item">
+                  <label for class="modal__box__window__form__items__item__label">
+                    Koszta czarteru / tydzień:
+                    <span
+                      class="modal__box__window__form__items__item__label--must"
+                    >*</span>
+                    <input
+                      type="number"
+                      class="modal__box__window__form__items__item__label__content"
+                      required
+                    />
+                  </label>
+                </div>
 
-              <div class="modal__box__windowform__form__items__item--skipper">
-                <label for class="modal__box__window__form__items__item__label">
-                  Dodaj zdjęcie:
-                  <span class="modal__box__window__form__items__item__label--must">*</span>
-                  <input
-                    type="file"
-                    class="modal__box__window__form__items__item__label__content"
-                    required
-                  />
-                </label>
-              </div>
-              <!-- 
-              <div class="modal__box__window__form__items__item">
-                <label for class="modal__box__window__form__items__item__label">
-                  Imię:
-                  <span class="modal__box__window__form__items__item__label--must">*</span>
-                  <input type="text" class="modal__box__window__form__items__item__label__content" />
-                </label>
-              </div>
-              <div class="modal__box__window__form__items__item">
-                <label for class="modal__box__window__form__items__item__label">
-                  Nazwisko:
-                  <span class="modal__box__window__form__items__item__label--must">*</span>
-                  <input type="text" class="modal__box__window__form__items__item__label__content" />
-                </label>
-              </div>
+                <div class="modal__box__windowform__form__items__item--skipper">
+                  <label for class="modal__box__window__form__items__item__label">
+                    Dodaj zdjęcie:
+                    <span class="modal__box__window__form__items__item__label--must">*</span>
+                    <input
+                      type="file"
+                      class="modal__box__window__form__items__item__label__content"
+                      required
+                    />
+                  </label>
+                </div>
 
-              <div class="modal__box__window__form__items__item">
-                <label for class="modal__box__window__form__items__item__label">
-                  Adres Email:
-                  <span class="modal__box__window__form__items__item__label--must">*</span>
-                  <input
-                    type="email"
-                    class="modal__box__window__form__items__item__label__content"
-                    required
-                  />
-                </label>
+                <div class="modal__box__window__form__items__item--skipper">
+                  <label for class="modal__box__window__form__items__item--skipper__label">
+                    Skipper:
+                    <span class="modal__box__window__form__items__item__label--must">*</span>
+                    <!-- <div class="modal__box__window__form__items__item__label--chbox"> -->
+                    <input
+                      type="checkbox"
+                      class="modal__box__window__form__items__item--skipper__label__content"
+                      required
+                    />
+                    <!-- </div> -->
+                  </label>
+                </div>
+                <div class="modal__box__window__form__items__item">
+                  <label for class="modal__box__window__form__items__item__label">
+                    Imię skippera:
+                    <span class="modal__box__window__form__items__item__label--must">*</span>
+                    <input
+                      type="text"
+                      class="modal__box__window__form__items__item__label__content"
+                    />
+                  </label>
+                </div>
               </div>
-
-              <div class="modal__box__window__form__items__item">
-                <label for class="modal__box__window__form__items__item__label">
-                  Numer telefonu:
-                  <span class="modal__box__window__form__items__item__label--must">*</span>
-                  <input
-                    type="tel"
-                    class="modal__box__window__form__items__item__label__content"
-                    required
-                  />
-                </label>
-              </div>-->
-
-              <div class="modal__box__window__form__items__item--skipper">
-                <label for class="modal__box__window__form__items__item--skipper__label">
-                  Skipper:
-                  <span class="modal__box__window__form__items__item__label--must">*</span>
-                  <!-- <div class="modal__box__window__form__items__item__label--chbox"> -->
-                  <input
-                    type="checkbox"
-                    class="modal__box__window__form__items__item--skipper__label__content"
-                    required
-                  />
-                  <!-- </div> -->
-                </label>
+              <div class="modal__box__window__form__buttons">
+                <button type="submit" class="modal__box__window__form__buttons__submit">Dodaj</button>
+                <button
+                  type="button"
+                  class="modal__box__window__form__buttons__clear"
+                  @click="toggleModalDisplay"
+                >Wyjdź</button>
               </div>
-              <div class="modal__box__window__form__items__item">
-                <label for class="modal__box__window__form__items__item__label">
-                  Imię skippera:
-                  <span class="modal__box__window__form__items__item__label--must">*</span>
-                  <input type="text" class="modal__box__window__form__items__item__label__content" />
-                </label>
-              </div>
-            </div>
-            <div class="modal__box__window__form__buttons">
-              <button type="submit" class="modal__box__window__form__buttons__submit">Dodaj</button>
-              <button type class="modal__box__window__form__buttons__clear">Wyjdź</button>
-            </div>
-          </form>
+            </form>
+          </div>
         </div>
       </div>
     </div>
@@ -149,7 +131,20 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      isModalDisplayed: false
+    };
+  },
+  methods: {
+    toggleModalDisplay() {
+      //   console.log(this.isModalDisplayed);
+      this.isModalDisplayed = !this.isModalDisplayed;
+      console.log(this.isModalDisplayed);
+    }
+  }
+};
 </script>
 
 <style lang="scss" scoped>
@@ -170,6 +165,7 @@ $media-content: "only screen and (min-width : 960px)";
     border-radius: 50%;
     padding: 5px;
     &--display {
+      cursor: pointer;
       color: #eee;
       padding: 5px 15px;
       font-size: 60px;
@@ -184,6 +180,7 @@ $media-content: "only screen and (min-width : 960px)";
   bottom: 0;
   left: 0;
   background-color: #00000080;
+  //   display: none;
   &__window {
     position: relative;
     top: 50%;
