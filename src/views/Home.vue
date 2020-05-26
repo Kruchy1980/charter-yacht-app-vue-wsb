@@ -18,6 +18,7 @@
         data-title="Zarejestrowani czarterujący"
       >1234567</div>
     </div>
+    <AddYourYacht />
     <!-- Kartki z opisem drobnym -->
     <div class="main-card__box">
       <div v-for="(card, index) in cards" :key="index" class="card__box">
@@ -45,9 +46,10 @@
 import TheSlider from "@/components/TheSlider";
 import MainMenu from "@/components/MainMenu";
 import MainFooter from "@/components/MainFooter";
+import AddYourYacht from "@/components/AddYourYacht";
 export default {
   name: "App",
-  components: { TheSlider, MainMenu, MainFooter },
+  components: { TheSlider, MainMenu, MainFooter, AddYourYacht },
   data() {
     return {
       cards: [
