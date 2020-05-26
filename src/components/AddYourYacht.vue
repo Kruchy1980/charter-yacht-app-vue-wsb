@@ -47,7 +47,7 @@
                   <span
                     class="modal__box__window__form__items__item__label--must"
                   >*</span>
-                  <textarea class="modal__box__window__items__item__label__content" rows="10"></textarea>
+                  <textarea class="modal__box__window__form__items__item__label__content" rows="10"></textarea>
                 </label>
               </div>
 
@@ -58,14 +58,14 @@
                     class="modal__box__window__form__items__item__label--must"
                   >*</span>
                   <input
-                    type="tel"
+                    type="number"
                     class="modal__box__window__form__items__item__label__content"
                     required
                   />
                 </label>
               </div>
 
-              <div class="modal__box__windowform__form__items__item">
+              <div class="modal__box__windowform__form__items__item--skipper">
                 <label for class="modal__box__window__form__items__item__label">
                   Dodaj zdjęcie:
                   <span class="modal__box__window__form__items__item__label--must">*</span>
@@ -76,7 +76,7 @@
                   />
                 </label>
               </div>
-
+              <!-- 
               <div class="modal__box__window__form__items__item">
                 <label for class="modal__box__window__form__items__item__label">
                   Imię:
@@ -114,22 +114,33 @@
                     required
                   />
                 </label>
-              </div>
+              </div>-->
 
-              <div class="modal__box__window__form__items__item">
-                <label for class="modal__box__window__form__items__item__label">
+              <div class="modal__box__window__form__items__item--skipper">
+                <label for class="modal__box__window__form__items__item--skipper__label">
                   Skipper:
                   <span class="modal__box__window__form__items__item__label--must">*</span>
+                  <!-- <div class="modal__box__window__form__items__item__label--chbox"> -->
                   <input
                     type="checkbox"
-                    class="modal__box__window__form__items__item__label__content"
+                    class="modal__box__window__form__items__item--skipper__label__content"
                     required
                   />
+                  <!-- </div> -->
+                </label>
+              </div>
+              <div class="modal__box__window__form__items__item">
+                <label for class="modal__box__window__form__items__item__label">
+                  Imię skippera:
+                  <span class="modal__box__window__form__items__item__label--must">*</span>
+                  <input type="text" class="modal__box__window__form__items__item__label__content" />
                 </label>
               </div>
             </div>
-            <button type="submit" class="modal__box__window__submit">Dodaj</button>
-            <button type="submit" class="modal__box__window__submit">Wyjdź</button>
+            <div class="modal__box__window__form__buttons">
+              <button type="submit" class="modal__box__window__form__buttons__submit">Dodaj</button>
+              <button type class="modal__box__window__form__buttons__clear">Wyjdź</button>
+            </div>
           </form>
         </div>
       </div>
@@ -184,6 +195,21 @@ $media-content: "only screen and (min-width : 960px)";
     padding: 15px;
     border-radius: 20px;
     box-shadow: 0 0 10px 3px #fff;
+    transition: all 0.5s;
+    // margin-top: 40px;
+    // display: flex;
+    // width: 80%;
+    // flex-direction: column;
+    @media #{$mobile-plus} {
+      width: 75%;
+    }
+    @media #{$tablet-plus} {
+      width: 70%;
+    }
+    @media #{$media-content} {
+      width: 600px;
+    }
+
     &__text--upper {
       margin: 10px auto;
       padding: 10px 0;
@@ -193,31 +219,86 @@ $media-content: "only screen and (min-width : 960px)";
       font-size: 18px;
     }
     &__form {
-      margin: 10px 0;
+      margin: 10px auto;
       &__items {
-        width: 95%;
+        width: 90%;
+        margin: auto;
+        // display: flex;
+        // flex-direction: column;
+        // align-content: center;
         &__item {
-          margin: 10px 0;
+          margin-top: 10px;
+          //   display: flex;
+          width: 100%;
+          //   justify-content: center;
+          &--skipper {
+            font-family: monospace;
+            font-size: 14px;
+            margin: 10px 0;
+            display: flex;
+            width: 200px;
+            justify-content: space-between;
+            &__label {
+              display: flex;
+              justify-self: space-between;
+              align-items: center;
+              &__content {
+                margin-left: 15px;
+              }
+            }
+          }
           &__label {
             font-family: monospace;
             font-size: 14px;
-            width: 90%;
+            width: 100%;
             &--must {
               color: #ff0000;
             }
+
             &__content {
               display: block;
-              margin: 5px 0;
-              width: 90%;
-              background-color: #fff;
+              margin: 10px 0;
+              width: 100%;
+
               border-radius: 10px;
               overflow: hidden;
               text-overflow: ellipsis;
               white-space: nowrap;
               outline-style: none;
-              padding: 5px;
+              padding: 5px 0;
             }
           }
+        }
+      }
+      &__buttons {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px;
+        &__submit {
+          text-align: center;
+          cursor: pointer;
+          padding: 5px 8px;
+          background-color: #00ff00;
+          color: #eee;
+          border: none;
+          border-radius: 20px;
+          outline-style: none;
+          font-weight: bold;
+          font-size: 16px;
+          box-shadow: 0 0 5px 2px #ccc;
+        }
+        &__clear {
+          text-align: center;
+          cursor: pointer;
+          padding: 5px 8px;
+          background-color: #8b0303;
+          color: #eee;
+          border: none;
+          border-radius: 20px;
+          outline-style: none;
+          font-weight: bold;
+          font-size: 16px;
         }
       }
     }
