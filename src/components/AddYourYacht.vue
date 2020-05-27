@@ -25,6 +25,7 @@
                     <input
                       type="text"
                       class="modal__box__window__form__items__item__label__content"
+                      required
                     />
                   </label>
                 </div>
@@ -36,6 +37,7 @@
                     <input
                       type="number"
                       class="modal__box__window__form__items__item__label__content"
+                      required
                     />
                   </label>
                 </div>
@@ -48,6 +50,7 @@
                     <input
                       type="number"
                       class="modal__box__window__form__items__item__label__content"
+                      required
                     />
                   </label>
                 </div>
@@ -60,6 +63,7 @@
                     <textarea
                       class="modal__box__window__form__items__item__label__content"
                       rows="10"
+                      required
                     ></textarea>
                   </label>
                 </div>
@@ -90,28 +94,43 @@
                   </label>
                 </div>
 
-                <div class="modal__box__window__form__items__item--skipper">
-                  <label for class="modal__box__window__form__items__item--skipper__label">
-                    Skipper:
-                    <span class="modal__box__window__form__items__item__label--must">*</span>
-                    <!-- <div class="modal__box__window__form__items__item__label--chbox"> -->
-                    <input
-                      type="checkbox"
-                      class="modal__box__window__form__items__item--skipper__label__content"
-                      required
-                    />
+                <div>
+                  <div class="modal__box__window__form__items__item--skipper">
+                    <label for class="modal__box__window__form__items__item--skipper__label">
+                      Skipper:
+                      <input
+                        v-model="isChecked"
+                        type="checkbox"
+                        class="modal__box__window__form__items__item--skipper__label__content"
+                      />
+                    </label>
+                    <label v-if="isChecked" class="modal__box__window__form__items__item__label">
+                      Imię skippera:
+                      <span
+                        class="modal__box__window__form__items__item__label--must"
+                      >*</span>
+                      <input
+                        type="text"
+                        class="modal__box__window__form__items__item__label__content"
+                        required
+                      />
+                    </label>
+                  </div>
+                  <div class="modal__box__window__form__items__item">
+                    <!-- <label for class="modal__box__window__form__items__item__label">
+                      Imię skippera:
+                      <span
+                        class="modal__box__window__form__items__item__label--must"
+                      >*</span>
+                      <input
+                        type="text"
+                        class="modal__box__window__form__items__item__label__content"
+                        required
+                      />
+                    </label>-->
                     <!-- </div> -->
-                  </label>
-                </div>
-                <div class="modal__box__window__form__items__item">
-                  <label for class="modal__box__window__form__items__item__label">
-                    Imię skippera:
-                    <span class="modal__box__window__form__items__item__label--must">*</span>
-                    <input
-                      type="text"
-                      class="modal__box__window__form__items__item__label__content"
-                    />
-                  </label>
+                    <!--Just from skipper display above div -->
+                  </div>
                 </div>
               </div>
               <div class="modal__box__window__form__buttons">
@@ -134,7 +153,8 @@
 export default {
   data() {
     return {
-      isModalDisplayed: false
+      isModalDisplayed: false,
+      isChecked: false
     };
   },
   methods: {
@@ -233,7 +253,8 @@ $media-content: "only screen and (min-width : 960px)";
             font-size: 14px;
             margin: 10px 0;
             display: flex;
-            width: 200px;
+            flex-direction: column;
+            width: 100%;
             justify-content: space-between;
             &__label {
               display: flex;
@@ -248,6 +269,7 @@ $media-content: "only screen and (min-width : 960px)";
             font-family: monospace;
             font-size: 14px;
             width: 100%;
+            margin-top: 10px;
             &--must {
               color: #ff0000;
             }
