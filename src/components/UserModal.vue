@@ -4,10 +4,7 @@
     <div class="modal--backdrop">
       <div class="modal">
           <img src="/bookmark-icon/1.blue.svg" alt="logo" class="logo">
-          <div class="login__buttons">
-              <button :class="loginCreate ? 'login__button--active' : 'login__button--inactive'" @click="loginCreate=!loginCreate">Logowanie</button>
-              <button :class="loginCreate ? 'login__button--inactive' : 'login__button--active'" @click="loginCreate=!loginCreate">Utwórz konto</button>
-          </div>
+          <span class="usermodal__label text__color--primary">Logowanie</span>
           <form action="/user" class="userform" @submit.prevent="logIn($event)">
               <div class="userform__group">
                   <label class="userform__label" for="email">E-mail<span class="text__color--gray"></span></label>
@@ -19,6 +16,7 @@
               </div>
               <button type="submit" class="userform__button background__color--light">Zaloguj się</button>
           </form>
+          <small class="usermodal__small">Nie masz konta? <button class="usermodal__switchbutton text__color--primary">Zarejestruj się</button></small>
       </div>
     </div>
   </transition>
@@ -82,40 +80,32 @@ export default {
     margin-right: auto;
     margin-left: auto;
 }
-.login__button--active,
-.login__button--inactive{
-  margin: 1rem 0.5rem;
+.usermodal__switchbutton{
+  background-color: transparent;
+  border: none;
+  padding: 3px;
+  border-radius: 5px;
+  border: 1px solid transparent;
+}
+.usermodal__switchbutton:hover{
+  border-color:  rgb(60, 84, 180);
   cursor: pointer;
-  height: 2.3em;
-  padding: .35rem .75rem;
-  text-align: center;
-  vertical-align: middle;
+}
+.usermodal__small{
+  margin-top: 0.5rem;
+  margin-left: 0.5rem;
+  margin-right: auto;
+}
+.usermodal__label{
+  margin: 0 auto;
+  margin-top: 0.5rem;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  border-radius: 10px;
+  border: 1.25px solid rgb(60, 84, 180);
   font-weight: bolder;
-  line-height: 1.5;
-  border-radius: .25rem;
-  -moz-transition: border-color .5s ease-in-out,box-shadow .15s ease-in-out;
-  -ms-transition: border-color .5s ease-in-out,box-shadow .15s ease-in-out;
-  -o-transition: border-color .5s ease-in-out,box-shadow .15s ease-in-out;
-  -webkit-transition: border-color .5s ease-in-out,box-shadow .15s ease-in-out;
-  transition: border-color .5s ease-in-out,box-shadow .15s ease-in-out;
-}
-.login__button--active{
-  color: rgb(251, 252, 253);
-  background-color: rgb(60, 84, 180);
-  border: 1px solid rgb(60, 84, 180);
-}
-.login__button--inactive{
-  border: 1px solid rgb(90, 90, 90);
-  color: rgb(90, 90, 90);
-  background-color: rgb(251, 252, 253);
-}
-.login__button--active:hover,
-.login__button--inactive:hover{
-  box-shadow: 2px 2px 6px #999;
-}
-.login__buttons{
- justify-content: space-between;
- margin: auto;
 }
 .logo {
   padding-top: 0.3rem;
@@ -137,10 +127,10 @@ export default {
     justify-content: center;
   }
 .modal {
-    margin-top:19%;
+    margin-top: 15%;
     padding-top: 0.5rem;
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
     padding-bottom: 1rem;
     background: #FFFFFF;
     box-shadow: 2px 2px 20px 1px;
