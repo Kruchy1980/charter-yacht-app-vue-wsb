@@ -12,7 +12,6 @@
 export default {
   props: {
     errorText: { type: String, default: ''},  //komunikat z wyświetlanym błędem
-    valid: { type: Boolean},  //wskaznie początkowego stanu komponentu: poprawne/niepoprawne
   },
   data(){
     return{

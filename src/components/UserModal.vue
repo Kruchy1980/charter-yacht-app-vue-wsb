@@ -1,42 +1,139 @@
 
 <template>
-  <transition name="modal-fade">
+<div>
+  <div>
     <div class="modal--backdrop">
       <div class="modal">
           <img src="/bookmark-icon/1.blue.svg" alt="logo" class="logo">
-          <span class="usermodal__label text__color--primary">Logowanie</span>
-          <form action="/user" class="userform" @submit.prevent="logIn($event)">
+          <span v-show="loginSignin" class="usermodal__label text__color--primary">Logowanie</span>
+          <span v-show="!loginSignin" class="usermodal__label text__color--primary">Rejestracja</span>
+          <form v-show="loginSignin" action="/user" class="userform" @submit.prevent="logIn($event)">
               <div class="userform__group">
-                  <label class="userform__label" for="email">E-mail<span class="text__color--gray"></span></label>
-                  <InputEmail id="email" ref="email" :error-text="'Proszę podać poprawny adres e-mail.'" />
+                  <label class="userform__label" for="loginEmail">E-mail</label>
+                  <InputEmail id="loginEmail" ref="loginEmail" :error-text="'Proszę podać poprawny adres e-mail.'" />
               </div>
               <div class="userform__group">
-                  <label class="userform__label" for="password">Hasło<span class="text__color--gray"></span></label>
-                  <InputText id="password" ref="password" :min-length="6" :error-text="'Hasło musi mieć minimum 6 znaków.'" />
+                  <label class="userform__label" for="loginPassword">Hasło</label>
+                  <InputPassword id="loginPassword" ref="loginPassword" :min-length="6" :error-text="'Hasło musi mieć minimum 6 znaków.'" />
               </div>
               <button type="submit" class="userform__button background__color--light">Zaloguj się</button>
+              <small class="usermodal__small">Nie masz konta? <button class="usermodal__switchbutton text__color--primary" @click="loginSignin=!loginSignin">Zarejestruj się</button></small>
           </form>
-          <small class="usermodal__small">Nie masz konta? <button class="usermodal__switchbutton text__color--primary">Zarejestruj się</button></small>
+          <form v-show="!loginSignin" action="/user" class="userform" @submit.prevent="createUser($event)">
+              <div class="userform__group">
+                  <label class="userform__label" for="signinName">Imię</label>
+                  <InputText id="signinName" ref="signinName" :min-length="3" :error-text="'Podaj swoje imię, minimum 3 znaki.'" />
+              </div>
+              <div class="userform__group">
+                  <label class="userform__label" for="signinEmail">E-mail</label>
+                  <InputEmail id="signinEmail" ref="signinEmail" :error-text="'Proszę podać poprawny adres e-mail.'" />
+              </div>
+              <div class="userform__group">
+                  <label class="userform__label" for="signinPassword">Hasło</label>
+                  <InputPassword id="signinPassword" ref="signinPassword" :min-length="6" :error-text="'Hasło musi mieć minimum 6 znaków.'" />
+              </div>
+              <div class="userform__group">
+                  <label class="userform__label" for="signinPassword2">Powtórz hasło</label>
+                  <InputPassword id="signinPassword2" ref="signinPassword2" :min-length="6" :error-text="'Powtórz hasło'" @verifypass="verifyPass" />
+              </div>
+              <button type="submit" class="userform__button background__color--light">Zarejestruj się</button>
+              <small class="usermodal__small">Masz już konto? <button class="usermodal__switchbutton text__color--primary" @click="loginSignin=!loginSignin">Zaloguj się</button></small>
+          </form>
       </div>
     </div>
-  </transition>
+    <!-- okna modalne -->
+    <ModalLoading v-show="isLoadingVisible" />
+    <ModalInfo v-show="isModalInfoVisible" :is-error="modalIsError" @close="closeModal">
+      <template v-slot:header>{{modalTitle}}</template>
+      <template v-slot:body><div>{{modalMsg}}</div></template>
+    </ModalInfo>
+  </div>
+</div>
+  
 </template> 
 
 <script>
 import InputText from "@/components/InputText";
 import InputEmail from "@/components/InputEmail";
+import InputPassword from "@/components/InputPassword";
 import ModalLoading from "@/components/LoadingLineDots";
 import ModalInfo from "@/components/ModalInfo";
+import firebase from "@/firebase.js";
+import { mapState }  from "vuex";
+
 export default { 
     name: "userLoginCreate",
-    components: { InputText, InputEmail},
+    components: { InputEmail, InputPassword, InputText, ModalLoading, ModalInfo},
     data() {
     return{
       isLoadingVisible: false,isModalInfoVisible: false, 
       modalTitle: '', modalMsg: '', 
       modalIsError: true,  //flaga określająca czy pokazywane okno modalne jest błędem
-      loginCreate: true,
+      loginSignin: true,  //flaga służąca do przełączania logowanie/zakładanie konta
     }
+  },
+  // computed: {
+  //   ...mapState ({  //mapujemy zmienne z magazynu
+  //     currentUser: 'user' //user firebase
+  //   })
+  // },
+  methods: {
+    verifyPass(pass){
+      let pass1 = this.$refs['signinPassword'];
+      let pass2 = this.$refs['signinPassword2'];
+      if(pass2.isValid){
+        if(pass1.value!=pass){
+          pass2.setInValid('Hasła muszą być zgodne.');
+        }
+        else{
+          pass2.setValid();
+        }
+      }
+    },
+    closeModal() {
+      this.isModalInfoVisible = false;
+    },
+    logIn(e){
+
+    },
+    createUser(e){
+      const that = this;  //zapamiętanie kontekstu
+      try{
+        let mail = that.$refs['signinEmail'];
+        let pass = that.$refs['signinPassword'];
+        firebase.auth().createUserWithEmailAndPassword(mail.value,pass.value)
+        .then(function(data ){
+          alert(data.user.uid);
+          e.target.submit();  //zatwierdzamy formularz
+        })
+        .catch(function(error){
+          if(error.code=='auth/email-already-in-use'){
+            that.modalIsError = true;
+            that.isLoadingVisible=false;
+            that.modalTitle='Błąd - takie konto już istnieje';
+            that.modalMsg='Istnieje już konto powiązane z podanym adresem e-mail. Użyj innego adresu e-mail lub zaloguj się na podany adres e-mail.';
+            console.error(that.modalTitle, that.modalMsg);
+            that.isModalInfoVisible = true;
+          }
+          else{
+            that.modalIsError = true;
+            that.isLoadingVisible=false;
+            that.modalTitle='Błąd '+error.code;
+            that.modalMsg=error.message;
+            console.error(that.modalTitle, that.modalMsg);
+            that.isModalInfoVisible = true;
+          }
+        });
+      }
+      catch(err){
+        that.modalIsError = true;
+        that.isLoadingVisible=false;
+        console.error("Error create user: ", err);
+        that.modalTitle ='Błąd rejestracji użytkownika!'
+        that.modalMsg = err;
+        that.isModalInfoVisible = true;
+      }
+    },
   }
 }
 </script>
@@ -79,6 +176,11 @@ export default {
     margin-top: 0.5rem;
     margin-right: auto;
     margin-left: auto;
+    -moz-transition: all .5s ease-in-out;
+    -ms-transition: all .5s ease-in-out;
+    -o-transition: all .5s ease-in-out;
+    -webkit-transition: all .5s ease-in-out;
+    transition: all .5s ease-in-out;
 }
 .usermodal__switchbutton{
   background-color: transparent;
@@ -86,13 +188,13 @@ export default {
   padding: 3px;
   border-radius: 5px;
   border: 1px solid transparent;
+  margin-top: 0.25rem;
 }
 .usermodal__switchbutton:hover{
   border-color:  rgb(60, 84, 180);
   cursor: pointer;
 }
 .usermodal__small{
-  margin-top: 0.5rem;
   margin-left: 0.5rem;
   margin-right: auto;
 }
@@ -127,7 +229,7 @@ export default {
     justify-content: center;
   }
 .modal {
-    margin-top: 15%;
+    margin-top: 4.5rem;
     padding-top: 0.5rem;
     padding-left: 0.75rem;
     padding-right: 0.75rem;
@@ -140,13 +242,18 @@ export default {
     min-width: 250px;
     height: fit-content;
   }
-/* wbudowane klasy Vue */
-  .modal-fade-enter,
-  .modal-fade-leave-active {
-    opacity: 0;
+
+@media only screen and (min-width: 768px){
+  .modal{
+    margin-top: 5rem;
+    padding-top: 1rem;
+    padding-left: 3rem;
+    padding-right: 3rem;
   }
-  .modal-fade-enter-active,
-  .modal-fade-leave-active {
-    transition: opacity .5s ease
+}
+@media only screen and (min-width: 1200px) {
+  .modal{
+    margin-top: 5%;
   }
+}
 </style>
