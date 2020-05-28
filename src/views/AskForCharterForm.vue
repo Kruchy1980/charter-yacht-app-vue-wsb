@@ -24,13 +24,13 @@
                 v-model="selected"
               >
                 <option value disabled>Wybierz kraj w którym chcesz wyczarterować Jacht</option>
-                <option value>Polska</option>
+                <option>Polska</option>
                 <option disabled value>W przyszłości będą dodane inne rejony</option>
               </select>
             </label>
           </div>
           <div class="container__main-form__items__item">
-            <label for class="container__main-form__items__item__label">
+            <label class="container__main-form__items__item__label">
               Dowolny (jesli nie ma na liście):
               <input
                 type="text"
@@ -60,7 +60,6 @@
               <select
                 class="container__main-form__items__item__label__content"
                 v-model="selected"
-                required
               >
                 <option value>---</option>
                 <option value>Jednokadłubowy żaglowy</option>
@@ -101,14 +100,26 @@
             <label for class="container__main-form__items__item__label">
               Imię:
               <span class="container__main-form__items__item__label--must">*</span>
-              <input type="text" class="container__main-form__items__item__label__content" />
+              <input
+                type="text"
+                class="container__main-form__items__item__label__content"
+                pattern="[A-Za-z\b[ą,ć,ę,ł,ó,ż,ź]]{3,}"
+                placeholder="Podaj poprawne Imię minimum 3 litery"
+                required
+              />
             </label>
           </div>
           <div class="container__main-form__items__item">
             <label for class="container__main-form__items__item__label">
               Nazwisko:
               <span class="container__main-form__items__item__label--must">*</span>
-              <input type="text" class="container__main-form__items__item__label__content" />
+              <input
+                type="text"
+                class="container__main-form__items__item__label__content"
+                pattern="[A-Za-z\b[ą,ć,ę,ł,ó,ż,ź,\-]]{3,}"
+                placeholder="Podaj poprawne nazwisko minimum 3 litery"
+                required
+              />
             </label>
           </div>
           <div class="container__main-form__items__item">
@@ -118,6 +129,7 @@
               <input
                 type="email"
                 class="container__main-form__items__item__label__content"
+                placeholder="Podaj poprawny adres Email aby Twoja Prośba została zarejestrowana"
                 required
               />
             </label>
@@ -126,7 +138,13 @@
             <label for class="container__main-form__items__item__label">
               Numer telefonu:
               <span class="container__main-form__items__item__label--must">*</span>
-              <input type="tel" class="container__main-form__items__item__label__content" required />
+              <input
+                type="tel"
+                class="container__main-form__items__item__label__content"
+                placeholder="Wpisz numer telefonu w formacie 000-000-000"
+                pattern="[0-9]{3}-[0-9]{3}-[0-9]{3}"
+                required
+              />
             </label>
           </div>
         </div>
@@ -140,6 +158,7 @@
 <script>
 import MainMenu from "@/components/MainMenu";
 import MainFooter from "@/components/MainFooter";
+import firebase from "@/firebase.js";
 export default {
   name: "AskForCharterForm",
   components: {
@@ -150,8 +169,10 @@ export default {
     return {
       homepage: "/",
       selected: ""
+      // Odtąd łączenie do firebase'a
     };
-  }
+  },
+  methodes: {}
 };
 </script>
 
