@@ -1,9 +1,9 @@
 <template>
 <div>
-  <input type="text" ref='inputTxt' v-model="value"
-  @focusout="setState" @focus="enter" @input="setState"
+  <input type="password" ref='inputTxt' v-model="value"
+  @focusout="setState" @focus="enter" @input="setState" @keyup="verifyPass"
   :class="{'input--valid' : validState==1, 'input--invalid' : validState==0}" >
-  <small ref='errorTxt' :class="{'input__error--hide' : validState!=0, 'input__error--show' : validState==0}" >{{errorText}}</small>
+  <small ref='errorTxt' :class="{'input__error--hide' : validState!=0, 'input__error--show' : validState==0}"> {{errTxt}} </small>
 </div>
   
 </template>
@@ -19,6 +19,7 @@ export default {
       isValid: false, //aktualny stan komponentu
       validState: -1, //zmienna pomocnicza do zarządaniem wyglądem komponentu
       value: '',
+      errTxt: this.errorText,
     }
   },
   mounted(){
@@ -57,6 +58,16 @@ export default {
         else{
           this.isValid=true;
         }
+      }
+    },
+    verifyPass(){
+        this.$emit('verifypass');
+    },
+    comparePass(verifyErr,verifyPass){
+      if(this.value!=verifyPass){
+        this.isValid=false;
+        this.validState=0;
+        this.errTxt=verifyErr;
       }
     },
   }

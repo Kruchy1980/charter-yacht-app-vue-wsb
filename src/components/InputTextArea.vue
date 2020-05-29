@@ -13,7 +13,6 @@ export default {
   props: {
     minLength: { type: Number, default: 0 },  //wymagana liczba znaków w polu
     errorText: { type: String, default: ''},  //komunikat z błędem wyświetlany gdy min liczba znaków nie została osiągnięta
-    valid: { type: Boolean},  //wskaznie początkowego stanu pola: poprawne/niepoprawne
     noRows: { type: Number, default: 5}
   },
   data(){

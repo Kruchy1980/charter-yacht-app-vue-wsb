@@ -2,6 +2,7 @@ import Vue from 'vue';
 import App from './App.vue';
 import router from "./router/index.js";
 import firebase from "./firebase.js";
+import store from "./store";
 
 Vue.config.productionTip = false
 
@@ -16,10 +17,14 @@ try{
         console.error('Session persistence: '+error.code+' '+error.message);
     });
     //kontrola stanu użytkownika
-    firebase.auth().onAuthStateChanged(function() {
+    firebase.auth().onAuthStateChanged(function(user) {
+        //aktualizacja stanu użytkownika
+        store.dispatch("fetchUser", user);
+
         if(!vm){
             vm = new Vue({
                 router,
+                store,
                 render: h => h(App),
             }).$mount('#app')
         }
