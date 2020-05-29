@@ -2,32 +2,39 @@
   <div class id="display-order">
     <div class="main-modal">
       <div class="main-modal__content">
-        <a class="main-modal__content__close-button" to="backToHome">x</a>
-        <div class="main-modal__content__text">
+        <router-link to="/">
+          <span class="main-modal__content__close-button">x</span>
+        </router-link>
+        <div class="main-modal__content__text" v-for="order in orders" :key="order.id">
           <p class="main-modal__content__text__display">
             Twoje zamówienie o numerze:
+            "
             <span
               class="main-modal__content__text__display--number"
-            >{{ orderNumber }}</span> zostało pomyślnie zapisane w naszej bazie danych.
+            >{{ order.id }}</span> " zostało pomyślnie zapisane w naszej bazie danych.
           </p>
-        </div>
-        <div class="main-modal__content__order">
-          <div class="main-modal__content__order__item">Imię: {{ name }}</div>
-          <div class="main-modal__content__order__item">Nazwisko: {{ surname }}</div>
-          <div class="main-modal__content__order__item">Informacje dodatkowe: {{ description }}</div>
-          <div class="main-modal__content__order__item">Typ Jachtu: {{ type }}</div>
-          <div class="main-modal__content__order__item">
-            Od:
-            <span class="main-modal__content__order__item__date_from">{{ date_from }}</span>
+          <div class="main-modal__content__order">
+            <div class="main-modal__content__order__item">Imię: {{ order.name }}</div>
+            <div class="main-modal__content__order__item">Nazwisko: {{ order.surname }}</div>
+            <div
+              class="main-modal__content__order__item"
+            >Informacje dodatkowe: {{ order.description }}</div>
+            <div class="main-modal__content__order__item">Typ Jachtu: {{ order.type }}</div>
+            <div class="main-modal__content__order__item">
+              Od:
+              <span class="main-modal__content__order__item__date_from">{{ order.date_from }}</span>
+            </div>
+            <div class="main-modal__content__order__item">
+              Do:
+              <span class="main-modal__content__order__item__date_to">{{ order.date_to }}</span>
+            </div>
+            <div class="main-modal__content__order__item">Adres Email: {{ order.email }}</div>
+            <div
+              class="main-modal__content__order__item"
+            >Rejon pływania: {{ order.country }} {{ order.country_extend }}</div>
+            <div class="main-modal__content__order__item">Ilość Kabin: {{ order.cabins }}</div>
+            <div class="main-modal__content__order__item">Ilość Gości: {{ order.guests }}</div>
           </div>
-          <div class="main-modal__content__order__item">
-            Do:
-            <span class="main-modal__content__order__item__date_to">{{ date_to }}</span>
-          </div>
-          <div class="main-modal__content__order__item">Adres Email: {{ email }}</div>
-          <div class="main-modal__content__order__item">Rejon pływania: {{ country }}</div>
-          <div class="main-modal__content__order__item">Ilość Kabin: {{ cabins }}</div>
-          <div class="main-modal__content__order__item">Ilość Gości: {{ guests }}</div>
         </div>
       </div>
     </div>
@@ -35,23 +42,52 @@
 </template>
 
 <script>
+import firebase from "@/firebase";
+
 export default {
   name: "DisplayOrder",
   data() {
     return {
-      // Powrót do strony domowej
-      backToHome: "/",
-      orderNumber: "Na teraz po prostu numer",
-      name: "Olaf",
-      surname: "Gniewny",
-      description: "Cokolwiek dopisałem bez skippera",
-      type: "Tango-730",
-      date_from: "22/05/2020",
-      date_to: "23/06/2020",
-      country: "Polska",
-      cabins: 4,
-      guests: 8
+      orders: [],
+      orderNumber: "",
+      name: "",
+      surname: "",
+      description: "",
+      type: "",
+      email: "",
+      date_from: "",
+      date_to: "",
+      country: "",
+      cabins: null,
+      guests: null,
+      country_extend: ""
     };
+  },
+  created() {
+    let db = firebase.firestore();
+    db.collection("Charter_Order")
+      .orderBy("date_from")
+      .get()
+      .then(querySnapshot => {
+        querySnapshot.forEach(doc => {
+          console.log(doc.data());
+          const data = {
+            id: doc.id,
+            name: doc.data().name,
+            surname: doc.data().surname,
+            description: doc.data().description,
+            type: doc.data().type,
+            email: doc.data().email,
+            date_from: doc.data().date_from,
+            date_to: doc.data().date_to,
+            country: doc.data().country,
+            cabins: doc.data().cabins,
+            guests: doc.data().guests,
+            country_extend: doc.data().country_extend
+          };
+          this.orders.push(data);
+        });
+      });
   }
 };
 </script>
@@ -97,8 +133,9 @@ $media-content: "only screen and (min-width : 960px)";
       padding: 5px 10px;
       border-radius: 50%;
       cursor: pointer;
+      text-decoration: none;
+      color: #fff;
       box-shadow: 2px 2px 5px 2px #aaa;
-      //   transform: translate(2px, 2px);
     }
     &__text {
       padding: 10px;

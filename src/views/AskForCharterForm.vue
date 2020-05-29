@@ -114,11 +114,9 @@
                 v-model="description"
                 class="container__main-form__items__item__label__content"
                 rows="10"
-                placeholder="Podaj informację na temat wynajmu - ze Skipperem czy bez i dodatkowe oczekiwania"
               />
             </label>
           </div>
-          <!-- pattern="[A-Za-z\b[ą,ć,ę,ł,ó,ż,ź]]{3,}" -->
           <div class="container__main-form__items__item">
             <label for class="container__main-form__items__item__label">
               Imię:
@@ -128,12 +126,12 @@
                 v-model="name"
                 type="text"
                 class="container__main-form__items__item__label__content"
+                pattern="[A-Za-z\b[ą,ć,ę,ł,ó,ż,ź]]{3,}"
                 placeholder="Podaj poprawne Imię minimum 3 litery"
                 required
               />
             </label>
           </div>
-          <!-- pattern="[A-Za-z\b[ą,ć,ę,ł,ó,ż,ź,\-]]{3,}" -->
           <div class="container__main-form__items__item">
             <label for class="container__main- form__items__item__label">
               Nazwisko:
@@ -143,6 +141,7 @@
                 v-model="surname"
                 type="text"
                 class="container__main-form__items__item__label__content"
+                pattern="[A-Za-z\b[ą,ć,ę,ł,ó,ż,ź,\-]]{3,}"
                 placeholder="Podaj poprawne nazwisko minimum 3 litery"
                 required
               />
@@ -162,7 +161,6 @@
               />
             </label>
           </div>
-          <!-- pattern="[0-9]{3}-[0-9]{3}-[0-9]{3}" -->
           <div class="container__main-form__items__item">
             <label for class="container__main-form__items__item__label">
               Numer telefonu:
@@ -173,6 +171,7 @@
                 type="tel"
                 class="container__main-form__items__item__label__content"
                 placeholder="Wpisz numer telefonu w formacie 000-000-000"
+                pattern="[0-9]{3}-[0-9]{3}-[0-9]{3}"
                 required
               />
             </label>
@@ -206,7 +205,7 @@ export default {
       country: "",
       country_extend: "",
       date_from: null,
-      date_to: null,
+      date_to: "",
       description: null,
       email: "",
       guests: null,
@@ -218,6 +217,7 @@ export default {
   },
   methods: {
     handleSubmit() {
+      let db = firebase.firestore();
       db.collection("Charter_Order")
         .add({
           // order_id: Math.floor(new Date() * (Math.random() * 20))
@@ -311,9 +311,9 @@ $media-content: "only screen and (min-width : 960px)";
             background-color: #eee;
             margin-top: 5px;
             display: block;
-            // overflow: none;
-            text-overflow: wrap;
-            // white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
             width: 90%;
             font-size: 16px;
             padding: 5px;
