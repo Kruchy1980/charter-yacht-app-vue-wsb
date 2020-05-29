@@ -14,14 +14,15 @@
           >&#8629; Powrót</a>
         </div>
       </div>
-      <form action class="container__main-form">
+      <form action class="container__main-form" @submit.prevent="handleSubmit">
         <div class="container__main-form__items">
           <div class="container__main-form__items__item">
             <label class="container__main-form__items__item__label">
               Kraj:
               <select
+                id="country"
+                v-model="country"
                 class="container__main-form__items__item__label__content"
-                v-model="selected"
               >
                 <option value disabled>Wybierz kraj w którym chcesz wyczarterować Jacht</option>
                 <option>Polska</option>
@@ -33,8 +34,11 @@
             <label class="container__main-form__items__item__label">
               Dowolny (jesli nie ma na liście):
               <input
+                id="country_extend"
+                v-model="country_extend"
                 type="text"
                 class="container__main-form__items__item__label__content"
+                placeholder="Podaj nazwę Kraju po którym chciałb yś/chciałabyś podróżować"
               />
             </label>
           </div>
@@ -42,13 +46,21 @@
             <label for class="container__main-form__items__item__label">
               Termin [od]:
               <span class="container__main-form__items__item__label--must">*</span>
-              <input type="date" class="container__main-form__items__item__label__content" required />
+              <input
+                id="date_from"
+                v-model="date_from"
+                type="date"
+                class="container__main-form__items__item__label__content"
+                required
+              />
             </label>
           </div>
           <div class="container__main-form__items__item">
             <label for class="container__main-form__items__item__label">
               Termin [do]:
               <input
+                id="date_to"
+                v-model="date_to"
                 type="date"
                 class="container__main-form__items__item__label__content"
               />
@@ -58,10 +70,11 @@
             <label class="container__main-form__items__item__label">
               Typ jachtu:
               <select
+                id="yacht_choice"
+                v-model="type"
                 class="container__main-form__items__item__label__content"
-                v-model="selected"
               >
-                <option value>---</option>
+                <option value>Wybierz odpowiedni rodzaj jachtu</option>
                 <option value>Jednokadłubowy żaglowy</option>
                 <option value>Jednokadłubowy motorowy</option>
                 <option value>Wielokadłubowy żaglowy</option>
@@ -70,53 +83,66 @@
             </label>
           </div>
           <div class="container__main-form__items__item">
-            <label for class="container__main-form__items__item__label">
+            <label class="container__main-form__items__item__label">
               Liczba kabin:
               <input
+                id="cabins"
+                v-model="cabins"
                 type="number"
                 class="container__main-form__items__item__label__content"
+                placeholder="Podaj liczbę kabin"
               />
             </label>
           </div>
           <div class="container__main-form__items__item">
-            <label for class="container__main-form__items__item__label">
+            <label class="container__main-form__items__item__label">
               Liczba gości:
               <input
+                id="guests"
+                v-model="guests"
                 type="number"
                 class="container__main-form__items__item__label__content"
+                placeholder="Podaj liczbę uczestników/gości"
               />
             </label>
           </div>
           <div class="container__main-form__items__item">
-            <label for class="container__main-form__items__item__label">
+            <label class="container__main-form__items__item__label">
               Uwagi dodatkowe:
               <textarea
+                id="description"
+                v-model="description"
                 class="container__main-form__items__item__label__content"
                 rows="10"
-              ></textarea>
+                placeholder="Podaj informację na temat wynajmu - ze Skipperem czy bez i dodatkowe oczekiwania"
+              />
             </label>
           </div>
+          <!-- pattern="[A-Za-z\b[ą,ć,ę,ł,ó,ż,ź]]{3,}" -->
           <div class="container__main-form__items__item">
             <label for class="container__main-form__items__item__label">
               Imię:
               <span class="container__main-form__items__item__label--must">*</span>
               <input
+                id="name"
+                v-model="name"
                 type="text"
                 class="container__main-form__items__item__label__content"
-                pattern="[A-Za-z\b[ą,ć,ę,ł,ó,ż,ź]]{3,}"
                 placeholder="Podaj poprawne Imię minimum 3 litery"
                 required
               />
             </label>
           </div>
+          <!-- pattern="[A-Za-z\b[ą,ć,ę,ł,ó,ż,ź,\-]]{3,}" -->
           <div class="container__main-form__items__item">
-            <label for class="container__main-form__items__item__label">
+            <label for class="container__main- form__items__item__label">
               Nazwisko:
               <span class="container__main-form__items__item__label--must">*</span>
               <input
+                id="surname"
+                v-model="surname"
                 type="text"
                 class="container__main-form__items__item__label__content"
-                pattern="[A-Za-z\b[ą,ć,ę,ł,ó,ż,ź,\-]]{3,}"
                 placeholder="Podaj poprawne nazwisko minimum 3 litery"
                 required
               />
@@ -127,6 +153,8 @@
               Adres Email:
               <span class="container__main-form__items__item__label--must">*</span>
               <input
+                id="email"
+                v-model="email"
                 type="email"
                 class="container__main-form__items__item__label__content"
                 placeholder="Podaj poprawny adres Email aby Twoja Prośba została zarejestrowana"
@@ -134,15 +162,17 @@
               />
             </label>
           </div>
+          <!-- pattern="[0-9]{3}-[0-9]{3}-[0-9]{3}" -->
           <div class="container__main-form__items__item">
             <label for class="container__main-form__items__item__label">
               Numer telefonu:
               <span class="container__main-form__items__item__label--must">*</span>
               <input
+                id="phone"
+                v-model="phone"
                 type="tel"
                 class="container__main-form__items__item__label__content"
                 placeholder="Wpisz numer telefonu w formacie 000-000-000"
-                pattern="[0-9]{3}-[0-9]{3}-[0-9]{3}"
                 required
               />
             </label>
@@ -159,6 +189,7 @@
 import MainMenu from "@/components/MainMenu";
 import MainFooter from "@/components/MainFooter";
 import firebase from "@/firebase.js";
+
 export default {
   name: "AskForCharterForm",
   components: {
@@ -168,11 +199,45 @@ export default {
   data() {
     return {
       homepage: "/",
-      selected: ""
+      // selected: true,
       // Odtąd łączenie do firebase'a
+      // order_id: null,
+      cabins: null,
+      country: "",
+      country_extend: "",
+      date_from: null,
+      date_to: null,
+      description: null,
+      email: "",
+      guests: null,
+      name: "",
+      surname: "",
+      phone: null,
+      type: ""
     };
   },
-  methodes: {}
+  methods: {
+    handleSubmit() {
+      db.collection("Charter_Order")
+        .add({
+          // order_id: Math.floor(new Date() * (Math.random() * 20))
+          cabins: this.cabins,
+          country: this.country.selectedOptions[0].text,
+          country_extend: this.country_extend,
+          date_from: this.date_from,
+          date_to: this.date_to,
+          description: this.description,
+          email: this.email,
+          guests: this.guests,
+          name: this.name,
+          surname: this.surname,
+          phone: this.phone,
+          type: this.type.selectedOptions[0].text
+        })
+        .then(docRef => this.$router.push("/"))
+        .catch(error => console.log(err));
+    }
+  }
 };
 </script>
 
@@ -230,6 +295,7 @@ $media-content: "only screen and (min-width : 960px)";
       border-radius: 20px;
       background-color: #a89003;
       color: #ddd;
+      outline-style: none;
     }
     &__items {
       padding: 20px;
@@ -245,9 +311,9 @@ $media-content: "only screen and (min-width : 960px)";
             background-color: #eee;
             margin-top: 5px;
             display: block;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
+            // overflow: none;
+            text-overflow: wrap;
+            // white-space: nowrap;
             width: 90%;
             font-size: 16px;
             padding: 5px;

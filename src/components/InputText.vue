@@ -1,18 +1,18 @@
 <template>
   <div>
     <input
-      type="text"
       ref="inputTxt"
       v-model="value"
+      type="text"
+      :class="{'input--valid' : validState==1, 'input--invalid' : validState==0}"
       @focusout="setState"
       @focus="enter"
       @input="setState"
-      :class="{'input--valid' : validState==1, 'input--invalid' : validState==0}"
-    />
+    >
     <small
       ref="errorTxt"
       :class="{'input__error--hide' : validState!=0, 'input__error--show' : validState==0}"
-    >{{errorText}}</small>
+    >{{ errorText }}</small>
   </div>
 </template>
 

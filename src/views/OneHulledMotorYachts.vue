@@ -3,10 +3,7 @@
     <MainMenu />
     <div class="banner__box">
       <div class="banner__box__image">
-        <img
-          src="../../public/images/slider-image/motor/2.motorboat.jpg"
-          alt="One hulled MotorBoat"
-        />
+        <img src="/images/slider-image/motor/2.motorboat.jpg" alt="One hulled MotorBoat" />
         <div class="banner__box__image__text">
           <p class="banner__box__image__text__title">Luksusowe jachty motorowe</p>
         </div>

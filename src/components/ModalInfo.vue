@@ -1,12 +1,12 @@
 <template>
   <transition name="modal-fade">
     <div class="modal--backdrop">
-      <div class="modal" role="dialog" aria-labelledby="modalTitle" aria-describedby="modalDescription" >
+      <div class="modal" role="dialog" aria-labelledby="modalTitle" aria-describedby="modalDescription">
         
         <header id="modalTitle" :class="isError ? 'modal__header--red' : 'modal__header--green'">
           <slot name="header">
               <h4>Komunikat</h4> 
-              <button type="button" class="button--close" @click="close" aria-label="Close modal" >&times;</button>
+              <button type="button" class="button--close" aria-label="Close modal" @click="close">&times;</button>
           </slot>
           
         </header>
@@ -17,7 +17,7 @@
 
         <footer class="modal__footer">
           <slot name="footer">
-            <button type="button" :class="isError ? 'button--red' : 'button--green'" @click="close" aria-label="Close modal" >OK</button>
+            <button type="button" :class="isError ? 'button--red' : 'button--green'" aria-label="Close modal" @click="close">OK</button>
           </slot>
         </footer>
 
@@ -28,7 +28,7 @@
 
 <script>
 export default {
-    name: 'modalInfo',
+    name: 'ModalInfo',
     props: {
       isError: { type: Boolean, default: false}
     },

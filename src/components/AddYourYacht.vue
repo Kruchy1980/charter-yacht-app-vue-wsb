@@ -26,7 +26,7 @@
                       type="text"
                       class="modal__box__window__form__items__item__label__content"
                       required
-                    />
+                    >
                   </label>
                 </div>
 
@@ -38,7 +38,7 @@
                       type="number"
                       class="modal__box__window__form__items__item__label__content"
                       required
-                    />
+                    >
                   </label>
                 </div>
                 <div class="modal__box__window__form__items__item">
@@ -51,7 +51,7 @@
                       type="number"
                       class="modal__box__window__form__items__item__label__content"
                       required
-                    />
+                    >
                   </label>
                 </div>
                 <div class="modal__box__window__form__items__item">
@@ -64,7 +64,7 @@
                       class="modal__box__window__form__items__item__label__content"
                       rows="10"
                       required
-                    ></textarea>
+                    />
                   </label>
                 </div>
 
@@ -78,7 +78,7 @@
                       type="number"
                       class="modal__box__window__form__items__item__label__content"
                       required
-                    />
+                    >
                   </label>
                 </div>
 
@@ -90,7 +90,7 @@
                       type="file"
                       class="modal__box__window__form__items__item__label__content"
                       required
-                    />
+                    >
                   </label>
                 </div>
 
@@ -102,7 +102,7 @@
                         v-model="isChecked"
                         type="checkbox"
                         class="modal__box__window__form__items__item--skipper__label__content"
-                      />
+                      >
                     </label>
                     <label v-if="isChecked" class="modal__box__window__form__items__item__label">
                       Imię skippera:
@@ -113,7 +113,7 @@
                         type="text"
                         class="modal__box__window__form__items__item__label__content"
                         required
-                      />
+                      >
                     </label>
                   </div>
                   <div class="modal__box__window__form__items__item">
