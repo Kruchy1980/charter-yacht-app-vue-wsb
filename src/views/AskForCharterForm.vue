@@ -220,7 +220,6 @@ export default {
       let db = firebase.firestore();
       db.collection("Charter_Order")
         .add({
-          // order_id: Math.floor(new Date() * (Math.random() * 20))
           cabins: this.cabins,
           country: this.country.selectedOptions[0].text,
           country_extend: this.country_extend,
