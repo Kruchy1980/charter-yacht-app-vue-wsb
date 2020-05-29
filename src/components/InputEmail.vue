@@ -33,8 +33,7 @@ export default {
       return re.test(email);
     },
     setState(){
-        let email = this.$refs.inputEmail;
-        if (!this.validEmail(email.value)){
+        if (!this.validEmail(this.value)){
             this.isValid=false;
             this.validState=0;
         }
@@ -46,8 +45,7 @@ export default {
     //czyścimy stan pola przy wejściu w edycją
     enter(){
         this.validState=-1;
-        let email = this.$refs.inputEmail;
-        if (!this.validEmail(email.value)){
+        if (!this.validEmail(this.value)){
             this.isValid=false;
         }
         else{

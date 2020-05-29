@@ -61,17 +61,15 @@ export default {
       }
     },
     verifyPass(){
-        this.$emit('verifypass',this.value);
+        this.$emit('verifypass');
     },
-    setInValid(error){
+    comparePass(verifyErr,verifyPass){
+      if(this.value!=verifyPass){
         this.isValid=false;
         this.validState=0;
-        this.errTxt=error;
+        this.errTxt=verifyErr;
+      }
     },
-    setValid(){
-        this.isValid=true;
-        this.validState=1;
-    }
   }
 }
 </script>

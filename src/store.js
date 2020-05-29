@@ -27,7 +27,8 @@ export default new Vuex.Store({
         commit("SET_USER", {
           displayName: user.displayName,
           email: user.email,
-          isAnonymous: user.isAnonymous
+          isAnonymous: user.isAnonymous,
+          uid: user.uid
         });
       } else {
         commit("SET_USER", null);

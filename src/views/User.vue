@@ -25,6 +25,7 @@ import ModalLoading from "@/components/LoadingLineDots";
 import ModalInfo from "@/components/ModalInfo";
 import firebase from "@/firebase.js";
 import UserModal from "@/components/UserModal";
+import { mapState }  from "vuex";
 export default {
   name: "userAccount",
   components: { MainMenu, MainFooter, UserModal, ModalLoading },
@@ -33,8 +34,22 @@ export default {
       isLoadingVisible: false,isModalInfoVisible: false, isUserModalVisible: true,
       modalTitle: '', modalMsg: '', 
       modalIsError: true,  //flaga określająca czy pokazywane okno modalne jest błędem
+      isLoggedUser: false,
     }
-  }
+  },
+  computed: {
+    ...mapState ({  //mapujemy zmienne z magazynu
+      currentUser: 'user' //user firebase
+    })
+  },
+  mounted(){
+    if(this.currentUser.loggedIn){
+      if(!this.currentUser.data.isAnonymous){
+        this.isLoggedUser = true; //jest zalogowany użytkownik, i nie jest to użytkownik anonimowy używany do wyświetlania danych z bazy
+        this.isUserModalVisible = false;
+      }
+    }
+  },
 };
 </script>
 

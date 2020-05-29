@@ -5,9 +5,10 @@
     <div class="modal--backdrop">
       <div class="modal">
           <img src="/bookmark-icon/1.blue.svg" alt="logo" class="logo">
-          <span v-show="loginSignin" class="usermodal__label text__color--primary">Logowanie</span>
-          <span v-show="!loginSignin" class="usermodal__label text__color--primary">Rejestracja</span>
-          <form v-show="loginSignin" action="/user" class="userform" @submit.prevent="logIn($event)">
+          <span v-show="lUser" class="usermodal__label text__color--primary">Logowanie</span>
+          <span v-show="cUser" class="usermodal__label text__color--primary">Rejestracja</span>
+          <span v-show="resetPass" class="usermodal__label text__color--primary">Resetowanie hasła</span>
+          <form v-show="lUser" action="user" class="userform" @submit.prevent="logIn($event)">
               <div class="userform__group">
                   <label class="userform__label" for="loginEmail">E-mail</label>
                   <InputEmail id="loginEmail" ref="loginEmail" :error-text="'Proszę podać poprawny adres e-mail.'" />
@@ -17,27 +18,41 @@
                   <InputPassword id="loginPassword" ref="loginPassword" :min-length="6" :error-text="'Hasło musi mieć minimum 6 znaków.'" />
               </div>
               <button type="submit" class="userform__button background__color--light">Zaloguj się</button>
-              <small class="usermodal__small">Nie masz konta? <button class="usermodal__switchbutton text__color--primary" @click="loginSignin=!loginSignin">Zarejestruj się</button></small>
+              <div class="userform__group">
+                <small class="usermodal__small">Nie masz konta? <button type="button" class="usermodal__switchbutton text__color--primary" @click="switchForm('create')">Zarejestruj się</button></small>
+                <small class="usermodal__small">Nie pamiętasz hasła? <button type="button" class="usermodal__switchbutton text__color--primary" @click="switchForm('reset')">Zresetuj hasło</button></small>
+              </div>
           </form>
-          <form v-show="!loginSignin" action="/user" class="userform" @submit.prevent="createUser($event)">
+          <form v-show="cUser" action="user" class="userform" @submit.prevent="createUser($event)">
               <div class="userform__group">
-                  <label class="userform__label" for="signinName">Imię</label>
-                  <InputText id="signinName" ref="signinName" :min-length="3" :error-text="'Podaj swoje imię, minimum 3 znaki.'" />
+                  <label class="userform__label" for="createName">Imię</label>
+                  <InputText id="createName" ref="createName" :min-length="3" :error-text="'Podaj swoje imię, minimum 3 znaki.'" />
               </div>
               <div class="userform__group">
-                  <label class="userform__label" for="signinEmail">E-mail</label>
-                  <InputEmail id="signinEmail" ref="signinEmail" :error-text="'Proszę podać poprawny adres e-mail.'" />
+                  <label class="userform__label" for="createEmail">E-mail</label>
+                  <InputEmail id="createEmail" ref="createEmail" :error-text="'Proszę podać poprawny adres e-mail.'" />
               </div>
               <div class="userform__group">
-                  <label class="userform__label" for="signinPassword">Hasło</label>
-                  <InputPassword id="signinPassword" ref="signinPassword" :min-length="6" :error-text="'Hasło musi mieć minimum 6 znaków.'" />
+                  <label class="userform__label" for="createPassword">Hasło</label>
+                  <InputPassword id="createPassword" ref="createPassword" :min-length="6" :error-text="'Hasło musi mieć minimum 6 znaków.'" />
               </div>
               <div class="userform__group">
-                  <label class="userform__label" for="signinPassword2">Powtórz hasło</label>
-                  <InputPassword id="signinPassword2" ref="signinPassword2" :min-length="6" :error-text="'Powtórz hasło'" @verifypass="verifyPass" />
+                  <label class="userform__label" for="createPassword2">Powtórz hasło</label>
+                  <InputPassword id="createPassword2" ref="createPassword2" :min-length="6" :error-text="'Powtórz hasło'" @verifypass="verifyPass" />
               </div>
               <button type="submit" class="userform__button background__color--light">Zarejestruj się</button>
-              <small class="usermodal__small">Masz już konto? <button class="usermodal__switchbutton text__color--primary" @click="loginSignin=!loginSignin">Zaloguj się</button></small>
+              <small class="usermodal__small">Masz już konto? <button type="button" class="usermodal__switchbutton text__color--primary" @click="switchForm('login')">Zaloguj się</button></small>
+          </form>
+          <form v-show="resetPass" action="user" class="userform" @submit.prevent="resetPassword($event)">
+          <div class="userform__group">
+            <p class="userform__label">Podaj adres e-mail powiązany z Twoim kontem. Prześlemy na niego e-mail pozwalający zresetować hasło i ustawić nowe.</p>
+            </div>
+              <div class="userform__group">
+                  <label class="userform__label" for="resetEmail">E-mail</label>
+                  <InputEmail id="resetEmail" ref="resetEmail" :error-text="'Proszę podać poprawny adres e-mail.'" />
+              </div>
+              <button type="submit" class="userform__button background__color--light">Resetuj hasło</button>
+              <small class="usermodal__small"><button type="button" class="usermodal__switchbutton text__color--primary" @click="switchForm('login')">wróc do logowania</button></small>
           </form>
       </div>
     </div>
@@ -69,61 +84,147 @@ export default {
       isLoadingVisible: false,isModalInfoVisible: false, 
       modalTitle: '', modalMsg: '', 
       modalIsError: true,  //flaga określająca czy pokazywane okno modalne jest błędem
-      loginSignin: true,  //flaga służąca do przełączania logowanie/zakładanie konta
+      lUser: true,  //flaga służąca do przełączania na logowanie
+      cUser: false,  //flaga nowego konta
+      resetPass: false, //flaga do przełączenia się na reset hasłą
+      targetForm: null, //odnośnik formularza do zatwierdzenia po zamknięciu komunikatu
     }
   },
-  // computed: {
-  //   ...mapState ({  //mapujemy zmienne z magazynu
-  //     currentUser: 'user' //user firebase
-  //   })
-  // },
   methods: {
-    verifyPass(pass){
-      let pass1 = this.$refs['signinPassword'];
-      let pass2 = this.$refs['signinPassword2'];
+    verifyPass(){
+      let pass1 = this.$refs['createPassword'];
+      let pass2 = this.$refs['createPassword2'];
       if(pass2.isValid){
-        if(pass1.value!=pass){
-          pass2.setInValid('Hasła muszą być zgodne.');
-        }
-        else{
-          pass2.setValid();
-        }
+        pass2.comparePass('Hasła muszą być zgodne.',pass1.value);
       }
     },
     closeModal() {
       this.isModalInfoVisible = false;
+      if(this.targetForm){
+        let target = this.targetForm;
+        this.targetForm = null;
+        target.submit();
+      }
+    },
+    switchForm(destination){
+      if(destination=='reset'){
+        this.resetPass = true;
+        this.lUser=false;
+        this.cUser=false;
+      }
+      else if(destination=='create')
+      {
+        this.resetPass = false;
+        this.lUser=false;
+        this.cUser=true;
+      }
+      else{
+        this.resetPass = false;
+        this.lUser=true;
+        this.cUser=false;
+      }
     },
     logIn(e){
-
+      const that = this;  //zapamiętanie kontekstu
+      try{
+        let valid = true; //zmienna pomocnicza
+        let controls = ['loginEmail','loginPassword']
+        controls.forEach(element => {
+          let el = that.$refs[element]
+          if(!el.isValid){
+            valid=false;
+            that.$refs[element].setState();  //uruchamiamy alert na kontrolce
+          }
+        });
+        if(valid){
+          that.isLoadingVisible=true;
+          let mail = that.$refs['loginEmail'];
+          let pass = that.$refs['loginPassword'];
+          firebase.auth().signInWithEmailAndPassword(mail.value,pass.value)
+          .then(function(data){
+            e.target.submit();  //odświeżamy okno
+          })
+          .catch(function(error){
+            that.modalIsError = true;
+            that.isLoadingVisible=false;
+            if(error.code=='auth/user-disabled'){
+              that.modalTitle='Błąd - konto wyłączone';
+              that.modalMsg='Twoje konto zostało zablokowane. Skontaktuj się z nami przy pomocy formularza kontaktowego w celu odblokowania konta.';
+            }
+            else if(error.code=='auth/user-not-found'){
+              that.modalTitle='Błąd - konto nie istnieje';
+              that.modalMsg='Nie istnieje konto powiązane z podanym adresem e-mail.';
+            }
+            else if(error.code=='auth/wrong-password'){
+              that.modalTitle='Błąd - niepoprawne hasło';
+              that.modalMsg='Podane hasło jest błędne. Wprowadź poprawne hasło.';
+            }
+            else{
+              that.modalTitle='Błąd '+error.code;
+              that.modalMsg=error.message;
+            }
+            console.error(that.modalTitle, that.modalMsg);
+            that.isModalInfoVisible = true;
+          });
+        }
+      }
+      catch(err){
+        that.modalIsError = true;
+        that.isLoadingVisible=false;
+        console.error("Error log in user: ", err);
+        that.modalTitle ='Błąd logowania użytkownika!'
+        that.modalMsg = err;
+        that.isModalInfoVisible = true;
+      }
     },
     createUser(e){
       const that = this;  //zapamiętanie kontekstu
       try{
-        let mail = that.$refs['signinEmail'];
-        let pass = that.$refs['signinPassword'];
-        firebase.auth().createUserWithEmailAndPassword(mail.value,pass.value)
-        .then(function(data ){
-          alert(data.user.uid);
-          e.target.submit();  //zatwierdzamy formularz
-        })
-        .catch(function(error){
-          if(error.code=='auth/email-already-in-use'){
-            that.modalIsError = true;
-            that.isLoadingVisible=false;
-            that.modalTitle='Błąd - takie konto już istnieje';
-            that.modalMsg='Istnieje już konto powiązane z podanym adresem e-mail. Użyj innego adresu e-mail lub zaloguj się na podany adres e-mail.';
-            console.error(that.modalTitle, that.modalMsg);
-            that.isModalInfoVisible = true;
-          }
-          else{
-            that.modalIsError = true;
-            that.isLoadingVisible=false;
-            that.modalTitle='Błąd '+error.code;
-            that.modalMsg=error.message;
-            console.error(that.modalTitle, that.modalMsg);
-            that.isModalInfoVisible = true;
+        let valid = true; //zmienna pomocnicza
+        let controls = ['createName','createEmail','createPassword']
+        controls.forEach(element => {
+          let el = that.$refs[element]
+          if(!el.isValid){
+            valid=false;
+            that.$refs[element].setState();  //uruchamiamy alert na kontrolce
           }
         });
+        //kontrola hasła 2 osobno
+        if(!that.$refs['createPassword2'].isValid){
+          valid=false;
+          that.$refs['createPassword2'].comparePass('Hasła muszą być zgodne.',that.$refs['createPassword'].value);;
+        }
+
+        if(valid){
+          let mail = that.$refs['createEmail'];
+          let pass = that.$refs['createPassword'];
+          let name = that.$refs['createName'];
+          that.isLoadingVisible=true;
+          firebase.auth().createUserWithEmailAndPassword(mail.value,pass.value)
+          .then(function(data){
+            data.user.updateProfile({
+              displayName: name.value
+            })
+            .then(function(){
+              that.isLoadingVisible=false;
+              e.target.submit();
+            });
+          })
+          .catch(function(error){
+            that.modalIsError = true;
+            that.isLoadingVisible=false;
+            if(error.code=='auth/email-already-in-use'){
+              that.modalTitle='Błąd - takie konto już istnieje';
+              that.modalMsg='Istnieje już konto powiązane z podanym adresem e-mail. Użyj innego adresu e-mail lub zaloguj się na podany adres e-mail.';
+            }
+            else{
+              that.modalTitle='Błąd '+error.code;
+              that.modalMsg=error.message;
+            }
+            console.error(that.modalTitle, that.modalMsg);
+            that.isModalInfoVisible = true;
+          });
+        }
       }
       catch(err){
         that.modalIsError = true;
@@ -134,6 +235,48 @@ export default {
         that.isModalInfoVisible = true;
       }
     },
+    resetPassword(e){
+      const that = this;
+      try{
+        let mail = that.$refs['resetEmail'];
+        if(!mail.isValid){
+          mail.setState();
+        }
+        else{
+          that.isLoadingVisible=true;
+          firebase.auth().sendPasswordResetEmail(mail.value)
+          .then(function(){
+            that.modalIsError = false;
+            that.modalTitle = 'E-mail wysłany';
+            that.modalMsg = 'Na podany adres e-mail została wysłana wiadomość. Postępuj zgodnie z poleceniami zawartymi w wiadomości.';
+            that.isModalInfoVisible = true;
+            that.targetForm = e.target; 
+          })
+          .catch(function(error){
+            that.modalIsError = true;
+            that.isLoadingVisible=false;
+            if(error.code=='auth/user-not-found'){
+              that.modalTitle='Błąd - takie konto nie istnieje';
+              that.modalMsg='Nie istnieje konto powiązane z podanym adresem e-mail. Użyj innego adresu e-mail.';
+            }
+            else{
+              that.modalTitle='Błąd '+error.code;
+              that.modalMsg=error.message;
+            }
+            console.error(that.modalTitle, that.modalMsg);
+            that.isModalInfoVisible = true;
+          });
+        }
+      }
+      catch(err){
+        that.modalIsError = true;
+        that.isLoadingVisible=false;
+        console.error("Error reset user password: ", err);
+        that.modalTitle ='Błąd resetu hasła użytkownika!'
+        that.modalMsg = err;
+        that.isModalInfoVisible = true;
+      }
+    }
   }
 }
 </script>
@@ -229,19 +372,22 @@ export default {
     justify-content: center;
   }
 .modal {
-    margin-top: 4.5rem;
-    padding-top: 0.5rem;
-    padding-left: 0.75rem;
-    padding-right: 0.75rem;
-    padding-bottom: 1rem;
-    background: #FFFFFF;
-    box-shadow: 2px 2px 20px 1px;
-    display: flex;
-    flex-direction: column;
-    border-radius: 5px;
-    min-width: 250px;
-    height: fit-content;
-  }
+  margin-left: 2rem;
+  margin-right: 2rem;
+  margin-top: 4.5rem;
+  padding-top: 0.5rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  padding-bottom: 1rem;
+  background: #FFFFFF;
+  box-shadow: 2px 2px 20px 1px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px;
+  min-width: 250px;
+  height: fit-content;
+  max-width: 500px;
+}
 
 @media only screen and (min-width: 768px){
   .modal{
