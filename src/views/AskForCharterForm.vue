@@ -337,6 +337,7 @@ $media-content: "only screen and (min-width : 960px)";
       background-color: #a89003;
       color: #ddd;
       outline-style: none;
+      cursor: pointer;
     }
     &__items {
       padding: 20px;

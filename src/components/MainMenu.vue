@@ -19,7 +19,7 @@
               <i v-show="!isExpanded" class="fas fa-caret-down" />
               <i v-show="isExpanded" class="fas fa-caret-up" />
             </a>
-            <ul class="nav_dropdown background__color--light">
+            <ul id="mnuCharter" class="nav_dropdown background__color--light">
               <li>
                 <a class="nav_link text__color--primary" @click="isExpanded1=!isExpanded1">
                   Jachty żaglowe
@@ -115,7 +115,6 @@
 import { mapState } from "vuex";
 import ModalLogOut from "@/components/ModalLogOut";
 import firebase from "@/firebase.js";
-
 export default {
   name: "mainMenu",
   components: { ModalLogOut },
@@ -301,7 +300,6 @@ li {
   width: fit-content;
   border-bottom-right-radius: 7px;
   border-bottom-left-radius: 7px;
-
   /* ukrycie + animacja */
   max-height: 0px;
   overflow: hidden;
@@ -317,11 +315,9 @@ li {
   border-bottom: 1px solid rgb(102, 102, 102, 0.5);
   box-shadow: 0 4px 2px -2px #999;
 }
-
 /* szkielet dla różnych wyświetlaczy */
 /* @media (min-width: 640px) {
 } */
-
 @media (min-width: 768px) {
   .header_nav {
     margin: auto 5% auto auto;
@@ -351,10 +347,8 @@ li {
     padding: 3px;
   }
 }
-
 /* @media (min-width: 1024px) {
 }
-
 @media (min-width: 1200px) {
 } */
 </style>
