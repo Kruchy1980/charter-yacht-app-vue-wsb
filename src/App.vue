@@ -1,23 +1,49 @@
 <template>
-  <div id="yacht-charter-app">
-    <div :any="any" class="smth">Jakiś tekst tylko na próbę</div>
+  <div id="app">
+    <router-view />
   </div>
 </template>
 
-<script>
-export default {
-  name: "App",
-  components: {}
-};
-</script>
 
-<style>
-#yacht-charter-app {
+<style  lang="scss">
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  padding: 0;
+  /* Czcionkę możemy sobie zmienić jak co także mus to nie jest może znajdziemy jakąś fajną pod tą stronę */
   font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+}
+.text__color--primary {
+  color: rgb(60, 84, 180)!important;
+}
+.text__color--yellow{
+    color: rgb(255, 193, 7)!important;
+}
+.text__color--red{
+    color: rgb(255, 0, 0)!important;
+}
+.text__color--blue{
+    color: rgb(0, 0, 255)!important;
+}
+.text__color--gray{
+      color: rgb(108, 117, 125)!important;
+}
+.text__color--dark{
+  color: rgb(33, 37, 41)!important;
+}
+.background__color--dark{
+  background-color: rgb(33, 37, 41)!important;
+}
+.text__color--light{
+  color: rgb(251, 252, 253)!important;
+}
+.background__color--light{
+  background-color: rgb(251, 252, 253)!important;
 }
 </style>
