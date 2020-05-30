@@ -8,7 +8,7 @@
       @focusout="setState"
       @focus="enter"
       @input="setState"
-    >
+    />
     <small
       ref="errorTxt"
       :class="{'input__error--hide' : validState!=0, 'input__error--show' : validState==0}"
@@ -20,8 +20,7 @@
 export default {
   props: {
     minLength: { type: Number, default: 0 }, //wymagana liczba znaków w polu
-    errorText: { type: String, default: "" }, //komunikat z błędem wyświetlany gdy min liczba znaków nie została osiągnięta
-    valid: { type: Boolean } //wskaznie początkowego stanu pola: poprawne/niepoprawne
+    errorText: { type: String, default: "" } //komunikat z błędem wyświetlany gdy min liczba znaków nie została osiągnięta
   },
   data() {
     return {

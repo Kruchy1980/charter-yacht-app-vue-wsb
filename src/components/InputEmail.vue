@@ -8,7 +8,7 @@
       @focusout="setState"
       @focus="enter"
       @input="setState"
-    >
+    />
     <small
       ref="errorTxt"
       :class="{'input__error--hide' : validState!=0, 'input__error--show' : validState==0}"
@@ -19,8 +19,7 @@
 <script>
 export default {
   props: {
-    errorText: { type: String, default: "" }, //komunikat z wyświetlanym błędem
-    valid: { type: Boolean } //wskaznie początkowego stanu komponentu: poprawne/niepoprawne
+    errorText: { type: String, default: "" } //komunikat z wyświetlanym błędem
   },
   data() {
     return {
@@ -42,8 +41,7 @@ export default {
       return re.test(email);
     },
     setState() {
-      let email = this.$refs.inputEmail;
-      if (!this.validEmail(email.value)) {
+      if (!this.validEmail(this.value)) {
         this.isValid = false;
         this.validState = 0;
       } else {
@@ -54,8 +52,7 @@ export default {
     //czyścimy stan pola przy wejściu w edycją
     enter() {
       this.validState = -1;
-      let email = this.$refs.inputEmail;
-      if (!this.validEmail(email.value)) {
+      if (!this.validEmail(this.value)) {
         this.isValid = false;
       } else {
         this.isValid = true;

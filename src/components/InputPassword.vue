@@ -1,10 +1,9 @@
 <template>
 <div>
-  <textarea ref="areaTxt" v-model="value" :rows="noRows" class="input_area"
-  :class="{'textarea--valid' : validState==1, 'textarea--invalid' : validState==0}" @focusout="setState" @focus="enter"
-  @input="setState"
-/>
-  <small ref="errorTxt" :class="{'textarea__error--hide' : validState!=0, 'textarea__error--show' : validState==0}">{{ errorText }}</small>
+  <input type="password" ref='inputTxt' v-model="value"
+  @focusout="setState" @focus="enter" @input="setState" @keyup="verifyPass"
+  :class="{'input--valid' : validState==1, 'input--invalid' : validState==0}" >
+  <small ref='errorTxt' :class="{'input__error--hide' : validState!=0, 'input__error--show' : validState==0}"> {{errTxt}} </small>
 </div>
   
 </template>
@@ -14,13 +13,13 @@ export default {
   props: {
     minLength: { type: Number, default: 0 },  //wymagana liczba znaków w polu
     errorText: { type: String, default: ''},  //komunikat z błędem wyświetlany gdy min liczba znaków nie została osiągnięta
-    noRows: { type: Number, default: 5}
   },
   data(){
     return{
       isValid: false, //aktualny stan komponentu
       validState: -1, //zmienna pomocnicza do zarządaniem wyglądem komponentu
       value: '',
+      errTxt: this.errorText,
     }
   },
   mounted(){
@@ -37,7 +36,7 @@ export default {
     //weryfikacja długości wprowadzonego ciągu znaków przy wyjściu z pola
     setState(){
       if(this.minLength>0){
-        let t = this.$refs.areaTxt;
+        let t = this.$refs.inputTxt;
         if(t.value.length<this.minLength){
           this.isValid=false;
           this.validState=0;
@@ -51,7 +50,7 @@ export default {
     //czyścimy stan pola przy wejściu w edycją
     enter(){
       if(this.minLength>0){
-        let t = this.$refs.areaTxt;
+        let t = this.$refs.inputTxt;
         this.validState=-1;
         if(t.value.length<this.minLength){
           this.isValid=false;
@@ -61,48 +60,56 @@ export default {
         }
       }
     },
+    verifyPass(){
+        this.$emit('verifypass');
+    },
+    comparePass(verifyErr,verifyPass){
+      if(this.value!=verifyPass){
+        this.isValid=false;
+        this.validState=0;
+        this.errTxt=verifyErr;
+      }
+    },
   }
 }
 </script>
 
 <style scoped>
-.input_area{
-    overflow: auto;
-    resize: vertical;
+input{
     width: 100%;
-    height: auto;
+    height: 2em;
     padding: .375rem .75rem;
-    font-size: 1.23rem;
+    font-size: 1rem;
     font-weight: normal;
     line-height: 1.5;
     color: rgb(73, 80, 87);
     background-color: #fff;
     border: 1px solid rgb(90, 90, 90);
     border-radius: .25rem;
-    margin-bottom: 0.1rem;
-    /* -moz-transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    -moz-transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
     -ms-transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
     -o-transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
     -webkit-transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out; */
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    margin-bottom: 0.2rem;
 }
-.input_area:focus{
+input:focus{
   box-shadow: 2px 2px 6px #999;
   outline: none;
 }
-.textarea--invalid{
-  border-color: rgb(255, 0, 0);
+.input--invalid{
+  border: 1px solid rgb(255, 0, 0);
   box-shadow: 0px 0px 6px rgb(255, 0, 0);
 }
-.textarea--valid{
+.input--valid{
   border: 1px solid rgb(0, 128, 0);
   box-shadow: 0px 0px 3px rgb(0, 128, 0);
 }
-.textarea__error--show{
+.input__error--show{
   color: rgb(255, 0, 0);
   visibility: visible;
 }
-.textarea__error--hide{
+.input__error--hide{
   visibility: hidden;
 }
 </style>

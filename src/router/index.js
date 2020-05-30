@@ -9,6 +9,7 @@ import MultiHulledSailingYachts from '@/views/MultiHulledSailingYachts';
 import MultiHulledMotorYachts from '@/views/MultiHulledMotorYachts';
 import AskForCharterForm from '@/views/AskForCharterForm';
 import DisplaySingleOrder from '@/components/DisplaySingleOrder';
+import User from "@/views/User.vue"
 
 Vue.use(VueRouter);
 
@@ -57,6 +58,11 @@ const routes = [{
         path: "/display-single-order",
         name: "display-single-order",
         component: DisplaySingleOrder
+    },
+    {
+        path: "/user",
+        name: "user",
+        component: User
     },
     { path: '*', redirect: '/' }, //przekierowanie dla błędnej nazwy strony
 ];
