@@ -4,7 +4,7 @@
     <div class="banner__box">
       <div class="banner__box__image">
         <img
-          src="../../public/images/slider-image/catamaran-sailing/1.catamaran-s.jpeg"
+          src="/images/slider-image/catamaran-sailing/1.catamaran-s.jpeg"
           alt="Multihulled sailing Yacht"
         />
         <div class="banner__box__image__text">

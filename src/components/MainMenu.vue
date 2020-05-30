@@ -2,7 +2,7 @@
   <header class="main_header text__color--primary background__color--light">
     <div class="main_header_nav">
       <a :href="mainUrl">
-        <img :src="logoUrl" alt="logo" class="nav_logo">
+        <img :src="logoUrl" alt="logo" class="nav_logo" />
       </a>
       <button type="button" class="nav_toggler" @click="showMobileMenu()">
         <i v-show="isMobileMenuClicked" class="fas fa-bars fa-lg" />
@@ -19,7 +19,7 @@
               <i v-show="!isExpanded" class="fas fa-caret-down" />
               <i v-show="isExpanded" class="fas fa-caret-up" />
             </a>
-            <ul class="nav_dropdown background__color--light">
+            <ul id="mnuCharter" class="nav_dropdown background__color--light">
               <li>
                 <a class="nav_link text__color--primary" @click="isExpanded1=!isExpanded1">
                   Jachty żaglowe
@@ -83,20 +83,41 @@
           <li>
             <router-link to="/about" class="nav_link text__color--primary">O Nas</router-link>
           </li>
-          <li>
-            <a href class="nav_link text__color--primary">
+          <li v-show="!isLoggedUser">
+            <router-link to="/user" class="nav_link text__color--primary">
               <i class="fas fa-user-circle fa-lg" />
+            </router-link>
+          </li>
+          <li v-show="isLoggedUser">
+            <a class="nav_link text__color--primary" @click="expandMenuUser($event)">
+              <i class="fas fa-user-circle fa-lg" />
+              <i v-show="!isExpandedUserMnu" class="fas fa-caret-down" />
+              <i v-show="isExpandedUserMnu" class="fas fa-caret-up" />
             </a>
+            <ul id="mnuUser" class="nav_dropdown background__color--light">
+              <li>
+                <router-link to="/user" class="nav_link text__color--primary">Twoje konto</router-link>
+              </li>
+              <li>
+                <a class="nav_link text__color--primary" @click="showLogOut()">Wyloguj się</a>
+              </li>
+            </ul>
           </li>
         </ul>
       </nav>
     </div>
+    <ModalLogOut v-show="isShowLogOut" @close="closeModal()" @logOut="firebaseLogOut()" />
   </header>
 </template>
 
 
 <script>
+import { mapState } from "vuex";
+import ModalLogOut from "@/components/ModalLogOut";
+import firebase from "@/firebase.js";
 export default {
+  name: "mainMenu",
+  components: { ModalLogOut },
   data() {
     return {
       mainUrl: "/",
@@ -104,8 +125,24 @@ export default {
       isMobileMenuClicked: true,
       isExpanded: false,
       isExpanded1: false,
-      isExpanded2: false
+      isExpanded2: false,
+      isLoggedUser: false,
+      isExpandedUserMnu: false,
+      isShowLogOut: false
     };
+  },
+  computed: {
+    ...mapState({
+      //mapujemy zmienne z magazynu
+      currentUser: "user" //user firebase
+    })
+  },
+  mounted() {
+    if (this.currentUser.loggedIn) {
+      if (!this.currentUser.data.isAnonymous) {
+        this.isLoggedUser = true; //jest zalogowany użytkownik, i nie jest to użytkownik anonimowy używany do wyświetlania danych z bazy
+      }
+    }
   },
   methods: {
     showMobileMenu() {
@@ -118,9 +155,33 @@ export default {
       this.isMobileMenuClicked = !this.isMobileMenuClicked;
     },
     expandMenuCharter(e) {
-      let ul = e.target.nextSibling;
+      let ul = document.getElementById("mnuCharter");
       this.isExpanded = !this.isExpanded;
       ul.classList.toggle("nav_dropdown--grow");
+    },
+    expandMenuUser(e) {
+      let ul = document.getElementById("mnuUser");
+      this.isExpandedUserMnu = !this.isExpandedUserMnu;
+      ul.classList.toggle("nav_dropdown--grow");
+    },
+    closeModal() {
+      this.isShowLogOut = false;
+    },
+    showLogOut() {
+      this.isShowLogOut = true;
+    },
+    firebaseLogOut() {
+      const that = this;
+      firebase
+        .auth()
+        .signOut()
+        .then(function() {
+          that.isShowLogOut = false;
+          that.$router.go(0); //odświeżenie bieżącel lokalizacji
+        })
+        .catch(function(error) {
+          console.error("Error during log out ", error);
+        });
     }
   }
 };
@@ -239,7 +300,6 @@ li {
   width: fit-content;
   border-bottom-right-radius: 7px;
   border-bottom-left-radius: 7px;
-
   /* ukrycie + animacja */
   max-height: 0px;
   overflow: hidden;
@@ -255,11 +315,9 @@ li {
   border-bottom: 1px solid rgb(102, 102, 102, 0.5);
   box-shadow: 0 4px 2px -2px #999;
 }
-
 /* szkielet dla różnych wyświetlaczy */
 /* @media (min-width: 640px) {
 } */
-
 @media (min-width: 768px) {
   .header_nav {
     margin: auto 5% auto auto;
@@ -289,10 +347,8 @@ li {
     padding: 3px;
   }
 }
-
 /* @media (min-width: 1024px) {
 }
-
 @media (min-width: 1200px) {
 } */
 </style>

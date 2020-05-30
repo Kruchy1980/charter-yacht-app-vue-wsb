@@ -68,9 +68,9 @@
     <!-- okna modalne -->
     <ModalLoading v-show="isLoadingVisible" />
     <ModalInfo v-show="isModalInfoVisible" :is-error="modalIsError" @close="closeModal">
-      <template v-slot:header>{{modalTitle}}</template>
+      <template v-slot:header>{{ modalTitle }}</template>
       <template v-slot:body>
-        <div>{{modalMsg}}</div>
+        <div>{{ modalMsg }}</div>
       </template>
     </ModalInfo>
     <MainFooter />
@@ -88,7 +88,7 @@ import ModalInfo from "@/components/ModalInfo";
 import firebase from "@/firebase.js";
 
 export default {
-  name: "contact",
+  name: "Contact",
   components: {
     MainMenu,
     MainFooter,

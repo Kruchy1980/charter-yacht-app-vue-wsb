@@ -1,23 +1,23 @@
 <template>
   <transition name="modal-fade">
     <div class="modal--backdrop">
-      <div class="modal" role="dialog" aria-labelledby="modalTitle" aria-describedby="modalDescription">
+      <div class="modal" role="dialog" aria-labelledby="modalTitle" aria-describedby="modalDescription" >
         
-        <header id="modalTitle" :class="isError ? 'modal__header--red' : 'modal__header--green'">
+        <header id="modalTitle" class="modal__header text__color--dark" >
           <slot name="header">
-              <h4>Komunikat</h4> 
-              <button type="button" class="button--close" aria-label="Close modal" @click="close">&times;</button>
+              <h5>Wylogowanie...</h5> 
+              <button type="button" class="button--close text__color--dark" @click="close" aria-label="Close modal" >&times;</button>
           </slot>
-          
         </header>
 
-        <section id="modalBody" class="modal__body">
-          <slot name="body">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor, suscipit!</slot>
+        <section id="modalBody" class="modal__body text__color--dark">
+          <slot name="body">Czy chcesz się wylogować?</slot>
         </section>
 
         <footer class="modal__footer">
           <slot name="footer">
-            <button type="button" :class="isError ? 'button--red' : 'button--green'" aria-label="Close modal" @click="close">OK</button>
+            <button type="button" class="button--green" @click="close" aria-label="Close modal" >Nie</button>
+            <button type="button" class="button--red" @click="logOut" aria-label="Log out" >Tak</button>
           </slot>
         </footer>
 
@@ -28,14 +28,14 @@
 
 <script>
 export default {
-    name: 'ModalInfo',
-    props: {
-      isError: { type: Boolean, default: false}
-    },
+    name: 'modalLogOut',
     methods: {
       close() {
         this.$emit('close');
       },
+      logOut(){
+          this.$emit('logOut');
+      }
     },
 }
 </script>
@@ -73,8 +73,7 @@ export default {
     display: flex;
     flex-direction: row
   }
-  .modal__header--green,
-  .modal__header--red {
+  .modal__header{
     padding-top: .5rem;
     padding-left: .5rem;
     padding-right: .5rem;
@@ -83,11 +82,8 @@ export default {
     border-bottom: 1px solid #eee;
     justify-content: space-between;
   }
-  .modal__header--green{
-    color: rgb(0, 128, 0);
-  }
-  .modal__header--red{
-    color: rgb(255, 0, 0);
+  .modal__header > h5{
+      margin-top: 0.2rem;
   }
   .button--close {
     border: none;
@@ -143,4 +139,17 @@ export default {
   .modal-fade-leave-active {
     transition: opacity .5s ease
   }
-</style>>
+@media only screen and (min-width: 768px){
+  .modal{
+    width: 500px;
+  }
+  .modal__header{
+      padding-bottom: 0.2rem;
+      margin-bottom: 0.4rem;
+  }
+  .modal__footer{
+      padding-top: 0.75rem;
+      padding-bottom: 0.75rem;
+  }
+} 
+</style>

@@ -3,7 +3,7 @@
     <MainMenu />
     <div class="banner__box">
       <div class="banner__box__image">
-        <img src="../../public/images/slider-image/sailing/4.yacht-s.jpeg" alt="Sailing Yacht" />
+        <img src="/images/slider-image/sailing/4.yacht-s.jpeg" alt="Sailing Yacht" />
         <div class="banner__box__image__text">
           <p class="banner__box__image__text__title">Luksusowe jachty żaglowe</p>
         </div>

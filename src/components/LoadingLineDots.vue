@@ -2,7 +2,7 @@
 <template>
   <transition name="modal-fade">
     <div class="modal--backdrop">
-      <div class="loading__animation---line_dots"><div></div><div></div><div></div><div></div></div>
+      <div class="loading__animation---line_dots"><div /><div /><div /><div /></div>
     </div>
   </transition>
 </template> 
