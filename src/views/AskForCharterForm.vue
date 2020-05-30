@@ -21,12 +21,16 @@
               Kraj:
               <select
                 id="country"
-                v-model="country"
+                v-model="selectedCountry"
+                @change="getText"
                 class="container__main-form__items__item__label__content"
               >
-                <option value disabled>Wybierz kraj w którym chcesz wyczarterować Jacht</option>
-                <option>Polska</option>
-                <option disabled value>W przyszłości będą dodane inne rejony</option>
+                <option value>Wybierz kraj w którym chcesz wyczarterować Jacht</option>
+                <option
+                  v-for="(countryChoice,i) in countryChoices"
+                  :key="i"
+                  :value="countryChoice.value === 'Inne kraje będą dostępne zależnie od zgłaszających się czarterujących' ? '' : countryChoice.value"
+                >{{ countryChoice.value }}</option>
               </select>
             </label>
           </div>
@@ -38,7 +42,6 @@
                 v-model="country_extend"
                 type="text"
                 class="container__main-form__items__item__label__content"
-                placeholder="Podaj nazwę Kraju po którym chciałb yś/chciałabyś podróżować"
               />
             </label>
           </div>
@@ -68,17 +71,18 @@
           </div>
           <div class="container__main-form__items__item">
             <label class="container__main-form__items__item__label">
-              Typ jachtu:
+              Rodzaj jachtu:
               <select
-                id="yacht_choice"
-                v-model="type"
+                v-on:change="getText"
+                v-model="selectedType"
                 class="container__main-form__items__item__label__content"
               >
-                <option value>Wybierz odpowiedni rodzaj jachtu</option>
-                <option value>Jednokadłubowy żaglowy</option>
-                <option value>Jednokadłubowy motorowy</option>
-                <option value>Wielokadłubowy żaglowy</option>
-                <option value>Wielokadłubowy motorowy</option>
+                <option value>Wybierz rodzaj jachtu na przygodę</option>
+                <option
+                  v-for="(typeChoice,i) in typeChoices"
+                  :key="i"
+                  :value="typeChoice.value"
+                >{{ typeChoice.value }}</option>
               </select>
             </label>
           </div>
@@ -117,6 +121,7 @@
               />
             </label>
           </div>
+          <!-- pattern="[A-Za-z\b[ą,ć,ę,ł,ó,ż,ź]]{3,}" -->
           <div class="container__main-form__items__item">
             <label for class="container__main-form__items__item__label">
               Imię:
@@ -126,14 +131,14 @@
                 v-model="name"
                 type="text"
                 class="container__main-form__items__item__label__content"
-                pattern="[A-Za-z\b[ą,ć,ę,ł,ó,ż,ź]]{3,}"
                 placeholder="Podaj poprawne Imię minimum 3 litery"
                 required
               />
             </label>
           </div>
+          <!-- pattern="[A-Za-z\b[ą,ć,ę,ł,ó,ż,ź,\-]]{3,}" -->
           <div class="container__main-form__items__item">
-            <label for class="container__main- form__items__item__label">
+            <label for class="container__main-form__items__item__label">
               Nazwisko:
               <span class="container__main-form__items__item__label--must">*</span>
               <input
@@ -141,8 +146,7 @@
                 v-model="surname"
                 type="text"
                 class="container__main-form__items__item__label__content"
-                pattern="[A-Za-z\b[ą,ć,ę,ł,ó,ż,ź,\-]]{3,}"
-                placeholder="Podaj poprawne nazwisko minimum 3 litery"
+                placeholder="Podaj poprawne Nazwisko minimum 3 litery"
                 required
               />
             </label>
@@ -161,6 +165,7 @@
               />
             </label>
           </div>
+          <!-- pattern="[0-9]{3}-[0-9]{3}-[0-9]{3}" -->
           <div class="container__main-form__items__item">
             <label for class="container__main-form__items__item__label">
               Numer telefonu:
@@ -171,7 +176,6 @@
                 type="tel"
                 class="container__main-form__items__item__label__content"
                 placeholder="Wpisz numer telefonu w formacie 000-000-000"
-                pattern="[0-9]{3}-[0-9]{3}-[0-9]{3}"
                 required
               />
             </label>
@@ -201,27 +205,63 @@ export default {
       // selected: true,
       // Odtąd łączenie do firebase'a
       // order_id: null,
+      // Informacje zawarte w select type
+      selectedType: "",
+      selectedCountry: "",
+      typeChoices: [
+        { value: "Jacht jednokadłubowy żaglowy" },
+        { value: "Jacht jednokadłubowy motorowy" },
+        { value: "Jacht wielookadłubowy żaglowy" },
+        { value: "Jacht wielookadłubowy motorowy" }
+      ],
+      // Informacje zawarte w select country
+      countryChoices: [
+        { value: "Polska" },
+        {
+          value:
+            "Inne kraje będą dostępne zależnie od zgłaszających się czarterujących"
+        }
+      ],
+      // choiceId: "",
+      // getText: "",
+      // łączenie reszty informacji
       cabins: null,
       country: "",
-      country_extend: "",
-      date_from: null,
+      country_extend: null,
+      date_from: "",
       date_to: "",
       description: null,
       email: "",
       guests: null,
       name: "",
       surname: "",
-      phone: null,
-      type: ""
+      phone: null
+      // type: ""
     };
   },
   methods: {
+    // Pobieranie textu z selecta
+    getText() {
+      // pobieranie wszystkich wartości z selecta type
+      let values = this.typeChoices.map(obj => obj.value);
+
+      console.log(values);
+      // pobiranie wszystkich wartości z selecta country
+      let countries = this.countryChoices.map(obj => obj.value);
+      console.log(countries);
+      // Pobieranie indexu pola
+      // let index = values.indexOf(this.selectedType);
+      // Przypisanie wartości  z
+      // this.choiceText = this.choices[index].text;
+      // console.log(index);
+    },
     handleSubmit() {
       let db = firebase.firestore();
       db.collection("Charter_Order")
         .add({
+          // order_id: Math.floor(new Date() * (Math.random() * 20))
           cabins: this.cabins,
-          country: this.country.selectedOptions[0].text,
+          country: this.selectedCountry,
           country_extend: this.country_extend,
           date_from: this.date_from,
           date_to: this.date_to,
@@ -231,9 +271,11 @@ export default {
           name: this.name,
           surname: this.surname,
           phone: this.phone,
-          type: this.type.selectedOptions[0].text
+          type: this.selectedType
         })
-        .then(docRef => this.$router.push("/"))
+        .then(docRef => {
+          this.$router.push("/");
+        })
         .catch(error => console.log(err));
     }
   }

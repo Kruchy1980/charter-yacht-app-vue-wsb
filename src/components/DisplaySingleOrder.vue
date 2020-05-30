@@ -1,8 +1,8 @@
 <template>
-  <div class id="display-order">
+  <div class id="display-single-order">
     <div class="main-modal">
       <div class="main-modal__content">
-        <router-link to="/">
+        <router-link to="/ask-for-charter-form">
           <span class="main-modal__content__close-button">x</span>
         </router-link>
         <div class="main-modal__content__text" v-for="order in orders" :key="order.id">
@@ -45,7 +45,7 @@
 import firebase from "@/firebase";
 
 export default {
-  name: "DisplayOrder",
+  name: "DisplaySingleOrder",
   data() {
     return {
       orders: [],
@@ -107,8 +107,10 @@ $media-content: "only screen and (min-width : 960px)";
   left: 0;
   bottom: 0;
   background-color: #00000080;
+
   //   display: none;
   &__content {
+    margin: 20px 0;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -119,6 +121,7 @@ $media-content: "only screen and (min-width : 960px)";
     border-radius: 30px;
     box-shadow: 0 0 10px 2px #555;
     transition: all 0.8s;
+    border-bottom: 1px double #333;
     @media #{$tablet-plus} {
       width: 70%;
     }

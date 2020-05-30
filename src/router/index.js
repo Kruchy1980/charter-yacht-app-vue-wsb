@@ -8,7 +8,7 @@ import OneHulledMotorYachts from '@/views/OneHulledMotorYachts';
 import MultiHulledSailingYachts from '@/views/MultiHulledSailingYachts';
 import MultiHulledMotorYachts from '@/views/MultiHulledMotorYachts';
 import AskForCharterForm from '@/views/AskForCharterForm';
-import DisplayOrder from '@/components/DisplayOrder';
+import DisplaySingleOrder from '@/components/DisplaySingleOrder';
 
 Vue.use(VueRouter);
 
@@ -54,9 +54,9 @@ const routes = [{
         component: AskForCharterForm
     },
     {
-        path: "/display-order",
-        name: "display-order",
-        component: DisplayOrder
+        path: "/display-single-order",
+        name: "display-single-order",
+        component: DisplaySingleOrder
     },
     { path: '*', redirect: '/' }, //przekierowanie dla błędnej nazwy strony
 ];
