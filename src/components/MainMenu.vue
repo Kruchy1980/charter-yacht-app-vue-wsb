@@ -90,8 +90,8 @@
           </li>
           <li v-show="isLoggedUser">
             <a class="nav_link text__color--primary" @click="expandMenuUser($event)">
-              <i class="fas fa-user-circle fa-lg" />
-              <i v-show="!isExpandedUserMnu" class="fas fa-caret-down" />
+              <!-- ikona i strzałka muszą być w linii bo inaczej jest brak odstępu między nimi -->
+              <i class="fas fa-user-circle fa-lg" /> <i v-show="!isExpandedUserMnu" class="fas fa-caret-down" />
               <i v-show="isExpandedUserMnu" class="fas fa-caret-up" />
             </a>
             <ul id="mnuUser" class="nav_dropdown background__color--light">
@@ -106,14 +106,21 @@
         </ul>
       </nav>
     </div>
-    <ModalLogOut v-show="isShowLogOut" @close="closeModal()" @logOut="firebaseLogOut()" />
+    <ModalLogOut v-show="isShowLogOut" @close="closeModal()" @logOut="firebaseLogOut()" >
+      <template v-slot:header>
+        <h5>Wylogowanie...</h5> 
+      </template>
+      <template v-slot:body>
+        <div>Czy chcesz się wylogować?</div>
+      </template>
+    </ModalLogOut>
   </header>
 </template>
 
 
 <script>
 import { mapState } from "vuex";
-import ModalLogOut from "@/components/ModalLogOut";
+import ModalLogOut from "@/components/ModalYesNo";
 import firebase from "@/firebase.js";
 export default {
   name: "mainMenu",

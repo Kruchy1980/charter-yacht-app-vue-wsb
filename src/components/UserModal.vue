@@ -338,7 +338,6 @@ export default {
   cursor: pointer;
 }
 .usermodal__small{
-  margin-left: 0.5rem;
   margin-right: auto;
 }
 .usermodal__label{
@@ -370,11 +369,13 @@ export default {
     background-color: rgba(0, 0, 0, 0.3);
     display: flex;
     justify-content: center;
+    overflow: auto;
   }
 .modal {
   margin-left: 2rem;
   margin-right: 2rem;
   margin-top: 4.5rem;
+  margin-bottom: 4.5rem;
   padding-top: 0.5rem;
   padding-left: 0.75rem;
   padding-right: 0.75rem;

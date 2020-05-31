@@ -20,8 +20,6 @@ try {
             console.error('Session persistence: ' + error.code + ' ' + error.message);
         });
     //kontrola stanu użytkownika
-    // firebase.auth().onAuthStateChanged(function() {
-    //     if (!vm) {
     firebase.auth().onAuthStateChanged(function(user) {
         //aktualizacja stanu użytkownika
         store.dispatch("fetchUser", user);
