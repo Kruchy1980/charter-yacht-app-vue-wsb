@@ -3,7 +3,7 @@
     <MainMenu />
     <div class="banner__box">
       <div class="banner__box__image">
-        <img src="../../public/images/slider-image/sailing/4.yacht-s.jpeg" alt="Sailing Yacht" />
+        <img src="/images/slider-image/sailing/4.yacht-s.jpeg" alt="Sailing Yacht" />
         <div class="banner__box__image__text">
           <p class="banner__box__image__text__title">Luksusowe jachty żaglowe</p>
         </div>
@@ -30,7 +30,7 @@
             >Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quia quasi, suscipit molestiae, a incidunt aliquam nihil, asperiores veritatis accusantium culpa nostrum odit cum quam impedit! Laboriosam tenetur laborum praesentium numquam tempora quidem consequuntur blanditiis illo dolor ratione esse labore veniam sit asperiores maxime dolores, quas porro incidunt id totam impedit.</p>
             <div class="main-content__box__inner__left__content__link">
               <a
-                href
+                :href="charterForm"
                 class="main-content__box__inner__left__content__link--display"
               >Zapytaj o czarter jachtu</a>
             </div>
@@ -46,7 +46,7 @@
           </div>
           <div class="main-content__box__inner__left__content__description">
             <div class="main-content__box__inner__left__content__description__inner">
-              <nav class="main-content__box__inner__left__content__description__inner__nav">
+              <div class="main-content__box__inner__left__content__description__inner__nav">
                 <div
                   class="main-content__box__inner__left__content__description__inner__nav__container"
                 >
@@ -71,7 +71,7 @@
                   <!-- </div> -->
                   <!-- </div> -->
                 </div>
-              </nav>
+              </div>
               <!-- </div> -->
             </div>
             <!-- Details about yachts -->
@@ -152,6 +152,11 @@ export default {
     MainMenu,
     MainFooter,
     CharterAsk
+  },
+  data() {
+    return {
+      charterForm: "/ask-for-charter-form"
+    };
   }
 };
 </script>
@@ -255,7 +260,7 @@ $media-content: "only screen and (min-width : 960px)";
         }
         &__description {
           margin: 20px 0;
-          border: 1px solid #ddd;
+          // border: 1px solid #ddd;
           &__inner {
             background-color: #fff;
             &__nav {

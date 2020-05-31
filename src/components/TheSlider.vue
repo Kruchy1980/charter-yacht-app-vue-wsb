@@ -6,7 +6,7 @@
     <Slide :slide="slides[choosenSlide]" />
     <div class="slider__box__arrow--right" @click="arrowRight">&gt;</div>
     <div class="slider__box__indicator-dots">
-      <div v-for="slide in slides" :key="slide.id" class="dots" @click="indicatorDots(slide.id-1)" />
+      <div v-for="slide in slides" :key="slide.id" class="dots" @click="indicatorDots(slide.id)" />
     </div>
   </div>
 </template>
@@ -25,21 +25,21 @@ export default {
           src: "images/slider-image/sailing/1.yacht-s.jpeg",
           title: "Jachty  żaglowe",
           description: "Jeśli potrzebujesz spokoju podczas żeglowania",
-          source: "http://localhost:8080/one-hulled-sailing-yachts"
+          source: "/one-hulled-sailing-yachts"
         },
         {
           id: 1,
           src: "images/slider-image/motor/1.motorboat.jpg",
           title: "Jachty motorowe",
           description: "Jeśli bardziej zależy Tobie na szybkości",
-          source: "http://localhost:8080/one-hulled-sailing-yachts"
+          source: "/one-hulled-motor-yachts"
         },
         {
           id: 2,
           src: "images/slider-image/catamaran-sailing/1.catamaran-s.jpeg",
           title: "Katamarany żaglowe",
           description: "Jeśli lubisz spokój i komfort",
-          source: "http://localhost:8080/one-hulled-sailing-yachts"
+          source: "/multi-hulled-sailing-yachts"
         },
         {
           id: 3,
@@ -47,9 +47,10 @@ export default {
           title: "Katamarany motorowe",
           description:
             "Jeśli chcesz się czuć jak w domu, a jednocześnie zwiedzać świat",
-          source: "http://localhost:8080/one-hulled-sailing-yachts"
+          source: "/multi-hulled-motor-yachts"
         }
       ],
+      // active: "background-color = grey;",
       // Add a variable to dynamically choose the image
       choosenSlide: 0, //just now defined for first image
       // To make the arrows work we should to declare the variale with defined value = null
@@ -68,9 +69,9 @@ export default {
     indicatorDots(id) {
       // // Test
       // // Create an array with dots
-      // const dots = [...document.querySelectorAll(".dots")];
-      // // console.log(dots[id]);
-
+      // let dots = [...document.querySelectorAll(".dots")];
+      // console.log(dots[id]);
+      // console.log(id);
       //  Assign the choosenSlide to the id of photo
 
       this.choosenSlide = id;

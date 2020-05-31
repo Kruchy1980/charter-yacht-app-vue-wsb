@@ -3,10 +3,7 @@
     <MainMenu />
     <div class="banner__box">
       <div class="banner__box__image">
-        <img
-          src="../../public/images/slider-image/motor/2.motorboat.jpg"
-          alt="One hulled MotorBoat"
-        />
+        <img src="/images/slider-image/motor/2.motorboat.jpg" alt="One hulled MotorBoat" />
         <div class="banner__box__image__text">
           <p class="banner__box__image__text__title">Luksusowe jachty motorowe</p>
         </div>
@@ -33,7 +30,7 @@
             >Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quia quasi, suscipit molestiae, a incidunt aliquam nihil, asperiores veritatis accusantium culpa nostrum odit cum quam impedit! Laboriosam tenetur laborum praesentium numquam tempora quidem consequuntur blanditiis illo dolor ratione esse labore veniam sit asperiores maxime dolores, quas porro incidunt id totam impedit.</p>
             <div class="main-content__box__inner__left__content__link">
               <a
-                href
+                :href="charterForm"
                 class="main-content__box__inner__left__content__link--display"
               >Zapytaj o czarter jachtu</a>
             </div>
@@ -155,6 +152,11 @@ export default {
     MainMenu,
     MainFooter,
     CharterAsk
+  },
+  data() {
+    return {
+      charterForm: "/ask-for-charter-form"
+    };
   }
 };
 </script>

@@ -18,12 +18,13 @@
         data-title="Zarejestrowani czarterujący"
       >1234567</div>
     </div>
+    <AddYourYacht />
     <!-- Kartki z opisem drobnym -->
     <div class="main-card__box">
       <div v-for="(card, index) in cards" :key="index" class="card__box">
         <div class="card__box__description">
           <div class="card__box__description__image">
-            <img :src="`${card.src}`" :alt="`${card.title}`" />
+            <img :src="`${card.src}`" :alt="`${card.title}`">
           </div>
           <div class="card__box__description__inner">
             <h3 class="card__box__description__inner__title">{{ card.title }}</h3>
@@ -31,7 +32,9 @@
           </div>
         </div>
         <div class="card__box__button">
-          <button class="card__box__button__show">Więcej</button>
+          <button class="card__box__button__show">
+            <a :href="`${card.link}`" class="card__box__button__show__link">Więcej</a>
+          </button>
         </div>
       </div>
     </div>
@@ -43,9 +46,10 @@
 import TheSlider from "@/components/TheSlider";
 import MainMenu from "@/components/MainMenu";
 import MainFooter from "@/components/MainFooter";
+import AddYourYacht from "@/components/AddYourYacht";
 export default {
   name: "App",
-  components: { TheSlider, MainMenu, MainFooter },
+  components: { TheSlider, MainMenu, MainFooter, AddYourYacht },
   data() {
     return {
       cards: [
@@ -54,28 +58,32 @@ export default {
           src: "card-images/one-hulled/sailing/1.sailing-yacht-s.jpeg",
           title: "Jachty żaglowe - jednokadłubowe",
           text:
-            "Jeśli intresuje Ciebie dobre samopoczucie i komfort sprzyjające żeglowaniu, a jednocześnie nie lubisz siedzieć w miejscu, to ten rodzaj czarteru zapewni Tobie wspaniale spędzony czas."
+            "Jeśli intresuje Ciebie dobre samopoczucie i komfort sprzyjające żeglowaniu, a jednocześnie nie lubisz siedzieć w miejscu, to ten rodzaj czarteru zapewni Tobie wspaniale spędzony czas.",
+          link: "/one-hulled-sailing-yachts"
         },
         {
           id: 1,
           src: "card-images/one-hulled/motor/1.motorboat-m.jpeg",
           title: "Jachty motorowe - jednokadłubowe",
           text:
-            "Jeśli intresuje Ciebie dobre samopoczucie i komfort sprzyjające żeglowaniu, a jednocześnie nie lubisz siedzieć w miejscu, to ten rodzaj czarteru zapewni Tobie wspaniale spędzony czas."
+            "Jeśli intresuje Ciebie dobre samopoczucie i komfort sprzyjające żeglowaniu, a jednocześnie nie lubisz siedzieć w miejscu, to ten rodzaj czarteru zapewni Tobie wspaniale spędzony czas.",
+          link: "/one-hulled-motor-yachts"
         },
         {
           id: 2,
           src: "card-images/catamarans/sailing/1.catamaran-s.jpeg",
           title: "Jachty żaglowe - wielokadłubowe",
           text:
-            "Jeśli intresuje Ciebie dobre samopoczucie i komfort sprzyjające żeglowaniu, a jednocześnie nie lubisz siedzieć w miejscu, to ten rodzaj czarteru zapewni Tobie wspaniale spędzony czas."
+            "Jeśli intresuje Ciebie dobre samopoczucie i komfort sprzyjające żeglowaniu, a jednocześnie nie lubisz siedzieć w miejscu, to ten rodzaj czarteru zapewni Tobie wspaniale spędzony czas.",
+          link: "/multi-hulled-sailing-yachts"
         },
         {
           id: 3,
           src: "card-images/catamarans/motor/1.catamaran-m.jpeg",
           title: "Jachty motorowe - wielokadłubowe",
           text:
-            "Jeśli intresuje Ciebie dobre samopoczucie i komfort sprzyjające żeglowaniu, a jednocześnie nie lubisz siedzieć w miejscu, to ten rodzaj czarteru zapewni Tobie wspaniale spędzony czas."
+            "Jeśli intresuje Ciebie dobre samopoczucie i komfort sprzyjające żeglowaniu, a jednocześnie nie lubisz siedzieć w miejscu, to ten rodzaj czarteru zapewni Tobie wspaniale spędzony czas.",
+          link: "/multi-hulled-motor-yachts"
         }
       ]
     };
@@ -91,7 +99,6 @@ $mobile: "only screen and (max-width : 425px)";
   min-width: 300px;
   max-width: 800px;
   margin: 30px auto;
-  // border: 1px solid #000;
   display: flex;
   justify-content: space-evenly;
   align-content: center;
@@ -138,10 +145,7 @@ $mobile: "only screen and (max-width : 425px)";
       position: absolute;
       top: -35px;
       padding: 4px;
-      // color: #222;
       white-space: nowrap;
-      // background-color: #0000ff;
-      // color: #ddd;
       border: 1px groove #777;
       border-radius: 5px;
       opacity: 0;
@@ -164,7 +168,6 @@ $mobile: "only screen and (max-width : 425px)";
   justify-content: center;
   align-content: center;
   .card__box {
-    // margin: 0 auto;
     width: 510px;
     min-width: 280px;
     box-shadow: 0 0 10px 2px #0000ff;
@@ -185,6 +188,7 @@ $mobile: "only screen and (max-width : 425px)";
           min-width: 50px;
           height: 100px;
           min-height: 50px;
+          border-radius: 20px;
         }
       }
       &__inner {
@@ -193,25 +197,24 @@ $mobile: "only screen and (max-width : 425px)";
           margin: 8px 0;
           font-size: 1.3em;
         }
-        // &__text {
-        // }
       }
     }
     &__button {
       display: flex;
       justify-content: flex-end;
-      // border-radius: 10px;
       padding: 15px;
-      cursor: pointer;
       &__show {
         cursor: pointer;
         padding: 5px;
         background-color: #b9820a;
         font-weight: bold;
         font-size: 1.2em;
-        color: #fff;
         border: none;
         border-radius: 5px;
+        &__link {
+          text-decoration: none;
+          color: #fff;
+        }
       }
     }
   }

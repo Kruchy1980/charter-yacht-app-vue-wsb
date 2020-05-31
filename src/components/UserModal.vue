@@ -328,10 +328,10 @@ export default {
 .usermodal__switchbutton{
   background-color: transparent;
   border: none;
-  padding: 3px;
+  padding: 4px;
   border-radius: 5px;
   border: 1px solid transparent;
-  margin-top: 0.25rem;
+  margin-top: 0.4rem;
 }
 .usermodal__switchbutton:hover{
   border-color:  rgb(60, 84, 180);

@@ -6,22 +6,27 @@ import store from "./store";
 
 Vue.config.productionTip = false
 
-let vm='';
 
-try{
+
+let vm = '';
+
+
+try {
     //czas trwania sesji
     // Indicates that the state will only persist in the current session or tab, 
     //and will be cleared when the tab or window in which the user authenticated is closed. 
     firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION)
-    .catch(function(error) {
-        console.error('Session persistence: '+error.code+' '+error.message);
-    });
+        .catch(function(error) {
+            console.error('Session persistence: ' + error.code + ' ' + error.message);
+        });
     //kontrola stanu użytkownika
+    // firebase.auth().onAuthStateChanged(function() {
+    //     if (!vm) {
     firebase.auth().onAuthStateChanged(function(user) {
         //aktualizacja stanu użytkownika
         store.dispatch("fetchUser", user);
-        
-        if(!vm){
+
+        if (!vm) {
             vm = new Vue({
                 router,
                 store,
@@ -29,7 +34,6 @@ try{
             }).$mount('#app')
         }
     });
-}
-catch(err){
+} catch (err) {
     console.error("Error starting app: ", err);
 }

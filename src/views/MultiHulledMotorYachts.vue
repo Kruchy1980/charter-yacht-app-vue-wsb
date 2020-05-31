@@ -3,7 +3,7 @@
     <MainMenu />
     <div class="banner__box">
       <div class="banner__box__image">
-        <img src="../../public/images/slider-image/catamaran-motor/2.catamaran-m.jpeg" alt />
+        <img src="/images/slider-image/catamaran-motor/2.catamaran-m.jpeg" alt />
         <div class="banner__box__image__text">
           <p class="banner__box__image__text__title">Luksusowe jachty motorowe wielokadłubowe</p>
         </div>
@@ -30,7 +30,7 @@
             >Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quia quasi, suscipit molestiae, a incidunt aliquam nihil, asperiores veritatis accusantium culpa nostrum odit cum quam impedit! Laboriosam tenetur laborum praesentium numquam tempora quidem consequuntur blanditiis illo dolor ratione esse labore veniam sit asperiores maxime dolores, quas porro incidunt id totam impedit.</p>
             <div class="main-content__box__inner__left__content__link">
               <a
-                href
+                :href="charterForm"
                 class="main-content__box__inner__left__content__link--display"
               >Zapytaj o czarter jachtu</a>
             </div>
@@ -80,10 +80,7 @@
                 <!-- First item -->
                 <div class="container__box__item">
                   <div class="container__box__item__image">
-                    <img
-                      src="../../public/card-images/one-hulled/sailing/3.sailing-yacht-s.jpeg"
-                      alt="Sailing Yacht"
-                    />
+                    <img src="/card-images/catamarans/motor/3.catamaran-m.jpeg" alt="Sailing Yacht" />
                   </div>
                   <div class="container__box__item__display">
                     <ul class="container__box__item__display__list">
@@ -105,10 +102,7 @@
                 <!-- Second item -->
                 <div class="container__box__item">
                   <div class="container__box__item__image">
-                    <img
-                      src="../../public/card-images/one-hulled/sailing/3.sailing-yacht-s.jpeg"
-                      alt="Sailing Yacht"
-                    />
+                    <img src="/card-images/catamarans/motor/1.catamaran-m.jpeg" alt="Sailing Yacht" />
                   </div>
                   <div class="container__box__item__display">
                     <ul class="container__box__item__display__list">
@@ -152,6 +146,11 @@ export default {
     MainMenu,
     MainFooter,
     CharterAsk
+  },
+  data() {
+    return {
+      charterForm: "/ask-for-charter-form"
+    };
   }
 };
 </script>
