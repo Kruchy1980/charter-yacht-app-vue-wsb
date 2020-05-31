@@ -14,7 +14,7 @@
           >&#8629; Powrót</a>
         </div>
       </div>
-      <form action class="container__main-form" @submit.prevent="handleSubmit">
+      <form class="container__main-form" @submit.prevent="handleSubmit">
         <div class="container__main-form__items">
           <div class="container__main-form__items__item">
             <label class="container__main-form__items__item__label">
@@ -202,6 +202,7 @@ export default {
   data() {
     return {
       homepage: "/",
+      // infopage: "/display-single-order",
       // selected: true,
       // Odtąd łączenie do firebase'a
       // order_id: null,
@@ -259,7 +260,6 @@ export default {
       let db = firebase.firestore();
       db.collection("Charter_Order")
         .add({
-          // order_id: Math.floor(new Date() * (Math.random() * 20))
           cabins: this.cabins,
           country: this.selectedCountry,
           country_extend: this.country_extend,
@@ -274,7 +274,7 @@ export default {
           type: this.selectedType
         })
         .then(docRef => {
-          this.$router.push("/");
+          this.$router.push("/display-single-order");
         })
         .catch(error => console.log(err));
     }
