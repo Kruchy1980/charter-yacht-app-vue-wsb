@@ -93,10 +93,16 @@
                 </div>
 
                 <div class="modal__box__windowform__form__items__item--skipper">
-                  <label for class="modal__box__window__form__items__item__label">
+                  <label class="modal__box__window__form__items__item__label">
                     Dodaj zdjęcie:
                     <span class="modal__box__window__form__items__item__label--must">*</span>
-                    <div>{{ this.progress }}</div>
+                    <progress
+                      id="uploader"
+                      class="modal__box__window__form__items__item__label--upload"
+                      :value="uploadValue"
+                      max="100"
+                      step="0.01"
+                    ></progress>
                     <input
                       type="file"
                       @change="onUploadImage"
@@ -178,10 +184,14 @@ export default {
       cabins: null,
       extended_info: "",
       guests: null,
-      selectedFile: null,
       price: null,
       skippers_name: "",
-      yacht_type: ""
+      yacht_type: "",
+      // część dla zdjęcia
+      selectedFile: null,
+      uploadValue: 0
+      // picture: null
+      // state: ""
     };
   },
   methods: {
@@ -192,44 +202,30 @@ export default {
     },
     // Dodawanie zdjęcia do firebase'a
     onUploadImage(event) {
-      let fb = firebase.storage();
+      const fb = firebase.storage();
       // Utworzenie zmiennej zawierającej dane obietem dodanego pliku
-      let file = event.target.files[0]; //ponieważ cchcemy dodać tylko jeden plik
+      const file = event.target.files[0]; //ponieważ cchcemy dodać tylko jeden plik
       // Teraz tworzymy referencję do naszego folderu w firebase.storage
-      let storageRef = fb.ref("yachts/" + file.name);
+      const storageRef = fb.ref("yachts/" + file.name);
       // Teraz dodajemy obrazek do storage'a tworząc zmienną pokazującą dodawwanie obrazka potem
       let uploadTask = storageRef.put(file);
-
+      // Pokaanie stanu postępu ładowania do bazy danych zdjęcia
       uploadTask.on(
         "state_changed",
-        function(snapshot) {
-          let progress =
+        snapshot => {
+          // Observe state change events such as progress, pause, and resume
+          // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+          var progress =
             (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          // console.log("Upload is " + progress + "% done");
-          switch (snapshot.state) {
-            case firebase.storage.TaskState.PAUSED: // or 'paused'
-              console.log("Upload is paused");
-              break;
-            case firebase.storage.TaskState.RUNNING: // or 'running'
-              console.log("Upload is running");
-              break;
+          this.uploadValue = progress;
+          if (progress === 100) {
+            this.uploadValue = "";
           }
         },
         error => {
-          // Handle unsuccessful uploads
-        },
-        function() {
-          // Handle successful uploads on complete
-          // For instance, get the download URL: https://firebasestorage.googleapis.com/...
-          uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {
-            console.log("File available at", downloadURL);
-          });
+          this.state = error;
         }
       );
-      // Sprawdzenie w konsoli
-      // console.log(event.target.files[0]);
-      // Przypisanie do wartości selectedFile miejsca z obiektu zawierającego ścieżkę naszego pliku
-      // this.selectedFile = event.target.files[0];
     },
     handleSubmitForm() {}
   }
@@ -317,6 +313,7 @@ $media-content: "only screen and (min-width : 960px)";
           //   display: flex;
           width: 100%;
           //   justify-content: center;
+
           &--skipper {
             font-family: monospace;
             font-size: 14px;
@@ -344,7 +341,7 @@ $media-content: "only screen and (min-width : 960px)";
             font-size: 14px;
             width: 100%;
             margin-top: 10px;
-            &--progress {
+            &--upload {
               margin: 10px 0;
               width: 100%;
               height: 2.5em;
@@ -365,6 +362,7 @@ $media-content: "only screen and (min-width : 960px)";
               outline-style: none;
               padding: 5px 0;
               transition: all 1s;
+
               &--file {
                 padding: 5px;
                 background-color: transparent;
@@ -383,18 +381,6 @@ $media-content: "only screen and (min-width : 960px)";
                 font-size: 14px;
                 box-shadow: 0 0 5px 2px #03143a;
               }
-              // &--upload {
-              //   padding: 3px 5px;
-              //   background-color: #00ff00;
-              //   color: #ddd;
-              //   font-weight: bold;
-              //   border: none;
-              //   outline-style: none;
-              //   border-radius: 20px;
-              //   cursor: pointer;
-              //   font-size: 14px;
-              //   box-shadow: 0 0 5px 2px #027c02;
-              // }
             }
           }
         }
