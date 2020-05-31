@@ -14,7 +14,7 @@
           >&#8629; Powrót</a>
         </div>
       </div>
-      <form action class="container__main-form" @submit.prevent="handleSubmit">
+      <form class="container__main-form" @submit.prevent="handleSubmit">
         <div class="container__main-form__items">
           <div class="container__main-form__items__item">
             <label class="container__main-form__items__item__label">
@@ -202,6 +202,7 @@ export default {
   data() {
     return {
       homepage: "/",
+      // infopage: "/display-single-order",
       // selected: true,
       // Odtąd łączenie do firebase'a
       // order_id: null,
