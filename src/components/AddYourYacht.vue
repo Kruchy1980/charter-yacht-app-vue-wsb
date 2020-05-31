@@ -97,7 +97,6 @@
                     Dodaj zdjęcie:
                     <span class="modal__box__window__form__items__item__label--must">*</span>
                     <progress
-                      id="uploader"
                       class="modal__box__window__form__items__item__label--upload"
                       :value="uploadValue"
                       max="100"
@@ -179,7 +178,7 @@ export default {
       //  Wyświetlanie pola z dodawaniem imienia po zaznaczeniu checkbox'a
       isChecked: false,
       // Zmienna do wyświetlania progress baru
-      isUploaded: false,
+      // isUploaded: false,
       // Elementy formularza dodawania nowego jachtu do bazy
       cabins: null,
       extended_info: "",
@@ -227,7 +226,23 @@ export default {
         }
       );
     },
-    handleSubmitForm() {}
+    handleSubmitForm() {
+      let db = firebase.firestore();
+      db.collection("New_Yacht")
+        .add({
+          // order_id: Math.floor(new Date() * (Math.random() * 20))
+          cabins: this.cabins,
+          extended_info: this.extended_info,
+          guests: this.guests,
+          price: this.price,
+          skippers_name: this.skippers_name,
+          yacht_type: this.yacht_type
+        })
+        .then(docRef => {
+          this.$router.push("/about"); //dorobić kartkę z widokiem dodanego jachtu - danych i potem przekierować tutaj
+        })
+        .catch(error => console.log(err));
+    }
   }
 };
 </script>

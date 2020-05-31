@@ -260,7 +260,6 @@ export default {
       let db = firebase.firestore();
       db.collection("Charter_Order")
         .add({
-          // order_id: Math.floor(new Date() * (Math.random() * 20))
           cabins: this.cabins,
           country: this.selectedCountry,
           country_extend: this.country_extend,
@@ -275,7 +274,7 @@ export default {
           type: this.selectedType
         })
         .then(docRef => {
-          this.$router.push("/");
+          this.$router.push("/display-single-order");
         })
         .catch(error => console.log(err));
     }
