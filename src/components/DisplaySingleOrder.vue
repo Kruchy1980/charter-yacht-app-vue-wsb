@@ -1,11 +1,11 @@
 <template>
   <div class id="display-single-order">
     <div class="main-modal">
-      <div class="main-modal__content">
+      <div v-for="order in orders" :key="order.id" class="main-modal__content">
         <router-link to="/ask-for-charter-form">
           <span class="main-modal__content__close-button">x</span>
         </router-link>
-        <div class="main-modal__content__text" v-for="order in orders" :key="order.id">
+        <div class="main-modal__content__text">
           <p class="main-modal__content__text__display">
             Twoje zamówienie o numerze:
             "
@@ -49,7 +49,7 @@ export default {
   data() {
     return {
       orders: [],
-      orderNumber: "",
+      // orderNumber: "",
       name: "",
       surname: "",
       description: "",
@@ -148,6 +148,7 @@ $media-content: "only screen and (min-width : 960px)";
         font-weight: bold;
         width: 90%;
         &--number {
+          text-decoration: underline wavy;
           color: #744d04;
         }
       }

@@ -37,6 +37,9 @@ body {
 .text__color--dark{
   color: rgb(33, 37, 41)!important;
 }
+.text__color--gray{
+      color: rgb(108, 117, 125)!important;
+}
 .background__color--dark{
   background-color: rgb(33, 37, 41)!important;
 }
