@@ -78,7 +78,7 @@
 
                 <div class="modal__box__window__form__items__item">
                   <label for class="modal__box__window__form__items__item__label">
-                    Koszta czarteru / tydzień:
+                    Koszta czarteru [PLN]/tydzień
                     <span
                       class="modal__box__window__form__items__item__label--must"
                     >*</span>
@@ -225,7 +225,6 @@ export default {
       let db = firebase.firestore();
       db.collection("New_Yacht")
         .add({
-          // order_id: Math.floor(new Date() * (Math.random() * 20))
           cabins: this.cabins,
           extended_info: this.extended_info,
           guests: this.guests,
@@ -369,7 +368,7 @@ $media-content: "only screen and (min-width : 960px)";
               &--file {
                 padding: 3px;
                 background-color: transparent;
-                width: 76.5%;
+                width: 100%;
               }
               &--file::-webkit-file-upload-button {
                 margin: 5px 0;

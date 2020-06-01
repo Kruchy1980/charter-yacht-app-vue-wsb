@@ -10,6 +10,7 @@ import MultiHulledMotorYachts from '@/views/MultiHulledMotorYachts';
 import AskForCharterForm from '@/views/AskForCharterForm';
 import DisplaySingleOrder from '@/components/DisplaySingleOrder';
 import User from "@/views/User.vue"
+import DisplayAddedYacht from '@/components/DisplayAddedYacht';
 
 Vue.use(VueRouter);
 
@@ -63,6 +64,11 @@ const routes = [{
         path: "/user",
         name: "user",
         component: User
+    },
+    {
+        path: "/added-yacht",
+        name: "added-yacht",
+        component: DisplayAddedYacht
     },
     { path: '*', redirect: '/' }, //przekierowanie dla błędnej nazwy strony
 ];
