@@ -169,6 +169,11 @@ export default {
       isChecked: false,
       // Zmienna do wyświetlania progress baru
       // isUploaded: false,
+      // pusta tablica z jachtami
+      yachts: [],
+      // id dodanego jachtu
+
+      yacht_id: "",
       // Elementy formularza dodawania nowego jachtu do bazy
       cabins: null,
       extended_info: "",

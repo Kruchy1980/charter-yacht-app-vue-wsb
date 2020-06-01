@@ -1,7 +1,7 @@
 <template>
   <div class="added-yacht">
     <div class="main-modal__box">
-      <div class="main-modal__box__content">
+      <div v-for="yacht in yachts" :key="yacht.id" class="main-modal__box__content">
         <router-link to="/">
           <span class="main-modal__box__content__close-button">x</span>
         </router-link>
@@ -11,42 +11,38 @@
             "
             <span
               class="main-modal__box__content__text__display--number"
-            >cokolwiek{{ yacht_id }}</span> ".
+            >{{ yacht.id }}</span> ".
           </p>
           <!-- Tutaj główny display dodanego jachtu -->
           <div class="main-modal__box__content__yacht">
             <div class="main-modal__box__content__yacht__item">
               <span class="main-modal__box__content__yacht__item--name">Imię kapitana Jachtu:</span>
-              {{ skippers_name }}
+              {{ yacht.skippers_name }}
             </div>
             <div class="main-modal__box__content__yacht__item">
               <span class="main-modal__box__content__yacht__item--name">Typ Jachtu:</span>
-              {{ yacht_type }}
+              {{ yacht.yacht_type }}
             </div>
             <div class="main-modal__box__content__yacht__item">
               <span class="main-modal__box__content__yacht__item--name">Ilość Kabin:</span>
-              {{ cabins }}
+              {{ yacht.cabins }}
             </div>
             <div class="main-modal__box__content__yacht__item">
               <span class="main-modal__box__content__yacht__item--name">Maksymalna liczba gości:</span>
-              {{ guests }}
+              {{ yacht.guests }}
             </div>
             <div class="main-modal__box__content__yacht__item">
               <span
                 class="main-modal__box__content__yacht__item--name"
               >Koszta czarteru w [PLN] na tydzień:</span>
-              {{ price }}
+              {{ yacht.price }} PLN
             </div>
             <div class="main-modal__box__content__yacht__item">
               <span class="main-modal__box__content__yacht__item--name">Informacje dodatkowe:</span>
-              {{ extended_info }}
+              {{ yacht.extended_info }}
             </div>
             <div class="main-modal__box__content__yacht__item">
-              <img
-                src="https://firebasestorage.googleapis.com/v0/b/yachtscharters-ddb15.appspot.com/o/yachts%2FIMG_20170509_192731.jpg?alt=media&token=12127e33-2362-45ec-b4fd-491b93a3e422"
-                alt
-                title
-              />
+              <img :src="yacht.image_url" :alt="yacht.yacht_type" :title="yacht.yacht_type" />
             </div>
           </div>
         </div>
@@ -61,18 +57,42 @@ export default {
   name: "added-yacht",
   data() {
     return {
-      yacht_id: null,
+      // Deklarowanie pustej tablicy z jachtami
+      yachts: [],
+      // Deklarowanie id jachtu
+      //   yacht: null,
+      // Deklarowanie zmiennych danego jachtu
       skippers_name: "",
       yacht_type: "",
       cabins: null,
       guests: null,
       price: null,
       extended_info: "",
-      img_src: ""
+      image_url: ""
     };
   },
   created() {
     let db = firebase.firestore();
+    db.collection("New_Yacht")
+      .get()
+      .then(querySnapshot => {
+        querySnapshot.forEach(doc => {
+          console.log(doc.data());
+          console.log(doc.data().image_url);
+          const data = {
+            id: doc.id,
+            skippers_name: doc.data().skippers_name,
+            yacht_type: doc.data().yacht_type,
+            cabins: doc.data().cabins,
+            guests: doc.data().guests,
+            price: doc.data().price,
+            extended_info: doc.data().extended_info,
+            image_url: doc.data().image_url
+          };
+          //   console.log(doc.img_url);
+          this.yachts.push(data);
+        });
+      });
   }
 };
 </script>
@@ -93,8 +113,9 @@ $media-content: "only screen and (min-width : 960px)";
   left: 0;
   background-color: #00000080;
   &__content {
+    // margin: 400px 0;
     position: relative;
-    top: 50%;
+    top: 10%;
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: #eee;
