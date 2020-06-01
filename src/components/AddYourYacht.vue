@@ -69,7 +69,7 @@
                     <textarea
                       v-model="extended_info"
                       class="modal__box__window__form__items__item__label__content"
-                      rows="10"
+                      rows="6"
                       placeholder="Podaj informacje dodatkowe"
                       required
                     />
@@ -108,10 +108,6 @@
                       class="modal__box__window__form__items__item__label__content--file"
                       required
                     />
-                    <!-- <button
-                      class="modal__box__window__form__items__item__label__content--upload"
-                      @click="onUpload"
-                    >Pobierz</button>-->
                   </label>
                 </div>
 
@@ -119,12 +115,6 @@
                   <div class="modal__box__window__form__items__item--skipper">
                     <label for class="modal__box__window__form__items__item--skipper__label">
                       Skipper:
-                      <!-- <img
-                        class="modal__box__window__form__items__item--skipper__label__icon"
-                        src="/info-icon/info.svg"
-                        alt="Info-icon"
-                        title="Zaznacz jeśli twój jacht posiada skippera"
-                      />-->
                       <input
                         v-model="isChecked"
                         type="checkbox"
@@ -186,10 +176,10 @@ export default {
       price: null,
       skippers_name: "",
       yacht_type: "",
-      // część dla zdjęcia
+      // część dla zdjęcia jachtu
       selectedFile: null,
-      uploadValue: 0
-      // picture: null
+      uploadValue: 0,
+      image_url: ""
       // state: ""
     };
   },
@@ -200,7 +190,7 @@ export default {
       console.log(this.isModalDisplayed);
     },
     // Dodawanie zdjęcia do firebase'a
-    onUploadImage(event) {
+    onUploadImage(event, image_url) {
       const fb = firebase.storage();
       // Utworzenie zmiennej zawierającej dane obietem dodanego pliku
       const file = event.target.files[0]; //ponieważ cchcemy dodać tylko jeden plik
@@ -219,6 +209,11 @@ export default {
           this.uploadValue = progress;
           if (progress === 100) {
             this.uploadValue = "";
+            uploadTask.snapshot.ref.getDownloadURL().then(downloadURL => {
+              console.log("File availible at", downloadURL);
+              this.image_url = downloadURL;
+              console.log(this.image_url);
+            });
           }
         },
         error => {
@@ -236,7 +231,8 @@ export default {
           guests: this.guests,
           price: this.price,
           skippers_name: this.skippers_name,
-          yacht_type: this.yacht_type
+          yacht_type: this.yacht_type,
+          image_url: this.image_url
         })
         .then(docRef => {
           this.$router.push("/about"); //dorobić kartkę z widokiem dodanego jachtu - danych i potem przekierować tutaj
@@ -274,6 +270,7 @@ $media-content: "only screen and (min-width : 960px)";
   }
 }
 .modal__box {
+  margin-top: 45px;
   position: fixed;
   top: 0;
   right: 0;
@@ -282,7 +279,7 @@ $media-content: "only screen and (min-width : 960px)";
   background-color: #00000080;
   //   display: none;
   &__window {
-    position: relative;
+    position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -293,10 +290,6 @@ $media-content: "only screen and (min-width : 960px)";
     border-radius: 20px;
     box-shadow: 0 0 10px 3px #fff;
     transition: all 0.5s;
-    // margin-top: 40px;
-    // display: flex;
-    // width: 80%;
-    // flex-direction: column;
     @media #{$mobile-plus} {
       width: 80%;
     }
@@ -320,19 +313,14 @@ $media-content: "only screen and (min-width : 960px)";
       &__items {
         width: 90%;
         margin: auto;
-        // display: flex;
-        // flex-direction: column;
-        // align-content: center;
-        &__item {
-          margin-top: 10px;
-          //   display: flex;
-          width: 100%;
-          //   justify-content: center;
 
+        &__item {
+          margin-top: 5px;
+          width: 100%;
           &--skipper {
             font-family: monospace;
             font-size: 14px;
-            margin: 10px 0;
+            margin: 5px 0;
             display: flex;
             flex-direction: column;
             width: 100%;
@@ -355,9 +343,9 @@ $media-content: "only screen and (min-width : 960px)";
             font-family: monospace;
             font-size: 14px;
             width: 100%;
-            margin-top: 10px;
+            // margin-top: 5px;
             &--upload {
-              margin: 10px 0;
+              margin: 5px 0;
               width: 100%;
               height: 2.5em;
             }
@@ -368,7 +356,7 @@ $media-content: "only screen and (min-width : 960px)";
 
             &__content {
               display: block;
-              margin: 10px 0;
+              margin: 5px 0;
               width: 100%;
               border-radius: 10px;
               overflow: hidden;
@@ -377,14 +365,14 @@ $media-content: "only screen and (min-width : 960px)";
               outline-style: none;
               padding: 5px 0;
               transition: all 1s;
-
+              padding: 3px 5px;
               &--file {
-                padding: 5px;
+                padding: 3px;
                 background-color: transparent;
                 width: 76.5%;
               }
               &--file::-webkit-file-upload-button {
-                margin: 10px 0;
+                margin: 5px 0;
                 padding: 3px 5px;
                 background-color: #0637be;
                 color: #ddd;
