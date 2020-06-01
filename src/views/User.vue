@@ -2,12 +2,14 @@
   <div id="userAccount">
     <MainMenu />
     <main class="container">
-      <section class="section background__color--light">
-        <article class="article">
-          <h2 class="article__title">Twoje konto</h2>
-          
-        </article>
-      </section>
+      <div v-show="isLoggedUser">
+        <section class="section background__color--light">
+          <article class="article">
+            <h2 class="article__title">Twoje konto</h2>
+            
+          </article>
+        </section>
+      </div>
     </main>
     <!-- okna modalne -->
     <UserModal v-show="isUserModalVisible" />
@@ -87,10 +89,6 @@ export default {
   }
 }
 @media only screen and (min-width: 768px) {
-  #about::after {
-    background: url("/images/background/about-big.jpg") no-repeat center center
-      fixed;
-  }
   .section {
     margin-top: 10%;
     margin-left: 10%;

@@ -5,13 +5,13 @@
         
         <header id="modalTitle" class="modal__header text__color--dark" >
           <slot name="header">
-              <h5>Wylogowanie...</h5> 
-              <button type="button" class="button--close text__color--dark" @click="close" aria-label="Close modal" >&times;</button>
+              <h5>Pytanie</h5> 
           </slot>
+          <button type="button" class="button--close text__color--dark" @click="close" aria-label="Close modal" >&times;</button>
         </header>
 
         <section id="modalBody" class="modal__body text__color--dark">
-          <slot name="body">Czy chcesz się wylogować?</slot>
+          <slot name="body">Treść pytania?</slot>
         </section>
 
         <footer class="modal__footer">
@@ -77,13 +77,11 @@ export default {
     padding-top: .5rem;
     padding-left: .5rem;
     padding-right: .5rem;
+    padding-bottom: .25rem;
     display: flex;
     flex-direction: row;
     border-bottom: 1px solid #eee;
     justify-content: space-between;
-  }
-  .modal__header > h5{
-      margin-top: 0.2rem;
   }
   .button--close {
     border: none;
