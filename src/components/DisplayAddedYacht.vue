@@ -115,7 +115,7 @@ $media-content: "only screen and (min-width : 960px)";
   &__content {
     // margin: 400px 0;
     position: relative;
-    top: 10%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: #eee;
