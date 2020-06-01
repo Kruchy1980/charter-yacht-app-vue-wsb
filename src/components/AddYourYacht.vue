@@ -234,7 +234,7 @@ export default {
           image_url: this.image_url
         })
         .then(docRef => {
-          this.$router.push("/about"); //dorobić kartkę z widokiem dodanego jachtu - danych i potem przekierować tutaj
+          this.$router.push("/added-yacht"); //dorobić kartkę z widokiem dodanego jachtu - danych i potem przekierować tutaj
         })
         .catch(error => console.log(err));
     }
