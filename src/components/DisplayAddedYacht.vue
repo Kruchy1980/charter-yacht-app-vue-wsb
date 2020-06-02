@@ -1,7 +1,8 @@
 <template>
   <div class="added-yacht">
     <div class="main-modal__box">
-      <div v-for="yacht in yachts" :key="yacht.id" class="main-modal__box__content">
+      <!-- v-for="yacht in yachts" :key="yacht.yacht_id" -->
+      <div class="main-modal__box__content">
         <router-link to="/">
           <span class="main-modal__box__content__close-button">x</span>
         </router-link>
@@ -11,13 +12,13 @@
             "
             <span
               class="main-modal__box__content__text__display--number"
-            >{{ yacht.id }}</span> ".
+            >{{ id }}</span> ".
           </p>
           <!-- Tutaj główny display dodanego jachtu -->
-          <div class="main-modal__box__content__yacht">
+          <!-- <div class="main-modal__box__content__yacht">
             <div class="main-modal__box__content__yacht__item">
               <span class="main-modal__box__content__yacht__item--name">Imię kapitana Jachtu:</span>
-              {{ yacht.skippers_name }}
+              {{ yacht.skippers_name }} : {{ yacht.yacht_id }}
             </div>
             <div class="main-modal__box__content__yacht__item">
               <span class="main-modal__box__content__yacht__item--name">Typ Jachtu:</span>
@@ -44,7 +45,7 @@
             <div class="main-modal__box__content__yacht__item">
               <img :src="yacht.image_url" :alt="yacht.yacht_type" :title="yacht.yacht_type" />
             </div>
-          </div>
+          </div>-->
         </div>
       </div>
     </div>
@@ -59,21 +60,24 @@ export default {
     return {
       // Deklarowanie pustej tablicy z jachtami
       yachts: [],
-      // Deklarowanie id jachtu
-      //   yacht: null,
+      // Deklarowanie id jachtu z firebase'a
+      // id: "",
       // Deklarowanie zmiennych danego jachtu
+      yacht_id: "",
       skippers_name: "",
       yacht_type: "",
       cabins: null,
       guests: null,
       price: null,
       extended_info: "",
-      image_url: ""
+      image_url: "",
+      filterData: ""
     };
   },
   created() {
     let db = firebase.firestore();
     db.collection("New_Yacht")
+      // .orderBy("skippers_name")
       .get()
       .then(querySnapshot => {
         querySnapshot.forEach(doc => {
@@ -81,6 +85,7 @@ export default {
           console.log(doc.data().image_url);
           const data = {
             id: doc.id,
+            yacht_id: doc.data().yacht_id,
             skippers_name: doc.data().skippers_name,
             yacht_type: doc.data().yacht_type,
             cabins: doc.data().cabins,
@@ -89,10 +94,20 @@ export default {
             extended_info: doc.data().extended_info,
             image_url: doc.data().image_url
           };
-          //   console.log(doc.img_url);
+          console.log(data);
+          // console.log(data.id);
+          // console.log(data.skippers_name);
+          // console.log(data.yacht_id);
+          // console.log(data.image_url);
+
           this.yachts.push(data);
         });
       });
+  },
+  methods: {
+    filteredYachts(id) {
+      console.log(id.yacht_id);
+    }
   }
 };
 </script>

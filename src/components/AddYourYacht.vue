@@ -185,14 +185,13 @@ export default {
       selectedFile: null,
       uploadValue: 0,
       image_url: ""
-      // state: ""
     };
   },
   methods: {
     toggleModalDisplay() {
       //   console.log(this.isModalDisplayed);
       this.isModalDisplayed = !this.isModalDisplayed;
-      console.log(this.isModalDisplayed);
+      // console.log(this.isModalDisplayed);
     },
     // Dodawanie zdjęcia do firebase'a
     onUploadImage(event, image_url) {
@@ -209,15 +208,16 @@ export default {
         snapshot => {
           // Observe state change events such as progress, pause, and resume
           // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
-          var progress =
+          let progress =
             (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
           this.uploadValue = progress;
           if (progress === 100) {
             this.uploadValue = "";
+            alert("Twoje zdjęcie zostało dodane");
             uploadTask.snapshot.ref.getDownloadURL().then(downloadURL => {
-              console.log("File availible at", downloadURL);
+              // console.log("File availible at", downloadURL);
               this.image_url = downloadURL;
-              console.log(this.image_url);
+              // console.log(this.image_url);
             });
           }
         },
@@ -230,6 +230,7 @@ export default {
       let db = firebase.firestore();
       db.collection("New_Yacht")
         .add({
+          yacht_id: (Math.random() * 16).toString(36).substr(2, 25),
           cabins: this.cabins,
           extended_info: this.extended_info,
           guests: this.guests,
@@ -239,7 +240,7 @@ export default {
           image_url: this.image_url
         })
         .then(docRef => {
-          this.$router.push("/added-yacht"); //dorobić kartkę z widokiem dodanego jachtu - danych i potem przekierować tutaj
+          this.$router.push("/list-of-added-yachts"); //dorobić kartkę z widokiem dodanego jachtu - danych i potem przekierować tutaj
         })
         .catch(error => console.log(err));
     }

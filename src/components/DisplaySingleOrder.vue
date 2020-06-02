@@ -1,7 +1,7 @@
 <template>
   <div class id="display-single-order">
     <div class="main-modal">
-      <div v-for="order in orders" :key="order.id" class="main-modal__content">
+      <div class="main-modal__content">
         <router-link to="/ask-for-charter-form">
           <span class="main-modal__content__close-button">x</span>
         </router-link>
@@ -11,29 +11,27 @@
             "
             <span
               class="main-modal__content__text__display--number"
-            >{{ order.id }}</span> " zostało pomyślnie zapisane w naszej bazie danych.
+            >{{ }}</span> " zostało pomyślnie zapisane w naszej bazie danych.
           </p>
           <div class="main-modal__content__order">
             <div class="main-modal__content__order__item">Imię: {{ order.name }}</div>
-            <div class="main-modal__content__order__item">Nazwisko: {{ order.surname }}</div>
+            <div class="main-modal__content__order__item">Nazwisko: {{ }}</div>
             <div
               class="main-modal__content__order__item"
             >Informacje dodatkowe: {{ order.description }}</div>
             <div class="main-modal__content__order__item">Typ Jachtu: {{ order.type }}</div>
             <div class="main-modal__content__order__item">
               Od:
-              <span class="main-modal__content__order__item__date_from">{{ order.date_from }}</span>
+              <span class="main-modal__content__order__item__date_from">{{ }}</span>
             </div>
             <div class="main-modal__content__order__item">
               Do:
-              <span class="main-modal__content__order__item__date_to">{{ order.date_to }}</span>
+              <span class="main-modal__content__order__item__date_to">{{ }}</span>
             </div>
-            <div class="main-modal__content__order__item">Adres Email: {{ order.email }}</div>
-            <div
-              class="main-modal__content__order__item"
-            >Rejon pływania: {{ order.country }} {{ order.country_extend }}</div>
-            <div class="main-modal__content__order__item">Ilość Kabin: {{ order.cabins }}</div>
-            <div class="main-modal__content__order__item">Ilość Gości: {{ order.guests }}</div>
+            <div class="main-modal__content__order__item">Adres Email: {{ }}</div>
+            <div class="main-modal__content__order__item">Rejon pływania: {{ }} {{ }}</div>
+            <div class="main-modal__content__order__item">Ilość Kabin: {{ }}</div>
+            <div class="main-modal__content__order__item">Ilość Gości: {{ }}</div>
           </div>
         </div>
       </div>
@@ -45,7 +43,7 @@
 import firebase from "@/firebase";
 
 export default {
-  name: "DisplaySingleOrder",
+  name: "display-single-order",
   data() {
     return {
       orders: [],
