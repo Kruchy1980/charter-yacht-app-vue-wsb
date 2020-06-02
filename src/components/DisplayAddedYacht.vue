@@ -12,7 +12,7 @@
             "
             <span
               class="main-modal__box__content__text__display--number"
-            >{{ yachts.includes(yacht_id) }}</span> ".
+            >{{ id }}</span> ".
           </p>
           <!-- Tutaj główny display dodanego jachtu -->
           <!-- <div class="main-modal__box__content__yacht">
@@ -60,8 +60,8 @@ export default {
     return {
       // Deklarowanie pustej tablicy z jachtami
       yachts: [],
-      // Deklarowanie id jachtu
-      //   yacht: null,
+      // Deklarowanie id jachtu z firebase'a
+      // id: "",
       // Deklarowanie zmiennych danego jachtu
       yacht_id: "",
       skippers_name: "",
@@ -77,7 +77,7 @@ export default {
   created() {
     let db = firebase.firestore();
     db.collection("New_Yacht")
-      .orderBy("skippers_name")
+      // .orderBy("skippers_name")
       .get()
       .then(querySnapshot => {
         querySnapshot.forEach(doc => {
@@ -94,9 +94,11 @@ export default {
             extended_info: doc.data().extended_info,
             image_url: doc.data().image_url
           };
-          console.log(data.id);
-          console.log(data.skippers_name);
-          console.log(data.yacht_id);
+          console.log(data);
+          // console.log(data.id);
+          // console.log(data.skippers_name);
+          // console.log(data.yacht_id);
+          // console.log(data.image_url);
 
           this.yachts.push(data);
         });
@@ -104,7 +106,7 @@ export default {
   },
   methods: {
     filteredYachts(id) {
-      console.log(id);
+      console.log(id.yacht_id);
     }
   }
 };

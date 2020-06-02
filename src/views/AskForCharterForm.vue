@@ -274,7 +274,7 @@ export default {
           type: this.selectedType
         })
         .then(docRef => {
-          this.$router.push("/display-single-order");
+          this.$router.push("/list-of-added-charter-asks");
         })
         .catch(error => console.log(err));
     }

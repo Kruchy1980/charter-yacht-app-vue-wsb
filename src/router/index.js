@@ -13,6 +13,8 @@ import User from "@/views/User.vue"
 import DisplayAddedYacht from '@/components/DisplayAddedYacht';
 // dodane
 import AddYourYacht from '@/components/AddYourYacht';
+import DisplayAllAddedYachts from '@/components/DisplayAllAddedYachts ';
+import DisplayAllOrders from '@/components/DisplayAllOrders';
 
 Vue.use(VueRouter);
 
@@ -57,11 +59,7 @@ const routes = [{
         name: "ask-for-charter-form",
         component: AskForCharterForm
     },
-    {
-        path: "/display-single-order",
-        name: "display-single-order",
-        component: DisplaySingleOrder
-    },
+
     {
         path: "/user",
         name: "user",
@@ -73,10 +71,28 @@ const routes = [{
         component: AddYourYacht
     },
     {
+        path: "/list-of-added-charter-orders",
+        name: "list-of-added-charter-orders",
+        component: DisplayAllOrders
+    },
+    {
+        path: "/list-of-added-yachts",
+        name: "list-of-added-yachts",
+        component: DisplayAllAddedYachts
+    },
+    // W przygotowaniu
+    {
+        path: "/display-single-order",
+        name: "display-single-order",
+        component: DisplaySingleOrder
+    },
+    // W przygotowaniu
+    {
         path: "/added-yacht",
         name: "added-yacht",
         component: DisplayAddedYacht
     },
+
     { path: '*', redirect: '/' }, //przekierowanie dla błędnej nazwy strony
 ];
 
