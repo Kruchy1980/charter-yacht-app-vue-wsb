@@ -6,10 +6,16 @@
         <button class="user__section__button" @click.stop="showUserContainer($event)">
           Twoje konto
           <i class="fas fa-caret-down hide show" /><i class="fas fa-caret-up hide" />
-          
         </button>
         <div class="user__section__container">
-          <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptates sequi quasi beatae aliquid doloribus rem nulla aspernatur quidem, incidunt labore amet repellat magnam veniam architecto temporibus maxime? Provident quod, libero non, earum tenetur minus sit harum consectetur ex laudantium autem, asperiores quas id repellat maiores quaerat recusandae nisi! Dolor quo cupiditate, nisi doloremque, similique veniam ab sapiente adipisci eligendi nihil quis aspernatur voluptatibus, nesciunt facilis molestias officiis eveniet debitis voluptate enim odit quasi reiciendis. Nam expedita veritatis, quam ullam, praesentium quia sunt sint maiores voluptatem aut, animi ipsam tempora ad error libero nisi hic blanditiis iste vel deserunt obcaecati sed?</p>
+          <h3>Podstawowe dane</h3>
+          <div class="user__form__group">
+            <label for="userName" class="user__form__label">Imię:</label>
+            <div class="user__form__group">
+              <input type="text" class="user__form__input text__color--dark" readonly >
+              <button class="user__form__button"><i class="fas fa-edit"></i></button>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -107,6 +113,42 @@ export default {
 </script>
 
 <style scoped>
+.user__form__button{
+  margin-left: 0.5rem;
+  margin-right: auto;
+  height: 2em;
+  width: 2.5em;
+  border-radius: 0.25rem;
+  border: 1px solid rgb(90, 90, 90);
+  background-color: #e9ecef;
+  cursor: pointer;
+  color: rgb(33, 37, 41);
+}
+.user__form__button:hover{
+  background-color:rgb(60, 84, 180);
+  color: rgb(251, 252, 253)!important;
+}
+.user__form__input{
+  width: 80%;
+  height: 2em;
+  padding: 0.375rem 0.75rem;
+  font-size: 0.9rem;
+  font-weight: normal;
+  line-height: 1.5;
+  background-color: #e9ecef;
+  border: 1px solid rgb(90, 90, 90);
+  border-radius: 0.25rem;
+}
+.user__form__label {
+  margin-bottom: 0.25rem;
+  font-size: 0.9rem;
+}
+.user__form__group{
+  display: flex;
+  flex-direction: column;
+  margin-top: 0.5rem;
+  margin-left: 0.5rem;
+}
 .user__section{
   padding: .75rem 1.5rem;
   border-bottom: 1px solid rgb(60, 84, 180);
@@ -146,6 +188,8 @@ export default {
   transition: all .5s ease-in-out;
   max-height: 0;
   overflow: auto;
+  width: auto;
+  flex-grow: 100;
 }
 .user__section__container--grow{
   max-height: 50vh;
@@ -165,24 +209,43 @@ export default {
 @media only screen and (min-width: 640px){
 }
 @media only screen and (min-width: 768px) {
+  .user__form__button{
+    height: 2.2em;
+  }
+  .user__form__input{
+    font-size: 1rem;
+  }
+  .user__form__label {
+    margin-bottom: 0rem;
+    margin-right: 0.5rem;
+    font-size: 1rem;
+  }
+  .user__form__group{
+    flex-direction: row;
+    align-items: baseline;
+    flex-grow: 1;
+  }
   .user__section{
     padding: .5rem 0.5rem;
     margin-left: 5%;
     margin-right: 5%;
     display: flex;
-    float: left;
   }
   .user__section__container{
-    max-width: 70%;
+    max-width: 65%;
     margin-left: 1rem;
+    flex-grow: 1;
   }
   .user__section__button{
-    width: 30%;
+    width: 27%;
   }
 }
 @media only screen and (min-width: 1200px) {
+  .user__section__container{
+    max-width: 75%;
+  }
   .user__section__button{
-    width: 15%;
+    width: 20%;
   }
 }
 </style>
