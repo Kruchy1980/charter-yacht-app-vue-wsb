@@ -185,7 +185,6 @@ export default {
       selectedFile: null,
       uploadValue: 0,
       image_url: ""
-      // state: ""
     };
   },
   methods: {
@@ -215,9 +214,9 @@ export default {
           if (progress === 100) {
             this.uploadValue = "";
             uploadTask.snapshot.ref.getDownloadURL().then(downloadURL => {
-              console.log("File availible at", downloadURL);
+              // console.log("File availible at", downloadURL);
               this.image_url = downloadURL;
-              console.log(this.image_url);
+              // console.log(this.image_url);
             });
           }
         },
@@ -230,6 +229,9 @@ export default {
       let db = firebase.firestore();
       db.collection("New_Yacht")
         .add({
+          yacht_id: Math.random()
+            .toString(36)
+            .substr(2, 25),
           cabins: this.cabins,
           extended_info: this.extended_info,
           guests: this.guests,
