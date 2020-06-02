@@ -56,10 +56,10 @@
                 <span class="box__inner__content__yacht__item--name">Informacje dodatkowe:</span>
                 {{ yacht.extended_info }}
               </div>
-              <!-- <div class="box__inner__content__yacht__buttons"> -->
-              <button class="box__inner__content__yacht--edit">Edytuj</button>
-              <button class="box__inner__content__yacht--delete">Kasuj</button>
-              <!-- </div> -->
+              <div class="box__inner__content__yacht__buttons">
+                <button class="box__inner__content__yacht--edit">Edytuj</button>
+                <button class="box__inner__content__yacht--delete">Kasuj</button>
+              </div>
             </div>
           </div>
         </div>
@@ -264,46 +264,43 @@ $media-content: "only screen and (min-width : 960px)";
               }
             }
           }
+          &__buttons {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            &--edit {
+              // display: block;
+              text-align: center;
+              cursor: pointer;
+              padding: 5px 8px;
+              background-color: #00ff00;
+              color: #eee;
+              border: none;
+              border-radius: 20px;
+              outline-style: none;
+              font-weight: bold;
+              font-size: 16px;
+              box-shadow: 0 0 5px 2px #027c02;
+            }
+            &--delete {
+              // position: relative;
+              // bottom: 10px;
+              // right: 10px;
+              text-align: center;
+              cursor: pointer;
+              padding: 5px 8px;
+              background-color: #8b0303;
+              color: #eee;
+              border: none;
+              border-radius: 20px;
+              outline-style: none;
+              font-weight: bold;
+              font-size: 16px;
+              box-shadow: 0 0 5px 2px #3d0101;
+            }
+          }
         }
-        // &__buttons {
-        //   margin: 20px 0;
-        //   justify-content: space-evenly;
-        //   align-items: baseline;
-        //   height: 167px;
-        //   border: 2px solid black;
-        &--edit {
-          position: relative;
-          bottom: 10px;
-          left: 10px;
-          text-align: center;
-          cursor: pointer;
-          padding: 5px 8px;
-          background-color: #00ff00;
-          color: #eee;
-          border: none;
-          border-radius: 20px;
-          outline-style: none;
-          font-weight: bold;
-          font-size: 16px;
-          box-shadow: 0 0 5px 2px #027c02;
-        }
-        &--delete {
-          position: relative;
-          bottom: 10px;
-          right: 10px;
-          text-align: center;
-          cursor: pointer;
-          padding: 5px 8px;
-          background-color: #8b0303;
-          color: #eee;
-          border: none;
-          border-radius: 20px;
-          outline-style: none;
-          font-weight: bold;
-          font-size: 16px;
-          box-shadow: 0 0 5px 2px #3d0101;
-        }
-        // }
       }
     }
   }
