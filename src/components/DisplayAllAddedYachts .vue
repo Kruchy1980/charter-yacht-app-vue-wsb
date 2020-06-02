@@ -15,51 +15,49 @@
         </div>
       </div>
     </div>
-    <div class="box">
-      <div class="box__inner">
-        <div v-for="yacht in yachts" :key="yacht.id" class="box__inner__content">
-          <div class="box__inner__content__text">
-            <p class="box__inner__content__text__display">Jacht o numerze identyfikacyjnym:</p>
-            <p class="box__inner__content__text__display__inner">
-              <span class="box__inner__content__text__display--number">" {{ yacht.id }} "</span>.
-            </p>
+    <div class="box__inner">
+      <div v-for="yacht in yachts" :key="yacht.id" class="box__inner__content">
+        <div class="box__inner__content__text">
+          <p class="box__inner__content__text__display">Jacht o numerze identyfikacyjnym:</p>
+          <p class="box__inner__content__text__display__inner">
+            <span class="box__inner__content__text__display--number">" {{ yacht.id }} "</span>.
+          </p>
+          <!-- <div class="box__inner__content__yacht__item"> -->
+          <div class="box__inner__content__yacht__inner">
+            <img :src="yacht.image_url" :alt="yacht.yacht_type" :title="yacht.yacht_type" />
+          </div>
+          <!-- </div> -->
+          <!-- Tutaj główny display dodanego jachtu -->
+          <div class="box__inner__content__yacht">
             <div class="box__inner__content__yacht__item">
-              <div class="box__inner__content__yacht__item__inner">
-                <img :src="yacht.image_url" :alt="yacht.yacht_type" :title="yacht.yacht_type" />
-              </div>
+              <span class="box__inner__content__yacht__item--name">Imię kapitana Jachtu:</span>
+              {{ yacht.skippers_name }}
             </div>
-            <!-- Tutaj główny display dodanego jachtu -->
-            <div class="box__inner__content__yacht">
-              <div class="box__inner__content__yacht__item">
-                <span class="box__inner__content__yacht__item--name">Imię kapitana Jachtu:</span>
-                {{ yacht.skippers_name }}
-              </div>
-              <div class="box__inner__content__yacht__item">
-                <span class="box__inner__content__yacht__item--name">Typ Jachtu:</span>
-                {{ yacht.yacht_type }}
-              </div>
-              <div class="box__inner__content__yacht__item">
-                <span class="box__inner__content__yacht__item--name">Ilość Kabin:</span>
-                {{ yacht.cabins }}
-              </div>
-              <div class="box__inner__content__yacht__item">
-                <span class="box__inner__content__yacht__item--name">Maksymalna liczba gości:</span>
-                {{ yacht.guests }}
-              </div>
-              <div class="box__inner__content__yacht__item">
-                <span
-                  class="box__inner__content__yacht__item--name"
-                >Koszta czarteru w [PLN] na tydzień:</span>
-                {{ yacht.price }} PLN
-              </div>
-              <div class="box__inner__content__yacht__item">
-                <span class="box__inner__content__yacht__item--name">Informacje dodatkowe:</span>
-                {{ yacht.extended_info }}
-              </div>
-              <div class="box__inner__content__yacht__buttons">
-                <button class="box__inner__content__yacht--edit">Edytuj</button>
-                <button class="box__inner__content__yacht--delete">Kasuj</button>
-              </div>
+            <div class="box__inner__content__yacht__item">
+              <span class="box__inner__content__yacht__item--name">Typ Jachtu:</span>
+              {{ yacht.yacht_type }}
+            </div>
+            <div class="box__inner__content__yacht__item">
+              <span class="box__inner__content__yacht__item--name">Ilość Kabin:</span>
+              {{ yacht.cabins }}
+            </div>
+            <div class="box__inner__content__yacht__item">
+              <span class="box__inner__content__yacht__item--name">Maksymalna liczba gości:</span>
+              {{ yacht.guests }}
+            </div>
+            <div class="box__inner__content__yacht__item">
+              <span
+                class="box__inner__content__yacht__item--name"
+              >Koszta czarteru w [PLN] na tydzień:</span>
+              {{ yacht.price }} PLN
+            </div>
+            <div class="box__inner__content__yacht__item">
+              <span class="box__inner__content__yacht__item--name">Informacje dodatkowe:</span>
+              {{ yacht.extended_info }}
+            </div>
+            <div class="box__inner__content__yacht__buttons">
+              <button class="box__inner__content__yacht__buttons--edit">Edytuj</button>
+              <button class="box__inner__content__yacht__buttons--delete">Kasuj</button>
             </div>
           </div>
         </div>
@@ -176,41 +174,45 @@ $media-content: "only screen and (min-width : 960px)";
 }
 
 .box {
-  height: auto;
   &__inner {
-    height: auto;
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
     flex-wrap: wrap;
-    @media #{$tablet-plus} {
-      flex-direction: row;
-      // align-items: center;
-      justify-content: center;
-    }
+    justify-content: space-evenly;
+    align-items: center;
+
+    // @media #{$tablet-plus} {
+    //   flex-direction: row;
+    //   // align-items: center;
+    //   justify-content: center;
+    // }
     &__content {
-      height: 700px;
+      // width: 360px;
       margin: 20px;
+      height: 670px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      height: 654px;
+      padding: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: row;
       background-color: #eee;
-      border-radius: 20px;
-      width: 90%;
-      box-shadow: 0 0 10px 3px #ccc;
-      transition: all 1s;
+      border-radius: 30px;
+      box-shadow: 0 0 10px 2px #555;
+      transition: all 0.8s;
+      border-bottom: 1px double #333;
       @media #{$mobile-plus} {
-        width: 80%;
-      }
-      @media #{$tablet-plus} {
-        width: 340px;
-      }
-      @media #{$media-content} {
         width: 360px;
       }
 
       &__text {
-        width: 100%;
         padding: 10px;
-        transition: all 1s;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 640px;
         &__display {
           text-align: center;
           margin-top: 30px;
@@ -249,56 +251,73 @@ $media-content: "only screen and (min-width : 960px)";
           &--name {
             font-weight: bold;
           }
-          &__inner {
-            margin: 0;
-            img {
-              display: block;
-              margin: 30px auto;
-              width: 100px;
-              height: 100px;
-              border-radius: 50%;
-              transition: all 0.8s;
-              @media #{$media-content} {
-                width: 150px;
-                height: 150px;
-              }
+          // &__inner {
+          //   margin: 0;
+          //   img {
+          //     display: block;
+          //     margin: auto;
+          //     width: 100px;
+          //     height: 100px;
+          //     border-radius: 50%;
+          //     transition: all 0.8s;
+          //     @media #{$media-content} {
+          //       width: 150px;
+          //       height: 150px;
+          //     }
+          //   }
+          // }
+        }
+        &__inner {
+          margin: 0;
+          img {
+            display: block;
+            margin: auto;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            transition: all 0.8s;
+            @media #{$media-content} {
+              width: 150px;
+              height: 150px;
             }
           }
-          &__buttons {
-            margin-top: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            &--edit {
-              // display: block;
-              text-align: center;
-              cursor: pointer;
-              padding: 5px 8px;
-              background-color: #00ff00;
-              color: #eee;
-              border: none;
-              border-radius: 20px;
-              outline-style: none;
-              font-weight: bold;
-              font-size: 16px;
-              box-shadow: 0 0 5px 2px #027c02;
-            }
-            &--delete {
-              // position: relative;
-              // bottom: 10px;
-              // right: 10px;
-              text-align: center;
-              cursor: pointer;
-              padding: 5px 8px;
-              background-color: #8b0303;
-              color: #eee;
-              border: none;
-              border-radius: 20px;
-              outline-style: none;
-              font-weight: bold;
-              font-size: 16px;
-              box-shadow: 0 0 5px 2px #3d0101;
-            }
+        }
+        &__buttons {
+          position: relative;
+          bottom: 0;
+          margin-top: 20px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          &--edit {
+            // display: block;
+            text-align: center;
+            cursor: pointer;
+            padding: 5px 8px;
+            background-color: #00ff00;
+            color: #eee;
+            border: none;
+            border-radius: 20px;
+            outline-style: none;
+            font-weight: bold;
+            font-size: 16px;
+            box-shadow: 0 0 5px 2px #027c02;
+          }
+          &--delete {
+            // position: relative;
+            // bottom: 10px;
+            // right: 10px;
+            text-align: center;
+            cursor: pointer;
+            padding: 5px 8px;
+            background-color: #8b0303;
+            color: #eee;
+            border: none;
+            border-radius: 20px;
+            outline-style: none;
+            font-weight: bold;
+            font-size: 16px;
+            box-shadow: 0 0 5px 2px #3d0101;
           }
         }
       }
