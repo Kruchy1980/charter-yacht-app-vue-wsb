@@ -192,7 +192,7 @@ export default {
     toggleModalDisplay() {
       //   console.log(this.isModalDisplayed);
       this.isModalDisplayed = !this.isModalDisplayed;
-      console.log(this.isModalDisplayed);
+      // console.log(this.isModalDisplayed);
     },
     // Dodawanie zdjęcia do firebase'a
     onUploadImage(event, image_url) {
@@ -239,7 +239,9 @@ export default {
           image_url: this.image_url
         })
         .then(docRef => {
-          this.$router.push("/added-yacht"); //dorobić kartkę z widokiem dodanego jachtu - danych i potem przekierować tutaj
+          this.$router.push(
+            "/added-yacht" //dorobić kartkę z widokiem dodanego jachtu - danych i potem przekierować tutaj
+          );
         })
         .catch(error => console.log(err));
     }

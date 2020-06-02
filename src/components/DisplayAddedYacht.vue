@@ -77,8 +77,8 @@ export default {
       .get()
       .then(querySnapshot => {
         querySnapshot.forEach(doc => {
-          console.log(doc.data());
-          console.log(doc.data().image_url);
+          // console.log(doc.data());
+          // console.log(doc.data().image_url);
           const data = {
             id: doc.id,
             skippers_name: doc.data().skippers_name,
@@ -89,8 +89,8 @@ export default {
             extended_info: doc.data().extended_info,
             image_url: doc.data().image_url
           };
-          //   console.log(doc.img_url);
-          this.yachts.push(data);
+          console.log(this.yachts[id].data);
+          // this.yachts[id].push(data);
         });
       });
   }
