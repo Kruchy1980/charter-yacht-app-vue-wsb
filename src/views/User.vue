@@ -11,10 +11,21 @@
           <h3>Podstawowe dane</h3>
           <div class="user__form__group">
             <label for="userName" class="user__form__label">Imię:</label>
-            <div class="user__form__group">
+            <div class="user__section__group">
               <input type="text" class="user__form__input text__color--dark" readonly >
               <button class="user__form__button"><i class="fas fa-edit"></i></button>
             </div>
+          </div>
+          <div class="user__form__group">
+            <label for="userName" class="user__form__label">E-mail:</label>
+            <div class="user__section__group">
+              <input type="text" class="user__form__input text__color--dark" readonly >
+              <button class="user__form__button"><i class="fas fa-edit"></i></button>
+            </div>
+          </div>
+          <div class="user__button__group">
+            <button class="user__button--red">Zmień hasło</button>
+            <button class="user__button--red">Usuń konto</button>
           </div>
         </div>
       </div>
@@ -113,9 +124,8 @@ export default {
 </script>
 
 <style scoped>
-.user__form__button{
-  margin-left: 0.5rem;
-  margin-right: auto;
+.user__form__button,
+.user__button--red{
   height: 2em;
   width: 2.5em;
   border-radius: 0.25rem;
@@ -123,9 +133,26 @@ export default {
   background-color: #e9ecef;
   cursor: pointer;
   color: rgb(33, 37, 41);
+  -moz-transition: all .5s ease-in-out;
+  -ms-transition: all .5s ease-in-out;
+  -o-transition: all .5s ease-in-out;
+  -webkit-transition: all .5s ease-in-out;
+  transition: all .5s ease-in-out;
+}
+.user__form__button{
+  margin-left: 0.5rem;
 }
 .user__form__button:hover{
   background-color:rgb(60, 84, 180);
+  color: rgb(251, 252, 253)!important;
+}
+.user__button--red{
+  margin-right: 0.5rem;
+  padding: .25rem .75rem;
+  width: auto;
+}
+.user__button--red:hover{
+  background-color:rgb(255,0,0);
   color: rgb(251, 252, 253)!important;
 }
 .user__form__input{
@@ -149,12 +176,24 @@ export default {
   margin-top: 0.5rem;
   margin-left: 0.5rem;
 }
+.user__button__group{
+  margin-top: 0.75rem;
+  margin-left: 0.5rem;
+}
 .user__section{
   padding: .75rem 1.5rem;
   border-bottom: 1px solid rgb(60, 84, 180);
+  -moz-transition: all .5s ease-in-out;
+  -ms-transition: all .5s ease-in-out;
+  -o-transition: all .5s ease-in-out;
+  -webkit-transition: all .5s ease-in-out;
+  transition: all .5s ease-in-out;
 }
 .user__section--grow{
   margin-bottom: 1rem;
+}
+.user__section__group{
+  display: flex;
 }
 .user__section__button{
   cursor: pointer;
@@ -166,6 +205,7 @@ export default {
   font-size: 1em;
   line-height: 1.5;
   border: 2px solid rgb(60, 84, 180);
+  background-color: rgb(251, 252, 253);
   border-radius: .4rem;
   -moz-transition: all .5s ease-in-out;
   -ms-transition: all .5s ease-in-out;
@@ -219,8 +259,15 @@ export default {
     margin-bottom: 0rem;
     margin-right: 0.5rem;
     font-size: 1rem;
+    text-align: end;
+    width: 5rem;
   }
   .user__form__group{
+    flex-direction: row;
+    align-items: baseline;
+    flex-grow: 1;
+  }
+  .user__section__group{
     flex-direction: row;
     align-items: baseline;
     flex-grow: 1;
@@ -234,13 +281,15 @@ export default {
   .user__section__container{
     max-width: 65%;
     margin-left: 1rem;
-    flex-grow: 1;
   }
   .user__section__button{
     width: 27%;
   }
 }
 @media only screen and (min-width: 1200px) {
+  .user__form__input{
+    max-width: 50%;
+  }
   .user__section__container{
     max-width: 75%;
   }
