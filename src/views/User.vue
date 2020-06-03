@@ -13,7 +13,7 @@
             <label for="userName" class="user__form__label">Imię:</label>
             <div class="user__section__group">
               <input v-model="currentUser.data.displayName" type="text" class="user__form__input text__color--dark" readonly>
-              <button v-tooltip.right="'zmień imię'" class="user__form__button"><i class="fas fa-edit"></i></button>
+              <button v-tooltip.right="'zmień imię'" @click="showModal('changeUserName')" class="user__form__button"><i class="fas fa-edit"></i></button>
             </div>
           </div>
           <div class="user__form__group">
@@ -65,6 +65,7 @@
     <!-- okna modalne -->
     <UserModal v-show="isUserModalVisible" />
     <ModalLoading v-show="isLoadingVisible" />
+    <UserChangeName v-show="isUserChangeName" @close="closeModal('changeUserName')" @changeName="changeName" />
     <MainFooter />
   </div>
 </template>
@@ -78,16 +79,18 @@ import ModalLoading from "@/components/LoadingLineDots";
 import ModalInfo from "@/components/ModalInfo";
 import firebase from "@/firebase.js";
 import UserModal from "@/components/UserModal";
+import UserChangeName from "@/components/userProfile/UserChangeName";
 import { mapState }  from "vuex";
 export default {
   name: "userAccount",
-  components: { MainMenu, MainFooter, UserModal, ModalLoading },
+  components: { MainMenu, MainFooter, UserModal, ModalLoading, UserChangeName },
   data() {
     return{
       isLoadingVisible: false,isModalInfoVisible: false, isUserModalVisible: true,
       modalTitle: '', modalMsg: '', 
       modalIsError: true,  //flaga określająca czy pokazywane okno modalne jest błędem
       isLoggedUser: false,
+      isUserChangeName: false,
     }
   },
   computed: {
@@ -117,7 +120,49 @@ export default {
       b.getElementsByTagName("I").forEach(element => {
         element.classList.toggle('show');
       });
-
+    },
+    showModal(type){
+      if(type=='changeUserName'){
+        this.isUserChangeName=!this.isUserChangeName;
+      }
+    },
+    closeModal(type){
+      if(type=='changeUserName'){
+        this.isUserChangeName=!this.isUserChangeName;
+      }
+    },
+    changeName(newName){
+      const that = this;
+      try{
+        if(that.isLoggedUser){
+          that.isLoadingVisible = true; //animacja
+          let user = firebase.auth().currentUser; //bieżący user zalogowany
+          user.updateProfile({
+            displayName: newName
+          })
+          .then(()=>{
+            that.$store.dispatch("fetchUser", user);  //odświeżamy usera
+            that.isLoadingVisible = false;  //zamykamy animację
+            that.isUserChangeName=false;  //zamykamy okno
+          })
+          .catch(function(error){
+            that.modalIsError = true;
+            that.isLoadingVisible=false;
+            that.modalTitle='Błąd '+error.code;
+            that.modalMsg=error.message;
+            console.error(that.modalTitle, that.modalMsg);
+            that.isModalInfoVisible = true;
+          });
+        }
+      }
+      catch(err){
+        that.modalIsError = true;
+        that.isLoadingVisible=false;
+        console.error("Error log in user: ", err);
+        that.modalTitle ='Błąd logowania użytkownika!'
+        that.modalMsg = err;
+        that.isModalInfoVisible = true;
+      }
     }
   },
 };
