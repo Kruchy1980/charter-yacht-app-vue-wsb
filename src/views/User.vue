@@ -12,15 +12,15 @@
           <div class="user__form__group">
             <label for="userName" class="user__form__label">Imię:</label>
             <div class="user__section__group">
-              <input type="text" class="user__form__input text__color--dark" readonly >
-              <button class="user__form__button"><i class="fas fa-edit"></i></button>
+              <input v-model="currentUser.data.displayName" type="text" class="user__form__input text__color--dark" readonly>
+              <button v-tooltip.right="'zmień imię'" class="user__form__button"><i class="fas fa-edit"></i></button>
             </div>
           </div>
           <div class="user__form__group">
             <label for="userName" class="user__form__label">E-mail:</label>
             <div class="user__section__group">
-              <input type="text" class="user__form__input text__color--dark" readonly >
-              <button class="user__form__button"><i class="fas fa-edit"></i></button>
+              <input v-model="currentUser.data.email" type="text" class="user__form__input text__color--dark" readonly>
+              <button v-tooltip.right="'zmień e-mail'" class="user__form__button"><i class="fas fa-edit"></i></button>
             </div>
           </div>
           <div class="user__button__group">
@@ -148,7 +148,7 @@ export default {
 }
 .user__button--red{
   margin-right: 0.5rem;
-  padding: .25rem .75rem;
+  padding: .33rem .75rem;
   width: auto;
 }
 .user__button--red:hover{
