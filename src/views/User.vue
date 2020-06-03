@@ -13,14 +13,14 @@
             <label for="userName" class="user__form__label">Imię:</label>
             <div class="user__section__group">
               <input v-model="currentUser.data.displayName" type="text" class="user__form__input text__color--dark" readonly>
-              <button class="user__form__button"><i class="fas fa-edit"></i></button>
+              <button v-tooltip.right="'zmień imię'" class="user__form__button"><i class="fas fa-edit"></i></button>
             </div>
           </div>
           <div class="user__form__group">
             <label for="userName" class="user__form__label">E-mail:</label>
             <div class="user__section__group">
               <input v-model="currentUser.data.email" type="text" class="user__form__input text__color--dark" readonly>
-              <button class="user__form__button"><i class="fas fa-edit"></i></button>
+              <button v-tooltip.right="'zmień e-mail'" class="user__form__button"><i class="fas fa-edit"></i></button>
             </div>
           </div>
           <div class="user__button__group">
