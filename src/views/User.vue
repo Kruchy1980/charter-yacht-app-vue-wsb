@@ -13,19 +13,19 @@
             <label for="userName" class="user__form__label">Imię:</label>
             <div class="user__section__group">
               <input v-model="userName" type="text" class="user__form__input text__color--dark" readonly>
-              <button v-tooltip.right="'zmień imię'" @click="switchModal('changeUserName')" class="user__form__button"><i class="fas fa-edit"></i></button>
+              <button v-tooltip.right="'zmień imię'" @click="isUserChangeName=!isUserChangeName" class="user__form__button"><i class="fas fa-edit"></i></button>
             </div>
           </div>
           <div class="user__form__group">
             <label for="userName" class="user__form__label">E-mail:</label>
             <div class="user__section__group">
               <input v-model="userMail" type="text" class="user__form__input text__color--dark" readonly>
-              <button v-tooltip.right="'zmień e-mail'" @click="switchModal('changeUserMail')" class="user__form__button"><i class="fas fa-edit"></i></button>
+              <button v-tooltip.right="'zmień e-mail'" @click="isUserChangeMail=!isUserChangeMail" class="user__form__button"><i class="fas fa-edit"></i></button>
             </div>
           </div>
           <div class="user__button__group">
-            <button @click="switchModal('changeUserPass')" class="user__button--red">Zmień hasło</button>
-            <button @click="showLoading" class="user__button--red">Usuń konto</button>
+            <button @click="isUserChangePass=!isUserChangePass" class="user__button--red">Zmień hasło</button>
+            <button @click="isUserDeleteAccount=!isUserDeleteAccount" class="user__button--red">Usuń konto</button>
           </div>
         </div>
       </div>
@@ -69,9 +69,10 @@
     </ModalInfo>
     <UserModal v-show="isUserModalVisible" />
     <ModalLoading v-show="isLoadingVisible" />
-    <UserChangeName v-show="isUserChangeName" @close="switchModal('changeUserName')" @changeName="changeUserName" />
-    <UserChangeMail v-show="isUserChangeMail" @close="switchModal('changeUserMail')" @changeMail="changeUserMail" />
-    <UserChangePass v-show="isUserChangePass" @close="switchModal('changeUserPass')" @changePass="changeUserPass" />
+    <UserChangeName v-show="isUserChangeName" @close="isUserChangeName=!isUserChangeName" @changeName="changeUserName" />
+    <UserChangeMail v-show="isUserChangeMail" @close="isUserChangeMail=!isUserChangeMail" @changeMail="changeUserMail" />
+    <UserChangePass v-show="isUserChangePass" @close="isUserChangePass=!isUserChangePass" @changePass="changeUserPass" />
+    <UserDeleteAccount v-show="isUserDeleteAccount" @close="isUserDeleteAccount=!isUserDeleteAccount" @deleteAccount="userDeleteAccount" />
     <MainFooter />
   </div>
 </template>
@@ -88,10 +89,11 @@ import UserModal from "@/components/UserModal";
 import UserChangeName from "@/components/userProfile/UserChangeName";
 import UserChangeMail from "@/components/userProfile/UserChangeMail";
 import UserChangePass from "@/components/userProfile/UserChangePass";
+import UserDeleteAccount from "@/components/userProfile/UserDeleteAccount";
 import { mapState }  from "vuex";
 export default {
   name: "userAccount",
-  components: { MainMenu, MainFooter, UserModal, ModalLoading, ModalInfo, UserChangeName,UserChangeMail,UserChangePass },
+  components: { MainMenu, MainFooter, UserModal, ModalLoading, ModalInfo, UserChangeName,UserChangeMail,UserChangePass,UserDeleteAccount },
   data() {
     return{
       isLoadingVisible: false,isModalInfoVisible: false, isUserModalVisible: true,
@@ -101,6 +103,7 @@ export default {
       isUserChangeName: false,
       isUserChangeMail: false,
       isUserChangePass: false,
+      isUserDeleteAccount: false,
       userName: '',
       userMail: '',
     }
@@ -137,17 +140,6 @@ export default {
     },
     closeModalInfo() {
       this.isModalInfoVisible = false;
-    },
-    switchModal(type){
-      if(type=='changeUserName'){
-        this.isUserChangeName=!this.isUserChangeName;
-      }
-      else if(type=='changeUserMail'){
-        this.isUserChangeMail=!this.isUserChangeMail;
-      }
-      else if(type=='changeUserPass'){
-        this.isUserChangePass=!this.isUserChangePass;
-      }
     },
     showError(error,title){
       this.modalIsError = true;
@@ -247,9 +239,42 @@ export default {
         that.showError(err,'error change user password: ');
       }
     },
-    showLoading(){
+    userDeleteAccount(mail,pass){
       const that = this;
-      that.isLoadingVisible=true;
+      try{
+        if(that.isLoggedUser){
+          if(that.isLoggedUser){
+            that.isLoadingVisible = true; //animacja
+            let user = firebase.auth().currentUser; //bieżący user zalogowany
+            //ponownie uwierzytelniamy usera
+            let credentials = firebase.auth.EmailAuthProvider.credential(mail,pass);
+            user.reauthenticateWithCredential(credentials)
+            .then(()=>{
+              user.delete()
+              .then(()=>{
+                that.$store.dispatch("fetchUser", user);  //odświeżamy usera
+                that.isLoadingVisible = false;  //zamykamy animację
+                that.isUserDeleteAccount=false;  //zamykamy okno
+                //komunikat z potwierdzeniem zmiany
+                that.modalIsError = false;  
+                that.modalTitle='Usuwanie konta';
+                that.modalMsg='Twoje konto zostało usunięte.';
+                that.isModalInfoVisible = true;
+                setTimeout(() => that.$router.go(0), 5000); //odświeżamy bieżącą stronę po 5sek -> spowoduje załadowanie strony logowania
+              })
+              .catch(function(error){
+                that.showError(error,'Błąd usuwania konta: ');
+              });
+            })
+            .catch(function(error){
+              that.showError(error,'Błąd uwierzytelniania: ');
+            });
+          }
+        }
+      }
+      catch(err){
+        that.showError(err,'error delete user: ');
+      }
     }
   },
 };
