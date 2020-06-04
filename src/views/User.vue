@@ -12,20 +12,20 @@
           <div class="user__form__group">
             <label for="userName" class="user__form__label">Imię:</label>
             <div class="user__section__group">
-              <input v-model="currentUser.data.displayName" type="text" class="user__form__input text__color--dark" readonly>
-              <button v-tooltip.right="'zmień imię'" @click="showModal('changeUserName')" class="user__form__button"><i class="fas fa-edit"></i></button>
+              <input v-model="userName" type="text" class="user__form__input text__color--dark" readonly>
+              <button v-tooltip.right="'zmień imię'" @click="switchModal('changeUserName')" class="user__form__button"><i class="fas fa-edit"></i></button>
             </div>
           </div>
           <div class="user__form__group">
             <label for="userName" class="user__form__label">E-mail:</label>
             <div class="user__section__group">
-              <input v-model="currentUser.data.email" type="text" class="user__form__input text__color--dark" readonly>
-              <button v-tooltip.right="'zmień e-mail'" class="user__form__button"><i class="fas fa-edit"></i></button>
+              <input v-model="userMail" type="text" class="user__form__input text__color--dark" readonly>
+              <button v-tooltip.right="'zmień e-mail'" @click="switchModal('changeUserMail')" class="user__form__button"><i class="fas fa-edit"></i></button>
             </div>
           </div>
           <div class="user__button__group">
-            <button class="user__button--red">Zmień hasło</button>
-            <button class="user__button--red">Usuń konto</button>
+            <button @click="switchModal('changeUserPass')" class="user__button--red">Zmień hasło</button>
+            <button @click="showLoading" class="user__button--red">Usuń konto</button>
           </div>
         </div>
       </div>
@@ -63,9 +63,15 @@
     <!-- wypełniacz okna dla usera, który nie jest zalogowany -->
     <div v-show="!isLoggedUser" class="container"></div>
     <!-- okna modalne -->
+    <ModalInfo v-show="isModalInfoVisible" :is-error="modalIsError" @close="closeModalInfo">
+      <template v-slot:header>{{modalTitle}}</template>
+      <template v-slot:body><div>{{modalMsg}}</div></template>
+    </ModalInfo>
     <UserModal v-show="isUserModalVisible" />
     <ModalLoading v-show="isLoadingVisible" />
-    <UserChangeName v-show="isUserChangeName" @close="closeModal('changeUserName')" @changeName="changeName" />
+    <UserChangeName v-show="isUserChangeName" @close="switchModal('changeUserName')" @changeName="changeUserName" />
+    <UserChangeMail v-show="isUserChangeMail" @close="switchModal('changeUserMail')" @changeMail="changeUserMail" />
+    <UserChangePass v-show="isUserChangePass" @close="switchModal('changeUserPass')" @changePass="changeUserPass" />
     <MainFooter />
   </div>
 </template>
@@ -80,10 +86,12 @@ import ModalInfo from "@/components/ModalInfo";
 import firebase from "@/firebase.js";
 import UserModal from "@/components/UserModal";
 import UserChangeName from "@/components/userProfile/UserChangeName";
+import UserChangeMail from "@/components/userProfile/UserChangeMail";
+import UserChangePass from "@/components/userProfile/UserChangePass";
 import { mapState }  from "vuex";
 export default {
   name: "userAccount",
-  components: { MainMenu, MainFooter, UserModal, ModalLoading, UserChangeName },
+  components: { MainMenu, MainFooter, UserModal, ModalLoading, ModalInfo, UserChangeName,UserChangeMail,UserChangePass },
   data() {
     return{
       isLoadingVisible: false,isModalInfoVisible: false, isUserModalVisible: true,
@@ -91,6 +99,10 @@ export default {
       modalIsError: true,  //flaga określająca czy pokazywane okno modalne jest błędem
       isLoggedUser: false,
       isUserChangeName: false,
+      isUserChangeMail: false,
+      isUserChangePass: false,
+      userName: '',
+      userMail: '',
     }
   },
   computed: {
@@ -103,6 +115,8 @@ export default {
       if(!this.currentUser.data.isAnonymous){
         this.isLoggedUser = true; //jest zalogowany użytkownik, i nie jest to użytkownik anonimowy używany do wyświetlania danych z bazy
         this.isUserModalVisible = false;
+        this.userName = this.currentUser.data.displayName;
+        this.userMail = this.currentUser.data.email;
       }
     }
   },
@@ -121,17 +135,29 @@ export default {
         element.classList.toggle('show');
       });
     },
-    showModal(type){
+    closeModalInfo() {
+      this.isModalInfoVisible = false;
+    },
+    switchModal(type){
       if(type=='changeUserName'){
         this.isUserChangeName=!this.isUserChangeName;
       }
-    },
-    closeModal(type){
-      if(type=='changeUserName'){
-        this.isUserChangeName=!this.isUserChangeName;
+      else if(type=='changeUserMail'){
+        this.isUserChangeMail=!this.isUserChangeMail;
+      }
+      else if(type=='changeUserPass'){
+        this.isUserChangePass=!this.isUserChangePass;
       }
     },
-    changeName(newName){
+    showError(error,title){
+      this.modalIsError = true;
+      this.isLoadingVisible=false;
+      this.modalTitle=title+' '+error.code;
+      this.modalMsg=error.message;
+      console.error(this.modalTitle, this.modalMsg);
+      this.isModalInfoVisible = true;
+    },
+    changeUserName(newName){
       const that = this;
       try{
         if(that.isLoggedUser){
@@ -142,27 +168,88 @@ export default {
           })
           .then(()=>{
             that.$store.dispatch("fetchUser", user);  //odświeżamy usera
+            that.userName = that.currentUser.data.displayName;
             that.isLoadingVisible = false;  //zamykamy animację
             that.isUserChangeName=false;  //zamykamy okno
           })
           .catch(function(error){
-            that.modalIsError = true;
-            that.isLoadingVisible=false;
-            that.modalTitle='Błąd '+error.code;
-            that.modalMsg=error.message;
-            console.error(that.modalTitle, that.modalMsg);
-            that.isModalInfoVisible = true;
+            that.showError(error,'Błąd: ');
           });
         }
       }
       catch(err){
-        that.modalIsError = true;
-        that.isLoadingVisible=false;
-        console.error("Error log in user: ", err);
-        that.modalTitle ='Błąd logowania użytkownika!'
-        that.modalMsg = err;
-        that.isModalInfoVisible = true;
+        that.showError(err,'error change user name: ');
       }
+    }, 
+    changeUserMail(newMail,oldMail,pass){
+      const that = this;
+      try{
+        if(that.isLoggedUser){
+          that.isLoadingVisible = true; //animacja
+          let user = firebase.auth().currentUser; //bieżący user zalogowany
+          //ponownie uwierzytelniamy usera
+          let credentials = firebase.auth.EmailAuthProvider.credential(oldMail,pass);
+          user.reauthenticateWithCredential(credentials)
+          .then(()=>{
+            user.updateEmail(newMail)
+            .then(()=>{
+              that.$store.dispatch("fetchUser", user);  //odświeżamy usera
+              that.userMail = that.currentUser.data.email;
+              that.isLoadingVisible = false;  //zamykamy animację
+              that.isUserChangeMail=false;  //zamykamy okno
+            })
+            .catch(function(error){
+              that.showError(error,'Błąd zmiany adresu e-mail: ');
+            });
+          })
+          .catch(function(error){
+            that.showError(error,'Błąd uwierzytelniania: ');
+          });
+        }
+      }
+      catch(err){
+        that.showError(err,'error change user mail: ');
+      }
+    },
+    changeUserPass(newPass,mail,oldPass){
+      const that = this;
+      try{
+        if(that.isLoggedUser){
+          if(that.isLoggedUser){
+            that.isLoadingVisible = true; //animacja
+            let user = firebase.auth().currentUser; //bieżący user zalogowany
+            //ponownie uwierzytelniamy usera
+            let credentials = firebase.auth.EmailAuthProvider.credential(mail,oldPass);
+            user.reauthenticateWithCredential(credentials)
+            .then(()=>{
+              user.updatePassword(newPass)
+              .then(()=>{
+                that.$store.dispatch("fetchUser", user);  //odświeżamy usera
+                that.isLoadingVisible = false;  //zamykamy animację
+                that.isUserChangePass=false;  //zamykamy okno
+                //komunikat z potwierdzeniem zmiany
+                that.modalIsError = false;  
+                that.modalTitle='Zmiana hasła';
+                that.modalMsg='Twoje hasło zostało zmienione.';
+                that.isModalInfoVisible = true;
+              })
+              .catch(function(error){
+                that.showError(error,'Błąd zmiany hasła: ');
+              });
+            })
+            .catch(function(error){
+              that.showError(error,'Błąd uwierzytelniania: ');
+            });
+          }
+        }
+      }
+      catch(err){
+        that.showError(err,'error change user password: ');
+      }
+    },
+    showLoading(){
+      const that = this;
+      that.isLoadingVisible=true;
     }
   },
 };
