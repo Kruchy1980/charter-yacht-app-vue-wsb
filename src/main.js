@@ -3,6 +3,9 @@ import App from './App.vue';
 import router from "./router/index.js";
 import firebase from "./firebase.js";
 import store from "./store";
+import VTooltip from 'v-tooltip'
+
+Vue.use(VTooltip)
 
 
 Vue.config.productionTip = false
@@ -30,6 +33,7 @@ try {
             vm = new Vue({
                 router,
                 store,
+                VTooltip,
                 render: h => h(App),
             }).$mount('#app')
         }
