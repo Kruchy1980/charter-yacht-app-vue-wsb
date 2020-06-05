@@ -24,7 +24,7 @@
           </p>
           <!-- <div class="box__inner__content__yacht__item"> -->
           <div class="box__inner__content__yacht__inner">
-            <img :src="yacht.image_url" :alt="yacht.yacht_type" :title="yacht.yacht_type">
+            <img :src="yacht.image_url" :alt="yacht.yacht_type" :title="yacht.yacht_type" />
           </div>
           <!-- </div> -->
           <!-- Tutaj główny display dodanego jachtu -->
@@ -165,6 +165,7 @@ $media-content: "only screen and (min-width : 960px)";
         font-size: 16px;
       }
       &__display {
+        cursor: pointer;
         text-decoration: none;
         font-family: monospace;
         color: #111;

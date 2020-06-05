@@ -15,14 +15,14 @@
         </div>
       </div>
       <!-- Tutaj wygląd wyświetlający errory -->
-      <div v-if="errors" class="information__errors">
+      <!-- <div v-if="errors" class="information__errors">
         <p class="information__errors__text">Następujące pola nie zostały poprawnie wypełnione:</p>
         <ul class="information__errors__list">
           <template v-for="(errors, outerIndex) in validationErrors">
             <li v-for="(error, index) in errors" :key="outerIndex + '-' + index">{{ error }}</li>
           </template>
         </ul>
-      </div>
+      </div>-->
       <form action class="container__main-form" @submit.prevent="handleSubmit">
         <div class="container__main-form__items">
           <div class="container__main-form__items__item">
@@ -63,6 +63,7 @@
                 v-model="date_from"
                 type="date"
                 class="container__main-form__items__item__label__content"
+                required
               />
               <!-- required -->
             </label>
@@ -76,6 +77,7 @@
                 v-model="date_to"
                 type="date"
                 class="container__main-form__items__item__label__content"
+                reequired
               />
             </label>
           </div>
@@ -142,6 +144,7 @@
                 type="text"
                 class="container__main-form__items__item__label__content"
                 placeholder="Podaj poprawne Imię minimum 3 litery"
+                required
               />
               <!-- required -->
             </label>
@@ -157,8 +160,9 @@
                 type="text"
                 class="container__main-form__items__item__label__content"
                 placeholder="Podaj poprawne Nazwisko minimum 3 litery"
+                required
               />
-              required
+              <!-- required -->
             </label>
           </div>
           <div class="container__main-form__items__item">
@@ -171,8 +175,9 @@
                 type="email"
                 class="container__main-form__items__item__label__content"
                 placeholder="Podaj poprawny adres Email aby Twoja Prośba została zarejestrowana"
+                required
               />
-              required
+              <!-- required -->
             </label>
           </div>
           <!-- pattern="[0-9]{3}-[0-9]{3}-[0-9]{3}" -->
@@ -186,6 +191,7 @@
                 type="tel"
                 class="container__main-form__items__item__label__content"
                 placeholder="Wpisz numer telefonu."
+                required
               />
               <!-- required -->
             </label>
@@ -246,32 +252,32 @@ export default {
     };
   },
   // właściwość sprawdzająca czy są  errory
-  computed: {
-    errors() {
-      return Object.values(this.validationErrors).length;
-    }
-  },
-  // watchersy nasłuchujące czy są zmiany w polach
-  watch: {
-    date_from(value) {
-      this.validateWatch("date_from", value);
-    },
-    date_to(value) {
-      this.validateWatch("date_to", value);
-    },
-    name(value) {
-      this.validateWatch("name", value);
-    },
-    surname(value) {
-      this.validateWatch("surname", value);
-    },
-    email(value) {
-      this.validateWatch("email", value);
-    },
-    phone(value) {
-      this.validateWatch("phone", value);
-    }
-  },
+  // computed: {
+  //   errors() {
+  //     return Object.values(this.validationErrors).length;
+  //   }
+  // },
+  // // watchersy nasłuchujące czy są zmiany w polach
+  // watch: {
+  //   date_from(value) {
+  //     this.validateWatch("date_from", value);
+  //   },
+  //   date_to(value) {
+  //     this.validateWatch("date_to", value);
+  //   },
+  //   name(value) {
+  //     this.validateWatch("name", value);
+  //   },
+  //   surname(value) {
+  //     this.validateWatch("surname", value);
+  //   },
+  //   email(value) {
+  //     this.validateWatch("email", value);
+  //   },
+  //   phone(value) {
+  //     this.validateWatch("phone", value);
+  //   }
+  // },
 
   methods: {
     // Pobieranie textu z selecta
@@ -283,67 +289,67 @@ export default {
       let countries = this.countryChoices.map(obj => obj.value);
       console.log(countries);
     },
-    // validateWatch tworzenie metody
-    validateWatch(propertyName, value) {
-      this.validate(propertyName, value);
-    },
-    // deklaracja validate
-    validate(propertyName, value) {
-      // zadeklarowanie pustej tablicy na błędy
-      let errors = [];
+    // // validateWatch tworzenie metody
+    // validateWatch(propertyName, value) {
+    //   this.validate(propertyName, value);
+    // },
+    // // deklaracja validate
+    // validate(propertyName, value) {
+    //   // zadeklarowanie pustej tablicy na błędy
+    //   let errors = [];
 
-      Object(validation)[propertyName].forEach(err => {
-        if (!err.validator(value)) {
-          errors.push(err.message);
-        }
-      });
-      // Sprawdzenie czy są errory jakieś
-      if (errors.length > 0) {
-        Vue.set(this.validationErrors, propertyName, errors);
-      } else {
-        // Jeśli ich nie ma to czyść listę errorów
-        Vue.delete(this.validationErrors, propertyName);
-      }
-    },
-    // Zwalidować wszystkie metody teraz
-    validateAll() {
-      this.validate("date_from", this.date_from);
-      this.validate("date_to", this.date_to);
-      this.validate("name", this.name);
-      this.validate("surname", this.surname);
-      this.validate("email", this.email);
-      this.validate("phone", this.phone);
+    //   Object(validation)[propertyName].forEach(err => {
+    //     if (!err.validator(value)) {
+    //       errors.push(err.message);
+    //     }
+    //   });
+    //   // Sprawdzenie czy są errory jakieś
+    //   if (errors.length > 0) {
+    //     Vue.set(this.validationErrors, propertyName, errors);
+    //   } else {
+    //     // Jeśli ich nie ma to czyść listę errorów
+    //     Vue.delete(this.validationErrors, propertyName);
+    //   }
+    // },
+    // // Zwalidować wszystkie metody teraz
+    // validateAll() {
+    //   this.validate("date_from", this.date_from);
+    //   this.validate("date_to", this.date_to);
+    //   this.validate("name", this.name);
+    //   this.validate("surname", this.surname);
+    //   this.validate("email", this.email);
+    //   this.validate("phone", this.phone);
 
-      // Zwrot zwalidowanych wartości
-      return this.errors > 0 ? false : true;
-    },
+    //   // Zwrot zwalidowanych wartości
+    //   return this.errors > 0 ? false : true;
+    // },
     handleSubmit() {
-      // Sprawdzenie czy działa
-      if (this.validateAll()) {
-        console.log(
-          `FORM SUBMITTED: ${this.date_from}, ${this.date_to}, ${this.name}, ${this.surname}, ${this.email}, ${this.phone},`
-        );
-      }
-      // let db = firebase.firestore();
-      // db.collection("Charter_Order")
-      //   .add({
-      //     cabins: this.cabins,
-      //     country: this.selectedCountry,
-      //     country_extend: this.country_extend,
-      //     date_from: this.date_from,
-      //     date_to: this.date_to,
-      //     description: this.description,
-      //     email: this.email,
-      //     guests: this.guests,
-      //     name: this.name,
-      //     surname: this.surname,
-      //     phone: this.phone,
-      //     type: this.selectedType
-      //   })
-      //   .then(docRef => {
-      //     this.$router.push("/list-of-added-charter-orders");
-      //   })
-      //   .catch(error => console.log(err));
+      // // Sprawdzenie czy działa
+      // if (this.validateAll()) {
+      //   console.log(
+      //     `FORM SUBMITTED: ${this.date_from}, ${this.date_to}, ${this.name}, ${this.surname}, ${this.email}, ${this.phone},`
+      //   );
+      // }
+      let db = firebase.firestore();
+      db.collection("Charter_Order")
+        .add({
+          cabins: this.cabins,
+          country: this.selectedCountry,
+          country_extend: this.country_extend,
+          date_from: this.date_from,
+          date_to: this.date_to,
+          description: this.description,
+          email: this.email,
+          guests: this.guests,
+          name: this.name,
+          surname: this.surname,
+          phone: this.phone,
+          type: this.selectedType
+        })
+        .then(docRef => {
+          this.$router.push("/list-of-added-charter-orders");
+        })
+        .catch(error => console.log(err));
     }
   }
 };
@@ -386,6 +392,7 @@ $media-content: "only screen and (min-width : 960px)";
         font-size: 16px;
       }
       &__display {
+        cursor: pointer;
         text-decoration: none;
         font-family: monospace;
         color: #111;
