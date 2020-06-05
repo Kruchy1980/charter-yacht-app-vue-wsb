@@ -1,13 +1,13 @@
 <template>
   <transition name="modal-fade">
     <div class="modal--backdrop">
-      <div class="modal" role="dialog" aria-labelledby="modalTitle" aria-describedby="modalDescription" >
+      <div class="modal" role="dialog" aria-labelledby="modalTitle" aria-describedby="modalDescription">
         
-        <header id="modalTitle" class="modal__header text__color--dark" >
+        <header id="modalTitle" class="modal__header text__color--dark">
           <slot name="header">
               <h5>Pytanie</h5> 
           </slot>
-          <button type="button" class="button--close text__color--dark" @click="close" aria-label="Close modal" >&times;</button>
+          <button type="button" class="button--close text__color--dark" aria-label="Close modal" @click="close">&times;</button>
         </header>
 
         <section id="modalBody" class="modal__body text__color--dark">
@@ -16,8 +16,8 @@
 
         <footer class="modal__footer">
           <slot name="footer">
-            <button type="button" class="button--green" @click="close" aria-label="Close modal" >Nie</button>
-            <button type="button" class="button--red" @click="logOut" aria-label="Log out" >Tak</button>
+            <button type="button" class="button--green" aria-label="Close modal" @click="close">Nie</button>
+            <button type="button" class="button--red" aria-label="Log out" @click="logOut">Tak</button>
           </slot>
         </footer>
 
@@ -28,7 +28,7 @@
 
 <script>
 export default {
-    name: 'modalLogOut',
+    name: 'ModalLogOut',
     methods: {
       close() {
         this.$emit('close');

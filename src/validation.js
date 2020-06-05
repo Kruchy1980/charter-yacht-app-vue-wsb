@@ -12,7 +12,7 @@ function required(name) {
 // 2. Wymogi dla pola tekstowego
 function alpha(name) {
     return {
-        vlidator: value => value === /^[a-z\b[ą,ć,ę,ł,ó,ś,ż,ź]]$/i,
+        vlidator: value => (/^[a-z\b[ą,ć,ę,ł,ó,ś,ż,ź]]$/i).test(value),
         message: `${name} może zawierać tylko litery.`
     }
 }
@@ -26,14 +26,14 @@ function minLength(name, minLength) {
 // 4. Numer telefonu
 function phoneNumber(name) {
     return {
-        validator: value => value === /^[\d]{9,}$/i,
+        validator: value => (/^[\d]{9,}$/i).test(value),
         message: `${name} powinien zawierać tylko znaki numeryczne, minimum 9 znaków.`
     }
 }
 //5. Email validation
 function emailVal(name) {
     return {
-        validator: value => value === /^(([^<>()[]\.,;:s@"]+(.[^<>()[]\.,;:s@"]+)*)|(".+"))@(([[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}])|(([a-z0-9]+.)+[a-z]{2,}))$/igm,
+        validator: value => /^(([^<>()[]\.,;:s@"]+(.[^<>()[]\.,;:s@"]+)*)|(".+"))@(([[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}])|(([a-z0-9]+.)+[a-z]{2,}))$/igm.test(value),
         message: `Wpisz poprawny adres ${name}!`
     }
 }
@@ -47,25 +47,25 @@ function positiveNums(name) {
 // 7. Minimalna wartość
 function min(name) {
     return {
-        validator: value => value === 1,
-        message: `${name} musi być wększ od 1 PLN.`
+        validator: value => value >= 1,
+        message: `${name} musi być wększa od 1 PLN.`
     }
 }
 // Po zadeklarowaniu warunków walidacyjnych trzeba je wyeksportować do odpowiednicj miejsc
 export default {
     // nawy kolejnych pól potrzebujących walidacji
     // 1. Formularz zapytania o czarter
-    date_from: [required('date_from')],
-    date_to: [required('date_to')],
-    email: [required('email'), emailVal('email'), ],
-    name: [required('name'), alpha('name'), minLength('name', 3)],
-    surname: [required('surname'), alpha('surname'), minLength('surname', 3)],
-    phone: [required('phone'), phoneNumber('phone')],
+    date_from: [required('Data od:')],
+    date_to: [required('Data do:')],
+    email: [required('Adres Email'), emailVal('Adres Email'), ],
+    name: [required('Imię'), alpha('Imię'), minLength('Imię', 3)],
+    surname: [required('Nazwisko'), alpha('Nazwisko'), minLength('Nazwisko', 3)],
+    phone: [required('Numer Telefonu'), phoneNumber('Numer Telefonu')],
     // 2. Formularz dodawania jachtu
-    cabins: [required('cabins'), positiveNums('cabins')],
-    extended_info: [required('extended_info')],
-    guests: [required('guests'), positiveNums('guests'), min('guests')],
-    price: [required('price'), positiveNums('cabins'), min('price')],
-    skippers_name: [required('skippers_name'), alpha('skippers_name'), minLength('skippers_name', 1)],
-    yacht_type: [required('yacht_type'), alpha('yacht_type'), minLength('yacht_type', 3)],
+    cabins: [required('Ilość Kabin'), positiveNums('Ilość Kabin')],
+    extended_info: [required('Informacje dodatkowe')],
+    guests: [required('Ilość gości'), positiveNums('Ilość gości'), min('Ilość gości')],
+    price: [required('Cena'), positiveNums('Cena'), min('Cena')],
+    skippers_name: [required('Imię skippera'), alpha('Imię skippera'), minLength('Imię skippera', 1)],
+    yacht_type: [required('Typ Jachtu'), alpha('Typ Jachtu'), minLength('Typ Jachtu', 3)],
 }

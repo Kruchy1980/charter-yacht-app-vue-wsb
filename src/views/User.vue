@@ -44,7 +44,7 @@
       </div>
     </main>
     <!-- wypełniacz okna dla usera, który nie jest zalogowany -->
-    <div v-show="!isLoggedUser" class="container"></div>
+    <div v-show="!isLoggedUser" class="container" />
     <!-- okna modalne -->
     <UserModal v-show="isUserModalVisible" />
     <ModalLoading v-show="isLoadingVisible" />
@@ -63,7 +63,7 @@ import firebase from "@/firebase.js";
 import UserModal from "@/components/UserModal";
 import { mapState }  from "vuex";
 export default {
-  name: "userAccount",
+  name: "UserAccount",
   components: { MainMenu, MainFooter, UserModal, ModalLoading },
   data() {
     return{

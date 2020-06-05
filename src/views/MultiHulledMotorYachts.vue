@@ -3,7 +3,7 @@
     <MainMenu />
     <div class="banner__box">
       <div class="banner__box__image">
-        <img src="/images/slider-image/catamaran-motor/2.catamaran-m.jpeg" alt />
+        <img src="/images/slider-image/catamaran-motor/2.catamaran-m.jpeg" alt>
         <div class="banner__box__image__text">
           <p class="banner__box__image__text__title">Luksusowe jachty motorowe wielokadłubowe</p>
         </div>
@@ -80,7 +80,7 @@
                 <!-- First item -->
                 <div class="container__box__item">
                   <div class="container__box__item__image">
-                    <img src="/card-images/catamarans/motor/3.catamaran-m.jpeg" alt="Sailing Yacht" />
+                    <img src="/card-images/catamarans/motor/3.catamaran-m.jpeg" alt="Sailing Yacht">
                   </div>
                   <div class="container__box__item__display">
                     <ul class="container__box__item__display__list">
@@ -102,7 +102,7 @@
                 <!-- Second item -->
                 <div class="container__box__item">
                   <div class="container__box__item__image">
-                    <img src="/card-images/catamarans/motor/1.catamaran-m.jpeg" alt="Sailing Yacht" />
+                    <img src="/card-images/catamarans/motor/1.catamaran-m.jpeg" alt="Sailing Yacht">
                   </div>
                   <div class="container__box__item__display">
                     <ul class="container__box__item__display__list">

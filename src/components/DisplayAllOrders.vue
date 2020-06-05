@@ -1,5 +1,5 @@
 <template>
-  <div class id="list-of-added-charter-orders">
+  <div id="list-of-added-charter-orders" class>
     <!-- <div class=" -->
     <MainMenu />
     <!-- <div class="container"> -->
@@ -86,7 +86,11 @@ import MainFooter from "@/components/MainFooter";
 import firebase from "@/firebase";
 
 export default {
-  name: "list-of-added-charter-orders",
+  name: "ListOfAddedCharterOrders",
+  components: {
+    MainMenu,
+    MainFooter
+  },
   data() {
     return {
       orders: [],
@@ -103,10 +107,6 @@ export default {
       guests: null,
       country_extend: ""
     };
-  },
-  components: {
-    MainMenu,
-    MainFooter
   },
   created() {
     let db = firebase.firestore();

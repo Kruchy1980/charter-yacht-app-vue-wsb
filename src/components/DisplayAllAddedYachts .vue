@@ -24,7 +24,7 @@
           </p>
           <!-- <div class="box__inner__content__yacht__item"> -->
           <div class="box__inner__content__yacht__inner">
-            <img :src="yacht.image_url" :alt="yacht.yacht_type" :title="yacht.yacht_type" />
+            <img :src="yacht.image_url" :alt="yacht.yacht_type" :title="yacht.yacht_type">
           </div>
           <!-- </div> -->
           <!-- Tutaj główny display dodanego jachtu -->
@@ -72,7 +72,11 @@ import MainMenu from "./MainMenu";
 import MainFooter from "./MainFooter";
 import firebase from "@/firebase";
 export default {
-  name: "list-of-added-yachts",
+  name: "ListOfAddedYachts",
+  components: {
+    MainMenu,
+    MainFooter
+  },
   data() {
     return {
       homepage: "/",
@@ -91,10 +95,6 @@ export default {
       image_url: "",
       filterData: ""
     };
-  },
-  components: {
-    MainMenu,
-    MainFooter
   },
   created() {
     let db = firebase.firestore();
