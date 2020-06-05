@@ -2,7 +2,7 @@
   <header class="main_header text__color--primary background__color--light">
     <div class="main_header_nav">
       <a :href="mainUrl">
-        <img :src="logoUrl" alt="logo" class="nav_logo" />
+        <img :src="logoUrl" alt="logo" class="nav_logo">
       </a>
       <button type="button" class="nav_toggler" @click="showMobileMenu()">
         <i v-show="isMobileMenuClicked" class="fas fa-bars fa-lg" />
@@ -106,7 +106,7 @@
         </ul>
       </nav>
     </div>
-    <ModalLogOut v-show="isShowLogOut" @close="closeModal()" @logOut="firebaseLogOut()" >
+    <ModalLogOut v-show="isShowLogOut" @close="closeModal()" @logOut="firebaseLogOut()">
       <template v-slot:header>
         <h5>Wylogowanie...</h5> 
       </template>
@@ -123,7 +123,7 @@ import { mapState } from "vuex";
 import ModalLogOut from "@/components/ModalYesNo";
 import firebase from "@/firebase.js";
 export default {
-  name: "mainMenu",
+  name: "MainMenu",
   components: { ModalLogOut },
   data() {
     return {

@@ -1,5 +1,5 @@
 <template>
-  <div class id="display-single-order">
+  <div id="display-single-order" class>
     <div class="main-modal">
       <div class="main-modal__content">
         <router-link to="/ask-for-charter-form">
@@ -43,7 +43,7 @@
 import firebase from "@/firebase";
 
 export default {
-  name: "display-single-order",
+  name: "DisplaySingleOrder",
   data() {
     return {
       orders: [],

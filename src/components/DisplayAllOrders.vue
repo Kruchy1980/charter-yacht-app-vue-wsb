@@ -1,5 +1,5 @@
 <template>
-  <div class id="list-of-added-charter-orders">
+  <div id="list-of-added-charter-orders" class>
     <!-- <div class=" -->
     <MainMenu />
     <!-- <div class="container"> -->
@@ -86,9 +86,14 @@ import MainFooter from "@/components/MainFooter";
 import firebase from "@/firebase";
 
 export default {
-  name: "list-of-added-charter-orders",
+  name: "ListOfAddedCharterOrders",
+  components: {
+    MainMenu,
+    MainFooter
+  },
   data() {
     return {
+      homempage: "/",
       orders: [],
       // orderNumber: "",
       name: "",
@@ -104,14 +109,10 @@ export default {
       country_extend: ""
     };
   },
-  components: {
-    MainMenu,
-    MainFooter
-  },
   created() {
     let db = firebase.firestore();
     db.collection("Charter_Order")
-      .orderBy("name")
+      .orderBy("date_from")
       .get()
       .then(querySnapshot => {
         querySnapshot.forEach(doc => {
@@ -174,6 +175,7 @@ $media-content: "only screen and (min-width : 960px)";
         font-size: 16px;
       }
       &__display {
+        cursor: pointer;
         text-decoration: none;
         font-family: monospace;
         color: #111;

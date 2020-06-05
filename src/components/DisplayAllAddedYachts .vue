@@ -72,7 +72,11 @@ import MainMenu from "./MainMenu";
 import MainFooter from "./MainFooter";
 import firebase from "@/firebase";
 export default {
-  name: "list-of-added-yachts",
+  name: "ListOfAddedYachts",
+  components: {
+    MainMenu,
+    MainFooter
+  },
   data() {
     return {
       homepage: "/",
@@ -91,10 +95,6 @@ export default {
       image_url: "",
       filterData: ""
     };
-  },
-  components: {
-    MainMenu,
-    MainFooter
   },
   created() {
     let db = firebase.firestore();
@@ -165,6 +165,7 @@ $media-content: "only screen and (min-width : 960px)";
         font-size: 16px;
       }
       &__display {
+        cursor: pointer;
         text-decoration: none;
         font-family: monospace;
         color: #111;

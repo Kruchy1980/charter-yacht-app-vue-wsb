@@ -8,7 +8,7 @@
       @focusout="setState"
       @focus="enter"
       @input="setState"
-    />
+    >
     <small
       ref="errorTxt"
       :class="{'input__error--hide' : validState!=0, 'input__error--show' : validState==0}"

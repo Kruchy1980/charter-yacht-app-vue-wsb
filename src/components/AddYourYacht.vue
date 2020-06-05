@@ -28,7 +28,7 @@
                       class="modal__box__window__form__items__item__label__content"
                       placeholder="Podaj typ swojego jachtu"
                       required
-                    />
+                    >
                   </label>
                 </div>
 
@@ -42,7 +42,7 @@
                       class="modal__box__window__form__items__item__label__content"
                       placeholder="Podaj ilość kabin użytkowych"
                       required
-                    />
+                    >
                   </label>
                 </div>
                 <div class="modal__box__window__form__items__item">
@@ -57,7 +57,7 @@
                       class="modal__box__window__form__items__item__label__content"
                       placeholder="Podaj maksymalną ilość gości"
                       required
-                    />
+                    >
                   </label>
                 </div>
                 <div class="modal__box__window__form__items__item">
@@ -88,7 +88,7 @@
                       class="modal__box__window__form__items__item__label__content"
                       placeholder="Podaj maksymalny koszt czarteru jachtu"
                       required
-                    />
+                    >
                   </label>
                 </div>
 
@@ -101,13 +101,13 @@
                       :value="uploadValue"
                       max="100"
                       step="0.01"
-                    ></progress>
+                    />
                     <input
                       type="file"
-                      @change="onUploadImage"
                       class="modal__box__window__form__items__item__label__content--file"
                       required
-                    />
+                      @change="onUploadImage"
+                    >
                   </label>
                 </div>
 
@@ -119,13 +119,13 @@
                         v-model="isChecked"
                         type="checkbox"
                         class="modal__box__window__form__items__item--skipper__label__content"
-                      />
+                      >
                       <img
                         class="modal__box__window__form__items__item--skipper__label__icon"
                         src="/info-icon/info.svg"
                         alt="Info-icon"
                         title="Zaznacz jeśli twój jacht posiada skippera"
-                      />
+                      >
                     </label>
                     <label v-if="isChecked" class="modal__box__window__form__items__item__label">
                       Imię skippera:
@@ -137,7 +137,7 @@
                         type="text"
                         class="modal__box__window__form__items__item__label__content"
                         required
-                      />
+                      >
                     </label>
                   </div>
                 </div>

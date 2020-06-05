@@ -59,8 +59,8 @@
     <!-- okna modalne -->
     <ModalLoading v-show="isLoadingVisible" />
     <ModalInfo v-show="isModalInfoVisible" :is-error="modalIsError" @close="closeModal">
-      <template v-slot:header>{{modalTitle}}</template>
-      <template v-slot:body><div>{{modalMsg}}</div></template>
+      <template v-slot:header>{{ modalTitle }}</template>
+      <template v-slot:body><div>{{ modalMsg }}</div></template>
     </ModalInfo>
   </div>
 </div>
@@ -77,7 +77,7 @@ import firebase from "@/firebase.js";
 import { mapState }  from "vuex";
 
 export default { 
-    name: "userLoginCreate",
+    name: "UserLoginCreate",
     components: { InputEmail, InputPassword, InputText, ModalLoading, ModalInfo},
     data() {
     return{

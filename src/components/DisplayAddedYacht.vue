@@ -55,7 +55,7 @@
 <script>
 import firebase from "@/firebase";
 export default {
-  name: "added-yacht",
+  name: "AddedYacht",
   data() {
     return {
       // Deklarowanie pustej tablicy z jachtami
