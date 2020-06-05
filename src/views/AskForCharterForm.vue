@@ -14,6 +14,15 @@
           >&#8629; Powrót</a>
         </div>
       </div>
+      <!-- Tutaj wygląd wyświetlający errory -->
+      <!-- <div v-if="errors" class="information__errors">
+        <p class="information__errors__text">Następujące pola nie zostały poprawnie wypełnione:</p>
+        <ul class="information__errors__list">
+          <template v-for="(errors, outerIndex) in validationErrors">
+            <li v-for="(error, index) in errors" :key="outerIndex + '-' + index">{{ error }}</li>
+          </template>
+        </ul>
+      </div>-->
       <form action class="container__main-form" @submit.prevent="handleSubmit">
         <div class="container__main-form__items">
           <div class="container__main-form__items__item">
@@ -22,8 +31,8 @@
               <select
                 id="country"
                 v-model="selectedCountry"
-                @change="getText"
                 class="container__main-form__items__item__label__content"
+                @change="getText"
               >
                 <option value>Wybierz kraj w którym chcesz wyczarterować Jacht</option>
                 <option
@@ -56,16 +65,19 @@
                 class="container__main-form__items__item__label__content"
                 required
               />
+              <!-- required -->
             </label>
           </div>
           <div class="container__main-form__items__item">
             <label for class="container__main-form__items__item__label">
               Termin [do]:
+              <span class="container__main-form__items__item__label--must">*</span>
               <input
                 id="date_to"
                 v-model="date_to"
                 type="date"
                 class="container__main-form__items__item__label__content"
+                reequired
               />
             </label>
           </div>
@@ -73,9 +85,9 @@
             <label class="container__main-form__items__item__label">
               Rodzaj jachtu:
               <select
-                v-on:change="getText"
                 v-model="selectedType"
                 class="container__main-form__items__item__label__content"
+                @:change="getText"
               >
                 <option value>Wybierz rodzaj jachtu na przygodę</option>
                 <option
@@ -134,6 +146,7 @@
                 placeholder="Podaj poprawne Imię minimum 3 litery"
                 required
               />
+              <!-- required -->
             </label>
           </div>
           <!-- pattern="[A-Za-z\b[ą,ć,ę,ł,ó,ż,ź,\-]]{3,}" -->
@@ -149,6 +162,7 @@
                 placeholder="Podaj poprawne Nazwisko minimum 3 litery"
                 required
               />
+              <!-- required -->
             </label>
           </div>
           <div class="container__main-form__items__item">
@@ -163,6 +177,7 @@
                 placeholder="Podaj poprawny adres Email aby Twoja Prośba została zarejestrowana"
                 required
               />
+              <!-- required -->
             </label>
           </div>
           <!-- pattern="[0-9]{3}-[0-9]{3}-[0-9]{3}" -->
@@ -175,9 +190,10 @@
                 v-model="phone"
                 type="tel"
                 class="container__main-form__items__item__label__content"
-                placeholder="Wpisz numer telefonu w formacie 000-000-000"
+                placeholder="Wpisz numer telefonu."
                 required
               />
+              <!-- required -->
             </label>
           </div>
         </div>
@@ -192,7 +208,8 @@
 import MainMenu from "@/components/MainMenu";
 import MainFooter from "@/components/MainFooter";
 import firebase from "@/firebase.js";
-
+import validation from "@/validation";
+import Vue from "vue";
 export default {
   name: "AskForCharterForm",
   components: {
@@ -202,10 +219,6 @@ export default {
   data() {
     return {
       homepage: "/",
-      // selected: true,
-      // Odtąd łączenie do firebase'a
-      // order_id: null,
-      // Informacje zawarte w select type
       selectedType: "",
       selectedCountry: "",
       typeChoices: [
@@ -222,8 +235,6 @@ export default {
             "Inne kraje będą dostępne zależnie od zgłaszających się czarterujących"
         }
       ],
-      // choiceId: "",
-      // getText: "",
       // łączenie reszty informacji
       cabins: null,
       country: "",
@@ -235,31 +246,93 @@ export default {
       guests: null,
       name: "",
       surname: "",
-      phone: null
-      // type: ""
+      phone: null,
+      // właściwość zawierająca errory
+      validationErrors: {}
     };
   },
+  // właściwość sprawdzająca czy są  errory
+  // computed: {
+  //   errors() {
+  //     return Object.values(this.validationErrors).length;
+  //   }
+  // },
+  // // watchersy nasłuchujące czy są zmiany w polach
+  // watch: {
+  //   date_from(value) {
+  //     this.validateWatch("date_from", value);
+  //   },
+  //   date_to(value) {
+  //     this.validateWatch("date_to", value);
+  //   },
+  //   name(value) {
+  //     this.validateWatch("name", value);
+  //   },
+  //   surname(value) {
+  //     this.validateWatch("surname", value);
+  //   },
+  //   email(value) {
+  //     this.validateWatch("email", value);
+  //   },
+  //   phone(value) {
+  //     this.validateWatch("phone", value);
+  //   }
+  // },
+
   methods: {
     // Pobieranie textu z selecta
     getText() {
       // pobieranie wszystkich wartości z selecta type
       let values = this.typeChoices.map(obj => obj.value);
-
       console.log(values);
       // pobiranie wszystkich wartości z selecta country
       let countries = this.countryChoices.map(obj => obj.value);
       console.log(countries);
-      // Pobieranie indexu pola
-      // let index = values.indexOf(this.selectedType);
-      // Przypisanie wartości  z
-      // this.choiceText = this.choices[index].text;
-      // console.log(index);
     },
+    // // validateWatch tworzenie metody
+    // validateWatch(propertyName, value) {
+    //   this.validate(propertyName, value);
+    // },
+    // // deklaracja validate
+    // validate(propertyName, value) {
+    //   // zadeklarowanie pustej tablicy na błędy
+    //   let errors = [];
+
+    //   Object(validation)[propertyName].forEach(err => {
+    //     if (!err.validator(value)) {
+    //       errors.push(err.message);
+    //     }
+    //   });
+    //   // Sprawdzenie czy są errory jakieś
+    //   if (errors.length > 0) {
+    //     Vue.set(this.validationErrors, propertyName, errors);
+    //   } else {
+    //     // Jeśli ich nie ma to czyść listę errorów
+    //     Vue.delete(this.validationErrors, propertyName);
+    //   }
+    // },
+    // // Zwalidować wszystkie metody teraz
+    // validateAll() {
+    //   this.validate("date_from", this.date_from);
+    //   this.validate("date_to", this.date_to);
+    //   this.validate("name", this.name);
+    //   this.validate("surname", this.surname);
+    //   this.validate("email", this.email);
+    //   this.validate("phone", this.phone);
+
+    //   // Zwrot zwalidowanych wartości
+    //   return this.errors > 0 ? false : true;
+    // },
     handleSubmit() {
+      // // Sprawdzenie czy działa
+      // if (this.validateAll()) {
+      //   console.log(
+      //     `FORM SUBMITTED: ${this.date_from}, ${this.date_to}, ${this.name}, ${this.surname}, ${this.email}, ${this.phone},`
+      //   );
+      // }
       let db = firebase.firestore();
       db.collection("Charter_Order")
         .add({
-          // order_id: Math.floor(new Date() * (Math.random() * 20))
           cabins: this.cabins,
           country: this.selectedCountry,
           country_extend: this.country_extend,
@@ -274,7 +347,7 @@ export default {
           type: this.selectedType
         })
         .then(docRef => {
-          this.$router.push("/");
+          this.$router.push("/list-of-added-charter-orders");
         })
         .catch(error => console.log(err));
     }
@@ -289,7 +362,6 @@ $mobile-plus: "only screen and (min-width : 425px)";
 $tablet-plus: "only screen and (min-width : 768px)";
 // Media Query - main-content larger
 $media-content: "only screen and (min-width : 960px)";
-
 .container {
   margin-top: 50px;
   padding: 20px 0;
@@ -320,6 +392,7 @@ $media-content: "only screen and (min-width : 960px)";
         font-size: 16px;
       }
       &__display {
+        cursor: pointer;
         text-decoration: none;
         font-family: monospace;
         color: #111;

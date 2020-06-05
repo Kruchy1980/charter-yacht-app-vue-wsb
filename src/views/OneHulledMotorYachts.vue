@@ -3,7 +3,7 @@
     <MainMenu />
     <div class="banner__box">
       <div class="banner__box__image">
-        <img src="/images/slider-image/motor/2.motorboat.jpg" alt="One hulled MotorBoat" />
+        <img src="/images/slider-image/motor/2.motorboat.jpg" alt="One hulled MotorBoat">
         <div class="banner__box__image__text">
           <p class="banner__box__image__text__title">Luksusowe jachty motorowe</p>
         </div>
@@ -83,7 +83,7 @@
                     <img
                       src="../../public/card-images/one-hulled/motor/2.motorboat-m.jpeg"
                       alt="Motor Boat"
-                    />
+                    >
                   </div>
                   <div class="container__box__item__display">
                     <ul class="container__box__item__display__list">
@@ -108,7 +108,7 @@
                     <img
                       src="../../public/card-images/one-hulled/motor/3.motorboat-m.jpeg"
                       alt="Motor Boat"
-                    />
+                    >
                   </div>
                   <div class="container__box__item__display">
                     <ul class="container__box__item__display__list">

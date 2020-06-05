@@ -4,20 +4,21 @@
       <div class="modal" role="dialog" aria-labelledby="modalTitle" aria-describedby="modalDescription" >
         
         <header id="modalTitle" class="modal__header text__color--dark" >
-          <slot name="header">
-              <h5>Wylogowanie...</h5> 
-              <button type="button" class="button--close text__color--dark" @click="close" aria-label="Close modal" >&times;</button>
-          </slot>
+            <h5>Zmiana imienia</h5>
+          <button type="button" class="button--close text__color--dark" @click="close" aria-label="Close modal" >&times;</button>
         </header>
 
         <section id="modalBody" class="modal__body text__color--dark">
-          <slot name="body">Czy chcesz się wylogować?</slot>
+            <div class="body__group">
+                <label class="body__label" for="name">Nowe imię:</label>
+                <InputText id="name" ref="name" :min-length="3" :error-text="'Podaj swoje imię, minimum 3 znaki.'" />
+            </div>
         </section>
 
         <footer class="modal__footer">
           <slot name="footer">
-            <button type="button" class="button--green" @click="close" aria-label="Close modal" >Nie</button>
-            <button type="button" class="button--red" @click="logOut" aria-label="Log out" >Tak</button>
+            <button type="button" class="button--red" @click="changeName" aria-label="Change Name" >Zatwierdź</button>
+            <button type="button" class="button--gray" @click="close" aria-label="Close modal" >Anuluj</button>
           </slot>
         </footer>
 
@@ -27,21 +28,42 @@
 </template>
 
 <script>
+import InputText from "@/components/InputText";
+
 export default {
-    name: 'modalLogOut',
+    name: 'userChangeName',
+    components: { InputText },
     methods: {
-      close() {
-        this.$emit('close');
-      },
-      logOut(){
-          this.$emit('logOut');
-      }
+        close() {
+            this.$emit('close');
+        },
+        //weryfikacja stanu kontrolki
+        changeName(){
+            let el = this.$refs['name'];
+            if(!el.isValid){
+                el.setState(); 
+            }
+            else{
+                //poprawna -> emitujemy zdarzenia z parametrem
+                this.$emit('changeName',el.value);
+            }
+        },
     },
 }
 </script>
 
 <style scoped>
-  .modal--backdrop {
+.body__label{
+    margin-bottom: 0.25rem;
+    font-size: .9rem;
+}
+.body__group{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: .25rem;
+}
+
+.modal--backdrop {
     position: fixed;
     top: 0;
     bottom: 0;
@@ -51,8 +73,8 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
-  }
-  .modal {
+}
+.modal {
     background: #FFFFFF;
     box-shadow: 2px 2px 20px 1px;
     overflow-x: auto;
@@ -60,32 +82,31 @@ export default {
     flex-direction: column;
     border-radius: 5px;
     min-width: 250px;
-  }
-  .modal__body {
+}
+.modal__body {
     position: relative;
-    padding: 1rem .5rem;
+    padding: .5rem 1rem;
     color: rgb(33, 37, 41);
-  }
-  .modal__footer {
+    font-size: 1em;
+}
+.modal__footer {
     border-top: 1px solid #eee;
     justify-content: flex-end;
     padding: .5rem;
     display: flex;
     flex-direction: row
-  }
-  .modal__header{
+}
+.modal__header{
     padding-top: .5rem;
     padding-left: .5rem;
     padding-right: .5rem;
+    padding-bottom: .25rem;
     display: flex;
     flex-direction: row;
     border-bottom: 1px solid #eee;
     justify-content: space-between;
-  }
-  .modal__header > h5{
-      margin-top: 0.2rem;
-  }
-  .button--close {
+}
+.button--close {
     border: none;
     font-size: 1.4rem;
     padding-left: .5rem;
@@ -94,16 +115,17 @@ export default {
     font-weight: bold;
     color: rgb(60, 84, 180);
     background: transparent;
-  }
-  .button--green,
-  .button--red{
-    width: 3.5rem;
+}
+.button--gray,
+.button--red{
+    width: auto;
     cursor: pointer;
-    height: 2em;
-    padding: .35rem .75rem;
+    height: 2.1em;
+    padding: .4rem .75rem;
     text-align: center;
     vertical-align: middle;
     font-weight: bolder;
+    font-size: 0.9em;
     border-radius: .25rem;
     margin-right: .5rem;
     -moz-transition: border-color .5s ease-in-out,box-shadow .15s ease-in-out;
@@ -111,45 +133,55 @@ export default {
     -o-transition: border-color .5s ease-in-out,box-shadow .15s ease-in-out;
     -webkit-transition: border-color .5s ease-in-out,box-shadow .15s ease-in-out;
     transition: border-color .5s ease-in-out,box-shadow .15s ease-in-out;
-  }
-  .button--green{
-    border: 1px solid rgb(0, 128, 0);
-    color: rgb(0, 128, 0);
-  }
-  .button--green:hover{
+}
+.button--gray{
+    border: 1px solid rgb(108, 117, 125);
+    color: rgb(108, 117, 125);
+}
+.button--gray:hover{
     color: rgb(251, 252, 253);
-    background-color: rgb(0, 128, 0);
+    background-color: rgb(108, 117, 125);
     box-shadow: 2px 2px 6px #999;
-  }
-  .button--red{
+}
+.button--red{
     border: 1px solid rgb(255, 0, 0);
     color: rgb(255, 0, 0);
-  }
-  .button--red:hover{
+}
+.button--red:hover{
     color: rgb(251, 252, 253);
     background-color: rgb(255, 0, 0);
     box-shadow: 2px 2px 6px #999;
-  }
-  /* wbudowane klasy Vue */
-  .modal-fade-enter,
-  .modal-fade-leave-active {
+}
+/* wbudowane klasy Vue */
+.modal-fade-enter,
+.modal-fade-leave-active {
     opacity: 0;
-  }
-  .modal-fade-enter-active,
-  .modal-fade-leave-active {
+}
+.modal-fade-enter-active,
+.modal-fade-leave-active {
     transition: opacity .5s ease
-  }
+}
 @media only screen and (min-width: 768px){
-  .modal{
-    width: 500px;
-  }
-  .modal__header{
-      padding-bottom: 0.2rem;
-      margin-bottom: 0.4rem;
-  }
-  .modal__footer{
-      padding-top: 0.75rem;
-      padding-bottom: 0.75rem;
-  }
+    .body__label{
+        margin-bottom: 0rem;
+        margin-right: 0.75rem;
+        width: fit-content;
+    }
+    .body__group{
+        flex-direction: row;
+        align-items: baseline;
+    }
+    .modal{
+        min-width: 500px;
+        width: fit-content;
+    }
+    .modal__header{
+        padding-bottom: 0.2rem;
+        margin-bottom: 0.4rem;
+    }
+    .modal__footer{
+        padding-top: 0.75rem;
+        padding-bottom: 0.75rem;
+    }
 } 
 </style>

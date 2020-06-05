@@ -3,21 +3,21 @@
     <div class="modal--backdrop">
       <div class="modal" role="dialog" aria-labelledby="modalTitle" aria-describedby="modalDescription">
         
-        <header id="modalTitle" :class="isError ? 'modal__header--red' : 'modal__header--green'">
+        <header id="modalTitle" class="modal__header text__color--dark">
           <slot name="header">
-              <h4>Komunikat</h4> 
-              <button type="button" class="button--close" aria-label="Close modal" @click="close">&times;</button>
+              <h5>Pytanie</h5> 
           </slot>
-          
+          <button type="button" class="button--close text__color--dark" aria-label="Close modal" @click="close">&times;</button>
         </header>
 
-        <section id="modalBody" class="modal__body">
-          <slot name="body">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor, suscipit!</slot>
+        <section id="modalBody" class="modal__body text__color--dark">
+          <slot name="body">Treść pytania?</slot>
         </section>
 
         <footer class="modal__footer">
           <slot name="footer">
-            <button type="button" :class="isError ? 'button--red' : 'button--green'" aria-label="Close modal" @click="close">OK</button>
+            <button type="button" class="button--green" aria-label="Close modal" @click="close">Nie</button>
+            <button type="button" class="button--red" aria-label="Log out" @click="logOut">Tak</button>
           </slot>
         </footer>
 
@@ -28,14 +28,14 @@
 
 <script>
 export default {
-    name: 'ModalInfo',
-    props: {
-      isError: { type: Boolean, default: false}
-    },
+    name: 'ModalLogOut',
     methods: {
       close() {
         this.$emit('close');
       },
+      logOut(){
+          this.$emit('logOut');
+      }
     },
 }
 </script>
@@ -51,7 +51,6 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 1000;
   }
   .modal {
     background: #FFFFFF;
@@ -74,21 +73,15 @@ export default {
     display: flex;
     flex-direction: row
   }
-  .modal__header--green,
-  .modal__header--red {
+  .modal__header{
     padding-top: .5rem;
     padding-left: .5rem;
     padding-right: .5rem;
+    padding-bottom: .25rem;
     display: flex;
     flex-direction: row;
     border-bottom: 1px solid #eee;
     justify-content: space-between;
-  }
-  .modal__header--green{
-    color: rgb(0, 128, 0);
-  }
-  .modal__header--red{
-    color: rgb(255, 0, 0);
   }
   .button--close {
     border: none;
@@ -144,4 +137,17 @@ export default {
   .modal-fade-leave-active {
     transition: opacity .5s ease
   }
-</style>>
+@media only screen and (min-width: 768px){
+  .modal{
+    width: 500px;
+  }
+  .modal__header{
+      padding-bottom: 0.2rem;
+      margin-bottom: 0.4rem;
+  }
+  .modal__footer{
+      padding-top: 0.75rem;
+      padding-bottom: 0.75rem;
+  }
+} 
+</style>

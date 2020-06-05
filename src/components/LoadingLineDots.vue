@@ -22,6 +22,7 @@ export default { }
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 900;
   }
 /* wbudowane klasy Vue */
   .modal-fade-enter,

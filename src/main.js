@@ -3,8 +3,13 @@ import App from './App.vue';
 import router from "./router/index.js";
 import firebase from "./firebase.js";
 import store from "./store";
+import VTooltip from 'v-tooltip'
+
+Vue.use(VTooltip)
+
 
 Vue.config.productionTip = false
+
 
 
 
@@ -20,8 +25,6 @@ try {
             console.error('Session persistence: ' + error.code + ' ' + error.message);
         });
     //kontrola stanu użytkownika
-    // firebase.auth().onAuthStateChanged(function() {
-    //     if (!vm) {
     firebase.auth().onAuthStateChanged(function(user) {
         //aktualizacja stanu użytkownika
         store.dispatch("fetchUser", user);
@@ -30,6 +33,7 @@ try {
             vm = new Vue({
                 router,
                 store,
+                VTooltip,
                 render: h => h(App),
             }).$mount('#app')
         }

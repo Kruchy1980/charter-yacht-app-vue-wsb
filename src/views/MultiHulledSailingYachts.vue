@@ -6,7 +6,7 @@
         <img
           src="/images/slider-image/catamaran-sailing/1.catamaran-s.jpeg"
           alt="Multihulled sailing Yacht"
-        />
+        >
         <div class="banner__box__image__text">
           <p class="banner__box__image__text__title">Luksusowe jachty żaglowe wielokadłubowe</p>
         </div>
@@ -86,7 +86,7 @@
                     <img
                       src="../../public/card-images/catamarans/sailing/1.catamaran-s.jpeg"
                       alt="Sailing Yacht"
-                    />
+                    >
                   </div>
                   <div class="container__box__item__display">
                     <ul class="container__box__item__display__list">
@@ -111,7 +111,7 @@
                     <img
                       src="../../public/card-images/catamarans/sailing/3.catamaran-s.jpeg"
                       alt="Sailing Yacht"
-                    />
+                    >
                   </div>
                   <div class="container__box__item__display">
                     <ul class="container__box__item__display__list">
