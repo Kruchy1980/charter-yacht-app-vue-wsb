@@ -15,6 +15,8 @@ import DisplayAddedYacht from '@/components/DisplayAddedYacht';
 import AddYourYacht from '@/components/AddYourYacht';
 import DisplayAllAddedYachts from '@/components/DisplayAllAddedYachts ';
 import DisplayAllOrders from '@/components/DisplayAllOrders';
+// Strona under construction
+import PreparationPage from '@/components/PreparationPage'
 
 Vue.use(VueRouter);
 
@@ -91,6 +93,12 @@ const routes = [{
         path: "/added-yacht",
         name: "added-yacht",
         component: DisplayAddedYacht
+    },
+    // W przygotowaniu
+    {
+        path: "/preparation",
+        name: "preparation",
+        component: PreparationPage
     },
 
     { path: '*', redirect: '/' }, //przekierowanie dla błędnej nazwy strony
