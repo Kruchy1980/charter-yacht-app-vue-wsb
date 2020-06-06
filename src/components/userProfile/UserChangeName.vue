@@ -1,11 +1,11 @@
 <template>
   <transition name="modal-fade">
     <div class="modal--backdrop">
-      <div class="modal" role="dialog" aria-labelledby="modalTitle" aria-describedby="modalDescription" >
+      <div class="modal" role="dialog" aria-labelledby="modalTitle" aria-describedby="modalDescription">
         
-        <header id="modalTitle" class="modal__header text__color--dark" >
+        <header id="modalTitle" class="modal__header text__color--dark">
             <h5>Zmiana imienia</h5>
-          <button type="button" class="button--close text__color--dark" @click="close" aria-label="Close modal" >&times;</button>
+          <button type="button" class="button--close text__color--dark" aria-label="Close modal" @click="close">&times;</button>
         </header>
 
         <section id="modalBody" class="modal__body text__color--dark">
@@ -17,8 +17,8 @@
 
         <footer class="modal__footer">
           <slot name="footer">
-            <button type="button" class="button--red" @click="changeName" aria-label="Change Name" >Zatwierdź</button>
-            <button type="button" class="button--gray" @click="close" aria-label="Close modal" >Anuluj</button>
+            <button type="button" class="button--red" aria-label="Change Name" @click="changeName">Zatwierdź</button>
+            <button type="button" class="button--gray" aria-label="Close modal" @click="close">Anuluj</button>
           </slot>
         </footer>
 
@@ -31,7 +31,7 @@
 import InputText from "@/components/InputText";
 
 export default {
-    name: 'userChangeName',
+    name: 'UserChangeName',
     components: { InputText },
     methods: {
         close() {

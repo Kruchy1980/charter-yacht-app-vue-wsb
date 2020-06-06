@@ -18,13 +18,13 @@
                 type="text"
                 class="user__form__input text__color--dark"
                 readonly
-              />
+              >
               <button
                 v-tooltip.right="'zmień imię'"
-                @click="isUserChangeName=!isUserChangeName"
                 class="user__form__button"
+                @click="isUserChangeName=!isUserChangeName"
               >
-                <i class="fas fa-edit"></i>
+                <i class="fas fa-edit" />
               </button>
             </div>
           </div>
@@ -36,24 +36,24 @@
                 type="text"
                 class="user__form__input text__color--dark"
                 readonly
-              />
+              >
               <button
                 v-tooltip.right="'zmień e-mail'"
-                @click="isUserChangeMail=!isUserChangeMail"
                 class="user__form__button"
+                @click="isUserChangeMail=!isUserChangeMail"
               >
-                <i class="fas fa-edit"></i>
+                <i class="fas fa-edit" />
               </button>
             </div>
           </div>
           <div class="user__button__group">
             <button
-              @click="isUserChangePass=!isUserChangePass"
               class="user__button--red"
+              @click="isUserChangePass=!isUserChangePass"
             >Zmień hasło</button>
             <button
-              @click="isUserDeleteAccount=!isUserDeleteAccount"
               class="user__button--red"
+              @click="isUserDeleteAccount=!isUserDeleteAccount"
             >Usuń konto</button>
           </div>
         </div>
@@ -96,9 +96,9 @@
     <div v-show="!isLoggedUser" class="container" />
     <!-- okna modalne -->
     <ModalInfo v-show="isModalInfoVisible" :is-error="modalIsError" @close="closeModalInfo">
-      <template v-slot:header>{{modalTitle}}</template>
+      <template v-slot:header>{{ modalTitle }}</template>
       <template v-slot:body>
-        <div>{{modalMsg}}</div>
+        <div>{{ modalMsg }}</div>
       </template>
     </ModalInfo>
     <UserModal v-show="isUserModalVisible" />
@@ -142,7 +142,7 @@ import UserChangePass from "@/components/userProfile/UserChangePass";
 import UserDeleteAccount from "@/components/userProfile/UserDeleteAccount";
 import { mapState } from "vuex";
 export default {
-  name: "userAccount",
+  name: "UserAccount",
   components: {
     MainMenu,
     MainFooter,

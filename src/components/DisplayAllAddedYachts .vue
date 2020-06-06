@@ -24,7 +24,7 @@
           </p>
           <!-- <div class="box__inner__content__yacht__item"> -->
           <div class="box__inner__content__yacht__inner">
-            <img :src="yacht.image_url" :alt="yacht.yacht_type" :title="yacht.yacht_type" />
+            <img :src="yacht.image_url" :alt="yacht.yacht_type" :title="yacht.yacht_type">
           </div>
           <!-- </div> -->
           <!-- Tutaj główny display dodanego jachtu -->

@@ -14,15 +14,7 @@
           >&#8629; Powrót</a>
         </div>
       </div>
-      <!-- Tutaj wygląd wyświetlający errory -->
-      <!-- <div v-if="errors" class="information__errors">
-        <p class="information__errors__text">Następujące pola nie zostały poprawnie wypełnione:</p>
-        <ul class="information__errors__list">
-          <template v-for="(errors, outerIndex) in validationErrors">
-            <li v-for="(error, index) in errors" :key="outerIndex + '-' + index">{{ error }}</li>
-          </template>
-        </ul>
-      </div>-->
+
       <form action class="container__main-form" @submit.prevent="handleSubmit">
         <div class="container__main-form__items">
           <div class="container__main-form__items__item">
@@ -51,34 +43,39 @@
                 v-model="country_extend"
                 type="text"
                 class="container__main-form__items__item__label__content"
-              />
+              >
             </label>
           </div>
           <div class="container__main-form__items__item">
             <label for class="container__main-form__items__item__label">
               Termin [od]:
-              <span class="container__main-form__items__item__label--must">*</span>
+              <span
+                v-if="!$v.date_from.required"
+                class="error"
+              >Podanie daty rozpoczęcia czarteru jest wymagane w następującym formacie (DD/MM/YYYY)</span>
+              <!-- Do inputa dodajemy pola @input i @blur czyli v-on które będą definiowały co stanie się po rozpoczęciu wpisywania treści do inputa oraz po wyjściu z niego należy również dodać required i jeszcze trzeba podać w jaki sposób wyświetlać message - v-bind lub : error-messages-->
               <input
                 id="date_from"
                 v-model="date_from"
                 type="date"
                 class="container__main-form__items__item__label__content"
-                required
-              />
+              >
               <!-- required -->
             </label>
           </div>
           <div class="container__main-form__items__item">
             <label for class="container__main-form__items__item__label">
               Termin [do]:
-              <span class="container__main-form__items__item__label--must">*</span>
+              <span
+                v-if="!$v.date_to.required"
+                class="error"
+              >Podanie daty zakończenia czarteru jest wymagane w następującym formacie (DD/MM/YYYY)</span>
               <input
                 id="date_to"
                 v-model="date_to"
                 type="date"
                 class="container__main-form__items__item__label__content"
-                reequired
-              />
+              >
             </label>
           </div>
           <div class="container__main-form__items__item">
@@ -107,7 +104,7 @@
                 type="number"
                 class="container__main-form__items__item__label__content"
                 placeholder="Podaj liczbę kabin"
-              />
+              >
             </label>
           </div>
           <div class="container__main-form__items__item">
@@ -119,7 +116,7 @@
                 type="number"
                 class="container__main-form__items__item__label__content"
                 placeholder="Podaj liczbę uczestników/gości"
-              />
+              >
             </label>
           </div>
           <div class="container__main-form__items__item">
@@ -137,62 +134,77 @@
           <div class="container__main-form__items__item">
             <label for class="container__main-form__items__item__label">
               Imię:
-              <span class="container__main-form__items__item__label--must">*</span>
+              <!-- <span class="container__main-form__items__item__label--must">*</span> -->
               <input
                 id="name"
                 v-model="name"
                 type="text"
                 class="container__main-form__items__item__label__content"
                 placeholder="Podaj poprawne Imię minimum 3 litery"
-                required
-              />
+              >
+              <span v-if="!$v.name.required" class="error">Pole Imię jest wymagane</span>
+              <span
+                v-if="!$v.name.minLength"
+                class="error"
+              >Imię musi zawierać co najmniej {{ $v.name.$params.minLength.min }} znaki.</span>
               <!-- required -->
             </label>
           </div>
+
           <!-- pattern="[A-Za-z\b[ą,ć,ę,ł,ó,ż,ź,\-]]{3,}" -->
           <div class="container__main-form__items__item">
             <label for class="container__main-form__items__item__label">
               Nazwisko:
-              <span class="container__main-form__items__item__label--must">*</span>
+              <!-- <span class="container__main-form__items__item__label--must">*</span> -->
               <input
                 id="surname"
                 v-model="surname"
                 type="text"
                 class="container__main-form__items__item__label__content"
                 placeholder="Podaj poprawne Nazwisko minimum 3 litery"
-                required
-              />
+              >
+              <span v-if="!$v.surname.required" class="error">Pole Nazwisko jest wymagane</span>
+              <span
+                v-if="!$v.surname.minLength"
+                class="error"
+              >Nazwisko musi zawierać co najmniej {{ $v.surname.$params.minLength.min }} znaki.</span>
               <!-- required -->
             </label>
           </div>
           <div class="container__main-form__items__item">
             <label for class="container__main-form__items__item__label">
               Adres Email:
-              <span class="container__main-form__items__item__label--must">*</span>
+              <!-- <span class="container__main-form__items__item__label--must">*</span> -->
               <input
                 id="email"
                 v-model="email"
                 type="email"
                 class="container__main-form__items__item__label__content"
                 placeholder="Podaj poprawny adres Email aby Twoja Prośba została zarejestrowana"
-                required
-              />
+              >
+              <span v-if="!$v.email.required" class="error">Pole Email jest wymagane</span>
+              <span v-if="!$v.email.email" class="error">Wpisz poprawny adres e-mail</span>
               <!-- required -->
             </label>
           </div>
+
           <!-- pattern="[0-9]{3}-[0-9]{3}-[0-9]{3}" -->
           <div class="container__main-form__items__item">
             <label for class="container__main-form__items__item__label">
               Numer telefonu:
-              <span class="container__main-form__items__item__label--must">*</span>
+              <!-- <span class="container__main-form__items__item__label--must">*</span> -->
               <input
                 id="phone"
                 v-model="phone"
                 type="tel"
                 class="container__main-form__items__item__label__content"
                 placeholder="Wpisz numer telefonu."
-                required
-              />
+              >
+              <span v-if="!$v.phone.required" class="error">Pole Numer telefonu jest wymagane</span>
+              <span
+                v-if="!$v.phone.minLength"
+                class="error"
+              >Pole Numer telefonu musi zawierać co najmniej {{ $v.phone.$params.minLength.min }} znaków.</span>
               <!-- required -->
             </label>
           </div>
@@ -208,8 +220,9 @@
 import MainMenu from "@/components/MainMenu";
 import MainFooter from "@/components/MainFooter";
 import firebase from "@/firebase.js";
-import validation from "@/validation";
-import Vue from "vue";
+// import validation from "@/validation";
+// import Vue from "vue";
+import { required, email, minLength } from "vuelidate/lib/validators";
 export default {
   name: "AskForCharterForm",
   components: {
@@ -246,38 +259,18 @@ export default {
       guests: null,
       name: "",
       surname: "",
-      phone: null,
-      // właściwość zawierająca errory
-      validationErrors: {}
+      phone: null
     };
   },
-  // właściwość sprawdzająca czy są  errory
-  // computed: {
-  //   errors() {
-  //     return Object.values(this.validationErrors).length;
-  //   }
-  // },
-  // // watchersy nasłuchujące czy są zmiany w polach
-  // watch: {
-  //   date_from(value) {
-  //     this.validateWatch("date_from", value);
-  //   },
-  //   date_to(value) {
-  //     this.validateWatch("date_to", value);
-  //   },
-  //   name(value) {
-  //     this.validateWatch("name", value);
-  //   },
-  //   surname(value) {
-  //     this.validateWatch("surname", value);
-  //   },
-  //   email(value) {
-  //     this.validateWatch("email", value);
-  //   },
-  //   phone(value) {
-  //     this.validateWatch("phone", value);
-  //   }
-  // },
+  // Po zaimportowaniu walidatorów z vuelidate teraz utwórzmy validowanie interesujących nas pól
+  validations: {
+    date_from: { required },
+    date_to: { required },
+    name: { required, minLength: minLength(3) },
+    surname: { required, minLength: minLength(3) },
+    email: { required, email },
+    phone: { required, minLength: minLength(9) }
+  },
 
   methods: {
     // Pobieranie textu z selecta
@@ -289,67 +282,45 @@ export default {
       let countries = this.countryChoices.map(obj => obj.value);
       console.log(countries);
     },
-    // // validateWatch tworzenie metody
-    // validateWatch(propertyName, value) {
-    //   this.validate(propertyName, value);
-    // },
-    // // deklaracja validate
-    // validate(propertyName, value) {
-    //   // zadeklarowanie pustej tablicy na błędy
-    //   let errors = [];
 
-    //   Object(validation)[propertyName].forEach(err => {
-    //     if (!err.validator(value)) {
-    //       errors.push(err.message);
-    //     }
-    //   });
-    //   // Sprawdzenie czy są errory jakieś
-    //   if (errors.length > 0) {
-    //     Vue.set(this.validationErrors, propertyName, errors);
-    //   } else {
-    //     // Jeśli ich nie ma to czyść listę errorów
-    //     Vue.delete(this.validationErrors, propertyName);
-    //   }
-    // },
-    // // Zwalidować wszystkie metody teraz
-    // validateAll() {
-    //   this.validate("date_from", this.date_from);
-    //   this.validate("date_to", this.date_to);
-    //   this.validate("name", this.name);
-    //   this.validate("surname", this.surname);
-    //   this.validate("email", this.email);
-    //   this.validate("phone", this.phone);
-
-    //   // Zwrot zwalidowanych wartości
-    //   return this.errors > 0 ? false : true;
-    // },
     handleSubmit() {
-      // // Sprawdzenie czy działa
-      // if (this.validateAll()) {
-      //   console.log(
-      //     `FORM SUBMITTED: ${this.date_from}, ${this.date_to}, ${this.name}, ${this.surname}, ${this.email}, ${this.phone},`
-      //   );
-      // }
-      let db = firebase.firestore();
-      db.collection("Charter_Order")
-        .add({
-          cabins: this.cabins,
-          country: this.selectedCountry,
-          country_extend: this.country_extend,
-          date_from: this.date_from,
-          date_to: this.date_to,
-          description: this.description,
-          email: this.email,
-          guests: this.guests,
-          name: this.name,
-          surname: this.surname,
-          phone: this.phone,
-          type: this.selectedType
-        })
-        .then(docRef => {
-          this.$router.push("/list-of-added-charter-orders");
-        })
-        .catch(error => console.log(err));
+      // Sprawdzenie czy działa
+      if (
+        this.$v.name.required &&
+        this.$v.name.minLength &&
+        this.$v.date_from.required &&
+        this.$v.date_to.required &&
+        this.$v.surname.required &&
+        this.$v.surname.minLength &&
+        this.$v.email.required &&
+        this.$v.email.email &&
+        this.$v.phone.required &&
+        this.$v.phone.minLength
+      ) {
+        console.log("Formularz wysłany :)");
+        let db = firebase.firestore();
+        db.collection("Charter_Order")
+          .add({
+            cabins: this.cabins,
+            country: this.selectedCountry,
+            country_extend: this.country_extend,
+            date_from: this.date_from,
+            date_to: this.date_to,
+            description: this.description,
+            email: this.email,
+            guests: this.guests,
+            name: this.name,
+            surname: this.surname,
+            phone: this.phone,
+            type: this.selectedType
+          })
+          .then(docRef => {
+            this.$router.push("/list-of-added-charter-orders");
+          })
+          .catch(error => console.log(err));
+      } else {
+        alert("Wypełnij poprawnie wszystkie pola!");
+      }
     }
   }
 };
@@ -439,5 +410,12 @@ $media-content: "only screen and (min-width : 960px)";
       }
     }
   }
+}
+// Style errorów
+.error {
+  padding-top: 5px;
+  font-size: 10px;
+  text-decoration: underline;
+  color: #ff0000;
 }
 </style>
