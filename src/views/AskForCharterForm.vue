@@ -43,15 +43,15 @@
                 v-model="country_extend"
                 type="text"
                 class="container__main-form__items__item__label__content"
-              />
+              >
             </label>
           </div>
           <div class="container__main-form__items__item">
             <label for class="container__main-form__items__item__label">
               Termin [od]:
               <span
-                class="error"
                 v-if="!$v.date_from.required"
+                class="error"
               >Podanie daty rozpoczęcia czarteru jest wymagane w następującym formacie (DD/MM/YYYY)</span>
               <!-- Do inputa dodajemy pola @input i @blur czyli v-on które będą definiowały co stanie się po rozpoczęciu wpisywania treści do inputa oraz po wyjściu z niego należy również dodać required i jeszcze trzeba podać w jaki sposób wyświetlać message - v-bind lub : error-messages-->
               <input
@@ -59,7 +59,7 @@
                 v-model="date_from"
                 type="date"
                 class="container__main-form__items__item__label__content"
-              />
+              >
               <!-- required -->
             </label>
           </div>
@@ -67,15 +67,15 @@
             <label for class="container__main-form__items__item__label">
               Termin [do]:
               <span
-                class="error"
                 v-if="!$v.date_to.required"
+                class="error"
               >Podanie daty zakończenia czarteru jest wymagane w następującym formacie (DD/MM/YYYY)</span>
               <input
                 id="date_to"
                 v-model="date_to"
                 type="date"
                 class="container__main-form__items__item__label__content"
-              />
+              >
             </label>
           </div>
           <div class="container__main-form__items__item">
@@ -104,7 +104,7 @@
                 type="number"
                 class="container__main-form__items__item__label__content"
                 placeholder="Podaj liczbę kabin"
-              />
+              >
             </label>
           </div>
           <div class="container__main-form__items__item">
@@ -116,7 +116,7 @@
                 type="number"
                 class="container__main-form__items__item__label__content"
                 placeholder="Podaj liczbę uczestników/gości"
-              />
+              >
             </label>
           </div>
           <div class="container__main-form__items__item">
@@ -141,12 +141,12 @@
                 type="text"
                 class="container__main-form__items__item__label__content"
                 placeholder="Podaj poprawne Imię minimum 3 litery"
-              />
-              <span class="error" v-if="!$v.name.required">Pole Imię jest wymagane</span>
+              >
+              <span v-if="!$v.name.required" class="error">Pole Imię jest wymagane</span>
               <span
-                class="error"
                 v-if="!$v.name.minLength"
-              >Imię musi zawierać co najmniej {{$v.name.$params.minLength.min}} znaki.</span>
+                class="error"
+              >Imię musi zawierać co najmniej {{ $v.name.$params.minLength.min }} znaki.</span>
               <!-- required -->
             </label>
           </div>
@@ -162,12 +162,12 @@
                 type="text"
                 class="container__main-form__items__item__label__content"
                 placeholder="Podaj poprawne Nazwisko minimum 3 litery"
-              />
-              <span class="error" v-if="!$v.surname.required">Pole Nazwisko jest wymagane</span>
+              >
+              <span v-if="!$v.surname.required" class="error">Pole Nazwisko jest wymagane</span>
               <span
-                class="error"
                 v-if="!$v.surname.minLength"
-              >Nazwisko musi zawierać co najmniej {{$v.surname.$params.minLength.min}} znaki.</span>
+                class="error"
+              >Nazwisko musi zawierać co najmniej {{ $v.surname.$params.minLength.min }} znaki.</span>
               <!-- required -->
             </label>
           </div>
@@ -181,9 +181,9 @@
                 type="email"
                 class="container__main-form__items__item__label__content"
                 placeholder="Podaj poprawny adres Email aby Twoja Prośba została zarejestrowana"
-              />
-              <span class="error" v-if="!$v.email.required">Pole Email jest wymagane</span>
-              <span class="error" v-if="!$v.email.email">Wpisz poprawny adres e-mail</span>
+              >
+              <span v-if="!$v.email.required" class="error">Pole Email jest wymagane</span>
+              <span v-if="!$v.email.email" class="error">Wpisz poprawny adres e-mail</span>
               <!-- required -->
             </label>
           </div>
@@ -199,12 +199,12 @@
                 type="tel"
                 class="container__main-form__items__item__label__content"
                 placeholder="Wpisz numer telefonu."
-              />
-              <span class="error" v-if="!$v.phone.required">Pole Numer telefonu jest wymagane</span>
+              >
+              <span v-if="!$v.phone.required" class="error">Pole Numer telefonu jest wymagane</span>
               <span
-                class="error"
                 v-if="!$v.phone.minLength"
-              >Pole Numer telefonu musi zawierać co najmniej {{$v.phone.$params.minLength.min}} znaków.</span>
+                class="error"
+              >Pole Numer telefonu musi zawierać co najmniej {{ $v.phone.$params.minLength.min }} znaków.</span>
               <!-- required -->
             </label>
           </div>
@@ -260,8 +260,6 @@ export default {
       name: "",
       surname: "",
       phone: null
-      // właściwość zawierająca errory
-      // validationErrors: {}
     };
   },
   // Po zaimportowaniu walidatorów z vuelidate teraz utwórzmy validowanie interesujących nas pól
@@ -272,27 +270,6 @@ export default {
     surname: { required, minLength: minLength(3) },
     email: { required, email },
     phone: { required, minLength: minLength(9) }
-  },
-  // Aby poprawnie zwalidować nasze pola musimy podać w jaki sposób mają wyświetlać się errory do tego celu tworzymy computed methods
-  computed: {
-    // Właściwość przypisana do inputa date_from
-    // dateFromErrors() {
-    //   const errors = [];
-    //   if (!this.$v.date_from.$dirty) return errors;
-    //   !this.$v.date_from.required &&
-    //     errors.push(
-    //       "Musisz wybrać lub podać datę w formacie MM/DD/YYY - miesiąc/dzień/rok"
-    //     );
-    //   return errors;
-    // },
-    // nameErrors() {
-    //   const errors = [];
-    //   if (!this.name.$dirty) return errors;
-    //   !this.name.required && errors.push("Wypełnienie pola Imię jest wymagane");
-    //   !this.name.minLength &&
-    //     errors.push("Pole musi zawirać co najmniej 3 znaki.");
-    //   return errors;
-    // }
   },
 
   methods: {

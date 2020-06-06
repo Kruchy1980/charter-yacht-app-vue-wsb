@@ -1,11 +1,11 @@
 <template>
   <transition name="modal-fade">
     <div class="modal--backdrop">
-      <div class="modal" role="dialog" aria-labelledby="modalTitle" aria-describedby="modalDescription" >
+      <div class="modal" role="dialog" aria-labelledby="modalTitle" aria-describedby="modalDescription">
         
-        <header id="modalTitle" class="modal__header text__color--dark" >
+        <header id="modalTitle" class="modal__header text__color--dark">
             <h5>Usuwanie konta</h5>
-          <button type="button" class="button--close text__color--dark" @click="close" aria-label="Close modal" >&times;</button>
+          <button type="button" class="button--close text__color--dark" aria-label="Close modal" @click="close">&times;</button>
         </header>
 
         <section id="modalBody" class="modal__body text__color--dark">
@@ -25,8 +25,8 @@
 
         <footer class="modal__footer">
           <slot name="footer">
-            <button type="button" class="button--red" @click="deleteAccount" aria-label="Delete account" >Zatwierdź</button>
-            <button type="button" class="button--gray" @click="close" aria-label="Close modal" >Anuluj</button>
+            <button type="button" class="button--red" aria-label="Delete account" @click="deleteAccount">Zatwierdź</button>
+            <button type="button" class="button--gray" aria-label="Close modal" @click="close">Anuluj</button>
           </slot>
         </footer>
 
@@ -40,7 +40,7 @@ import InputEmail from "@/components/InputEmail";
 import InputPassword from "@/components/InputPassword";
 
 export default {
-    name: 'userDeleteAccount',
+    name: 'UserDeleteAccount',
     components: { InputEmail, InputPassword },
     methods: {
         close() {
