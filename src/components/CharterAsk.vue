@@ -43,19 +43,19 @@
     <ul class="main-content__box__inner__right__content__destination__list">
       <li class="main-content__box__inner__right__content__destination__list__item">
         <a
-          href
+          :href="prepPage"
           class="main-content__box__inner__right__content__destination__list__item__link"
         >Polska</a>
       </li>
       <li class="main-content__box__inner__right__content__destination__list__item">
         <a
-          href
+          :href="prepPage"
           class="main-content__box__inner__right__content__destination__list__item__link"
         >Europa</a>
       </li>
       <li class="main-content__box__inner__right__content__destination__list__item">
         <a
-          href
+          :href="prepPage"
           class="main-content__box__inner__right__content__destination__list__item__link"
         >Świat</a>
       </li>
@@ -67,6 +67,7 @@
 export default {
   data() {
     return {
+      prepPage: "/preparation",
       oneHulledSailing: "/one-hulled-sailing-yachts",
       multiHulledSailing: "/multi-hulled-sailing-yachts",
       oneHulledMotor: "/one-hulled-motor-yachts",

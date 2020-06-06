@@ -1,21 +1,21 @@
 <template>
   <transition name="modal-fade">
     <div class="modal--backdrop">
-      <div class="modal" role="dialog" aria-labelledby="modalTitle" aria-describedby="modalDescription" >
+      <div class="modal" role="dialog" aria-labelledby="modalTitle" aria-describedby="modalDescription">
         
-        <header id="modalTitle" class="modal__header text__color--dark" >
+        <header id="modalTitle" class="modal__header text__color--dark">
             <h5>Zmiana hasła</h5>
-          <button type="button" class="button--close text__color--dark" @click="close" aria-label="Close modal" >&times;</button>
+          <button type="button" class="button--close text__color--dark" aria-label="Close modal" @click="close">&times;</button>
         </header>
 
         <section id="modalBody" class="modal__body text__color--dark">
             <div class="body__group">
                   <label class="body__label--bold" for="createPassword">Nowe hasło:</label>
-                  <InputPassword class="body__control" id="createPassword" ref="createPassword" :min-length="6" :error-text="'Hasło musi mieć minimum 6 znaków.'" />
+                  <InputPassword id="createPassword" ref="createPassword" class="body__control" :min-length="6" :error-text="'Hasło musi mieć minimum 6 znaków.'" />
               </div>
               <div class="body__group">
                   <label class="body__label--bold" for="createPassword2">Powtórz hasło:</label>
-                  <InputPassword class="body__control" id="createPassword2" ref="createPassword2" :min-length="6" :error-text="'Powtórz hasło'" @verifypass="verifyPass" />
+                  <InputPassword id="createPassword2" ref="createPassword2" class="body__control" :min-length="6" :error-text="'Powtórz hasło'" @verifypass="verifyPass" />
               </div>
             <p class="body__p">Podaj aktualne dane konta aby potwierdzić zmianę hasła.</p>
             <div class="body__group">
@@ -30,8 +30,8 @@
 
         <footer class="modal__footer">
           <slot name="footer">
-            <button type="button" class="button--red" @click="changePass" aria-label="Change mail" >Zatwierdź</button>
-            <button type="button" class="button--gray" @click="close" aria-label="Close modal" >Anuluj</button>
+            <button type="button" class="button--red" aria-label="Change mail" @click="changePass">Zatwierdź</button>
+            <button type="button" class="button--gray" aria-label="Close modal" @click="close">Anuluj</button>
           </slot>
         </footer>
 
@@ -45,7 +45,7 @@ import InputEmail from "@/components/InputEmail";
 import InputPassword from "@/components/InputPassword";
 
 export default {
-    name: 'userChangePassword',
+    name: 'UserChangePassword',
     components: { InputEmail, InputPassword },
     methods: {
         close() {

@@ -6,7 +6,7 @@
         <img
           src="/images/slider-image/catamaran-sailing/1.catamaran-s.jpeg"
           alt="Multihulled sailing Yacht"
-        >
+        />
         <div class="banner__box__image__text">
           <p class="banner__box__image__text__title">Luksusowe jachty żaglowe wielokadłubowe</p>
         </div>
@@ -59,18 +59,20 @@
                   <!-- <div
                     class="main-content__box__inner__left__content__description__inner__nav__container__menu"
                   >-->
-                  <a
+                  <p
                     class="main-content__box__inner__left__content__description__inner__nav__container__link"
                     href="#"
-                  >Polska</a>
-                  <a
+                  >Polska</p>
+                  <p
+                    @click="isDisplayed"
                     class="main-content__box__inner__left__content__description__inner__nav__container__link"
                     href="#"
-                  >Europa</a>
-                  <a
+                  >Europa</p>
+                  <p
+                    @click="isDisplayed1"
                     class="main-content__box__inner__left__content__description__inner__nav__container__link"
                     href="#"
-                  >Świat</a>
+                  >Świat</p>
                   <!-- </div> -->
                   <!-- </div> -->
                 </div>
@@ -86,7 +88,7 @@
                     <img
                       src="../../public/card-images/catamarans/sailing/1.catamaran-s.jpeg"
                       alt="Sailing Yacht"
-                    >
+                    />
                   </div>
                   <div class="container__box__item__display">
                     <ul class="container__box__item__display__list">
@@ -111,7 +113,7 @@
                     <img
                       src="../../public/card-images/catamarans/sailing/3.catamaran-s.jpeg"
                       alt="Sailing Yacht"
-                    >
+                    />
                   </div>
                   <div class="container__box__item__display">
                     <ul class="container__box__item__display__list">
@@ -267,7 +269,7 @@ $media-content: "only screen and (min-width : 960px)";
             background-color: #fff;
             &__nav {
               // border: 1px solid #ddd;
-              padding: 20px 0;
+              // padding: 20px 0;
               &__container {
                 // background: yellow;
                 &__link {

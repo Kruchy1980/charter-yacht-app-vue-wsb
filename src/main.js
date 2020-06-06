@@ -4,11 +4,14 @@ import router from "./router/index.js";
 import firebase from "./firebase.js";
 import store from "./store";
 import VTooltip from 'v-tooltip'
+import Vuelidate from 'vuelidate';
 
-Vue.use(VTooltip)
+Vue.use(VTooltip);
+
+Vue.use(Vuelidate);
 
 
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
 
 
 

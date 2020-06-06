@@ -3,7 +3,7 @@
     <MainMenu />
     <div class="banner__box">
       <div class="banner__box__image">
-        <img src="/images/slider-image/catamaran-motor/2.catamaran-m.jpeg" alt>
+        <img src="/images/slider-image/catamaran-motor/2.catamaran-m.jpeg" alt />
         <div class="banner__box__image__text">
           <p class="banner__box__image__text__title">Luksusowe jachty motorowe wielokadłubowe</p>
         </div>
@@ -56,18 +56,20 @@
                   <!-- <div
                     class="main-content__box__inner__left__content__description__inner__nav__container__menu"
                   >-->
-                  <a
+                  <p
                     class="main-content__box__inner__left__content__description__inner__nav__container__link"
                     href="#"
-                  >Polska</a>
-                  <a
+                  >Polska</p>
+                  <p
+                    @click="isDisplayed"
                     class="main-content__box__inner__left__content__description__inner__nav__container__link"
                     href="#"
-                  >Europa</a>
-                  <a
+                  >Europa</p>
+                  <p
+                    @click="isDisplayed1"
                     class="main-content__box__inner__left__content__description__inner__nav__container__link"
                     href="#"
-                  >Świat</a>
+                  >Świat</p>
                   <!-- </div> -->
                   <!-- </div> -->
                 </div>
@@ -80,7 +82,7 @@
                 <!-- First item -->
                 <div class="container__box__item">
                   <div class="container__box__item__image">
-                    <img src="/card-images/catamarans/motor/3.catamaran-m.jpeg" alt="Sailing Yacht">
+                    <img src="/card-images/catamarans/motor/3.catamaran-m.jpeg" alt="Sailing Yacht" />
                   </div>
                   <div class="container__box__item__display">
                     <ul class="container__box__item__display__list">
@@ -102,7 +104,7 @@
                 <!-- Second item -->
                 <div class="container__box__item">
                   <div class="container__box__item__image">
-                    <img src="/card-images/catamarans/motor/1.catamaran-m.jpeg" alt="Sailing Yacht">
+                    <img src="/card-images/catamarans/motor/1.catamaran-m.jpeg" alt="Sailing Yacht" />
                   </div>
                   <div class="container__box__item__display">
                     <ul class="container__box__item__display__list">
@@ -121,6 +123,60 @@
                     </ul>
                   </div>
                 </div>
+              </div>
+            </section>
+            <section class="container" v-if="isDisplayed">
+              <div class="container__box">
+                <!-- First item -->
+                <div class="container__box__item">
+                  <div class="container__box__item__image">
+                    <img src="/card-images/catamarans/motor/3.catamaran-m.jpeg" alt="Sailing Yacht" />
+                  </div>
+                  <div class="container__box__item__display">
+                    <ul class="container__box__item__display__list">
+                      <li class="container__box__item__display__list__item--type">
+                        <h3>Typ Jachtu</h3>
+                      </li>
+                      <li class="container__box__item__display__list__item--place">
+                        <p>Ilość kabin/gości: 4/8</p>
+                      </li>
+                      <li class="container__box__item__display__list__item--crew">
+                        <p>Ilość załogi: 2</p>
+                      </li>
+                      <li class="container__box__item__display__list__item--price">
+                        <p>Koszta</p>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <!-- Second item -->
+              </div>
+            </section>
+            <section class="container" v-if="isDisplayed1">
+              <div class="container__box">
+                <!-- First item -->
+                <div class="container__box__item">
+                  <div class="container__box__item__image">
+                    <img src="/card-images/catamarans/motor/3.catamaran-m.jpeg" alt="Sailing Yacht" />
+                  </div>
+                  <div class="container__box__item__display">
+                    <ul class="container__box__item__display__list">
+                      <li class="container__box__item__display__list__item--type">
+                        <h3>Typ Jachtu</h3>
+                      </li>
+                      <li class="container__box__item__display__list__item--place">
+                        <p>Ilość kabin/gości: 4/8</p>
+                      </li>
+                      <li class="container__box__item__display__list__item--crew">
+                        <p>Ilość załogi: 2</p>
+                      </li>
+                      <li class="container__box__item__display__list__item--price">
+                        <p>Koszta</p>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <!-- Second item -->
               </div>
             </section>
           </div>
@@ -149,8 +205,18 @@ export default {
   },
   data() {
     return {
+      isDisplayed: false,
+      isDisplayed1: false,
       charterForm: "/ask-for-charter-form"
     };
+  },
+  methods: {
+    firstView() {
+      this.isDisplayed = !this.isDisplayed;
+    },
+    secondView() {
+      this.isDisplayed1 = this.isDisplayed1;
+    }
   }
 };
 </script>
@@ -259,7 +325,7 @@ $media-content: "only screen and (min-width : 960px)";
             background-color: #fff;
             &__nav {
               // border: 1px solid #ddd;
-              padding: 20px 0;
+              // padding: 20px 0;
               &__container {
                 // background: yellow;
                 &__link {

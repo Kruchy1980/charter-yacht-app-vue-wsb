@@ -21,57 +21,73 @@
                 <div class="modal__box__window__form__items__item">
                   <label for class="modal__box__window__form__items__item__label">
                     Typ Jachtu:
-                    <span class="modal__box__window__form__items__item__label--must">*</span>
+                    <!-- <span class="modal__box__window__form__items__item__label--must">*</span> -->
+                    <span class="error__normal" v-if="!$v.yacht_type.required">(Wymagane)</span>
+                    <span
+                      class="error"
+                      v-if="!$v.yacht_type.minLength"
+                    >Typ jachtu musi zawierać co najmniej {{$v.yacht_type.$params.minLength.min}} znaki.</span>
                     <input
                       v-model="yacht_type"
                       type="text"
                       class="modal__box__window__form__items__item__label__content"
                       placeholder="Podaj typ swojego jachtu"
-                      required
-                    >
+                    />
                   </label>
                 </div>
 
                 <div class="modal__box__window__form__items__item">
                   <label for class="modal__box__window__form__items__item__label">
                     Ilość kabin:
-                    <span class="modal__box__window__form__items__item__label--must">*</span>
+                    <!-- <span class="modal__box__window__form__items__item__label--must">*</span> -->
+                    <span class="error__normal" v-if="!$v.cabins.required">(Wymagane)</span>
+                    <span
+                      class="error"
+                      v-if="!$v.cabins.between"
+                    >Ilość kabin musi mieścić się w przedziale od {{$v.cabins.$params.between.min}} wzwyż</span>
                     <input
                       v-model="cabins"
                       type="number"
                       class="modal__box__window__form__items__item__label__content"
                       placeholder="Podaj ilość kabin użytkowych"
-                      required
-                    >
+                    />
                   </label>
                 </div>
                 <div class="modal__box__window__form__items__item">
                   <label for class="modal__box__window__form__items__item__label">
                     Maksymalna ilość gości:
-                    <span
+                    <!-- <span
                       class="modal__box__window__form__items__item__label--must"
-                    >*</span>
+                    >*</span>-->
+                    <span class="error__normal" v-if="!$v.guests.required">(Wymagane)</span>
+                    <span
+                      class="error"
+                      v-if="!$v.guests.between"
+                    >Ilość gości musi być większa niż {{$v.guests.$params.between.min}}</span>
                     <input
                       v-model="guests"
                       type="number"
                       class="modal__box__window__form__items__item__label__content"
                       placeholder="Podaj maksymalną ilość gości"
-                      required
-                    >
+                    />
                   </label>
                 </div>
                 <div class="modal__box__window__form__items__item">
                   <label for class="modal__box__window__form__items__item__label">
                     Dodatkowe informacje (np. rejon pływania):
-                    <span
+                    <!-- <span
                       class="modal__box__window__form__items__item__label--must"
-                    >*</span>
+                    >*</span>-->
+                    <span class="error__normal" v-if="!$v.extended_info.required">(Wymagane)</span>
+                    <span
+                      class="error"
+                      v-if="!$v.extended_info.minLength"
+                    >Informacja dodatkowa musi zawierać co najmniej {{$v.extended_info.$params.minLength.min}} znaków.</span>
                     <textarea
                       v-model="extended_info"
                       class="modal__box__window__form__items__item__label__content"
                       rows="6"
                       placeholder="Podaj informacje dodatkowe"
-                      required
                     />
                   </label>
                 </div>
@@ -79,23 +95,29 @@
                 <div class="modal__box__window__form__items__item">
                   <label for class="modal__box__window__form__items__item__label">
                     Koszta czarteru [PLN]/tydzień
-                    <span
+                    <!-- <span
                       class="modal__box__window__form__items__item__label--must"
-                    >*</span>
+                    >*</span>-->
+                    <span class="error__normal" v-if="!$v.price.required">Wymagane</span>
+                    <span
+                      class="error"
+                      v-if="!$v.price.between"
+                    >Koszt czarteru musi wynosić co najmniej {{$v.price.$params.between.min}} [PLN]</span>
                     <input
                       v-model="price"
                       type="number"
                       class="modal__box__window__form__items__item__label__content"
                       placeholder="Podaj maksymalny koszt czarteru jachtu"
-                      required
-                    >
+                    />
                   </label>
                 </div>
 
                 <div class="modal__box__windowform__form__items__item--skipper">
                   <label class="modal__box__window__form__items__item__label">
                     Dodaj zdjęcie:
-                    <span class="modal__box__window__form__items__item__label--must">*</span>
+                    <!-- <span class="modal__box__window__form__items__item__label--must">*</span> -->
+                    <span class="error__normal">(Wymagane)</span>
+
                     <progress
                       class="modal__box__window__form__items__item__label--upload"
                       :value="uploadValue"
@@ -105,9 +127,9 @@
                     <input
                       type="file"
                       class="modal__box__window__form__items__item__label__content--file"
-                      required
                       @change="onUploadImage"
-                    >
+                      required
+                    />
                   </label>
                 </div>
 
@@ -119,25 +141,29 @@
                         v-model="isChecked"
                         type="checkbox"
                         class="modal__box__window__form__items__item--skipper__label__content"
-                      >
+                      />
                       <img
                         class="modal__box__window__form__items__item--skipper__label__icon"
                         src="/info-icon/info.svg"
                         alt="Info-icon"
                         title="Zaznacz jeśli twój jacht posiada skippera"
-                      >
+                      />
                     </label>
                     <label v-if="isChecked" class="modal__box__window__form__items__item__label">
                       Imię skippera:
-                      <span
+                      <!-- <span
                         class="modal__box__window__form__items__item__label--must"
-                      >*</span>
+                      >*</span>-->
+                      <span class="error__normal" v-if="!$v.skippers_name.required">(Wymagane)</span>
+                      <span
+                        class="error"
+                        v-if="!$v.skippers_name.minLength"
+                      >Imię Skipera musi zawierać co najmniej {{$v.skippers_name.$params.minLength.min}} znaki.</span>
                       <input
                         v-model="skippers_name"
                         type="text"
                         class="modal__box__window__form__items__item__label__content"
-                        required
-                      >
+                      />
                     </label>
                   </div>
                 </div>
@@ -160,6 +186,7 @@
 
 <script>
 import firebase from "@/firebase";
+import { required, email, minLength, between } from "vuelidate/lib/validators";
 export default {
   data() {
     return {
@@ -182,10 +209,19 @@ export default {
       skippers_name: "",
       yacht_type: "",
       // część dla zdjęcia jachtu
+      // photo: null,
       selectedFile: null,
       uploadValue: 0,
       image_url: ""
     };
+  },
+  validations: {
+    cabins: { required, between: between(0, 999) },
+    guests: { required, between: between(1, 999) },
+    extended_info: { required, minLength: minLength(5) },
+    yacht_type: { required, minLength: minLength(3) },
+    skippers_name: { required, minLength: minLength(3) },
+    price: { required, between: between(1, 99999) }
   },
   methods: {
     toggleModalDisplay() {
@@ -226,23 +262,46 @@ export default {
         }
       );
     },
+    //     cabins: { required, between: between(0, 999) },
+    // guests: { required, between: between(1, 999) },
+    // extended_info: { required, minLength: minLength(5) },
+    // yacht_type: { required, minLength: minLength(3) },
+    // skippers_name: { required, minLength: minLength(3) },
+    // price: { required, between: between(1, 99999) }
     handleSubmitForm() {
-      let db = firebase.firestore();
-      db.collection("New_Yacht")
-        .add({
-          yacht_id: (Math.random() * 16).toString(36).substr(2, 25),
-          cabins: this.cabins,
-          extended_info: this.extended_info,
-          guests: this.guests,
-          price: this.price,
-          skippers_name: this.skippers_name,
-          yacht_type: this.yacht_type,
-          image_url: this.image_url
-        })
-        .then(docRef => {
-          this.$router.push("/list-of-added-yachts"); //dorobić kartkę z widokiem dodanego jachtu - danych i potem przekierować tutaj
-        })
-        .catch(error => console.log(err));
+      if (
+        this.$v.skippers_name.required &&
+        this.$v.skippers_name.minLength &&
+        this.$v.cabins.required &&
+        this.$v.cabins.between &&
+        this.$v.guests.required &&
+        this.$v.guests.between &&
+        this.$v.extended_info.required &&
+        this.$v.extended_info.minLength &&
+        this.$v.yacht_type.required &&
+        this.$v.yacht_type.minLength &&
+        this.$v.price.required &&
+        this.$v.price.between
+      ) {
+        let db = firebase.firestore();
+        db.collection("New_Yacht")
+          .add({
+            yacht_id: (Math.random() * 16).toString(36).substr(2, 25),
+            cabins: this.cabins,
+            extended_info: this.extended_info,
+            guests: this.guests,
+            price: this.price,
+            skippers_name: this.skippers_name,
+            yacht_type: this.yacht_type,
+            image_url: this.image_url
+          })
+          .then(docRef => {
+            this.$router.push("/list-of-added-yachts"); //dorobić kartkę z widokiem dodanego jachtu - danych i potem przekierować tutaj
+          })
+          .catch(error => console.log(err));
+      } else {
+        alert("Musisz wypełnić wszystkie wymgane pola poprawnie!");
+      }
     }
   }
 };
@@ -428,6 +487,17 @@ $media-content: "only screen and (min-width : 960px)";
         }
       }
     }
+  }
+}
+// Style errorów
+.error {
+  padding-top: 5px;
+  font-size: 10px;
+  text-decoration: underline;
+  color: #ff0000;
+  &__normal {
+    font-size: 10px;
+    color: #555;
   }
 }
 </style>
