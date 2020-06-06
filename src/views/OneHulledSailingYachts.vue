@@ -3,7 +3,7 @@
     <MainMenu />
     <div class="banner__box">
       <div class="banner__box__image">
-        <img src="/images/slider-image/sailing/4.yacht-s.jpeg" alt="Sailing Yacht">
+        <img src="/images/slider-image/sailing/4.yacht-s.jpeg" alt="Sailing Yacht" />
         <div class="banner__box__image__text">
           <p class="banner__box__image__text__title">Luksusowe jachty żaglowe</p>
         </div>
@@ -56,18 +56,20 @@
                   <!-- <div
                     class="main-content__box__inner__left__content__description__inner__nav__container__menu"
                   >-->
-                  <a
+                  <p
                     class="main-content__box__inner__left__content__description__inner__nav__container__link"
                     href="#"
-                  >Polska</a>
-                  <a
+                  >Polska</p>
+                  <p
+                    @click="isDisplayed"
                     class="main-content__box__inner__left__content__description__inner__nav__container__link"
                     href="#"
-                  >Europa</a>
-                  <a
+                  >Europa</p>
+                  <p
+                    @click="isDisplayed1"
                     class="main-content__box__inner__left__content__description__inner__nav__container__link"
                     href="#"
-                  >Świat</a>
+                  >Świat</p>
                   <!-- </div> -->
                   <!-- </div> -->
                 </div>
@@ -83,7 +85,7 @@
                     <img
                       src="../../public/card-images/one-hulled/sailing/3.sailing-yacht-s.jpeg"
                       alt="Sailing Yacht"
-                    >
+                    />
                   </div>
                   <div class="container__box__item__display">
                     <ul class="container__box__item__display__list">
@@ -108,7 +110,7 @@
                     <img
                       src="../../public/card-images/one-hulled/sailing/3.sailing-yacht-s.jpeg"
                       alt="Sailing Yacht"
-                    >
+                    />
                   </div>
                   <div class="container__box__item__display">
                     <ul class="container__box__item__display__list">
@@ -265,12 +267,14 @@ $media-content: "only screen and (min-width : 960px)";
             background-color: #fff;
             &__nav {
               // border: 1px solid #ddd;
-              padding: 20px 0;
+              // padding: 0 20px;
               &__container {
+                // padding: 0 20px;
                 // background: yellow;
                 &__link {
+                  display: inline-block;
                   text-decoration: none;
-                  padding: 20px;
+                  // padding: 0 20px;
                   border: 1px solid #ccc;
                   border-bottom: #fff;
                   border-right: #fff;
