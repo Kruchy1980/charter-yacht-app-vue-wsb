@@ -57,16 +57,17 @@
                     class="main-content__box__inner__left__content__description__inner__nav__container__menu"
                   >-->
                   <p
+                    @click="toggleisDisplayedOne"
                     class="main-content__box__inner__left__content__description__inner__nav__container__link"
                     href="#"
                   >Polska</p>
                   <p
-                    @click="isDisplayed"
+                    @click="toggleisDisplayed"
                     class="main-content__box__inner__left__content__description__inner__nav__container__link"
                     href="#"
                   >Europa</p>
+
                   <p
-                    @click="isDisplayed1"
                     class="main-content__box__inner__left__content__description__inner__nav__container__link"
                     href="#"
                   >Świat</p>
@@ -80,7 +81,7 @@
             <section class="container">
               <div class="container__box">
                 <!-- First item -->
-                <div class="container__box__item">
+                <div class="container__box__item" v-if="isDisplayedOne">
                   <div class="container__box__item__image">
                     <img
                       src="../../public/card-images/one-hulled/sailing/3.sailing-yacht-s.jpeg"
@@ -105,7 +106,7 @@
                   </div>
                 </div>
                 <!-- Second item -->
-                <div class="container__box__item">
+                <div class="container__box__item" v-if="isDisplayedOne">
                   <div class="container__box__item__image">
                     <img
                       src="../../public/card-images/one-hulled/sailing/3.sailing-yacht-s.jpeg"
@@ -131,6 +132,7 @@
                 </div>
               </div>
             </section>
+            <YachtInfoCard v-if="isDisplayed" />
           </div>
         </div>
         <!-- Right side -->
@@ -147,18 +149,36 @@
 import MainMenu from "@/components/MainMenu";
 import MainFooter from "@/components/MainFooter";
 import CharterAsk from "@/components/CharterAsk";
+import YachtInfoCard from "@/components/YachtInfoCard";
 
 export default {
   name: "OneHulledSailingYachts",
   components: {
     MainMenu,
     MainFooter,
-    CharterAsk
+    CharterAsk,
+    YachtInfoCard
   },
   data() {
     return {
-      charterForm: "/ask-for-charter-form"
+      charterForm: "/ask-for-charter-form",
+      isDisplayed: false,
+      isDisplayedOne: true
     };
+  },
+  methods: {
+    toggleisDisplayed() {
+      console.log("Kliknięto na Europę");
+
+      this.isDisplayedOne = !this.isDisplayedOne;
+
+      this.isDisplayed = !this.isDisplayed;
+    },
+    toggleisDisplayedOne() {
+      console.log("Kliknięto na Polskę");
+      this.isDisplayed = false;
+      this.isDisplayedOne = !this.isDisplayedOne;
+    }
   }
 };
 </script>
@@ -280,6 +300,10 @@ $media-content: "only screen and (min-width : 960px)";
                   border-right: #fff;
                   border-collapse: collapse;
                   color: #333;
+                  &:hover {
+                    cursor: pointer;
+                    background-color: #ddd;
+                  }
                 }
               }
             }

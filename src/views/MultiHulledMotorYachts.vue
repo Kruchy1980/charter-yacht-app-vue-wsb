@@ -152,9 +152,9 @@
                 <!-- Second item -->
               </div>
             </section>
-            <section class="container" v-if="isDisplayed1">
+            <!-- <section class="container" v-if="isDisplayed1">
               <div class="container__box">
-                <!-- First item -->
+
                 <div class="container__box__item">
                   <div class="container__box__item__image">
                     <img src="/card-images/catamarans/motor/3.catamaran-m.jpeg" alt="Sailing Yacht" />
@@ -176,9 +176,9 @@
                     </ul>
                   </div>
                 </div>
-                <!-- Second item -->
+
               </div>
-            </section>
+            </section>-->
           </div>
         </div>
         <!-- Right side -->

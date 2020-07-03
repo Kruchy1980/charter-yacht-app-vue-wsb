@@ -24,7 +24,7 @@
       <div v-for="(card, index) in cards" :key="index" class="card__box">
         <div class="card__box__description">
           <div class="card__box__description__image">
-            <img :src="`${card.src}`" :alt="`${card.title}`">
+            <img :src="`${card.src}`" :alt="`${card.title}`" />
           </div>
           <div class="card__box__description__inner">
             <h3 class="card__box__description__inner__title">{{ card.title }}</h3>
@@ -66,7 +66,7 @@ export default {
           src: "card-images/one-hulled/motor/1.motorboat-m.jpeg",
           title: "Jachty motorowe - jednokadłubowe",
           text:
-            "Jeśli intresuje Ciebie dobre samopoczucie i komfort sprzyjające żeglowaniu, a jednocześnie nie lubisz siedzieć w miejscu, to ten rodzaj czarteru zapewni Tobie wspaniale spędzony czas.",
+            "Jeśli intresuje Ciebie komfort i szybkość dotarcia do celu te oferty są dla Ciebie. Spokojna woda spokojny rejs:)",
           link: "/one-hulled-motor-yachts"
         },
         {
@@ -74,7 +74,7 @@ export default {
           src: "card-images/catamarans/sailing/1.catamaran-s.jpeg",
           title: "Jachty żaglowe - wielokadłubowe",
           text:
-            "Jeśli intresuje Ciebie dobre samopoczucie i komfort sprzyjające żeglowaniu, a jednocześnie nie lubisz siedzieć w miejscu, to ten rodzaj czarteru zapewni Tobie wspaniale spędzony czas.",
+            "Jeśli intresuje Ciebie komfort oraz dużo miejsca na powietrzu uraz jesteś miłośnikiem sił natury to nie odmówisz sobie przyjemności żeglowania na jachtach posiadających wiele kadłubów.",
           link: "/multi-hulled-sailing-yachts"
         },
         {
@@ -82,7 +82,7 @@ export default {
           src: "card-images/catamarans/motor/1.catamaran-m.jpeg",
           title: "Jachty motorowe - wielokadłubowe",
           text:
-            "Jeśli intresuje Ciebie dobre samopoczucie i komfort sprzyjające żeglowaniu, a jednocześnie nie lubisz siedzieć w miejscu, to ten rodzaj czarteru zapewni Tobie wspaniale spędzony czas.",
+            "Dla miłośników stabilnych i komfortowych jachtów motorowych, dających możliwość zwiedzania terenów z wody przy jednoczesnym komforcie pływania.",
           link: "/multi-hulled-motor-yachts"
         }
       ]
